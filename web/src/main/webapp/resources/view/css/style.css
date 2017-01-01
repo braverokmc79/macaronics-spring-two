@@ -257,7 +257,13 @@ img {
 #aa-menu-area .main-navbar .navbar-nav .dropdown-menu li a {
   color: #555;
   padding: 8px 10px;
+  
 }
+#navbar  #top-menu  li  a:HOVER{
+	background-color: #fff;
+
+}
+
 #aa-menu-area .main-navbar .navbar-right {
   margin-right: -30px;
 }

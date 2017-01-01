@@ -18,6 +18,30 @@ default tablespace spring;
 -- 사용 권한 부여
 grant connect, resource, dba to spring;
 
+--p.126 tbl_member
+create table tbl_member(
+	userid varchar2(150) not null,
+	userpw varchar2(150) not null,
+	username varchar2(50) not null,
+	email varchar2(100),
+	regdate  date default sysdate ,
+	updatedate date default sysdate,
+	primary key(userid)
+	
+);
+
+insert into tbl_member (userid, userpw, username, email)
+values ('kim', '1234', '김철수', 'kim@nate.com');
+
+select * from tbl_member;
+commit;
+
+
+
+
+
+
+
 
 
 
