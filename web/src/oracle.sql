@@ -6,10 +6,12 @@ alter session set "_ORACLE_SCRIPT" =true;
 
 --테이블 스페이스 생성
 create tablespace spring
-datafile 'd:/spring.dbf' size 50m
+datafile 'D:\\oracleDB\\XE\\spring.dbf' size 50m
 autoextend on
 next 10m
 maxsize unlimited;
+
+
 --사용자 계정 만들기
 create user spring identified by 1234
 default tablespace spring;
