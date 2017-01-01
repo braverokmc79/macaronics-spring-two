@@ -13,17 +13,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.macaronics.www.sample.dto.ProductVO;
 
 @Controller
+@RequestMapping("/sample")
 public class SampleController {
 
 	private static final Logger logger =LoggerFactory.getLogger(SampleController.class);
 	
-	@RequestMapping("/")
-	public String home(){
-		
-		return "/home";
-	}
 	
-	@RequestMapping("doA")
+	@RequestMapping("/doA")
 	public String doA(Model model){
 		
 		logger.info("doA");
@@ -32,14 +28,14 @@ public class SampleController {
 		return "redirect:doB";
 	}
 	
-	@RequestMapping("doB")
+	@RequestMapping("/doB")
 	public void doB(){
 		logger.info("doB");
 	}
 	
 	//ModelAndView : Model - 데이터 저장소, View 화면
 	// 데이터와 포워드할 페이지의 정보
-	@RequestMapping("doC")
+	@RequestMapping("/doC")
 	public ModelAndView doC(){
 		Map<String, Object> map 
 				=new HashMap<String, Object>();

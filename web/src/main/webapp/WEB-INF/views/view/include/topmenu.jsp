@@ -73,7 +73,7 @@
              <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="/member/list.do">회원관리 <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">                
-                <li><a href="properties.html">PROPERTIES</a></li>
+                <li><a href="/member/list.do">회원목록 보기</a></li>
                 <li><a href="properties-detail.html">PROPERTIES DETAIL</a></li>                                            
               </ul>
             </li>
