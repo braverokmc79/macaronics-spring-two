@@ -1,4 +1,4 @@
-package com.macaronics.www.user;
+package com.macaronics.www.user.controller;
 
 import javax.inject.Inject;
 

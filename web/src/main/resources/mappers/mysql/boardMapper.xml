@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="mysqlBoardMapper">
+	
+
+	<select id="boardList" resultType="BoardVO">
+		select * from tbl_board where bno > 0 order by bno desc, regdate desc
+	</select>
+	
+	<insert id="boardCreate">
+	insert INTO tbl_board ( title, content, writer) 
+
+		VALUES ( #{title}, #{content}, #{writer} )
+	</insert>
+	
+	<select id="boardRead" resultType="BoardVO">
+		select * from tbl_board where bno =#{bno}
+	</select>
+	
+	<update id="boardUpdate">
+	UPDATE tbl_board SET content=#{content},  title=#{title}, writer=#{writer} WHERE bno=#{bno}
+	</update> 
+	
+	<delete id="boardDelete">
+		delete from tbl_board where bno=#{bno}
+	</delete>
+	
+			
+</mapper>
+
+
+
+

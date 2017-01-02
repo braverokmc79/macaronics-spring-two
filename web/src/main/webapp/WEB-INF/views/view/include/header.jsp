@@ -42,11 +42,4 @@
   </head>
 <body class="aa-price-range">  
   <!-- Pre Loader --> 
-  
-  
-  
-  
-  
-  
-  
-  
+ 

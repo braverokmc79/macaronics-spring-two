@@ -6,6 +6,7 @@
 
 	<typeAliases>
 		<package name="com.macaronics.www.member.model.dto" />
+		<package name="com.macaronics.www.member.model.dto.board"/>
 	</typeAliases>
 
 </configuration>

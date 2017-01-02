@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
   
 <c:set value="<%= request.getRequestURI() %>" var="curUrl"  />
-
 
  <!-- Pre Loader -->
   <div id="aa-preloader-area">
@@ -75,9 +73,9 @@
             	<a href="/">HOME</a>
             </li>
              <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="/member/list.do">회원관리 <span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="/board/listAll.do">게시판 <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">                
-                <li><a href="/member/list.do">회원목록 보기</a></li>
+                <li><a href="/board/listAll.do">일반게시글</a></li>
                 <li><a href="properties-detail.html">PROPERTIES DETAIL</a></li>                                            
               </ul>
             </li>
