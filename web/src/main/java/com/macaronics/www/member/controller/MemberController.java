@@ -16,21 +16,25 @@ import com.macaronics.www.member.service.MemberService;
 @RequestMapping(value="/member")
 public class MemberController {
 	
-	private final String FOLDER_PATH ="/view/member/";
+	private final String JSP_PAGE ="/view/member/";
+	
 	@Inject
 	private MemberService memberService;
 	
 	
 	@RequestMapping(value="/list.do", method=RequestMethod.GET)
 	public String memberList(Model model){	
-		List<MemberDTO> list=memberService.memberList();
-		model.addAttribute("list", list);
 		
-		return FOLDER_PATH+"member_list";
+		
+		return "redirect:/admin/memberList.do";
 	}
 	
 	
-	
+	@RequestMapping(value="/register.do", method=RequestMethod.GET)
+	public String memberRegister(){
+		
+		return JSP_PAGE+"register";
+	}
 	
 
 	
