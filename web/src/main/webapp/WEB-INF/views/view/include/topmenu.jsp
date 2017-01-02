@@ -34,7 +34,10 @@
               </div>
               <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="aa-header-right">
-                  <a href="register.html" class="aa-register">Register</a>
+                  <a href="/users/index" class="aa-register">회원</a>
+                  <a href="/users/userinfo.do" class="aa-register">회원정보</a>
+                  
+                  <a href="/member/register.do" class="aa-register">회원가입</a>
                   <a href="signin.html" class="aa-login">Login</a>
                 </div>
               </div>

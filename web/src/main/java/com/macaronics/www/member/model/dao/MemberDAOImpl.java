@@ -54,6 +54,22 @@ public class MemberDAOImpl implements MemberDAO {
 		sqlSession.update(namespace+".updateMember", dto);
 	}
 
+
+
+	@Override
+	public boolean userAndEmailConfirm(MemberDTO memberdto) {
+		
+		boolean result =false;
+		logger.info("userAndEmailConfirm  : " + memberdto.toString());
+		int count= sqlSession.selectOne(namespace+".userAndEmailConfirm", memberdto);
+		
+		if(count ==0){
+			result =true;
+		}
+			
+		return result;
+	}
+
 	
 	
 	

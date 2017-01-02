@@ -11,6 +11,7 @@ public interface MemberDAO {
 	public MemberDTO viewMember(String userid);
 	public void deleteMember(String userid);
 	public void updateMember(MemberDTO dto);
+	public boolean userAndEmailConfirm(MemberDTO memberdto);
 	
 	
 }

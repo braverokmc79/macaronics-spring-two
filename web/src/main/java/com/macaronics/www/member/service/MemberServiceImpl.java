@@ -48,4 +48,10 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.updateMember(dto);
 	}
 
+	@Override
+	public boolean userAndEmailConfirm(MemberDTO memberdto) {
+		// TODO Auto-generated method stub
+		return memberDao.userAndEmailConfirm(memberdto);
+	}
+
 }
