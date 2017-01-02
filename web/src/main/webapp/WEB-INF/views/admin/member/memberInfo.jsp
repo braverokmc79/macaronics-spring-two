@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
+      
       
 <%@ include file="../include/header.jsp" %>      
       
@@ -39,61 +41,50 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+            <form role="form"  method="post"  action="/admin/memberUpdate.do">
               <div class="box-body">
                                 
                 <div class="form-group">
-                  <label for="exampleInputEmail1">아이디 : </label>
-                  ${dto.userid }
+                  <label for="userid">아이디 : </label>
+                  <input type="text" required="required" aria-required="true"  value="${dto.userid }" class="form-control" readonly="readonly"   id="userid" name="userid">
                 </div>
           
                 
                 <div class="form-group">
-                  <label for="exampleInputEmail1">이름 : </label>
-                  ${dto.username }
+                  <label for="username">이름 : </label>
+                 <input type="text" required="required" aria-required="true" value="${dto.username }" class="form-control"   id="username" name="username">
+               
                 </div>
           
           		<div class="form-group">
-                  <label for="exampleInputEmail1">이메일 :</label>
-                  ${dto.email }
+                  <label for="email">이메일 :</label>
+                  <input type="email" required="required" aria-required="true" value="${dto.email }" class="form-control"   id="email" name="email">
+                  
                 </div>
-          
           	
           		 <div class="form-group">
-                  <label for="exampleInputEmail1">가입일</label>
-                  ${dto.regdate }
+                  <label for="exampleInputEmail1">가입일 : </label>
+                
+                <fmt:formatDate  value='${dto.regdate }' pattern="yyyy-MM-dd HH:mm:ss"   />
+
                 </div>
           
-          	
+          
+               <div class="form-group">
+                  <label for="exampleInputEmail1">수정일 :</label>
                 
-                
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+          		 <fmt:formatDate  value="${dto.updatedate }"  pattern="yyyy-MM-dd HH:mm:ss"  />  
+              
                 </div>
-                
-                
-                
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputFile">File input</label>
-                  <input type="file" id="exampleInputFile">
+          
 
-                  <p class="help-block">Example block-level help text here.</p>
-                </div>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox"> Check me out
-                  </label>
-                </div>
-              </div>
-              <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-success">수정하기</button>
+                <button type="button" class="btn btn-danger" id="btnDelete">삭제하기</button>
+                <a href="/admin/memberList.do"  class="btn btn-primary">회원 목록 보기</a>
+              </div>
+                
               </div>
             </form>
           </div>
@@ -109,8 +100,24 @@
 
     </section>
  
- 
- 
+
+
+<script>
+
+$(document).ready(function(){
+	
+	var message ='${message}';	
+	
+	if(message.length >3){
+		alert(message);
+	}
+	
+	
+});
+
+
+</script> 
+   
 
   
 <%@ include file="../include/content_footer.jsp" %>
@@ -120,4 +127,11 @@
   
   
 <%@ include file="../include/footer.jsp" %>  
+  
+  
+  
+
+
+
+
   

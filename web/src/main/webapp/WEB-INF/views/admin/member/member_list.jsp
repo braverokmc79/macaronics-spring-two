@@ -63,7 +63,7 @@
 		<td>${row.userid }</td>
 		<td><a href="/admin/memberInfo.do?userid=${ row.userid}" >${row.username }</a></td>
 		<td>${row.email }</td>
-		<td><span class="label label-danger">Denied</span></td>
+		<td><span class="label label-success">Access</span></td>
 		<td>${row.regdate }</td>
 		</tr>
 	</c:forEach>

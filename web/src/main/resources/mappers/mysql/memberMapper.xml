@@ -33,12 +33,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		
 		<delete id="deleteMember">
-		
+		  delete FROM tbl_member WHERE userid =#{userid}
 		</delete>
 			
 			
 		<update id="updateMember">
-		
+		 update tbl_member set username=#{username}, email=#{email} , updatedate =now() where  userid=#{userid}
 		</update>	
 			
 </mapper>

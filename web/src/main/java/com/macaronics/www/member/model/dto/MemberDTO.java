@@ -1,6 +1,6 @@
 package com.macaronics.www.member.model.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 import lombok.Data;
 
@@ -11,8 +11,11 @@ public class MemberDTO {
 	private String userpw;
 	private String username;
 	private String email;
+	
 	private Date regdate;
 	private Date updatedate; 	
+	
+	
 	private String confirmPassword;
 	
 	

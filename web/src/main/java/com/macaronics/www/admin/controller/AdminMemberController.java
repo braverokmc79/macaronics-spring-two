@@ -88,8 +88,26 @@ public class AdminMemberController {
 	}
 	
 	
+	@RequestMapping(value="/memberUpdate.do", method=RequestMethod.POST)
+	public String memberUpdate(@ModelAttribute MemberDTO dto, RedirectAttributes rttr){
+		
+		
+		try{
+			
+			memberService.updateMember(dto);
+			rttr.addFlashAttribute("message", "회원정보를 변경 했습니다.");		
+		}catch(Exception e){
+			e.printStackTrace();
+			rttr.addFlashAttribute("message", "회원정보를 변경 에 실패 했습니다.");	
+		}
+
+		return  "redirect:memberInfo.do?userid="+dto.getUserid();
+	}
 	
 	
+	
+	
+
 	
 	
 }

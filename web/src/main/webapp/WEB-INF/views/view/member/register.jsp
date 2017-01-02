@@ -58,7 +58,7 @@
                   <input type="password" name="confirmPassword" required="required"> 
                 </div>
                 <div class="aa-single-submit">
-                  <input type="submit" value="Create Account" name="submit">                    
+                  <input type="submit" value="회원 가입하기" name="submit">                    
                 </div>
               </form>
               
