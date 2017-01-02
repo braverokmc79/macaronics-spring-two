@@ -59,11 +59,11 @@
    
    
    <c:forEach items="${list }" var="row">
-		<tr>
+		<tr class="memberInfoTr" data-userid="${row.userid }">
 		<td>${row.userid }</td>
 		<td><a href="/admin/memberInfo.do?userid=${ row.userid}" >${row.username }</a></td>
 		<td>${row.email }</td>
-		<td><span class="label label-success">Access</span></td>
+		<td><span class="label label-success" data-toggle="modal" data-target="#checkPw" >패스워드 체크</span></td>
 		<td>${row.regdate }</td>
 		</tr>
 	</c:forEach>
@@ -85,9 +85,82 @@
 
 
     </section>
- 
- 
- 
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkPw">Large modal</button>
+
+
+
+  <div class="modal modal-danger" id="checkPw">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span></button>
+          <h4 class="modal-title">패스워드 입력</h4>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" name="userid" id="modal_Id"  class="form-control" >
+          <input type="text" name="confirmPassword" class="form-control" id="confirmPassword">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-outline" id="confirmPwd">패스워드 확인</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+   <!-- /.modal -->
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	
+	
+	$(".memberInfoTr").on("click", function(){
+		var userid=$(this).attr("data-userid");
+		$("#confirmPassword").val("");
+		
+		$("#modal_Id").val(userid);	
+			
+	
+	});
+	
+	$("#confirmPwd").click(function(){
+		var userid=$("#modal_Id").val();	
+		var confirmPassword=$("#confirmPassword").val();
+		if(confirmPassword.trim().length <1 ){
+			alert("패스워드를 입력 하세요!");
+			return;
+		}
+		
+		$.ajax({
+			
+			type:"POST",
+			url:"/admin/checkPwd",
+			data: {
+				userid :userid,
+				confirmPassword :confirmPassword
+			},
+			dataType:"text",
+			success:function(result){
+				alert(result);
+				
+				
+				$("#confirmPassword").val("");
+			}
+		});
+		
+	});
+	
+	
+	
+});
+
+
+</script>
+
 
   
 <%@ include file="../include/content_footer.jsp" %>

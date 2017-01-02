@@ -12,6 +12,7 @@ public interface MemberDAO {
 	public void deleteMember(String userid);
 	public void updateMember(MemberDTO dto);
 	public boolean userAndEmailConfirm(MemberDTO memberdto);
+	public String checkPwd(String userid);
 	
 	
 }

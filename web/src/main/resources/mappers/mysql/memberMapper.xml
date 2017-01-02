@@ -23,7 +23,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</insert>
 		
 		
-		
+		<select id="checkPwd" resultType="string">
+		 select  AES_DECRYPT(UNHEX(userpw), 'macaronics119@') from tbl_member where userid=#{userid}
+		</select>
 		
 		
 		

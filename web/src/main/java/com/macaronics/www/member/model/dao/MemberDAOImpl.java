@@ -70,6 +70,14 @@ public class MemberDAOImpl implements MemberDAO {
 		return result;
 	}
 
+
+
+	@Override
+	public String checkPwd(String userid) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".checkPwd", userid);
+	}
+
 	
 	
 	

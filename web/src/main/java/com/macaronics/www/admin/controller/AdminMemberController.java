@@ -1,16 +1,20 @@
 package com.macaronics.www.admin.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 
-import org.junit.runners.Parameterized.Parameter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.macaronics.www.member.model.dto.MemberDTO;
@@ -22,6 +26,8 @@ import com.macaronics.www.util.passwordencoder.PasswordEncoding;
 public class AdminMemberController {
 
 	private static final String JSP_PAGE="/admin/member/";
+	
+	private static final Logger logger =LoggerFactory.getLogger(AdminMemberController.class);
 	
 	@Inject
 	private MemberService memberService;
@@ -109,6 +115,14 @@ public class AdminMemberController {
 	public String memberDelete(@RequestParam String userid, RedirectAttributes rttr){
 		
 		try{
+			
+			//관리자 삭제 불가
+			//
+			if(userid.equals("admin")){
+				rttr.addFlashAttribute("message", "관리자는 삭제가 불가능 합니다.");
+				return "redirect:memberInfo.do?userid="+userid;
+			}
+			
 			memberService.deleteMember(userid);
 			
 			return  "redirect:memberList.do";
@@ -122,5 +136,53 @@ public class AdminMemberController {
 	
 
 	
+	// 패스워드 체크
+	@ResponseBody
+	@RequestMapping(value="/checkPwd", method=RequestMethod.POST)
+	public void checkPwd(HttpServletResponse response   , 
+			@RequestParam String userid, 
+			@RequestParam String confirmPassword){
+		String str ="";
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out =null;
+		try{
+				out=response.getWriter();
+				
+				String resultPwd=memberService.checkPwd(userid);
+				
+				logger.info("   resultPwd  "  + resultPwd);
+				
+				if(passwordEncoding.matches(confirmPassword, resultPwd)){
+					
+					str ="일치 합니다.";
+					
+				}else{
+					
+					str ="패스워드가 틀립니다.";
+					
+				}
+		}catch(Exception e){
+			e.printStackTrace();
+			str ="오류 입니다.";
+		}
+		
+		out.print(str);
+	}
+	
+	
+	
+	
+	
+	
+	
+
+	
 	
 }
+
+
+
+
+
+
+

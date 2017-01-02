@@ -54,4 +54,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.userAndEmailConfirm(memberdto);
 	}
 
+	@Override
+	public String checkPwd(String userid) {
+		// TODO Auto-generated method stub
+		return memberDao.checkPwd(userid);
+	}
+
+	
 }
