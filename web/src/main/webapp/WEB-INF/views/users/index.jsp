@@ -320,9 +320,7 @@
 				</div><!--/col-->
 				
               </div>
-
-                    
-                   
+             
                 <!-- statics end -->
               
             

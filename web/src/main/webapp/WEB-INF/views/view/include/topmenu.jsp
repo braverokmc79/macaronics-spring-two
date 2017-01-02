@@ -28,12 +28,13 @@
                     1-900-523-3564
                   </div>
                   <div class="aa-email hidden-xs">
-                    <span class="fa fa-envelope-o"></span> info@markups.com
+                    <span class="fa fa-envelope-o"></span> braverokmc79@gmai.com
                   </div>
                 </div>              
               </div>
               <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="aa-header-right">
+                 <a href="/admin/index" class="aa-register">관리자</a>
                   <a href="/users/index" class="aa-register">회원</a>
                   <a href="/users/userinfo.do" class="aa-register">회원정보</a>
                   

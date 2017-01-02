@@ -105,7 +105,20 @@ public class AdminMemberController {
 	}
 	
 	
-	
+	@RequestMapping(value="/memberDelete.do", method=RequestMethod.POST)
+	public String memberDelete(@RequestParam String userid, RedirectAttributes rttr){
+		
+		try{
+			memberService.deleteMember(userid);
+			
+			return  "redirect:memberList.do";
+		}catch(Exception e){
+			
+			rttr.addFlashAttribute("message", "회원 삭제에 실패 했습니다.");
+			return "redirect:memberInfo.do?userid="+userid;
+		}
+		
+	}
 	
 
 	

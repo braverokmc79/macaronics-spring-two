@@ -113,6 +113,20 @@ $(document).ready(function(){
 	}
 	
 	
+	$("#btnDelete").click(function(){
+		
+		if(confirm("정말 삭제 하시겠습니까?")){
+			
+			var form =$("form[role='form']");
+			
+			form.attr("action", "/admin/memberDelete.do");
+			form.submit();
+		}
+		
+	});
+	
+	
+	
 });
 
 
