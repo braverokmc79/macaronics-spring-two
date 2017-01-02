@@ -26,3 +26,23 @@ insert into tbl_member (userid, userpw, username, email)
 values ('kim', '1234', '김철수', 'kim@nate.com');
 
 
+
+--p.163 tbl_board
+create table tbl_board(
+
+	bno int PRIMARY KEY AUTO_INCREMENT COMMENT '게시물 번호', 
+	title varchar(200) not null COMMENT '제목', 
+	content text COMMENT '내용', 
+	writer varchar(200) not null COMMENT '이름', 
+	regdate Timestamp default now() COMMENT '이름', 
+	viewcnt int default 0 COMMENT '조회수' 
+	
+);	
+
+INSERT INTO tbl_board ( title, content, writer) 
+
+	VALUES ('제목', '내용' , '글쓴이');
+
+
+
+

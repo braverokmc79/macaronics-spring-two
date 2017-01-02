@@ -37,9 +37,43 @@ select * from tbl_member;
 commit;
 
 
+--p.163 tbl_board
+create table tbl_board(
+
+	bno number not null,
+	title varchar2(200) not null,
+	content varchar2(4000),
+	writer varchar2(50) not null,
+	regdate date default sysdate,
+	viewcnt number default 0,
+	PRIMARY key(bno)
+);
 
 
 
+
+--p.163 tbl_board
+create table tbl_board(
+
+	bno number not null,  --게시물 번호
+	title varchar2(200) not null, --제목
+	content varchar2(4000), --내용
+	writer varchar2(50) not null, --이름
+	regdate date default sysdate, --날짜
+	viewcnt number default 0, --조회수
+	PRIMARY key(bno)
+);	
+
+
+-- nvl(A, B) A 가 null 이면 B, null 이 아니면 A
+insert into TBL_BOARD (BNO, TITLE, CONTENT, WRITER) 
+ VALUES((select nvl(max(bno)+1,1) from tbl_board), '제목', '내용', 'kim');
+
+select * from tbl_board;
+
+commit; 
+ 
+ 
 
 
 

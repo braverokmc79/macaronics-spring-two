@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.example.spring01.controller">
+	<logger name="com.macaronics.www.*">
 		<level value="info" />
 	</logger>
 	
