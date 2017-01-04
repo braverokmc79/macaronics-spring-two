@@ -19,8 +19,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				and   ${search_option} like  '%' || #{keyword} || '%'
 			</if>
 		</if>
-		
-
 	
 	<if test="search_option == 'all'">
 			 and   ( title like  '%' || #{keyword} || '%' )		  
@@ -74,7 +72,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
+<!-- 	<sql id="search">
+		<choose>
+			<when test="#{search_option == 'all'}">
+				전체검색
+				where writer like '%' || #{keyword} || '%'
+					or content like '%' || #{keyword} || '%'
+					or title like '%' || #{keyword} || '%'
+			</when>
+			<otherwise>전체 검색이 아닐 때
+				where ${search_option} like
+					'%' || #{keyword} || '%'
+			</otherwise>
+		</choose>
+	</sql>
 	
+	 -->
 			
 </mapper>
 

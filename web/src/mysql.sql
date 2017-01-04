@@ -45,4 +45,7 @@ INSERT INTO tbl_board ( title, content, writer)
 
 
 
-
+ALTER TABLE tbl_member
+   ADD UNIQUE KEY`uc_email`(email);
+   
+   

@@ -37,7 +37,7 @@
                   <a href="/users/userinfo.do" class="aa-register">회원정보</a>
                   
                   <a href="/member/register.do" class="aa-register">회원가입</a>
-                  <a href="signin.html" class="aa-login">Login</a>
+                  <a href="/member/loginform.do" class="aa-login">Login</a>
                 </div>
               </div>
             </div>

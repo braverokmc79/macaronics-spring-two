@@ -65,10 +65,12 @@ commit;
  
 
 
+-- 멤버 이메일로 유니크 제약조건 
+ALTER TABLE tbl_member
+   ADD CONSTRAINT uc_email UNIQUE (email) VALIDATE;
 
 
 
-
-
+   
 
 

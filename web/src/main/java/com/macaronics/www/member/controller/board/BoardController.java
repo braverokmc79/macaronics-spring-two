@@ -35,8 +35,13 @@ public class BoardController {
 		ModelAndView mv =new ModelAndView();
 		
 		int count =boardService.countArticle(search_option, keyword);
+		
+		
 		mv.addObject("countList", count);
 		mv.addObject("list", boardService.boardList(search_option, keyword));
+		
+		
+		
 		mv.setViewName(JSP_PAGE+"list");
 		
 		return mv;
