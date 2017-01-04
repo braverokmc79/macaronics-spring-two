@@ -2,6 +2,8 @@ package com.macaronics.www.member.model.dto.board;
 
 import java.sql.Date;
 
+import com.macaronics.www.util.xss.XssDefender;
+
 import lombok.Data;
 
 @Data
@@ -13,6 +15,15 @@ public class BoardVO {
 	private String writer;
 	private Date regdate;
 	private int viewcnt;
+	
+	
+	public void setTitle(String title) {
+		this.title = XssDefender.inputString(title);
+	}
+	
+	public void setWriter(String writer) {
+		this.writer = XssDefender.inputString(writer);
+	}
 	
 	
 	
