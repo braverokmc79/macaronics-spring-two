@@ -32,8 +32,14 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
+		model.addAttribute("ServerEnvironment", SqlServerEnvironment.SQL );
 		
 		return "home";
 	}
 	
 }
+
+
+
+
+

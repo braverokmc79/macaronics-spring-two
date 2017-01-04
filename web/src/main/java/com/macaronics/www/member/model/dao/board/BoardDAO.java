@@ -11,6 +11,10 @@ public interface BoardDAO {
 	public BoardVO boardRead(Integer bno);
 	public void boardUpdate(BoardVO vo);
 	public void boardDelete(Integer bno);
+	
+	
+	public void viewCntUpdate(Integer bno);
+	public BoardVO getBoard(Integer bno);
 
 	
 }

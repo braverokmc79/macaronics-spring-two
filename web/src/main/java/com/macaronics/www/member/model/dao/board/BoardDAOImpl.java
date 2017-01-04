@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.macaronics.www.SqlServerEnvironment;
 import com.macaronics.www.member.model.dto.board.BoardVO;
 
 
@@ -21,9 +22,9 @@ public class BoardDAOImpl implements BoardDAO {
 	private static final Logger logger =LoggerFactory.getLogger(BoardDAOImpl.class);
 	
 	
-   private static final String namespace="oracleBoardMapper";
+   private static final String namespace=SqlServerEnvironment.SQL+"BoardMapper";
 	
-//	private static final String namespace="mysqlBoardMapper";
+
 	
 	
 	
@@ -61,6 +62,21 @@ public class BoardDAOImpl implements BoardDAO {
 	public void boardDelete(Integer bno) {
 		// TODO Auto-generated method stub
 		sqlSession.delete(namespace+".boardDelete", bno);
+	}
+
+	
+	
+	//조회수 증가
+	@Override
+	public void viewCntUpdate(Integer bno) {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".viewCntUpdate", bno);
+	}
+
+	@Override
+	public BoardVO getBoard(Integer bno) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".getBoard", bno);
 	}
 
 }

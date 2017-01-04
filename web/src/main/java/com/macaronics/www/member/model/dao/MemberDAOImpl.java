@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.macaronics.www.SqlServerEnvironment;
 import com.macaronics.www.member.model.dto.MemberDTO;
 
 
@@ -20,7 +21,7 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	private static final Logger logger =LoggerFactory.getLogger(MemberDAOImpl.class);
 	
-	private static String namespace="memberMapper";
+	private static String namespace= SqlServerEnvironment.SQL+"memberMapper";
 	
 	
 	@Override

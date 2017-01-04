@@ -33,6 +33,8 @@ public class MemberController {
 		return JSP_PAGE+"register";
 	}
 	
+	
+
 
 	
 	

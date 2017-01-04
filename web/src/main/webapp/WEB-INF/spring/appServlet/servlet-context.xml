@@ -18,6 +18,10 @@
 	<annotation-driven />
 	  <!-- aop의 설정을 통한 자동적인 Proxy 객체 설정 --> 
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+    <!-- 트랜잭션 처리 -->
+	<tx:annotation-driven/>
+			
+		
 		
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 

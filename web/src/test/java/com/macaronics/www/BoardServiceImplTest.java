@@ -36,7 +36,7 @@ public class BoardServiceImplTest {
 
 	@Test
 	public void testBoardRead() {
-		boardService.boardRead(1);
+		//boardService.boardRead(1);
 	}
 
 	@Test

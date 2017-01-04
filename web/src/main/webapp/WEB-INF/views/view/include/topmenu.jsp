@@ -23,7 +23,7 @@
                 <div class="aa-header-left">
                   <div class="aa-telephone-no">
                     <span class="fa fa-phone"></span>
-                    1-900-523-3564
+                    1-900-523-3564  서버 환경  :  <span style="color: red;">${ServerEnvironment }</span>
                   </div>
                   <div class="aa-email hidden-xs">
                     <span class="fa fa-envelope-o"></span> braverokmc79@gmail.com

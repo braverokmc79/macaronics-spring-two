@@ -29,9 +29,18 @@
    <!-- aop의 설정을 통한 자동적인 Proxy 객체 설정 --> 
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	
-	
-	
+
 	<import resource="appServlet/datasource-context.xml"/>
+	
+	
+	 <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+		<!-- 트랜잭션 처리 -->
+	<tx:annotation-driven/>
+	
+	
 	
 	<!-- 아파치 DBCP 설정 -->
 	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" 

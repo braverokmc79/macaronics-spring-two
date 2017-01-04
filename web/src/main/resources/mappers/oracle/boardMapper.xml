@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
-<mapper namespace="oracleBoardMapper">
+<mapper namespace="ORACLEBoardMapper">
 	
 	<select id="boardList" resultType="BoardVO">
 	select * from tbl_board where bno > 0 order by bno desc, regdate desc
@@ -16,20 +16,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	
-	
 	<select id="boardRead" resultType="BoardVO">
-	
+	select * from tbl_board  where bno =#{bno}
 	</select>
 	
 	
-	<update id="boardUpdate">
+	<!--  조회수 증가 -->
+	<update id="viewCntUpdate">
+		update tbl_board set viewcnt = viewcnt+1 where bno=#{bno}
+	</update>
 	
+	
+	<update id="boardUpdate">
+	 UPDATE tbl_board SET content=#{content},  title=#{title}, writer=#{writer} WHERE bno=#{bno}
 	</update> 
 	
 	
 	<delete id="boardDelete">
-	
+		delete from tbl_board where bno=#{bno}
 	</delete>
+	
+	
+	
+	<select id="getBoard" resultType="BoardVO">
+		select * from tbl_board where bno =#{bno}
+	</select>
+	
 	
 	
 			

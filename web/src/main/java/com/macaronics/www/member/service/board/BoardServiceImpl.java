@@ -3,10 +3,12 @@ package com.macaronics.www.member.service.board;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.macaronics.www.member.model.dao.board.BoardDAO;
 import com.macaronics.www.member.model.dto.board.BoardVO;
@@ -46,13 +48,29 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 	
-	
 
+	@Transactional
 	@Override
-	public BoardVO boardRead(Integer bno) {
+	public BoardVO boardRead(Integer bno, HttpSession session) {
 		BoardVO vo =null;
 		try{
 			vo=boardDAO.boardRead(bno);
+		
+			
+			//조회수 증가	
+			
+			long update_time =0;
+			//세션에 저장된 조회시간 검색
+			if(session.getAttribute("update_time" +bno) !=null){
+				update_time =(long)session.getAttribute("update_time"+ bno);	
+			}
+			//시스템 현재시간
+			long current_time =System.currentTimeMillis();
+			if(current_time - update_time > 24*60*60*1000){
+				boardDAO.viewCntUpdate(bno);
+				session.setAttribute("update_time"+bno, current_time);
+			}
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -76,6 +94,13 @@ public class BoardServiceImpl implements BoardService {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+
+
+	@Override
+	public BoardVO getBoard(Integer bno) {
+		// TODO Auto-generated method stub
+		return boardDAO.getBoard(bno);
 	}
 
 	

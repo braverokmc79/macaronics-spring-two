@@ -49,4 +49,19 @@
 
 
 
+<!-- delete put 폼 처리 -->
+<filter>
+    <filter-name>httpMethodFilter</filter-name>
+    <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+</filter>
+
+<filter-mapping>
+    <filter-name>httpMethodFilter</filter-name>
+    <servlet-name>petclinic</servlet-name>
+</filter-mapping>
+
+
+
+
+
 </web-app>

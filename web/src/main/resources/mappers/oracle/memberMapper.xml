@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
-<mapper namespace="MYSQLmemberMapper">
+<mapper namespace="ORACLEmemberMapper">
 	
 
 		<select id="memberList" resultType="MemberDTO">
@@ -19,12 +19,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<insert id="insertMember" >
 		insert INTO tbl_member (userid, userpw, username, email) 
 
-			 VALUES(#{userid}, HEX(AES_ENCRYPT(#{userpw}, 'macaronics119@')), #{username}, #{email})
+			 VALUES(#{userid}, #{userpw}, #{username}, #{email})
 		</insert>
 		
 		
 		<select id="checkPwd" resultType="string">
-		 select  AES_DECRYPT(UNHEX(userpw), 'macaronics119@') from tbl_member where userid=#{userid}
+		 select #{userpw} from tbl_member where userid=#{userid}
 		</select>
 		
 		
@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			
 			
 		<update id="updateMember">
-		 update tbl_member set username=#{username}, email=#{email} , updatedate =now() where  userid=#{userid}
+		 update tbl_member set username=#{username}, email=#{email} , updatedate =sysdate where  userid=#{userid}
 		</update>	
 			
 </mapper>
