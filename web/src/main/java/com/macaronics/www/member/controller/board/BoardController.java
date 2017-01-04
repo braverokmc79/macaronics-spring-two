@@ -27,7 +27,10 @@ public class BoardController {
 	@RequestMapping(value="/listAll.do", method=RequestMethod.GET)
 	public ModelAndView boardList(){
 	
-		
+		ModelAndView mv =new ModelAndView();
+		/*mv.addObject("list", boardService.boardList());
+		mv.setViewName(JSP_PAGE+"list");
+		*/
 		return new ModelAndView(JSP_PAGE+"list", "list", boardService.boardList());
 	}
 	

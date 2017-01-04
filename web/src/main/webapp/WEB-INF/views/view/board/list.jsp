@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="../include/header.jsp" %>
 
 
@@ -39,6 +39,15 @@
 
 
 
+<div class="row">
+        <div class="col-xs-12">
+ 
+        
+        
+        </div>
+      </div>
+
+
 
 
 
@@ -52,134 +61,57 @@
               <div class="col-md-8">
                 <div class="aa-blog-content">
                   <div class="row">
-                    <div class="col-md-6 col-sm-6">
-                      <article class="aa-blog-single">
-                        <figure class="aa-blog-img">
-                          <a href="#"><img alt="img" src="img/blog-img-1.jpg"></a>
-                          <span class="aa-date-tag">15 April, 16</span>
-                        </figure>
-                        <div class="aa-blog-single-content">
-                          <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
-                          <div class="aa-blog-single-bottom">
-                            <a class="aa-blog-author" href="#"><i class="fa fa-user"></i> Admin</a>
-                            <a class="aa-blog-comments" href="#"><i class="fa fa-comment-o"></i>6</a>
-                          </div>
-                        </div>                   
-                      </article>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                      <article class="aa-blog-single">
-                        <figure class="aa-blog-img">
-                          <a href="#"><img alt="img" src="img/blog-img-2.jpg"></a>
-                          <span class="aa-date-tag">15 April, 16</span>
-                        </figure>
-                        <div class="aa-blog-single-content">
-                          <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
-                          <div class="aa-blog-single-bottom">
-                            <a class="aa-blog-author" href="#"><i class="fa fa-user"></i> Admin</a>
-                            <a class="aa-blog-comments" href="#"><i class="fa fa-comment-o"></i>6</a>
-                          </div>
-                        </div>                   
-                      </article>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                      <article class="aa-blog-single">
-                        <figure class="aa-blog-img">
-                          <a href="#"><img alt="img" src="img/blog-img-3.jpg"></a>
-                          <span class="aa-date-tag">15 April, 16</span>
-                        </figure>
-                        <div class="aa-blog-single-content">
-                          <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
-                          <div class="aa-blog-single-bottom">
-                            <a class="aa-blog-author" href="#"><i class="fa fa-user"></i> Admin</a>
-                            <a class="aa-blog-comments" href="#"><i class="fa fa-comment-o"></i>6</a>
-                          </div>
-                        </div>                   
-                      </article>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                      <article class="aa-blog-single">
-                        <figure class="aa-blog-img">
-                          <a href="#"><img alt="img" src="img/blog-img-1.jpg"></a>
-                          <span class="aa-date-tag">15 April, 16</span>
-                        </figure>
-                        <div class="aa-blog-single-content">
-                          <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
-                          <div class="aa-blog-single-bottom">
-                            <a class="aa-blog-author" href="#"><i class="fa fa-user"></i> Admin</a>
-                            <a class="aa-blog-comments" href="#"><i class="fa fa-comment-o"></i>6</a>
-                          </div>
-                        </div>                   
-                      </article>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                      <article class="aa-blog-single">
-                        <figure class="aa-blog-img">
-                          <a href="#"><img alt="img" src="img/blog-img-2.jpg"></a>
-                          <span class="aa-date-tag">15 April, 16</span>
-                        </figure>
-                        <div class="aa-blog-single-content">
-                          <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
-                          <div class="aa-blog-single-bottom">
-                            <a class="aa-blog-author" href="#"><i class="fa fa-user"></i> Admin</a>
-                            <a class="aa-blog-comments" href="#"><i class="fa fa-comment-o"></i>6</a>
-                          </div>
-                        </div>                   
-                      </article>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                      <article class="aa-blog-single">
-                        <figure class="aa-blog-img">
-                          <a href="#"><img alt="img" src="img/blog-img-3.jpg"></a>
-                          <span class="aa-date-tag">15 April, 16</span>
-                        </figure>
-                        <div class="aa-blog-single-content">
-                          <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
-                          <div class="aa-blog-single-bottom">
-                            <a class="aa-blog-author" href="#"><i class="fa fa-user"></i> Admin</a>
-                            <a class="aa-blog-comments" href="#"><i class="fa fa-comment-o"></i>6</a>
-                          </div>
-                        </div>                   
-                      </article>
-                    </div>
-                     <div class="col-md-6 col-sm-6">
-                      <article class="aa-blog-single">
-                        <figure class="aa-blog-img">
-                          <a href="#"><img alt="img" src="img/blog-img-1.jpg"></a>
-                          <span class="aa-date-tag">15 April, 16</span>
-                        </figure>
-                        <div class="aa-blog-single-content">
-                          <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
-                          <div class="aa-blog-single-bottom">
-                            <a class="aa-blog-author" href="#"><i class="fa fa-user"></i> Admin</a>
-                            <a class="aa-blog-comments" href="#"><i class="fa fa-comment-o"></i>6</a>
-                          </div>
-                        </div>                   
-                      </article>
-                    </div>
-                     <div class="col-md-6 col-sm-6">
-                      <article class="aa-blog-single">
-                        <figure class="aa-blog-img">
-                          <a href="#"><img alt="img" src="img/blog-img-3.jpg"></a>
-                          <span class="aa-date-tag">15 April, 16</span>
-                        </figure>
-                        <div class="aa-blog-single-content">
-                          <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
-                          <div class="aa-blog-single-bottom">
-                            <a class="aa-blog-author" href="#"><i class="fa fa-user"></i> Admin</a>
-                            <a class="aa-blog-comments" href="#"><i class="fa fa-comment-o"></i>6</a>
-                          </div>
-                        </div>                   
-                      </article>
-                    </div>
+                   <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">일반 게시판</h3>
+
+              <div class="box-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                  </div>
+                </div>
+              </div>
+              <h3></h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover">
+                <tbody><tr>
+                  <th>번호</th>
+                  <th>제목</th>
+                  <th>글쓴이</th>
+                  <th>등록일</th>
+                  <th>조회수</th>
+                </tr>
+               
+       <c:forEach items="${list }"  var="row">
+
+                <tr>
+                  <td>${row.bno }</td>
+                  <td>${row.title }</td>
+                  <td>${ row.writer }</td>
+                  <td><span class="label label-success">
+                  <fmt:formatDate value="${ row.regdate }"  pattern="yyyy-MM-dd hh:mm"/></span>
+                  </td>
+                  <td> <span class="badge bg-red">${ row.viewcnt }</span></td>
+                </tr>
+       
+       </c:forEach>
+             
+             
+              </tbody></table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+              
+              
+              
+              
+                 
+                 
                   </div>
                   <div class="row">
                     <div class="col-md-12">
@@ -207,6 +139,13 @@
                     </div>
                   </div>
                 </div>
+              
+              
+              
+              
+              
+              
+              
               </div>
               <!-- Start blog sidebar -->
               <div class="col-md-4">

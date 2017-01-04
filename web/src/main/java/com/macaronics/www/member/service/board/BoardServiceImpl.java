@@ -24,7 +24,12 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> boardList() {
 		List<BoardVO> list=null;
 		try {	
-			boardDAO.boardList();
+			list=boardDAO.boardList();
+			
+			for(BoardVO  li : list){
+				logger.info("정보 : " + li.toString());
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
