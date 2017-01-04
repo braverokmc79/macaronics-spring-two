@@ -1,6 +1,6 @@
 package com.macaronics.www.member.model.dto.board;
 
-import java.util.Date;
+import java.sql.Date;
 
 import lombok.Data;
 

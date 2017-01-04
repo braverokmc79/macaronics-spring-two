@@ -11,7 +11,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="boardCreate">
-	
+	insert into TBL_BOARD (BNO, TITLE, CONTENT, WRITER) 
+      VALUES((select nvl(max(bno)+1,1) from tbl_board), #{title}, #{content},  #{writer} )
 	</insert>
 	
 	

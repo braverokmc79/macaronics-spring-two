@@ -5,11 +5,12 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.macaronics.www.member.model.dto.board.BoardVO;
 import com.macaronics.www.member.service.board.BoardService;
 
 @Controller
@@ -35,9 +36,19 @@ public class BoardController {
 	}
 	
 	
+	@RequestMapping(value="/write.do", method=RequestMethod.GET)
+	public String writeDo (){
+		
+		return JSP_PAGE+"write";
+	}
 	
 	
-	
+	@RequestMapping(value="/insert.do", method=RequestMethod.POST)
+	public String insertDo(@ModelAttribute  BoardVO  vo){
+		
+		boardService.boardCreate(vo);
+		return "redirect:listAll.do";
+	}
 	
 	
 	

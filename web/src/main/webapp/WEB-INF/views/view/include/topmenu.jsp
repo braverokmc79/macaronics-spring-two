@@ -26,7 +26,7 @@
                     1-900-523-3564
                   </div>
                   <div class="aa-email hidden-xs">
-                    <span class="fa fa-envelope-o"></span> braverokmc79@gmai.com
+                    <span class="fa fa-envelope-o"></span> braverokmc79@gmail.com
                   </div>
                 </div>              
               </div>
@@ -62,7 +62,7 @@
           </button>
           <!-- LOGO -->                                               
           <!-- Text based logo -->
-           <a class="navbar-brand aa-logo" href="index.html"> Macaronics <span>SHOP</span></a>
+           <a class="navbar-brand aa-logo" href="/"> Macaronics <span>SHOP</span></a>
            <!-- Image based logo -->
            <!-- <a class="navbar-brand aa-logo-img" href="index.html"><img src="/resources/view/img/logo.png" alt="logo"></a> -->
         </div>
@@ -73,10 +73,10 @@
             	<a href="/">HOME</a>
             </li>
              <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="/board/listAll.do">게시판 <span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="/board/listAll.do">Free 게시판 <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">                
-                <li><a href="/board/listAll.do">일반게시글</a></li>
-                <li><a href="properties-detail.html">PROPERTIES DETAIL</a></li>                                            
+                <li><a href="/board/listAll.do">Free 게시글목록</a></li>
+                <li><a href="/board/write.do">게시글 등록하기</a></li>                                            
               </ul>
             </li>
             

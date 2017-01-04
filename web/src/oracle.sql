@@ -7,13 +7,14 @@ alter session set "_ORACLE_SCRIPT" =true;
 --테이블 스페이스 생성
 create tablespace spring
 datafile 'D:\\oracleDB\\XE\\spring.dbf' size 50m
+
 autoextend on
 next 10m
 maxsize unlimited;
 
 
 --사용자 계정 만들기
-create user spring identified by 1234
+create user spring identified by 1234;
 default tablespace spring;
 -- 사용 권한 부여
 grant connect, resource, dba to spring;
@@ -36,18 +37,6 @@ values ('kim', '1234', '김철수', 'kim@nate.com');
 select * from tbl_member;
 commit;
 
-
---p.163 tbl_board
-create table tbl_board(
-
-	bno number not null,
-	title varchar2(200) not null,
-	content varchar2(4000),
-	writer varchar2(50) not null,
-	regdate date default sysdate,
-	viewcnt number default 0,
-	PRIMARY key(bno)
-);
 
 
 

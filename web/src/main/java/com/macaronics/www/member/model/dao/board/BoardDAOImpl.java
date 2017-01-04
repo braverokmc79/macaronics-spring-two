@@ -21,9 +21,9 @@ public class BoardDAOImpl implements BoardDAO {
 	private static final Logger logger =LoggerFactory.getLogger(BoardDAOImpl.class);
 	
 	
-	// private static final String namespace="oracleBoardMapper";
+   private static final String namespace="oracleBoardMapper";
 	
-	private static final String namespace="mysqlBoardMapper";
+//	private static final String namespace="mysqlBoardMapper";
 	
 	
 	
@@ -36,7 +36,13 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public void boardCreate(BoardVO vo) {
 		// TODO Auto-generated method stub
-		sqlSession.insert(namespace+".boardCreate", vo);
+		logger.info(" 데이터 삽입 : " + vo.toString());
+		try{
+			sqlSession.insert(namespace+".boardCreate", vo);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override

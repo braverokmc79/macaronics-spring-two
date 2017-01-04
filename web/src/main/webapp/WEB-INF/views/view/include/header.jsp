@@ -39,6 +39,13 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+	
+  <!-- jQuery library -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+  <script src="/resources/view/js/jquery.min.js"></script>   
+  
+
+
   </head>
 <body class="aa-price-range">  
   <!-- Pre Loader --> 

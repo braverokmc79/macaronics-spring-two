@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="/resources/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
 <%@ include file="../include/header.jsp" %>
 
@@ -65,54 +66,68 @@
                   <div class="row">
                    <div class="box">
             <div class="box-header">
-              <h3 class="box-title">일반 게시판</h3>
+              <h3 class="box-title">게시글 등록</h3>
 
               <div class="box-tools">
-                <div class="input-group input-group-sm" style="width: 100%;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" 
-                  		style="display: inline;">
-
-                  <div class="input-group-btn"  >
-                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                  
-                  	<button id="btnWrite" class="btn btn-primary" style="margin-top :10px; float: right;">글쓰기</button>
-                  </div>
-                </div>
+     
               </div>
               
-             
               <h3></h3>
-              
-              
               
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
+            
+            <form method="post" action="/board/insert.do"  name="formmm1" id="formmm1">
               <table class="table table-hover">
-                <tbody><tr>
-                  <th>번호</th>
-                  <th>제목</th>
-                  <th>글쓴이</th>
-                  <th>등록일</th>
-                  <th>조회수</th>
-                </tr>
-               
-       <c:forEach items="${list }"  var="row">
-
+                <thead>
+                	
+                </thead>
+                <tbody>
+                
                 <tr>
-                  <td>${row.bno }</td>
-                  <td>${row.title }</td>
-                  <td>${ row.writer }</td>
-                  <td><span class="label label-success">
-                  <fmt:formatDate value="${ row.regdate }"  pattern="yyyy-MM-dd hh:mm"/></span>
-                  </td>
-                  <td> <span class="badge bg-red">${ row.viewcnt }</span></td>
+                	<td>제목</td>
+                	<td><input type="text" name="title" id="title" class="form-control" ></td>
                 </tr>
-       
-       </c:forEach>
+                <tr>
+                	<td>내용</td>
+   					<td>
+
+                 <textarea     class="textarea" id="content" name="content"
+                  style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; 
+                  border: 1px solid #dddddd; padding: 10px;"></textarea>
+              
+              <!-- CK Editor -->
+<script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="/resources/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script>
+  $(function () {
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+  //  CKEDITOR.replace('content');
+    //bootstrap WYSIHTML5 - text editor
+	  $(".textarea").wysihtml5();
+  });
+</script>
+   		</td>		
+   				</tr>	
              
+             	<tr>
+             		<td>이름</td>
+             		<td><input type="text"  name="writer" id="writer" class="form-control"></td>
+             	</tr>
              
-              </tbody></table>
+              </tbody>
+              	<tfoot>
+              		<tr>
+              			<td colspan="2"><button id="btnWrite" type="button" class="btn btn-warning">글 등록하기</button></td>
+              		</tr>
+              	</tfoot>
+            </table>
+              
+              
+              </form>
             </div>
             <!-- /.box-body -->
           </div>
@@ -150,7 +165,12 @@
                   </div>
                 </div>
               
-           
+              
+              
+              
+              
+              
+              
               </div>
               <!-- Start blog sidebar -->
               <div class="col-md-4">
@@ -262,20 +282,50 @@
 
 
 
+
 <script>
+
 $(document).ready(function(){
 	
+
 	
 	$("#btnWrite").click(function(){
+		var form1 = $("#formmm1");
+		
+		var title=$("#title");
+		var content =$("#content");
+		var writer =$("#writer");
 		
 		
-		location.href="/board/write.do";
+	
+		if(title.val().length < 1){
+			alert("제목을 입력 하세요");
+			title.focus();
+			return;
+		}
+		
+		if(content.val().length <1){
+			alert("내용을 입력 하세요");
+			content.focus();
+			return;
+		}
+		
+		if(writer.val().length <1){
+			alert("이름을 입력 하세요");
+			writer.focus();
+			return;
+		}
+		
+		form1.submit();
+		
+		
 		
 	});
 	
 	
 	
 });
+
 
 
 </script>
