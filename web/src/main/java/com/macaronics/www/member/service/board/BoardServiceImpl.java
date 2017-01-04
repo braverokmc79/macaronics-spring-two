@@ -23,10 +23,10 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	@Override
-	public List<BoardVO> boardList() {
+	public List<BoardVO> boardList(String search_option, String keyword) {
 		List<BoardVO> list=null;
 		try {	
-			list=boardDAO.boardList();
+			list=boardDAO.boardList(search_option, keyword);
 			
 			for(BoardVO  li : list){
 				logger.info("정보 : " + li.toString());
@@ -101,6 +101,13 @@ public class BoardServiceImpl implements BoardService {
 	public BoardVO getBoard(Integer bno) {
 		// TODO Auto-generated method stub
 		return boardDAO.getBoard(bno);
+	}
+
+
+	@Override
+	public int countArticle(String search_option, String keyword) {
+		// TODO Auto-generated method stub
+		return boardDAO.countArticle(search_option, keyword);
 	}
 
 	

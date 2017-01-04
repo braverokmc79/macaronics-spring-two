@@ -22,7 +22,7 @@ public class BoardServiceImplTest {
 	@Test
 	public void testBoardList() {
 		
-	  	boardService.boardList();	
+	  	boardService.boardList("", "fes");	
 	}
 
 	@Test

@@ -29,13 +29,17 @@ public class BoardController {
 	
 	
 	@RequestMapping(value="/listAll.do", method=RequestMethod.GET)
-	public ModelAndView boardList(){
+	public ModelAndView boardList(@RequestParam(  required=false) String search_option , 
+			@RequestParam( required=false) String keyword){
 	
 		ModelAndView mv =new ModelAndView();
-		/*mv.addObject("list", boardService.boardList());
+		
+		int count =boardService.countArticle(search_option, keyword);
+		mv.addObject("countList", count);
+		mv.addObject("list", boardService.boardList(search_option, keyword));
 		mv.setViewName(JSP_PAGE+"list");
-		*/
-		return new ModelAndView(JSP_PAGE+"list", "list", boardService.boardList());
+		
+		return mv;
 	}
 	
 	

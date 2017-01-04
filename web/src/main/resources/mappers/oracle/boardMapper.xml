@@ -5,10 +5,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="ORACLEBoardMapper">
+	<!-- 레코드 개수 계수 -->
+	<select id="countArticle" resultType="int">
+	   select count(*)  from tbl_board  where bno > 0
+	   	 <include refid="search"></include>
+	</select>
+	
+	
+<sql id="search">
+		
+		<if test="search_option !=null">					
+			<if test="search_option =='title' || search_option =='writer' || search_option=='content' ">
+				and   ${search_option} like  '%' || #{keyword} || '%'
+			</if>
+		</if>
+		
+
+	
+	<if test="search_option == 'all'">
+			 and   ( title like  '%' || #{keyword} || '%' )		  
+			  or  (  writer like  '%' || #{keyword} || '%' )
+			     or ( content like  '%' || #{keyword} || '%'  )
+	</if>
+			
+</sql>	
 	
 	<select id="boardList" resultType="BoardVO">
-	select * from tbl_board where bno > 0 order by bno desc, regdate desc
+	select * from tbl_board where bno > 0 
+			
+		 <include refid="search"></include>
+		 
+		order by bno desc, regdate desc
 	</select>
+	
+	
+	
 	
 	<insert id="boardCreate">
 	insert into TBL_BOARD (BNO, TITLE, CONTENT, WRITER) 

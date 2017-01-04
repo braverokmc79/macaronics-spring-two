@@ -77,21 +77,37 @@
               <h3 class="box-title" style="margin-bottom: 10px;">Free 게시판</h3>
 
               <div class="box-tools">
-                <div class="input-group input-group-sm" style="width: 100%;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" 
-                  		style="display: inline;">
-
-                  <div class="input-group-btn"  >
-                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                  
-                  	<button id="btnWrite" class="btn btn-primary" style="margin-top :10px; float: right;">글쓰기</button>
-                  </div>
-                </div>
-              </div>
+              <form method="get" action="/board/listAll.do"  name="serarchForm">
+              		<div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+    				<div class="col-md-4">
+            	      
+            	      <select name="search_option" class="form-control"  >
+            	        <option value=""   <c:if test="${ param.search_option =='' }">selected="selected"</c:if>>----</option>
+	                 	<option value="writer"   <c:if test="${ param.search_option =='writer' }">selected="selected"</c:if>>이름</option>
+	                 	<option value="content" <c:if test="${ param.search_option =='content' }">selected="selected"</c:if>>내용</option>
+	                 	<option value="title" <c:if test="${ param.search_option =='title' }">selected="selected"</c:if>>제목</option>
+	                 	<option value="all" <c:if test="${ param.search_option =='all' }">selected="selected"</c:if>>이름+내용+제목</option>
+	                  </select>
+	                  </div>
+	               <div class="col-md-4">
+				    <input type="text" class="form-control" name="keyword" value="${param.keyword }">
+				    </div>
+				    <div class="col-md-4">
+  					<button type="submit" class="btn btn-warning">검색</button>
+  					</div>
+				 </div>
+				 
+              </form>
+             <p class="input-group input-group-sm" style="margin-top :10px;"><button id="btnWrite" class="btn btn-primary" >글쓰기</button></p>
+            
+            </div>
               
-             
-              <h3></h3>
-              
+             <c:if test ="${ not empty countList }">
+              <p class="label label-danger" >  
+              검색 결과 개수 : ${countList }
+              </p>
+              <p></p>
+             </c:if> 
               
               
             </div>

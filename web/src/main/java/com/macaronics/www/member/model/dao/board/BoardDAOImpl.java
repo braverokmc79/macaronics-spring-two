@@ -1,6 +1,8 @@
 package com.macaronics.www.member.model.dao.board;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -29,9 +31,13 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	
 	@Override
-	public List<BoardVO> boardList() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".boardList");
+	public List<BoardVO> boardList(String search_option, String keyword) {
+		
+		Map<String, Object> map =new HashMap<>();
+		map.put("search_option", search_option);
+		map.put("keyword", keyword);
+		
+		return sqlSession.selectList(namespace+".boardList", map);
 	}
 
 	@Override
@@ -79,6 +85,18 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectOne(namespace+".getBoard", bno);
 	}
 
+	
+	//레코드 개수 계산
+	@Override
+	public int countArticle(String search_option, String keyword) {
+		Map<String, Object> map =new HashMap<>();
+		map.put("search_option", search_option);
+		map.put("keyword", keyword);
+		
+		return sqlSession.selectOne(namespace+".countArticle", map);
+	}
+
+	
 }
 
 
