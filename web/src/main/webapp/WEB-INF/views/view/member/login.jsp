@@ -20,12 +20,20 @@
             <div class="aa-signin-form">
               <div class="aa-signin-form-title">
                 <a class="aa-property-home" href="index.html">Macaronics Home</a>
-                <h4>계정에 로그인하십시오.</h4>
+                <c:choose>
+                	<c:when test="${not empty errorMessage }">
+                		<h4 style="color:red;">${errorMessage }</h4>
+                	</c:when>
+                	<c:otherwise>
+                		<h4>계정에 로그인하십시오.</h4>	
+                	</c:otherwise>
+                </c:choose>
+                
               </div>
               <form class="contactform" method="post" action="/member/login.do">                                                 
                 <div class="aa-single-field">
                   <label for="email">메일 <span class="required">*</span></label>
-                  <input type="email" required="required" aria-required="true" value="" name="email">
+                  <input type="email" required="required" aria-required="true" value="${messageEmail }" name="email">
                 </div>
                 <div class="aa-single-field">
                   <label for="password">패스워드 <span class="required">*</span></label>

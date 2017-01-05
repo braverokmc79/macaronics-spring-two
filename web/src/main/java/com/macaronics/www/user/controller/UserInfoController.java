@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.macaronics.www.member.model.dto.MemberDTO;
 import com.macaronics.www.member.service.MemberService;
@@ -29,9 +30,9 @@ public class UserInfoController {
 	
 	
 	@RequestMapping(value="/userinfo", method=RequestMethod.GET)
-	public String userInfo(@ModelAttribute MemberDTO dto){
+	public String userInfo(@RequestParam String userid){
 		
-		memberService.viewMember(dto.getUserid());
+		memberService.viewMember(userid);
 		
 		return JSP_PAGE+"/member/userinfo";
 	}

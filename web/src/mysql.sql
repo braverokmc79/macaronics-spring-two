@@ -44,8 +44,16 @@ INSERT INTO tbl_board ( title, content, writer)
 	VALUES ('제목', '내용' , '글쓴이');
 
 
-
+-- 제약 조건 추가
 ALTER TABLE tbl_member
    ADD UNIQUE KEY`uc_email`(email);
+
    
-   
+--    member_level 추가
+alter table tbl_member add ( member_level INT DEFAULT 1);
+
+INSERT  INTO tbl_member (userid, userpw, username, email, member_level) 
+	VALUE ( 'braverokmc' , '815BD3BAB386F0D425511BE6FAC7A406EC469351FA17C1A15B061A0577B5378448263D37268128052E08898B64311C818F8B6956FFF0BC77796F49A6735497A7' , '최준호', 'braverokmc79@gmail.com' , 15 );
+	
+	
+	  

@@ -22,23 +22,36 @@
               <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="aa-header-left">
                   <div class="aa-telephone-no">
-                    <span class="fa fa-phone"></span>
-                    1-900-523-3564  서버 환경  :  <span style="color: red;">${ServerEnvironment }</span>
+                    <span class="fa fa-bars"></span>
+                    서버 환경  :  <span style="color: red;">${ServerEnvironment }</span>
                   </div>
                   <div class="aa-email hidden-xs">
                     <span class="fa fa-envelope-o"></span> braverokmc79@gmail.com
                   </div>
                 </div>              
               </div>
+              
+              
               <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="aa-header-right">
-                 <a href="/admin/index" class="aa-register">관리자</a>
-                  <a href="/users/index" class="aa-register">회원</a>
-                  <a href="/users/userinfo.do" class="aa-register">회원정보</a>
-                  
-                  <a href="/member/register.do" class="aa-register">회원가입</a>
-                  <a href="/member/loginform.do" class="aa-login">Login</a>
-                </div>
+               <c:choose>
+	               	<c:when test="${ not empty sessionScope.loginUser }">
+	               	     <c:if test="${ loginUser.member_level  >= 15}"  >
+	               	    	  <a href="/admin/index" class="aa-register">관리자</a>
+	               	     </c:if>
+		                  <a href="/users/index" class="aa-register">${ loginUser.userid } 회원님</a>
+		                  <a href="/users/userinfo.do?userid=${loginUser.userid }" class="aa-register">회원정보</a>                  
+		                  <a href="/member/register.do" class="aa-register">회원가입</a>
+		                  <a href="/member/logout" class="aa-login">로그아웃</a>
+	               	</c:when>
+	               	<c:otherwise>
+ 
+                  		<a href="/member/register.do" class="aa-register">회원가입</a>
+                		<a href="/member/loginform.do" class="aa-login">Login</a>
+	               	</c:otherwise>
+               </c:choose>
+
+ 			   </div>
               </div>
             </div>
           </div>

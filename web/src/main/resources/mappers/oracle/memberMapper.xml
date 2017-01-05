@@ -42,6 +42,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<update id="updateMember">
 		 update tbl_member set username=#{username}, email=#{email} , updatedate =sysdate where  userid=#{userid}
 		</update>	
+		
+		
+		<select id="checkLogin" resultType="MemberDTO">
+		 select * from tbl_member  where email =#{email} 
+		</select>	
+		
+		
+		
+		
+		
+		
 			
 </mapper>
 

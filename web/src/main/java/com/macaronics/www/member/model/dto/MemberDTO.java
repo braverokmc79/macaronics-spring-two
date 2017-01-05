@@ -17,6 +17,8 @@ public class MemberDTO {
 	
 	
 	private String confirmPassword;
+	private String password_key;
 	
+	private int member_level;
 	
 }

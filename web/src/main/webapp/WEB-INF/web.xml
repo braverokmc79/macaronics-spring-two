@@ -60,7 +60,10 @@
     <servlet-name>petclinic</servlet-name>
 </filter-mapping>
 
-
+  <!-- 세션 유효 시간 --> 
+<session-config>
+	<session-timeout>20</session-timeout>
+</session-config>
 
 
 

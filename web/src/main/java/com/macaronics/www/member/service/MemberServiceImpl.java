@@ -1,6 +1,8 @@
 package com.macaronics.www.member.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -16,6 +18,8 @@ public class MemberServiceImpl implements MemberService {
 
 	@Inject
 	private MemberDAO memberDao;
+	
+
 	
 	private static final Logger logger =LoggerFactory.getLogger(MemberServiceImpl.class);
 	
@@ -58,6 +62,13 @@ public class MemberServiceImpl implements MemberService {
 	public String checkPwd(String userid) {
 		// TODO Auto-generated method stub
 		return memberDao.checkPwd(userid);
+	}
+
+	@Override
+	public MemberDTO checkLogin(MemberDTO dto) {
+		// TODO Auto-generated method stub
+		
+		return memberDao.checkLogin(dto);
 	}
 
 	

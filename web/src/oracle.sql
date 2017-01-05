@@ -72,5 +72,7 @@ ALTER TABLE tbl_member
 
 
    
+-- 회원 레벨 컬럼 추가
+alter TABLE  TBL_MEMBER ADD  ( member_level  number default 1 );
 
 

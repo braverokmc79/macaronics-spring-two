@@ -14,6 +14,7 @@ public interface MemberService {
 	public void updateMember(MemberDTO dto);
 	public boolean userAndEmailConfirm(MemberDTO memberdto);
 	public String checkPwd(String userid);
+	public MemberDTO checkLogin(MemberDTO dto);
 	
 	
 	
