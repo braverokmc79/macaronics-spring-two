@@ -22,10 +22,10 @@ public class BoardServiceImplTest {
 	@Test
 	public void testBoardList() {
 		
-	  	boardService.boardList("", "fes");	
+		boardService.boardList(1, 10, "", "");	
 	}
 
-	@Test
+/*	@Test
 	public void testBoardCreate() {
 	   BoardVO vo =new BoardVO();
 	   vo.setContent("ssssss");
@@ -51,6 +51,6 @@ public class BoardServiceImplTest {
 	@Test
 	public void testBoardDelete() {
 		boardService.boardDelete(2);
-	}
+	}*/
 
 }

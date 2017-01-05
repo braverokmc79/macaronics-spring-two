@@ -23,10 +23,10 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	@Override
-	public List<BoardVO> boardList(String search_option, String keyword) {
+	public List<BoardVO> boardList(int start, int end, String search_option, String keyword) {
 		List<BoardVO> list=null;
 		try {	
-			list=boardDAO.boardList(search_option, keyword);
+			list=boardDAO.boardList(start, end, search_option, keyword);
 			
 			for(BoardVO  li : list){
 				logger.info("정보 : " + li.toString());

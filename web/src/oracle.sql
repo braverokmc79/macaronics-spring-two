@@ -89,3 +89,42 @@ create VIEW free_board as
 
 
 
+--페이지 나누기 쿼리
+
+
+select * from
+(
+	select rownum as rn , A.*
+ from	(select  rownum , bno, content, title, viewcnt, writer, userid, username 
+ 		from FREE_BOARD  order by bno desc , regdate desc ) A
+) where  rn BETWEEN  1 and 10
+
+  and username like '%' || '2222' || '%' ;
+		
+
+
+-- 기존 게시물 삭제
+delete from tbl_board;
+commit;
+-- 게시물 1000 개 입력
+
+declare
+ i number :=1;
+begin 
+ while i <= 1000 loop
+  insert into tbl_board (bno, title, content, writer)
+	values
+   ( (select nvl(max(bno) +1, 1) from tbl_board )
+  	, '제목'||i, '내용'||i, 'kim');	
+	i :=i+1;
+  end loop;
+end;
+
+
+
+
+
+
+
+
+

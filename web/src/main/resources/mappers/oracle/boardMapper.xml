@@ -29,11 +29,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </sql>	
 	
 	<select id="boardList" resultType="BoardVO">
-	select * from free_board where bno > 0 
-			
+	
+select * from
+(
+	select rownum as rn , A.*
+ from	(select  rownum , bno, content, title, viewcnt, writer, userid, username 
+ 		from FREE_BOARD  order by bno desc , regdate desc ) A
+) where  rn BETWEEN  #{start} and #{end}
+
 		 <include refid="search"></include>
-		 
-		order by bno desc, regdate desc
+
 	</select>
 	
 	

@@ -31,12 +31,13 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	
 	@Override
-	public List<BoardVO> boardList(String search_option, String keyword) {
+	public List<BoardVO> boardList(int start, int end, String search_option, String keyword) {
 		
 		Map<String, Object> map =new HashMap<>();
 		map.put("search_option", search_option);
 		map.put("keyword", keyword);
-		
+		map.put("start", start);
+		map.put("end", end);
 		return sqlSession.selectList(namespace+".boardList", map);
 	}
 

@@ -99,8 +99,8 @@
             </div>
               
              <c:if test ="${ not empty countList }">
-              <p class="label label-danger" >  
-              검색 결과 개수 : ${countList }
+              <p>  
+               <span class="label label-danger"> ${countList }</span> 개의 게시물이 있습니다.
               </p>
               <p></p>
              </c:if> 

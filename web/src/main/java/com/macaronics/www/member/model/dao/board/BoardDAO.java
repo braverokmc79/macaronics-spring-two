@@ -6,7 +6,7 @@ import com.macaronics.www.member.model.dto.board.BoardVO;
 
 public interface BoardDAO {
 
-	public List<BoardVO> boardList(String search_option, String keyword) ;
+	public List<BoardVO> boardList(int start, int end, String search_option, String keyword) ;
 	public void boardCreate(BoardVO vo);
 	public BoardVO boardRead(Integer bno);
 	public void boardUpdate(BoardVO vo);
