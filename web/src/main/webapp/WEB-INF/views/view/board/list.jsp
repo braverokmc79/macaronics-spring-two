@@ -52,15 +52,9 @@
 
 <div class="row">
         <div class="col-xs-12">
- 
-        
-        
+     
         </div>
       </div>
-
-
-
-
 
   <!-- Start Blog  -->
   <section id="aa-blog">
@@ -83,7 +77,8 @@
             	      
             	      <select name="search_option" class="form-control"  >
             	        <option value=""   <c:if test="${ param.search_option =='' }">selected="selected"</c:if>>----</option>
-	                 	<option value="writer"   <c:if test="${ param.search_option =='writer' }">selected="selected"</c:if>>이름</option>
+	                 	<option value="writer"   <c:if test="${ param.search_option =='writer' }">selected="selected"</c:if>>아이디</option>
+	                 	<option value="username"   <c:if test="${ param.search_option =='username' }">selected="selected"</c:if>>이름</option>
 	                 	<option value="content" <c:if test="${ param.search_option =='content' }">selected="selected"</c:if>>내용</option>
 	                 	<option value="title" <c:if test="${ param.search_option =='title' }">selected="selected"</c:if>>제목</option>
 	                 	<option value="all" <c:if test="${ param.search_option =='all' }">selected="selected"</c:if>>이름+내용+제목</option>
@@ -98,8 +93,9 @@
 				 </div>
 				 
               </form>
-             <p class="input-group input-group-sm" style="margin-top :10px;"><button id="btnWrite" class="btn btn-primary" >글쓰기</button></p>
-            
+      <c:if test="${ not empty  loginUser}" >      
+       <p class="input-group input-group-sm" style="margin-top :10px;"><button id="btnWrite" class="btn btn-primary" >글쓰기</button></p>
+	</c:if>            
             </div>
               
              <c:if test ="${ not empty countList }">

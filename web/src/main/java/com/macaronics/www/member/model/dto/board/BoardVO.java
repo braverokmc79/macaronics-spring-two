@@ -16,6 +16,10 @@ public class BoardVO {
 	private Date regdate;
 	private int viewcnt;
 	
+	private String member_level;
+	private String username;
+	private String userid;
+	
 	
 	public void setTitle(String title) {
 		this.title = XssDefender.inputString(title);

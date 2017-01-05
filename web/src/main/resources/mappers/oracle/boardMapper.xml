@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="ORACLEBoardMapper">
 	<!-- 레코드 개수 계수 -->
 	<select id="countArticle" resultType="int">
-	   select count(*)  from tbl_board  where bno > 0
+	   select count(*)  from free_board  where bno > 0
 	   	 <include refid="search"></include>
 	</select>
 	
@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <sql id="search">
 		
 		<if test="search_option !=null">					
-			<if test="search_option =='title' || search_option =='writer' || search_option=='content' ">
+			<if test="search_option =='title' || search_option =='writer' || search_option=='content' || search_option=='username' ">
 				and   ${search_option} like  '%' || #{keyword} || '%'
 			</if>
 		</if>
@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </sql>	
 	
 	<select id="boardList" resultType="BoardVO">
-	select * from tbl_board where bno > 0 
+	select * from free_board where bno > 0 
 			
 		 <include refid="search"></include>
 		 

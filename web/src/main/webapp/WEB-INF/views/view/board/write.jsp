@@ -6,9 +6,10 @@
   <link rel="stylesheet" href="/resources/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
 <%@ include file="../include/header.jsp" %>
-
-
 <%@ include file="../include/topmenu.jsp" %>
+
+<%@ include file="../../session_check.jsp" %>
+
 
 <style type="text/css">
 
@@ -115,7 +116,7 @@
              
              	<tr>
              		<td>이름</td>
-             		<td><input type="text"  name="writer" id="writer" class="form-control"></td>
+             		<td><input type="text"  name="writer" id="writer" readonly="readonly" value="${sessionScope.loginUser.userid }" class="form-control"></td>
              	</tr>
              
               </tbody>
@@ -132,11 +133,7 @@
             <!-- /.box-body -->
           </div>
               
-              
-              
-              
-                 
-                 
+               
                   </div>
                   <div class="row">
                     <div class="col-md-12">
@@ -164,10 +161,6 @@
                     </div>
                   </div>
                 </div>
-              
-              
-              
-              
               
               
               

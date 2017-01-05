@@ -5,11 +5,10 @@
 <%@ include file="../include/header.jsp" %>
 
 <%@ include file="../include/top_menu.jsp" %>
-
-   
-   
+ 
 <%@ include file="../include/side_menu.jsp" %>   
-   
+
+<jsp:include page="../../session_check.jsp" />   
    
    
       <!--main content start-->

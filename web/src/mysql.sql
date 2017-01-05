@@ -56,4 +56,17 @@ INSERT  INTO tbl_member (userid, userpw, username, email, member_level)
 	VALUE ( 'braverokmc' , '815BD3BAB386F0D425511BE6FAC7A406EC469351FA17C1A15B061A0577B5378448263D37268128052E08898B64311C818F8B6956FFF0BC77796F49A6735497A7' , '최준호', 'braverokmc79@gmail.com' , 15 );
 	
 	
-	  
+
+-- free board 생성
+
+create VIEW free_board as 
+	( select b.bno, b.content, b.title, b.viewcnt, m.email, m.member_level, b.regdate, m.username, b.writer, m.userid
+	
+	from tbl_member m, tbl_board b where m.userid =b.writer 
+	
+);
+
+	
+	
+	
+	

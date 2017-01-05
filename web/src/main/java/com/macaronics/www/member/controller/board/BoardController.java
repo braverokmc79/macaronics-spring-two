@@ -62,6 +62,8 @@ public class BoardController {
 		return "redirect:listAll.do";
 	}
 	
+	
+	
 	//조회수 증가
 	@RequestMapping(value="/view.do", method=RequestMethod.GET)
 	public String viewDo(@RequestParam Integer bno, Model model, HttpSession session){

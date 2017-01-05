@@ -10,6 +10,13 @@
 
 <%@ include file="../include/topmenu.jsp" %>
 
+
+
+<%@ include file="../../session_exact_check.jsp" %>
+
+
+
+
 <style type="text/css">
 
 #aa-property-header {

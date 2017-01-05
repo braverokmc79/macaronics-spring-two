@@ -18,7 +18,7 @@
     <!--   <context:property-placeholder  location="classpath:/config/mysql-config.properties"/>  -->
     <!-- <context:property-placeholder  location="classpath:/config/mysql2-config.properties"/> -->
    <!-- <context:property-placeholder  location="classpath:/config/oracle-config.properties"/>   -->
-	<context:property-placeholder  location="classpath:/config/mysql-config.properties"/>
+	<context:property-placeholder  location="classpath:/config/oracle-config.properties"/>
 
 
 

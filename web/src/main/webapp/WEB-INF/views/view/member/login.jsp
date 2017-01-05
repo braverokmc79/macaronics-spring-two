@@ -19,7 +19,7 @@
           <div class="aa-signin-area">
             <div class="aa-signin-form">
               <div class="aa-signin-form-title">
-                <a class="aa-property-home" href="index.html">Macaronics Home</a>
+                <a class="aa-property-home" href="/">Macaronics Home</a>
                 <c:choose>
                 	<c:when test="${not empty errorMessage }">
                 		<h4 style="color:red;">${errorMessage }</h4>

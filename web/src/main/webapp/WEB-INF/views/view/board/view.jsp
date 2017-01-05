@@ -10,6 +10,7 @@
 
 <%@ include file="../include/topmenu.jsp" %>
 
+
 <style type="text/css">
 
 #aa-property-header {
@@ -66,7 +67,6 @@
        		
               </div>
               	 <h3 style="display:inline-table; "> 
-                 <button  type="button" class="btn btn-primary"  id="btnList"  style="float: right; " >글 목록</button>
             
                 </h3>
               
@@ -108,14 +108,17 @@
              
               </tbody>
               	<tfoot>
-              		<tr>
-              			<td colspan="2">
+                <tr>
+                <td colspan="2">
+                   <c:if test="${sessionScope.loginUser.userid ==vo.writer   || sessionScope.loginUser.member_level >=15}"> 	
               			<input type="hidden"  name="bno" value="${vo.bno }">
               			<button id="btnUpdate" type="button" class="btn btn-warning">수정하기</button>
               			<button id="btnDelete" type="button" class="btn btn-danger">삭제하기</button>
-              			</td>
-              		</tr>
-              	</tfoot>
+                	</c:if>
+                	 <button  type="button" class="btn btn-primary"  id="btnList"  style="float: right; " >글 목록</button>	
+              	</td>
+              		 </tr>
+              	 </tfoot>
             </table>
               
               

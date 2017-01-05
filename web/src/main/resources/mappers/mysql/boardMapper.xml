@@ -5,11 +5,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="MYSQLBoardMapper">
-	
-
-	<select id="boardList" resultType="BoardVO">
-		select * from tbl_board where bno > 0 order by bno desc, regdate desc
+		<!-- 레코드 개수 계수 -->
+	<select id="countArticle" resultType="int">
+	   select count(*)  from free_board  where bno > 0
+	   	 <include refid="search"></include>
 	</select>
+	
+	
+<sql id="search">
+		
+		<if test="search_option !=null">					
+			<if test="search_option =='title' || search_option =='writer' || search_option=='content' || search_option=='username' ">
+				and   ${search_option} like  concat( '%', #{keyword}, '%' )
+			</if>
+		</if>
+	
+	<if test="search_option == 'all'">
+			 and   ( title like  concat( '%', #{keyword}, '%' ) )		  
+			  or  (  writer like  concat( '%', #{keyword}, '%' ) )
+			     or ( content like  concat( '%', #{keyword}, '%' )  )
+	</if>
+			
+</sql>	
+	
+	<select id="boardList" resultType="BoardVO">
+	select * from free_board where bno > 0 
+			
+		 <include refid="search"></include>
+		 
+		order by bno desc, regdate desc
+	</select>
+	
 	
 	<insert id="boardCreate">
 	insert INTO tbl_board ( title, content, writer) 

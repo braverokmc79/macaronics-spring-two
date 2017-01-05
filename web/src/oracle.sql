@@ -76,3 +76,16 @@ ALTER TABLE tbl_member
 alter TABLE  TBL_MEMBER ADD  ( member_level  number default 1 );
 
 
+
+
+-- free board 생성
+
+create VIEW free_board as 
+	( select b.bno, b.content, b.title, b.viewcnt, m.email, m.member_level, b.regdate, m.username, b.writer, m.userid
+	
+	from tbl_member m, tbl_board b where m.userid =b.writer 
+	
+);
+
+
+
