@@ -145,7 +145,6 @@
                       <div class="aa-properties-content-bottom">
                         <nav>
                     
-                    
                           <ul class="pagination">
                            
                            <c:if test="${map.pager.curBlock  > 1 }">
@@ -194,17 +193,17 @@
                               </a>
                             </li>
                         </c:if>    
-                 
                           </ul>
-                      
-                      
                       
                       </nav>
                       </div>
                     </div>
                   </div>
+                
+                
                 </div>
               
+           
            
               </div>
               <!-- Start blog sidebar -->

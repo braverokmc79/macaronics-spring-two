@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="MYSQL_freeBoardReplyMapper">
+	
+
+		<select id="list" resultType="FreeBoardReplyVO" >
+		select * from TBL_REPLY where bno =#{bno}  order by regdate desc
+		</select>
+	
+	<insert id="create" >
+	INSERT into TBL_REPLY ( BNO, REPLYTEXT, REPLYER) 
+
+ 		VALUES ( #{bno}, #{replytext},  #{replyer} )
+ 
+	</insert>
+	
+	
+	<update id="update">
+		update TBL_REPLY SET REPLYTEXT =#{replytext} , UPDATEDATE =sysdate WHERE RNO =#{rno} 
+	</update>
+	
+	
+	<delete id="delete">
+	  delete from tbl_reply where rno =#{rno}
+	</delete>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -89,4 +89,46 @@ insert into tbl_board ( title, content, writer)
   
 select count(*) from tbl_board;	
 	
-	
+
+
+-- Free Board 댓글 테이블 (p.370)
+-- 게시판 : 댓글 (1:n , 1: 다)
+-- 댓글 테이블 (p.370)
+
+
+create table tbl_reply(
+
+  rno int not null primary key AUTO_INCREMENT ,
+  bno int default 0,
+  replytext text not null,
+  replyer varchar(50) not null,
+  regdate TIMESTAMP   default now(),
+  updatedate DATETIME 
+
+);
+
+-- foreing key 제약조건 추가
+
+alter table tbl_reply add constraint fk_board
+
+ foreign key(bno) REFERENCES  tbl_board(bno);
+
+
+
+
+-- 1000번 게시물에 대한 댓글
+
+insert into tbl_reply( bno, replytext, replyer)
+ values ( 890,  '댓글 ...' , 'braverokmc');
+
+select rno, bno, replyer, r.regdate, r.updatedate, username
+
+from  tbl_reply r, tbl_member m
+
+where r.replyer = m.userid and bno =890;
+
+
+
+commit;
+
+

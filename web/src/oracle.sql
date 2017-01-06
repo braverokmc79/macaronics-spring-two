@@ -122,6 +122,66 @@ end;
 
 
 
+-- Free Board 댓글 테이블 (p.370)
+-- 게시판 : 댓글 (1:n , 1: 다)
+-- 댓글 테이블 (p.370)
+
+
+create table tbl_reply(
+
+  rno number not null primary key,
+  bno number default 0,
+  replytext varchar2(1000) not null,
+  replyer varchar2(50) not null,
+  regdate date  default sysdate,
+  updatedate date  default sysdate
+
+);
+
+-- foreing key 제약조건 추가
+
+alter table tbl_reply add constraint fk_board
+
+ foreign key(bno) REFERENCES  tbl_board(bno);
+
+-- 시퀀스 생성
+
+create sequence reply_seq
+
+start with 1 increment by 1;
+
+
+select reply_seq.nextval from dual;
+
+
+-- 1000번 게시물에 대한 댓글
+
+insert into tbl_reply(rno, bno, replytext, replyer)
+ values (reply_seq.nextval, 1000,  '댓글 ...' , 'kim');
+
+select rno, bno, replyer, r.regdate, r.updatedate, username
+
+from  tbl_reply r, tbl_member m
+
+where r.replyer = m.userid and bno =1000;
+
+
+
+commit;
+
+select USERNAME , r.REGDATE, r.UPDATEDATE,  REPLYTEXT,  REPLYER , rno, bno  from 
+
+ 	TBL_MEMBER m , TBL_REPLY r WHERE  m.USERID =r.REPLYER  and bno =1000
+	order BY rno ;
+
+
+
+
+
+
+
+
+
 
 
 

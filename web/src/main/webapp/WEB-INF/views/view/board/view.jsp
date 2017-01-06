@@ -145,6 +145,39 @@
                     <div class="col-md-12">
                       <div class="aa-properties-content-bottom">
                         <nav>
+                        
+                             
+           <!-- 댓글 -->
+                <div class="row">
+                <hr style="  border: 1px #66AD44 solid;" >
+                <h3 >댓글 쓰기</h3>
+                	
+                	<form  name="replyform1" method="post" action="">
+                	<table class="table">
+                		<tr>
+                			<td>작성자</td>
+                			<td><input type="text" value="${sessionScope.loginUser.userid }"  class="form-control" id="replyer">
+                			</td>
+                		</tr>
+
+						 <tr>
+                			<td>내용</td>
+                			<td>
+                			<textarea rows="7" cols="" id="replytext" class="form-control" placeholder="댓글을 작성하세요"></textarea>
+                			</td>
+                		</tr>
+	
+						<tr>
+						<td colspan="2" ><button class="btn btn-warning" id="btnReply" >댓글쓰기</button></td>
+						</tr>
+             
+                	</table>
+                
+                </form>
+                </div>
+                
+                        
+                        
                           <ul class="pagination">
                             <li>
                               <a aria-label="Previous" href="#">
@@ -322,6 +355,61 @@ $(document).ready(function(){
 		}
 		
 	});
+	
+	//댓글 쓰기
+	
+	
+	
+	
+	$("#btnReply").click(function(event){
+		event.preventDefault();
+		var  userid ='${sessionScope.loginUser.userid}';
+		var replytext =$("#replytext").val();
+		var bno ='${vo.bno}';
+		alert("번호" + bno + " : " +userid + " : " + replytext) ;
+		
+		if(userid.length < 1){
+			alert("로그인을 하셔야 댓글이 가능합니다." ) ;
+			
+			return ;
+		
+		}
+		
+		if(replytext.length <1){
+			alert("댓글을 작성하세요!");
+			return ;
+		}
+		
+
+		
+		$.ajax({
+			
+			type :"post",
+			url : "/freeboard_reply/insert",
+			contentType:"application/json",
+			dataType :"text",
+			data:JSON.stringify({
+				bno :bno,
+				replyer:userid,
+				replytext:replytext
+				
+			}),
+			success:function(result){
+				
+				if(result=="SUCCESS"){
+					alert("성공");	
+				}
+				
+				
+			}
+			
+		});
+		
+		
+		
+	});
+	
+	
 	
 });
 

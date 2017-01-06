@@ -15,10 +15,10 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-    <!--   <context:property-placeholder  location="classpath:/config/mysql-config.properties"/>  -->
-    <!-- <context:property-placeholder  location="classpath:/config/mysql2-config.properties"/> -->
-   <!-- <context:property-placeholder  location="classpath:/config/oracle-config.properties"/>   -->
-	<context:property-placeholder  location="classpath:/config/mysql-config.properties"/>
+    <!--   <context:property-placeholder  location="classpath:/config/m1-config.properties"/>     mysql 포토  : 3306  --> 
+    <!-- <context:property-placeholder  location="classpath:/config/m2-config.properties"/>  mysql 포토  : 3306  -->
+   <!-- <context:property-placeholder  location="classpath:/config/o-config.properties"/>    oracle -->
+	<context:property-placeholder  location="classpath:/config/o-config.properties"/>
 
 
 
