@@ -6,8 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="MYSQLBoardMapper">
 		<!-- 레코드 개수 계수 -->
-	<select id="countArticle" resultType="int">
-	   select count(*)  from free_board  where bno > 0
+	<select id="mysqlListSearchCount" resultType="int">
+	   select count(*)  from v_free_board  where bno > 0
 	   	 <include refid="search"></include>
 	</select>
 	
@@ -28,14 +28,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			
 </sql>	
 	
-	<select id="boardList" resultType="BoardVO">
-	select * from free_board where bno > 0 
+	<select id="mysqlListSearchCriteria" resultType="BoardVO">
+	select * from v_free_board where bno > 0 
 			
 		 <include refid="search"></include>
 		 
-		order by bno desc, regdate desc
+		order by bno desc, regdate desc  limit  #{pageStart}, #{perPageNum}
 	</select>
-	
+
+
+
+
 	
 	<insert id="boardCreate">
 	insert INTO tbl_board ( title, content, writer) 

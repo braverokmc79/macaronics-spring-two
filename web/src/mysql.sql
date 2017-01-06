@@ -59,7 +59,7 @@ INSERT  INTO tbl_member (userid, userpw, username, email, member_level)
 
 -- free board 생성
 
-create VIEW free_board as 
+create VIEW v_free_board as 
 	( select b.bno, b.content, b.title, b.viewcnt, m.email, m.member_level, b.regdate, m.username, b.writer, m.userid
 	
 	from tbl_member m, tbl_board b where m.userid =b.writer 
@@ -67,6 +67,26 @@ create VIEW free_board as
 );
 
 	
-	
+delete from tbl_board;
+
+insert into tbl_board (title, content, writer) values('제목1 ', '내용1 ', 'braverokmc' );
+insert into tbl_board (title, content, writer) values('제목2 ', '내용2 ', 'braverokmc' );
+insert into tbl_board (title, content, writer) values('제목3 ', '내용3 ', 'braverokmc' );
+insert into tbl_board (title, content, writer) values('제목4 ', '내용4 ', 'braverokmc' );
+insert into tbl_board (title, content, writer) values('제목5 ', '내용5 ', 'braverokmc' );
+insert into tbl_board (title, content, writer) values('제목6 ', '내용6 ', 'braverokmc' );
+insert into tbl_board (title, content, writer) values('제목7 ', '내용7 ', 'braverokmc' );
+insert into tbl_board (title, content, writer) values('제목8 ', '내용8 ', 'braverokmc' );
+insert into tbl_board (title, content, writer) values('제목9', '내용9 ', 'braverokmc' );
+insert into tbl_board (title, content, writer) values('제목10 ', '내용10 ', 'braverokmc' );
+
+
+
+
+insert into tbl_board ( title, content, writer)
+ 
+  (select title, content, writer from tbl_board);
+  
+select count(*) from tbl_board;	
 	
 	

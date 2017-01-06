@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.macaronics.www.member.model.dao.board.BoardDAO;
 import com.macaronics.www.member.model.dto.board.BoardVO;
+import com.macaronics.www.util.mysql.SearchCriteria;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -108,6 +109,20 @@ public class BoardServiceImpl implements BoardService {
 	public int countArticle(String search_option, String keyword) {
 		// TODO Auto-generated method stub
 		return boardDAO.countArticle(search_option, keyword);
+	}
+
+
+	@Override
+	public List<BoardVO> mysqlListSearchCriteria(SearchCriteria cri) {
+		// TODO Auto-generated method stub
+		return boardDAO.mysqlListSearchCriteria(cri);
+	}
+
+
+	@Override
+	public int mysqlListSearchCount(SearchCriteria cri) {
+		// TODO Auto-generated method stub
+		return boardDAO.mysqlListSearchCount(cri);
 	}
 
 	

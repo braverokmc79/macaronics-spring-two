@@ -132,6 +132,15 @@
               			<td colspan="2">
               			<input type="hidden" value="${vo.bno }"  name="bno" >
               			
+              			
+              			                	
+                	<input type="hidden" value="${param.search_option }" name="search_option">
+                	<input type="hidden" value="${param.keyword }" name="keyword">
+                	<input type="hidden" value="${param.page }" name="page">
+             
+                	<input type="hidden" value="${param.displayPageNum }" name="displayPageNum">
+              			
+              			
               			<button id="btnWrite" type="button" class="btn btn-warning">글 수정하기</button>
               			
               			</td>
@@ -174,10 +183,6 @@
                     </div>
                   </div>
                 </div>
-              
-              
-              
-              
               
               
               

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.macaronics.www.SqlServerEnvironment;
 import com.macaronics.www.member.model.dto.board.BoardVO;
+import com.macaronics.www.util.mysql.SearchCriteria;
 
 
 @Repository
@@ -27,8 +28,6 @@ public class BoardDAOImpl implements BoardDAO {
    private static final String namespace=SqlServerEnvironment.SQL+"BoardMapper";
 	
 
-	
-	
 	
 	@Override
 	public List<BoardVO> boardList(int start, int end, String search_option, String keyword) {
@@ -95,6 +94,20 @@ public class BoardDAOImpl implements BoardDAO {
 		map.put("keyword", keyword);
 		
 		return sqlSession.selectOne(namespace+".countArticle", map);
+	}
+
+	
+	//MYSQL 페이지 서치 리스트
+	@Override
+	public List<BoardVO> mysqlListSearchCriteria(SearchCriteria cri) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".mysqlListSearchCriteria", cri);
+	}
+
+	@Override
+	public int mysqlListSearchCount(SearchCriteria cri) {
+	
+		return sqlSession.selectOne(namespace+".mysqlListSearchCount", cri);
 	}
 
 	

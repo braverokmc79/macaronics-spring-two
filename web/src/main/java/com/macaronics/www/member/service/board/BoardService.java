@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.macaronics.www.member.model.dto.board.BoardVO;
+import com.macaronics.www.util.mysql.SearchCriteria;
 
 public interface BoardService {
 
@@ -19,5 +20,11 @@ public interface BoardService {
 
 	
 	public int countArticle(String search_option, String keyword);
+
+
+	public List<BoardVO> mysqlListSearchCriteria(SearchCriteria cri);
+
+
+	public int mysqlListSearchCount(SearchCriteria cri);
 	
 }

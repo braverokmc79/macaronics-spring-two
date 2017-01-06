@@ -2,14 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-  <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="/resources/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
 
 <%@ include file="../include/header.jsp" %>
 
 
 <%@ include file="../include/topmenu.jsp" %>
-
 
 <style type="text/css">
 
@@ -18,6 +16,15 @@
   background-image: url("/resources/view/img/slider/1.jpg");
 
   
+}
+.rowTitle a:hover{
+
+	background-color: #F0AD4E;
+	color: #fff;
+	padding: 5px;
+	
+	
+	border-radius: 0.5em;
 }
 </style>
 
@@ -45,7 +52,7 @@
 
 <div class="row">
         <div class="col-xs-12">
-        
+     
         </div>
       </div>
 
@@ -60,116 +67,146 @@
                 <div class="aa-blog-content">
                   <div class="row">
                    <div class="box">
-            <div class="box-header" >
-              <h3 class="box-title">게시글</h3>
+            <div class="box-header">
+              <h3 class="box-title" style="margin-bottom: 10px;">Free 게시판</h3>
 
-              <div class="box-tools" style="margin-bottom: 10px; " >
-       		
-              </div>
-              	 <h3 style="display:inline-table; "> 
-            
-                </h3>
+              <div class="box-tools">
+              <form method="get" action="/board/listAll.do"  name="serarchForm">
+              		<div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+    				<div class="col-md-4">
+            	      
+            	      <select name="search_option" class="form-control"  >
+            	        <option value=""   <c:if test="${ cri.search_option =='' }">selected="selected"</c:if>>----</option>
+	                 	<option value="writer"   <c:if test="${ cri.search_option =='writer' }">selected="selected"</c:if>>아이디</option>
+	                 	<option value="username"   <c:if test="${ cri.search_option =='username' }">selected="selected"</c:if>>이름</option>
+	                 	<option value="content" <c:if test="${ cri.search_option =='content' }">selected="selected"</c:if>>내용</option>
+	                 	<option value="title" <c:if test="${ cri.search_option =='title' }">selected="selected"</c:if>>제목</option>
+	                 	<option value="all" <c:if test="${ cri.search_option =='all' }">selected="selected"</c:if>>이름+내용+제목</option>
+	                  </select>
+	                  
+	                  
+	                  </div>
+	               <div class="col-md-4">
+				    <input type="text" class="form-control" name="keyword" value="${cri.keyword }">
+				    </div>
+				    <div class="col-md-4">
+  					<button type="submit" class="btn btn-warning">검색</button>
+  					</div>
+				 </div>
+				 
+              </form>
+      <c:if test="${ not empty  loginUser}" >      
+       <p class="input-group input-group-sm" style="margin-top :10px;"><button id="btnWrite" class="btn btn-primary" >글쓰기</button></p>
+	</c:if>            
+            </div>
+              
+             
+              <p>  
+               <span class="label label-danger"> ${countList }</span> 개의 게시물이 있습니다.
+              </p>
+              <p>
+              
+              
               
             </div>
             <!-- /.box-header -->
-            <div class="box-body table-responsive no-padding" >
-            
-            <form method="post" action="/board/insert.do"  name="formmm1" id="formmm1">
+            <div class="box-body table-responsive no-padding">
               <table class="table table-hover">
-                <thead>
-                	
-                </thead>
-                <tbody>
-                 <tr>
-                	<td>등록일</td>
-                	<td><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd hh:mm:ss"/> </td>
+                <tbody><tr>
+                  <th>번호</th>
+                  <th>제목</th>
+                  <th>글쓴이</th>
+                  <th>등록일</th>
+                  <th>조회수</th>
                 </tr>
-                
-                <tr>
-                	<td>조회수</td>
-                	<td>${vo.viewcnt }</td>
-                </tr>
-                
-                <tr>
-                	<td>제목</td>
-                	<td>${vo.title }</td>
-                </tr>
-                <tr>
-                	<td>내용</td>
-   					<td>
-						${vo.content }
-   		      		</td>		
-   				</tr>	
-             
-             	<tr>
-             		<td>이름</td>
-             		<td>${vo.writer }</td>
-             	</tr>
-             
-              </tbody>
-              	<tfoot>
-                <tr>
-                <td colspan="2">
-                   <c:if test="${sessionScope.loginUser.userid ==vo.writer   || sessionScope.loginUser.member_level >=15}"> 	
-              			<input type="hidden"  name="bno" value="${vo.bno }">
-              			<button id="btnUpdate" type="button" class="btn btn-warning">수정하기</button>
-              			<button id="btnDelete" type="button" class="btn btn-danger">삭제하기</button>
-                	</c:if>
-                	
-                	
-                	<input type="hidden" value="${param.search_option }" name="search_option">
-                	<input type="hidden" value="${param.keyword }" name="keyword">
-                	<input type="hidden" value="${param.page }" name="page">
-             
-                	<input type="hidden" value="${param.displayPageNum }" name="displayPageNum">
+               
+       <c:forEach items="${list }"  var="row">
 
-                	 <a  type="button" class="btn btn-primary"  id="btnList"  
-           style="float: right; "  >글 목록</a>	
-              	
-              	
-              	</td>
-              		
-              		
-              		 </tr>
-              	 </tfoot>
-            </table>
-              
-              
-              </form>
+                <tr>
+                  <td>${row.bno }</td>
+                  <td class="rowTitle"> <a href="/board/view.do${pageMaker.mysqlSearchQuery(cri.page) }&bno=${row.bno }">${row.title }</a></td>
+                  <td>${ row.writer }</td>
+                  <td><span class="label label-success">
+                  <fmt:formatDate value="${ row.regdate }"  pattern="yyyy-MM-dd hh:mm"/></span>
+                  </td>
+                  <td> <span class="badge bg-red">${ row.viewcnt }</span></td>
+                </tr>
+       
+       </c:forEach>
+             
+             
+              </tbody></table>
             </div>
             <!-- /.box-body -->
           </div>
-                     
+              
+             
                   </div>
                   <div class="row">
                     <div class="col-md-12">
                       <div class="aa-properties-content-bottom">
                         <nav>
+                    
+                                       
+                    
                           <ul class="pagination">
+                           
+                           <c:if test="${cri.page  > 1 }">
+                               <li>
+                               <a aria-label="Previous" href="javascript:list('${pageMaker.mysqlSearchQuery(1) }')">
+                                <span aria-hidden="true">시작</span>
+                              </a>
+                              </li>
+                           </c:if>
+                           
+                           <c:if test="${pageMaker.prev }">
                             <li>
-                              <a aria-label="Previous" href="#">
+                              <a aria-label="Previous" href="javascript:list('${pageMaker.mysqlSearchQuery(pageMaker.startPage-1) }')">
                                 <span aria-hidden="true">«</span>
                               </a>
                             </li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li class="active"><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
+                            </c:if>
+   
+                          <c:forEach begin="${ pageMaker.startPage }"  end="${ pageMaker.endPage }" var="page">
+                           	<c:choose>
+                           		<c:when test="${ page ==cri.page }">
+                           			<li class="active"> 
+                            		  <a href="javascript:list('${pageMaker.mysqlSearchQuery(page) }')" >${page}</a>
+                            		</li>
+                           		</c:when>
+                           		<c:otherwise>
+                           			<li > 
+                            		  <a href="javascript:list('${pageMaker.mysqlSearchQuery(page) }')" >${page}</a>
+                            		</li>	
+                           		</c:otherwise>
+                           	</c:choose>
+                           
+                          </c:forEach>
+                    
+           				<c:if test="${ pageMaker.next && pageMaker.endPage >0 }">
                             <li>
-                              <a aria-label="Next" href="#">
+                              <a aria-label="Next" href="javascript:list('${ pageMaker.mysqlSearchQuery(pageMaker.endPage +1) }')">
                                 <span aria-hidden="true">»</span>
                               </a>
                             </li>
+                        </c:if> 
+                        <c:if test="${pageMaker.next && pageMaker.endPage >0 }">
+                          <li>
+                              <a aria-label="Next" href="javascript:list('${ pageMaker.mysqlSearchQuery(pageMaker.endFinishPage) }')">
+                                <span aria-hidden="true">끝</span>
+                              </a>
+                            </li>
+                        </c:if>    
+                 
                           </ul>
-                        </nav>
+                      
+                      </nav>
                       </div>
                     </div>
                   </div>
                 </div>
               
-              
-              
+           
               </div>
               <!-- Start blog sidebar -->
               <div class="col-md-4">
@@ -281,51 +318,27 @@
 
 
 
-
 <script>
-
 $(document).ready(function(){
 	
-
 	
-	$("#btnList").click(function(){
+	$("#btnWrite").click(function(){
 		
-		var form1 =$("#formmm1");
 		
-		form1.attr("action" , "/board/listAll.do");
-		form1.attr("method", "get");
-		form1.submit();
-
+		location.href="/board/write.do";
 		
 	});
 	
 	
-	$("#btnUpdate").click(function(){
-		var form1 =$("#formmm1");
-		form1.attr("action", "/board/updateform.do");
-		form1.attr("method", "get");
-		form1.submit();
-		
-	});
-	
-	
-	//삭제
-	$("#btnDelete").click(function(){
-		
-		if(confirm("정말 삭제 하시겠습니까?")){
-			
-			var form1 =$("#formmm1");
-			form1.attr("action", "/board/delete.do");
-			
-			form1.submit();
-				
-		}
-		
-	});
 	
 });
 
 
+function list(page){
+
+	location.href='/board/listAll.do'+page;
+
+}
 
 </script>
 

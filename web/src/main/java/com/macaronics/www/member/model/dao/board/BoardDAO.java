@@ -3,6 +3,7 @@ package com.macaronics.www.member.model.dao.board;
 import java.util.List;
 
 import com.macaronics.www.member.model.dto.board.BoardVO;
+import com.macaronics.www.util.mysql.SearchCriteria;
 
 public interface BoardDAO {
 
@@ -18,5 +19,8 @@ public interface BoardDAO {
 
 	
 	public int countArticle(String search_option, String keyword);
+	
+	public List<BoardVO> mysqlListSearchCriteria(SearchCriteria cri);
+	public int mysqlListSearchCount(SearchCriteria cri);
 	
 }
