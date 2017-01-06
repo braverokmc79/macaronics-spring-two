@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.macaronics.www.member.model.dto.board.BoardVO;
 import com.macaronics.www.member.service.board.BoardService;
+import com.macaronics.www.util.oralce.PageAndSearch;
 import com.macaronics.www.util.oralce.Pager;
 
 @Controller
@@ -32,35 +33,41 @@ public class BoardController {
 	@Inject
 	private BoardService boardService;
 	
-
-
 	
 	@RequestMapping(value="/listAll.do", method=RequestMethod.GET)
-	public ModelAndView boardList(
-			@RequestParam(defaultValue="1") Integer curPage,
-			@RequestParam(  required=false) String search_option , 
-			@RequestParam( required=false) String keyword){
+	public ModelAndView boardList( @ModelAttribute("pas") PageAndSearch pas){
 	
 		ModelAndView mv =new ModelAndView();
 		
-		int count =boardService.countArticle(search_option, keyword);
+		
+		
+		int count =boardService.countArticle(pas.getSearch_option(), pas.getKeyword());
 		
 		//페이지 나누기 관련 처리
-		Pager pager =new Pager(count, curPage);
+		if(pas.getCurPage()==null){pas.setCurPage(1);}
+		
+
+		Pager pager =new Pager(count, pas.getCurPage());
 		int start =pager.getPageBegin();
 		int end=pager.getPageEnd();
 		
 		
-		List<BoardVO> list=boardService.boardList(start, end, search_option, keyword);
+		logger.info(" ****************   " + pas.toString() + "    메서드  : " + pas.searchQuery(1) +
+				"  count : " + count + " start : " + start + "  end  : " + end);
+		
+		List<BoardVO> list=boardService.boardList(start, end, pas.getSearch_option(), pas.getKeyword());
 		
 		Map<String, Object> map =new HashMap<>();
 		map.put("countList", count);
 		map.put("list", list);
-		map.put("search_option", search_option);
-		map.put("keyword", keyword);
 		map.put("pager", pager);
-		
+		/*map.put("search_option", pas.getSearch_option());
+		map.put("keyword", pas.getKeyword());
+		*/
+			
 		mv.addObject("map", map);
+		mv.addObject("pageAndSearch", pas);
+		
 		mv.setViewName(JSP_PAGE+"list");
 		
 		return mv;

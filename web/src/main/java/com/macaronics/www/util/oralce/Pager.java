@@ -1,7 +1,5 @@
 package com.macaronics.www.util.oralce;
 
-import org.springframework.stereotype.Component;
-
 //  페이지 나누기 관련 작업 클래스
 
 
@@ -11,12 +9,15 @@ public class Pager {
 	public static final int PAGE_SCALE =10;
 	//화면당 페이지 수
 	public static final int BLOCK_SCALE =10;
-	private int curPage;  //현재 페이지
+	
+	private Integer curPage;  //현재 페이지
+	
 	private int prevPage; //이전 페이지
 	private int nextPage; // 다음 페이지
 	private int totPage; // 전체 페이지 개수
 	private int totBlock; //전체 페이지 블록 개수
 	private int curBlock; //현재 페이지 블록
+	
 	private int prevBlock; //이전 페이지 블록
 	private int nextBlock; //다음 페이지 블록
 	// where rn between #{start } and #{end}
@@ -38,10 +39,14 @@ public class Pager {
 		setBlockRange();
 	}
 	
+	public Pager(){
+		
+	}
+	
 	
 	private void setBlockRange() {
 		//현재 페이지에 몇번째 페이지 블록에 속하는지 계산
-		curBlock=(int)Math.ceil((curPage+1)/BLOCK_SCALE)+1;
+		curBlock=(int)Math.ceil((curPage-1)/BLOCK_SCALE)+1;
 		//현재 페이지 블록의 시작, 끝 번호 계산
 		blockBegin =(curBlock -1) * BLOCK_SCALE +1;
 		blockEnd=blockBegin+BLOCK_SCALE-1;
@@ -66,12 +71,14 @@ public class Pager {
 	}
 
 
-	public int getCurPage() {
+	public Integer getCurPage() {
 		return curPage;
 	}
-	public void setCurPage(int curPage) {
+	public void setCurPage(Integer curPage) {
 		this.curPage = curPage;
 	}
+	
+	
 	public int getPrevPage() {
 		return prevPage;
 	}
@@ -149,7 +156,8 @@ public class Pager {
 	}
 
 
+
 	
-	
+
 	
 }

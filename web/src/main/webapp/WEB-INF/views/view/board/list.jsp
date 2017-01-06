@@ -76,16 +76,16 @@
     				<div class="col-md-4">
             	      
             	      <select name="search_option" class="form-control"  >
-            	        <option value=""   <c:if test="${ param.search_option =='' }">selected="selected"</c:if>>----</option>
-	                 	<option value="writer"   <c:if test="${ param.search_option =='writer' }">selected="selected"</c:if>>아이디</option>
-	                 	<option value="username"   <c:if test="${ param.search_option =='username' }">selected="selected"</c:if>>이름</option>
-	                 	<option value="content" <c:if test="${ param.search_option =='content' }">selected="selected"</c:if>>내용</option>
-	                 	<option value="title" <c:if test="${ param.search_option =='title' }">selected="selected"</c:if>>제목</option>
-	                 	<option value="all" <c:if test="${ param.search_option =='all' }">selected="selected"</c:if>>이름+내용+제목</option>
+            	        <option value=""   <c:if test="${ pageAndSearch.search_option =='' }">selected="selected"</c:if>>----</option>
+	                 	<option value="writer"   <c:if test="${ pageAndSearch.search_option =='writer' }">selected="selected"</c:if>>아이디</option>
+	                 	<option value="username"   <c:if test="${ pageAndSearch.search_option =='username' }">selected="selected"</c:if>>이름</option>
+	                 	<option value="content" <c:if test="${ pageAndSearch.search_option =='content' }">selected="selected"</c:if>>내용</option>
+	                 	<option value="title" <c:if test="${ pageAndSearch.search_option =='title' }">selected="selected"</c:if>>제목</option>
+	                 	<option value="all" <c:if test="${ pageAndSearch.search_option =='all' }">selected="selected"</c:if>>이름+내용+제목</option>
 	                  </select>
 	                  </div>
 	               <div class="col-md-4">
-				    <input type="text" class="form-control" name="keyword" value="${param.keyword }">
+				    <input type="text" class="form-control" name="keyword" value="${pageAndSearch.keyword }">
 				    </div>
 				    <div class="col-md-4">
   					<button type="submit" class="btn btn-warning">검색</button>
@@ -98,12 +98,12 @@
 	</c:if>            
             </div>
               
-             <c:if test ="${ not empty countList }">
+             
               <p>  
-               <span class="label label-danger"> ${countList }</span> 개의 게시물이 있습니다.
+               <span class="label label-danger"> ${map.countList }</span> 개의 게시물이 있습니다.
               </p>
-              <p></p>
-             </c:if> 
+              <p>
+              
               
               
             </div>
@@ -118,11 +118,11 @@
                   <th>조회수</th>
                 </tr>
                
-       <c:forEach items="${list }"  var="row">
+       <c:forEach items="${map.list }"  var="row">
 
                 <tr>
                   <td>${row.bno }</td>
-                  <td class="rowTitle"> <a href="/board/view.do?bno=${row.bno }">${row.title }</a></td>
+                  <td class="rowTitle"> <a href="/board/view.do${pageAndSearch.searchQuery(param.curPage) }&bno=${row.bno }">${row.title }</a></td>
                   <td>${ row.writer }</td>
                   <td><span class="label label-success">
                   <fmt:formatDate value="${ row.regdate }"  pattern="yyyy-MM-dd hh:mm"/></span>
@@ -138,34 +138,65 @@
             <!-- /.box-body -->
           </div>
               
-              
-              
-              
-                 
-                 
+             
                   </div>
                   <div class="row">
                     <div class="col-md-12">
                       <div class="aa-properties-content-bottom">
                         <nav>
+                    
+                    
                           <ul class="pagination">
+                           
+                           <c:if test="${map.pager.curBlock  > 1 }">
+                               <li>
+                               <a aria-label="Previous" href="javascript:list('${pageAndSearch.searchQuery(1) }')">
+                                <span aria-hidden="true">시작</span>
+                              </a>
+                              </li>
+                           </c:if>
+                           
+                           <c:if test="${map.pager.curBlock  > 1 }">
                             <li>
-                              <a aria-label="Previous" href="#">
+                              <a aria-label="Previous" href="javascript:list('${pageAndSearch.searchQuery(map.pager.prevPage) }')">
                                 <span aria-hidden="true">«</span>
                               </a>
                             </li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li class="active"><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
+                            </c:if>
+   
+                          <c:forEach begin="${ map.pager.blockBegin }"  end="${ map.pager.blockEnd }" var="page">
+                           	<c:choose>
+                           		<c:when test="${ page ==map.pager.curPage }">
+                           			<li class="active"> 
+                            		  <a href="javascript:list('${pageAndSearch.searchQuery(page) }')" >${page}</a>
+                            		</li>
+                           		</c:when>
+                           		<c:otherwise>
+                           			<li > 
+                            		  <a href="javascript:list('${pageAndSearch.searchQuery(page) }')" >${page}</a>
+                            		</li>	
+                           		</c:otherwise>
+                           	</c:choose>
+                           
+                          </c:forEach>
+                    
+           				<c:if test="${ map.pager.curBlock < map.pager.totBlock }">
                             <li>
-                              <a aria-label="Next" href="#">
+                              <a aria-label="Next" href="javascript:list('${ pageAndSearch.searchQuery(map.pager.nextPage) }')">
                                 <span aria-hidden="true">»</span>
                               </a>
                             </li>
+                        </c:if> 
+                        <c:if test="${map.pager.curPage < map.pager.totPage }">
+                          <li>
+                              <a aria-label="Next" href="javascript:list('${ pageAndSearch.searchQuery(map.pager.totPage) }')">
+                                <span aria-hidden="true">끝</span>
+                              </a>
+                            </li>
+                        </c:if>    
+                 
                           </ul>
-                        </nav>
+                      </nav>
                       </div>
                     </div>
                   </div>
@@ -298,6 +329,12 @@ $(document).ready(function(){
 	
 });
 
+
+function list(page){
+
+	location.href='/board/listAll.do'+page;
+
+}
 
 </script>
 

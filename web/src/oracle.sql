@@ -80,7 +80,7 @@ alter TABLE  TBL_MEMBER ADD  ( member_level  number default 1 );
 
 -- free board 생성
 
-create VIEW free_board as 
+create VIEW v_free_board as 
 	( select b.bno, b.content, b.title, b.viewcnt, m.email, m.member_level, b.regdate, m.username, b.writer, m.userid
 	
 	from tbl_member m, tbl_board b where m.userid =b.writer 
@@ -96,7 +96,7 @@ select * from
 (
 	select rownum as rn , A.*
  from	(select  rownum , bno, content, title, viewcnt, writer, userid, username 
- 		from FREE_BOARD  order by bno desc , regdate desc ) A
+ 		from v_free_board  order by bno desc , regdate desc ) A
 ) where  rn BETWEEN  1 and 10
 
   and username like '%' || '2222' || '%' ;
