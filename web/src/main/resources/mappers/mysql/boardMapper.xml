@@ -29,14 +29,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </sql>	
 	
 	<select id="mysqlListSearchCriteria" resultType="BoardVO">
-	select * from v_free_board where bno > 0 
+	select * 
+		
+	from v_free_board where bno > 0 
 			
 		 <include refid="search"></include>
 		 
 		order by bno desc, regdate desc  limit  #{pageStart}, #{perPageNum}
 	</select>
-
-
 
 
 	

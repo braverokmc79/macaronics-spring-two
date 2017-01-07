@@ -44,7 +44,7 @@
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
   <script src="/resources/view/js/jquery.min.js"></script>   
   
-
+<script type="text/javascript"  src="/resources/view/js/handlebars-v4.0.5.js"></script>	
 
   </head>
 <body class="aa-price-range">  

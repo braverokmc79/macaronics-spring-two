@@ -124,7 +124,11 @@
 
                 <tr>
                   <td>${row.bno }</td>
-                  <td class="rowTitle"> <a href="/board/view.do${pageMaker.mysqlSearchQuery(cri.page) }&bno=${row.bno }">${row.title }</a></td>
+                  <td class="rowTitle"> <a href="/board/view.do${pageMaker.mysqlSearchQuery(cri.page) }&bno=${row.bno }">${row.title } 
+                  <c:if test="${row.cnt > 0 }">
+                  <span class="label label-danger">[ ${row.cnt } ]</span>
+                  </c:if>
+                  </a></td>
                   <td>${ row.writer }</td>
                   <td><span class="label label-success">
                   <fmt:formatDate value="${ row.regdate }"  pattern="yyyy-MM-dd hh:mm"/></span>

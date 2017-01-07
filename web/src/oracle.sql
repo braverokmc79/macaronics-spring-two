@@ -176,7 +176,16 @@ select USERNAME , r.REGDATE, r.UPDATEDATE,  REPLYTEXT,  REPLYER , rno, bno  from
 
 
 
+	
+-- v_free_board cnt 추가 	
+	
+drop VIEW v_free_board;
 
+	
+create VIEW v_free_board as 	
+select b.bno, b.content, b.title, b.viewcnt, m.email, m.member_level, b.regdate, m.username, b.writer, m.userid,
+	(select count(*) from tbl_reply  where bno =b.bno) as cnt
+	from tbl_member m, tbl_board b where m.userid =b.writer ;	
 
 
 

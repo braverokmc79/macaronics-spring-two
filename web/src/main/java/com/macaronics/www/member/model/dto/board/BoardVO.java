@@ -20,6 +20,7 @@ public class BoardVO {
 	private String username;
 	private String userid;
 	
+	private int cnt;
 	
 	public void setTitle(String title) {
 		this.title = XssDefender.inputString(title);

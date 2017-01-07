@@ -70,7 +70,7 @@
             <div class="box-header">
               <h3 class="box-title" style="margin-bottom: 10px;">Free 게시판</h3>
 
-              <div class="box-tools">
+              <div class="box-tools">	
               <form method="get" action="/board/listAll.do"  name="serarchForm">
               		<div class="row" style="margin-top: 20px; margin-bottom: 20px;">
     				<div class="col-md-4">
@@ -122,7 +122,8 @@
 
                 <tr>
                   <td>${row.bno }</td>
-                  <td class="rowTitle"> <a href="/board/view.do${pageAndSearch.searchQuery(param.curPage) }&bno=${row.bno }">${row.title }</a></td>
+                  <td class="rowTitle">
+<a href="/board/view.do${pageAndSearch.searchQuery(param.curPage) }&bno=${row.bno }">${row.title }  [ ${row.cnt }]</a></td>
                   <td>${ row.writer }</td>
                   <td><span class="label label-success">
                   <fmt:formatDate value="${ row.regdate }"  pattern="yyyy-MM-dd hh:mm"/></span>

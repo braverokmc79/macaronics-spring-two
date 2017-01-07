@@ -127,8 +127,20 @@ from  tbl_reply r, tbl_member m
 
 where r.replyer = m.userid and bno =890;
 
-
-
 commit;
 
+select USERNAME , r.REGDATE, r.UPDATEDATE,  REPLYTEXT,  REPLYER , rno, bno  from 
 
+ 	TBL_MEMBER m , TBL_REPLY r WHERE  m.USERID =r.REPLYER  and bno =1000
+	order BY rno ;
+
+	
+-- v_free_board cnt 추가 	
+	
+drop VIEW v_free_board;
+
+	
+create VIEW v_free_board as 	
+select b.bno, b.content, b.title, b.viewcnt, m.email, m.member_level, b.regdate, m.username, b.writer, m.userid,
+	(select count(*) from tbl_reply  where bno =b.bno) as cnt
+	from tbl_member m, tbl_board b where m.userid =b.writer ;	

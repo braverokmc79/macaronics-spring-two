@@ -7,7 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="ORACLE_freeBoardReplyMapper">
 	
 		<select id="list" resultType="FreeBoardReplyVO" >
-		select * from TBL_REPLY where bno =#{bno}  order by regdate desc
+			select USERNAME , r.REGDATE, r.UPDATEDATE,  REPLYTEXT,  REPLYER , rno, bno  from 
+	 		TBL_MEMBER m , TBL_REPLY r WHERE  m.USERID =r.REPLYER  and bno =#{bno}
+		order BY rno 
 		</select>
 	
 	<insert id="create" >

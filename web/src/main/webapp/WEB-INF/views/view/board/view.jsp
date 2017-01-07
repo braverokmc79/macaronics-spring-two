@@ -41,8 +41,6 @@
   <!-- End Proerty header  -->
 
 
-
-
 <div class="row">
         <div class="col-xs-12">
         
@@ -125,11 +123,8 @@
 
                 	 <a  type="button" class="btn btn-primary"  id="btnList"  
            style="float: right; "  >글 목록</a>	
-              	
-              	
               	</td>
-              		
-              		
+   		
               		 </tr>
               	 </tfoot>
             </table>
@@ -174,11 +169,22 @@
                 	</table>
                 
                 </form>
-                </div>
                 
+                <hr>
+                
+                <div class="aa-comments-area">
+                        <h3> <span id="replyNum"></span>  개의 댓글 </h3>
+                        <div class="comments">
+                         <ul class="commentlist">
+               
+                         </ul>
+                          <!-- comments pagination -->
                         
-                        
-                          <ul class="pagination">
+                        </div>
+                 </div>
+            </div>
+                     
+                       <ul class="pagination">
                             <li>
                               <a aria-label="Previous" href="#">
                                 <span aria-hidden="true">«</span>
@@ -200,8 +206,6 @@
                     </div>
                   </div>
                 </div>
-              
-              
               
               </div>
               <!-- Start blog sidebar -->
@@ -319,7 +323,8 @@
 
 $(document).ready(function(){
 	
-
+	//replyListAll();
+	replyListAll2();
 	
 	$("#btnList").click(function(){
 		
@@ -350,15 +355,12 @@ $(document).ready(function(){
 			var form1 =$("#formmm1");
 			form1.attr("action", "/board/delete.do");
 			
-			form1.submit();
-				
+			form1.submit();			
 		}
 		
 	});
 	
 	//댓글 쓰기
-	
-	
 	
 	
 	$("#btnReply").click(function(event){
@@ -369,8 +371,7 @@ $(document).ready(function(){
 		alert("번호" + bno + " : " +userid + " : " + replytext) ;
 		
 		if(userid.length < 1){
-			alert("로그인을 하셔야 댓글이 가능합니다." ) ;
-			
+			alert("로그인을 하셔야 댓글이 가능합니다." ) ;		
 			return ;
 		
 		}
@@ -379,34 +380,28 @@ $(document).ready(function(){
 			alert("댓글을 작성하세요!");
 			return ;
 		}
-		
-
-		
+				
 		$.ajax({
 			
 			type :"post",
 			url : "/freeboard_reply/insert",
 			contentType:"application/json",
 			dataType :"text",
-			data:JSON.stringify({
+			data:{
 				bno :bno,
 				replyer:userid,
 				replytext:replytext
 				
-			}),
+			},
 			success:function(result){
 				
 				if(result=="SUCCESS"){
 					alert("성공");	
 				}
 				
-				
 			}
 			
-		});
-		
-		
-		
+		});	
 	});
 	
 	
@@ -415,8 +410,90 @@ $(document).ready(function(){
 
 
 
+function  replyListAll(){
+	
+	var bno ='${vo.bno}';
+	
+	$.ajax({
+		url :"/freeboard_reply/listAll?bno="+bno,
+		type:"get",
+		success :function(result){
+			alert("성공");
+			
+			$(".commentlist").html(result);
+		}
+		
+	});
+}
+
+function  replyListAll2(){
+	
+	var bno ='${vo.bno}';
+	
+	$.ajax({
+		url :"/freeboard_reply/listAll/"+bno,
+		type:"get",
+		contentType: "application/json",
+		success :function(result){		
+			printData (result);
+			$("#replyNum").html($(".media").size());	
+		}
+	});
+}
+
+
+Handlebars.registerHelper("prettifyDate", function(timeValue){
+	
+	var dateObj =new Date(timeValue);
+	var year =dateObj.getFullYear();
+	var month =dateObj.getMonth() +1;
+	var date =dateObj.getDate();
+	return year +"/"+month +"/"+date;
+});
+
+
+function printData (data){
+	var template =Handlebars.compile($("#template").html());
+	
+	var html =template(data);
+	
+	$(".commentlist").html(html);
+	
+}
+
+
 </script>
 
+
+
+
+<script id="template" type="text/x-handlebars-template">
+{{#each .}}
+ <li>
+   <div class="media">
+     <div class="media-left">    
+         <img alt="img" src="img/testimonial-1.png" class="media-object news-img">      
+     </div>
+     <div class="media-body">
+      <h4 class="author-name">{{replyer}}</h4>
+      <span class="comments-date"> {{regdate}}</span>
+      <p>{{ replytext}}</p>
+      <a class="reply-btn" href="#">Reply</a>
+     </div>
+   </div>
+</li>
+
+{{/each}}    
+</script>
+
+
+
+ rno          int(11),
+   bno          int(11) DEFAULT 0,
+   replytext    text,
+   replyer      varchar(50),
+   regdate      timestamp DEFAULT 'CURRENT_TIMESTAMP',
+   updatedate   datetime
 
 
 
