@@ -31,14 +31,12 @@ public class FreeBoadReplyServiceImpl implements FreeBoadReplyService {
 
 	@Override
 	public void create(FreeBoardReplyVO vo) {
-		// TODO Auto-generated method stub
-		
+	
 		freeBoardReplyao.create(vo);
 	}
 
 	@Override
 	public void update(FreeBoardReplyVO vo) {
-		// TODO Auto-generated method stub
 
 		freeBoardReplyao.update(vo);
 	}
