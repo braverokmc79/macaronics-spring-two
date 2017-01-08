@@ -2,6 +2,8 @@ package com.macaronics.www.member.service.board;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.macaronics.www.member.model.dto.board.FreeBoardReplyVO;
 
 public interface FreeBoadReplyService {
@@ -12,7 +14,7 @@ public interface FreeBoadReplyService {
 	public void delete(Integer rno);
 	
 	public int countOracleReply(Integer bno);
-	public List<FreeBoardReplyVO> oracleList(Integer bno, int start, int end);
+	public List<FreeBoardReplyVO> oracleList(Integer bno, int start, int end, HttpSession session);
 	
 	
 	

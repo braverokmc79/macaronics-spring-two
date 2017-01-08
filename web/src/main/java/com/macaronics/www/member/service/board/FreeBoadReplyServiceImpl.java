@@ -3,12 +3,14 @@ package com.macaronics.www.member.service.board;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.macaronics.www.member.model.dao.board.FreeBoadReplyDAO;
+import com.macaronics.www.member.model.dto.MemberDTO;
 import com.macaronics.www.member.model.dto.board.FreeBoardReplyVO;
 
 
@@ -54,9 +56,43 @@ public class FreeBoadReplyServiceImpl implements FreeBoadReplyService {
 	}
 
 	@Override
-	public List<FreeBoardReplyVO> oracleList(Integer bno, int start, int end) {
-		// TODO Auto-generated method stub
-		return freeBoardReplyao.oracleList(bno, start, end);
+	public List<FreeBoardReplyVO> oracleList(Integer bno, int start, int end, HttpSession session) {
+
+		 List<FreeBoardReplyVO>  list=freeBoardReplyao.oracleList(bno, start, end);
+		
+		 for(FreeBoardReplyVO row : list){
+			 
+			 //로그인 여부
+			MemberDTO  dto =(MemberDTO) session.getAttribute("loginUser");
+			 if(dto!=null){
+				 
+				 if(row.getSecret_reply().equals("y")){
+				
+					 if(dto.getUserid().equals(row.getReplyer())
+						|| dto.getUserid().equals(row.getWriter())
+							 ){
+						 //로그인 한 유저 와 댓글 한 유저 또는 글쓴 유저 아이디가 같으면 통과
+					 }else{
+						 
+						 row.setReplytext("비밀 댓글 입니다.");
+					 }
+				 }
+			 }else{
+				 //로그인 안한 사람 비밀 댓글이 y 면 비빌댓글입니다. 표시
+				if(row.getSecret_reply().equals("y")){
+					row.setReplytext("비밀 댓글 입니다.");
+				}
+				 
+			 }
+		 }	 
+		return list;
 	}
 
+	
+	
 }
+
+
+
+
+

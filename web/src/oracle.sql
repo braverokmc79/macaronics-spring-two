@@ -194,6 +194,34 @@ alter table tbl_reply add (secret_reply char(1));
 commit;
 
 
+-- secret_reply null 을 n 으로 업데이트
+update tbl_reply set secret_reply ='n' where SECRET_REPLY is null;	
+	
+
+
+-- 비밀 댓글 표시를 위한 쿼리 변경
+
+select *
+	from 
+	(
+   select rownum as rn , A.* 
+   	from (
+		select 	
+			 rownum,  REPLYTEXT,  REPLYER ,  bno , m.USERNAME  , r.REGDATE, r.UPDATEDATE , rno ,
+			 
+			 (select writer  from tbl_board  where bno=1000) as writer
+			 
+			 from 
+	 	  TBL_REPLY r , TBL_MEMBER m  WHERE  r.REPLYER =m.USERID 	
+		  
+		   and bno=1000 order by rno desc
+		   ) A
+		   
+		   ) where rn BETWEEN  1 and 10;
+
+
+
+
 
 
 

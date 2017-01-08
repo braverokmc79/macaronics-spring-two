@@ -17,5 +17,6 @@ public class FreeBoardReplyVO {
 	
 	private String secret_reply;
 	
+	private String writer;
 	
 }

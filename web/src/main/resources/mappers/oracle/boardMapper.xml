@@ -57,7 +57,7 @@ select * from
 	
 	
 	<select id="boardRead" resultType="BoardVO">
-	select  bno, title, content, regdate , viewcnt  , (select count(*) from tbl_reply where  bno=#{bno}) as cnt  
+	select  bno, title, content, regdate , viewcnt , writer , (select count(*) from tbl_reply where  bno=#{bno}) as cnt  
 	from tbl_board    where bno=#{bno}
 	</select>
 	

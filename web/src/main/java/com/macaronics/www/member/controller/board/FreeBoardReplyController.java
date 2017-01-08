@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,12 +66,12 @@ public class FreeBoardReplyController {
 	@ResponseBody
 	@RequestMapping(value="/listAll/{bno}/{page}", method=RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> ready(@PathVariable("bno") Integer bno,
-			@PathVariable("page")  Integer page ){		
+			@PathVariable("page")  Integer page , HttpSession session ){		
 		ResponseEntity<Map<String, Object>> entity =null;
 
 		
 		if(SqlServerEnvironment.SQL.equals("ORACLE")){
-			entity=oracleListAlll(bno, page);
+			entity=oracleListAlll(bno, page, session);
 		}else{
 			//entity=mysqlListAlll(bno, page);
 		}		
@@ -80,7 +81,7 @@ public class FreeBoardReplyController {
 	
 	
 	//오라클 댓글 리스트
-	public ResponseEntity<Map<String, Object>> oracleListAlll (Integer bno, Integer page){
+	public ResponseEntity<Map<String, Object>> oracleListAlll (Integer bno, Integer page, HttpSession session){
 		
 		ResponseEntity<Map<String, Object>> entity =null;
 		
@@ -93,7 +94,7 @@ public class FreeBoardReplyController {
 			int start =pager.getPageBegin();
 			int end=pager.getPageEnd();
 			
-			List<FreeBoardReplyVO> list =service.oracleList(bno, start, end);
+			List<FreeBoardReplyVO> list =service.oracleList(bno, start, end, session);
 			
 			Map<String, Object> map=new HashMap<>();
 			map.put("list", list);

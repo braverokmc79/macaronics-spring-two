@@ -19,13 +19,17 @@ select *
    select rownum as rn , A.* 
    	from (
 		select 	
-			 rownum,  REPLYTEXT,  REPLYER ,  bno , m.USERNAME  , r.REGDATE, r.UPDATEDATE , rno from 
+			 rownum,  REPLYTEXT,  REPLYER ,  bno , m.USERNAME  , r.REGDATE, r.UPDATEDATE , rno , secret_reply,
+			 
+			 (select writer  from tbl_board  where bno=#{bno} ) as writer
+			 
+			 from 
 	 	  TBL_REPLY r , TBL_MEMBER m  WHERE  r.REPLYER =m.USERID 	
 		  
 		   and bno=#{bno} order by rno desc
 		   ) A
 		   
-		   ) where rn BETWEEN  #{start} and #{end}
+		   ) where rn BETWEEN #{start} and #{end}
 	</select>
 	
 	<insert id="create" >
