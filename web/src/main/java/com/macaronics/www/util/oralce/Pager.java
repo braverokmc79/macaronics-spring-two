@@ -10,7 +10,7 @@ public class Pager {
 	//화면당 페이지 수
 	public static final int BLOCK_SCALE =10;
 	
-	private Integer curPage;  //현재 페이지
+	private Integer curPage=1;  //현재 페이지
 	
 	private int prevPage; //이전 페이지
 	private int nextPage; // 다음 페이지
@@ -26,6 +26,7 @@ public class Pager {
 	private int blockBegin;// 현재 페이지에 시작번호 [이전]
 	private int blockEnd; // 현재 페이지에 끝 번호 [끝]
 	//생성자
+	
 	//Pager(레코드 갯수 , 현재 페이지 번호
 	public Pager(int count, int curPage) {
 		curBlock =1; //현재 페이지 블록 번호

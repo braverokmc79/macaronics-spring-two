@@ -12,7 +12,9 @@ public class PageAndSearch extends Pager {
 	
 
 	public  String searchQuery(Integer curPage){
-			
+		if(curPage==null){
+			curPage=1;
+		}
 		UriComponents uriComponents =
 				UriComponentsBuilder.newInstance()
 				.queryParam("curPage", curPage )

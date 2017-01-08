@@ -10,8 +10,10 @@ public interface FreeBoadReplyDAO {
 	public void create(FreeBoardReplyVO vo);
 	public void update(FreeBoardReplyVO vo);
 	public void delete(Integer rno);
+	public int countOracleReply(Integer bno);
 	
 	
+	public List<FreeBoardReplyVO> oracleList(Integer bno, int start, int end);
 	
 	
 }

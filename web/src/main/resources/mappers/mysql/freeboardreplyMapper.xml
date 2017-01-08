@@ -10,15 +10,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<select id="list" resultType="FreeBoardReplyVO" >
 		select USERNAME , r.REGDATE, r.UPDATEDATE,  REPLYTEXT,  REPLYER , rno, bno  from 
 	 		TBL_MEMBER m , TBL_REPLY r WHERE  m.USERID =r.REPLYER  and bno =#{bno}
-		order BY rno 
-	
+		order BY rno desc 
 		</select>
 	
 	<insert id="create" >
 	INSERT into TBL_REPLY ( BNO, REPLYTEXT, REPLYER) 
 
  		VALUES ( #{bno}, #{replytext},  #{replyer} )
- 
 	</insert>
 	
 	

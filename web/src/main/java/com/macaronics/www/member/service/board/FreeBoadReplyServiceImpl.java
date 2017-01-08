@@ -47,4 +47,16 @@ public class FreeBoadReplyServiceImpl implements FreeBoadReplyService {
 		freeBoardReplyao.delete(rno);
 	}
 
+	@Override
+	public int countOracleReply(Integer bno) {
+		// TODO Auto-generated method stub
+		return freeBoardReplyao.countOracleReply(bno);
+	}
+
+	@Override
+	public List<FreeBoardReplyVO> oracleList(Integer bno, int start, int end) {
+		// TODO Auto-generated method stub
+		return freeBoardReplyao.oracleList(bno, start, end);
+	}
+
 }

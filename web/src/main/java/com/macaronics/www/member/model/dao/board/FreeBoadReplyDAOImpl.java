@@ -1,6 +1,8 @@
 package com.macaronics.www.member.model.dao.board;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -70,6 +72,26 @@ public class FreeBoadReplyDAOImpl implements FreeBoadReplyDAO{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+
+
+	@Override
+	public int countOracleReply(Integer bno) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne(namespace +".countOracleReply", bno);
+	}
+
+
+
+	@Override
+	public List<FreeBoardReplyVO> oracleList(Integer bno, int start, int end) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map =new HashMap<String, Object>();
+		map.put("bno", bno);
+		map.put("start", start);
+		map.put("end", end);
+		return sqlsession.selectList(namespace+".oracleList", map);
 	}
 
 	

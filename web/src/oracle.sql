@@ -189,8 +189,9 @@ select b.bno, b.content, b.title, b.viewcnt, m.email, m.member_level, b.regdate,
 
 
 
-
-
+-- 숨김 댓글 컬럼 추가 
+alter table tbl_reply add (secret_reply char(1));
+commit;
 
 
 

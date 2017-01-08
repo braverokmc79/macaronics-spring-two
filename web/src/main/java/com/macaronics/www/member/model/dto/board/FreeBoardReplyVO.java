@@ -15,7 +15,7 @@ public class FreeBoardReplyVO {
 	private Date regdate;
 	private Date updatedate;
 	
-	
+	private String secret_reply;
 	
 	
 }

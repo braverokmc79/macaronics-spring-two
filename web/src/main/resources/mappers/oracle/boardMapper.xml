@@ -33,7 +33,7 @@ select * from
 (
 	select rownum as rn , A.*
 
- from	(select  rownum , bno, content, title, viewcnt, writer, userid, username ,regdate
+ from	(select  rownum , bno, content, title, viewcnt, writer, userid, username ,regdate, cnt
  		from v_free_board  
 		 where  bno >0 
 
@@ -57,7 +57,8 @@ select * from
 	
 	
 	<select id="boardRead" resultType="BoardVO">
-	select * from tbl_board  where bno =#{bno}
+	select  bno, title, content, regdate , viewcnt  , (select count(*) from tbl_reply where  bno=#{bno}) as cnt  
+	from tbl_board    where bno=#{bno}
 	</select>
 	
 	

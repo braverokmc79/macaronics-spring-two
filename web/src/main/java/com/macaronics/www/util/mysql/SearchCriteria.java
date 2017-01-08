@@ -11,9 +11,7 @@ public class SearchCriteria extends Criteria {
 	private String search_option;
 	private String keyword;
 	
-	
-
-	
+		
 	public String getSearch_option() {
 		return search_option;
 	}

@@ -171,12 +171,6 @@
                 			<textarea rows="7" cols="" id="replytext" class="form-control" placeholder="댓글을 작성하세요"></textarea>
                 			</td>
                 		</tr>
-                		 <tr>
-                		 	<td>비밀댓글</td>
-                		 	<td>
-                		 	<input type="checkbox" id="secret_reply" name="secret_reply" class="form-control" >
-                		 	</td>
-                		 </tr>
 	
 						<tr>
 						<td colspan="2" ><button class="btn btn-warning" id="btnReply" >댓글쓰기</button></td>
@@ -189,7 +183,7 @@
                 <hr>
                 
                 <div class="aa-comments-area">
-                        <h3> <span id="replyNum">${vo.cnt}</span>  개의 댓글 </h3>
+                        <h3> <span id="replyNum"></span>  개의 댓글 </h3>
                         <div class="comments">
                          <ul class="commentlist">
                
@@ -200,10 +194,22 @@
                  </div>
             </div>
                      
-                      	 <ul class="pagination" id="replyPage">
-                         
-                         
-                         
+                       <ul class="pagination">
+                            <li>
+                              <a aria-label="Previous" href="#">
+                                <span aria-hidden="true">«</span>
+                              </a>
+                            </li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li class="active"><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li>
+                              <a aria-label="Next" href="#">
+                                <span aria-hidden="true">»</span>
+                              </a>
+                            </li>
                           </ul>
                         </nav>
                       </div>
@@ -328,7 +334,7 @@
 $(document).ready(function(){
 	
 	//replyListAll();
-	replyListAll2(1);
+	replyListAll2();
 	
 	$("#btnList").click(function(){
 		
@@ -373,13 +379,6 @@ $(document).ready(function(){
 		var replytext =$("#replytext").val();
 		var bno ='${vo.bno}';
 		//alert("번호" + bno + " : " +userid + " : " + replytext) ;
-		//비밀 댓글 체크 여부
-		var secret_reply ="n";
-		if($("#secret_reply").is(":checked")){
-			
-			secret_reply ="y";
-		}
-	
 		
 		if(userid.length < 1){
 			alert("로그인을 하셔야 댓글이 가능합니다." ) ;		
@@ -401,31 +400,20 @@ $(document).ready(function(){
 			data:JSON.stringify({
 				bno :bno,
 				replyer:userid,
-				replytext:replytext,
-				secret_reply: secret_reply
+				replytext:replytext
 				
 			}),
 			success:function(result){
 				
 				if(result=="SUCCESS"){	
-					replyListAll2(1);
+					replyListAll2();
 					$("#replytext").val("");
-					var cnt =$("#replyNum").html();
-					
-					$("#replyNum").html((parseInt(cnt)+1));	
+					$("#replyNum").html($(".media").size());	
 				}
 				
 			}
 			
 		});	
-	});
-	
-	
-	//댓글 페이지 클릭
-	$("#replyPage").on("click", "li a", function(event){
-		event.preventDefault();	
-		rplyPage =$(this).attr("href");
-		replyListAll2(rplyPage);
 	});
 	
 	
@@ -450,17 +438,17 @@ function  replyListAll(){
 
 
 
-function  replyListAll2(replyPage){
+function  replyListAll2(){
 	
 	var bno ='${vo.bno}';
 	
 	$.ajax({
-		url :"/freeboard_reply/listAll/"+bno +"/"+replyPage,
+		url :"/freeboard_reply/listAll/"+bno,
 		type:"get",
 		contentType: "application/json",
 		success :function(result){		
-			printData (result.list);
-			replyPage22(result.pager);
+			printData (result);
+			
 		}
 	});
 }
@@ -486,27 +474,8 @@ function printData (data){
 }
 
 
-function replyPage22(pager){
-	var str ="";
-	
-	if(pager.curBlock  > 1){
-		str +="<li><a aria-label='Previous' href='"+pager.prevPage+"'>«</li>";
-	}
 
-	
-     for(var i=pager.blockBegin ; i <=pager.blockEnd; i++){
-    	 var strClass= (pager.curPage ==i )? 'class=active' :'';
-    	 str +="<li "+ strClass +"><a href='"+ i +"'>" + i+"</a></li>";
-    	 
-     }
 
-    if(pager.curBlock < pager.totBlock){
-    	str +="<li>< a href='"+pager.nextPage+'">»</a></li>';
-    }
-
-    $("#replyPage").html(str);
-	
-}
 
 
 </script>
@@ -516,7 +485,7 @@ function replyPage22(pager){
 
 <script id="template" type="text/x-handlebars-template">
 {{#each .}}
- <li class="replyLi5">
+ <li>
    <div class="media">
      <div class="media-left">    
          <img alt="img" src="/resources/admin/dist/img/user3-128x128.jpg" class="media-object news-img">      

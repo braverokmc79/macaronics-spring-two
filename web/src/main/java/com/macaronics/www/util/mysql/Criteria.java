@@ -5,6 +5,8 @@ public class Criteria {
 	private Integer page;
 	private Integer perPageNum;
 	
+	
+	
 	public Criteria(){
 		this.page=1;
 		this.perPageNum=10;
@@ -40,6 +42,12 @@ public class Criteria {
 		
 		return (this.page-1) * perPageNum;
 	}
+
+	
+
+	
+	
+	
 	
 	
 	

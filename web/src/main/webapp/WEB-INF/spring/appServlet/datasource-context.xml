@@ -18,7 +18,7 @@
     <!--   <context:property-placeholder  location="classpath:/config/m1-config.properties"/>     mysql 포토  : 3306  --> 
     <!-- <context:property-placeholder  location="classpath:/config/m2-config.properties"/>  mysql 포토  : 3306  -->
    <!-- <context:property-placeholder  location="classpath:/config/o-config.properties"/>    oracle -->
-	<context:property-placeholder  location="classpath:/config/m1-config.properties"/>
+	<context:property-placeholder  location="classpath:/config/o-config.properties"/>
 
 
 

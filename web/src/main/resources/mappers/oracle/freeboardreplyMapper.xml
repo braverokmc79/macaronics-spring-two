@@ -6,17 +6,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="ORACLE_freeBoardReplyMapper">
 	
-		<select id="list" resultType="FreeBoardReplyVO" >
-			select USERNAME , r.REGDATE, r.UPDATEDATE,  REPLYTEXT,  REPLYER , rno, bno  from 
-	 		TBL_MEMBER m , TBL_REPLY r WHERE  m.USERID =r.REPLYER  and bno =#{bno}
-		order BY rno 
-		</select>
+	
+	<select id="countOracleReply" resultType="int">
+	 select count(*) from TBL_REPLY  where bno=#{bno}
+	</select>
+	
+	
+	<select id="oracleList" resultType="FreeBoardReplyVO" >
+select *
+	from 
+	(
+   select rownum as rn , A.* 
+   	from (
+		select 	
+			 rownum,  REPLYTEXT,  REPLYER ,  bno , m.USERNAME  , r.REGDATE, r.UPDATEDATE , rno from 
+	 	  TBL_REPLY r , TBL_MEMBER m  WHERE  r.REPLYER =m.USERID 	
+		  
+		   and bno=#{bno} order by rno desc
+		   ) A
+		   
+		   ) where rn BETWEEN  #{start} and #{end}
+	</select>
 	
 	<insert id="create" >
-	INSERT into TBL_REPLY (RNO, BNO, REPLYTEXT, REPLYER) 
-
- 		VALUES (reply_seq.nextval, #{bno}, #{replytext},  #{replyer} )
- 
+	INSERT into TBL_REPLY (RNO, BNO, REPLYTEXT, REPLYER, secret_reply) 
+ 		VALUES (reply_seq.nextval, #{bno}, #{replytext},  #{replyer} , #{secret_reply})
 	</insert>
 	
 	
@@ -30,17 +44,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	
+	
+	
+	
 </mapper>
-
-
-
-
-
-
-
-
-
-
 
 
 

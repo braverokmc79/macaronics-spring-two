@@ -38,7 +38,8 @@ public class BoardController {
 	
 	
 	@RequestMapping(value="/listAll.do", method=RequestMethod.GET)
-	public ModelAndView boardList(@ModelAttribute("cri") SearchCriteria cri){
+	public ModelAndView boardList(@ModelAttribute("cri") SearchCriteria cri, 
+			@RequestParam( required=false) Integer curPage){
 
 		
 		ModelAndView mv =null;
@@ -47,7 +48,13 @@ public class BoardController {
 			//Orcle DB 일 경우
 			PageAndSearch pas =new PageAndSearch();
 			
+	
 			pas.setCurPage(cri.getPage());
+			if(curPage !=null){
+				pas.setCurPage(curPage);
+			}
+		
+			
 			pas.setSearch_option(cri.getSearch_option());
 			pas.setKeyword(cri.getKeyword());
 			mv=oraclePageList(pas);
@@ -145,6 +152,8 @@ public class BoardController {
 		
 		return   JSP_PAGE+"view";
 	}
+	
+	
 	
 	
 	
