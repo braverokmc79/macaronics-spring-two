@@ -171,13 +171,31 @@ public class BoardController {
 	
 	
 	@RequestMapping(value="/update.do", method=RequestMethod.POST)
-	public String update(
-			@ModelAttribute("cri") SearchCriteria cri,
+	public String update(@RequestParam(required=false) Integer curPage,
+			@RequestParam(required=false) Integer page,
 			@ModelAttribute BoardVO vo){
-		boardService.boardUpdate(vo);
 		
-		return "redirect:listAll.do"+cri.mysqlSearchQuery(cri.getPage());
+		if(curPage !=null){
+			boardService.boardUpdate(vo);
+			return "redirect:listAll.do?curPage="+curPage;
+		
+		}else if(page !=null){
+			
+			boardService.boardUpdate(vo);
+			return "redirect:listAll.do?page="+page;
+		
+		}else {
+			
+			boardService.boardUpdate(vo);
+			return "redirect:listAll.do";
+			
+		}
 	}
+	
+	
+
+	
+	
 	
 	
 

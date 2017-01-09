@@ -355,6 +355,13 @@ $(document).ready(function(){
 	//삭제
 	$("#btnDelete").click(function(){
 		
+		var cnt =$("#replyNum").html();
+		if(cnt >0){
+			
+			alert("댓글달린 게시물은 삭제 할수 없습니다.");
+			return;
+		}
+		
 		if(confirm("정말 삭제 하시겠습니까?")){
 			
 			var form1 =$("#formmm1");
@@ -451,6 +458,8 @@ $(document).ready(function(){
 					$("#replyModal").modal("toggle");
 					var li =$("#replyPage").find(".active").find("a").text();
 					replyListAll2(li);	
+					var cnt =$("#replyNum").html();
+					$("#replyNum").html((parseInt(cnt)-1));	
 				}
 			
 			});
@@ -618,6 +627,8 @@ function modalOpen(event){
 
 {{/each}}    
 </script>
+
+
 
 
 <div class="modal" id="replyModal">
