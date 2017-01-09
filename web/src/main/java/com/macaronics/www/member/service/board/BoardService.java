@@ -26,5 +26,8 @@ public interface BoardService {
 
 
 	public int mysqlListSearchCount(SearchCriteria cri);
+
+	
+	
 	
 }

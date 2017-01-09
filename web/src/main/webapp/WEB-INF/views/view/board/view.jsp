@@ -436,6 +436,53 @@ $(document).ready(function(){
 		
 	});
 	
+	//댓글 삭제
+	$("#modalDelete").click(function(){
+		var rno =$("#ddd").text();
+	
+		if(confirm("정말 삭제 하시겠습니까?")){
+			$.ajax({
+				
+				url : "/freeboard_reply/delete/"+ rno,
+				type:"delete",
+				contentType:"application/json",
+				dataType:"text",
+				success:function(result){
+					$("#replyModal").modal("toggle");
+					var li =$("#replyPage").find(".active").find("a").text();
+					replyListAll2(li);	
+				}
+			
+			});
+			
+		}
+		
+	});
+	
+	
+	//댓글 변경
+	$("#modalAlter1").click(function(){
+		var replytext =$("#modalBodayOne").val();
+		var rno =$("#ddd").text();
+		
+		$.ajax({
+			
+			url:"/freeboard_reply/alter/"+rno,
+			type:"put",
+			dataType:"text",
+			contentType:"application/json",
+			data :JSON.stringify({
+				replytext :replytext
+			}),
+			success:function(result){
+				
+				$("#replyModal").modal("toggle");
+				var li =$("#replyPage").find(".active").find("a").text();
+				replyListAll2(li);	
+			}			
+		});
+	
+	});
 	
 });
 
@@ -536,7 +583,7 @@ function modalOpen(event){
 		if(data.replyer==userid){
 			$("#modalBodayOne").html(data.replytext);		
 			
-			$("#replyModal").modal("show");		
+			$("#replyModal").modal("toggle");		
 		}else{
 			alert("댓글쓴이만 수정 가능합니다.");
 			return;
@@ -545,13 +592,11 @@ function modalOpen(event){
 	});
 	
 	
-	
 }
+
 
 </script>
 
-
-	
 
 
 <script id="template" type="text/x-handlebars-template">
@@ -589,8 +634,8 @@ function modalOpen(event){
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
-                <button type="button" class="btn btn-primary">수정하기</button>
-                <button type="button" class="btn btn-primary">삭제하기</button>
+                <button type="button" class="btn btn-primary" id="modalAlter1">수정하기</button>
+                <button type="button" class="btn btn-danger" id="modalDelete">삭제하기</button>
               </div>
             </div>
             <!-- /.modal-content -->
@@ -600,3 +645,7 @@ function modalOpen(event){
 
   
 <%@ include file="../include/footer.jsp" %>
+
+
+
+

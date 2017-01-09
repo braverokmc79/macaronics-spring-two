@@ -102,8 +102,31 @@ public class FreeBoadReplyDAOImpl implements FreeBoadReplyDAO{
 		return sqlsession.selectOne(namespace+".detail", rno);
 	}
 
+
+
+	@Override
+	public void replyAlter(FreeBoardReplyVO vo) {
+		// TODO Auto-generated method stub
+		logger.info(" 답변변경 :" + vo.toString());
+		 sqlsession.update(namespace+".replyAlter", vo);
+	}
+
+
+	
+	@Override
+	public void replyDelete(Integer rno) {
+		
+		sqlsession.delete(namespace+".replyDelete", rno);
+	}
+
+	
+	
+	
 	
 	
 	
 	
 }
+
+
+

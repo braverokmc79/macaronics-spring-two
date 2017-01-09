@@ -146,10 +146,44 @@ public class FreeBoardReplyController {
 	
 	
 	
+	@RequestMapping(value="/alter/{rno}",   method={RequestMethod.PUT, RequestMethod.PATCH} )
+	public ResponseEntity<String> replyAlter(@PathVariable("rno") Integer rno, @RequestBody FreeBoardReplyVO  vo){	
+		ResponseEntity<String> entity =null;
+		
+		try{
+			logger.info(vo.toString());
+			vo.setRno(rno);
+			service.replyAlter(vo);
+			entity=new ResponseEntity<String>("SUCCESS", HttpStatus.OK); 
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			
+			entity=new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	
+	
+	@RequestMapping(value="/delete/{rno}", method=RequestMethod.DELETE)
+	public ResponseEntity<String> replyDelete(@PathVariable("rno") Integer rno){
+		ResponseEntity<String> entity =null;
+		try{
+			service.delete(rno);
+			entity=new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		}catch(Exception e){
+			e.printStackTrace();
+			entity=new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	
+	
+	
+	
 }
-
-
-
 
 
 

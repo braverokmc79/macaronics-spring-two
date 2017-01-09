@@ -20,6 +20,12 @@ public interface FreeBoadReplyService {
 	public FreeBoardReplyVO detail(int rno);
 	
 	
+	//댓글 수정
+	public void replyAlter(FreeBoardReplyVO vo);
+	
+	
+	//댓글 삭제
+	public void replyDelete(Integer rno);
 	
 	
 	

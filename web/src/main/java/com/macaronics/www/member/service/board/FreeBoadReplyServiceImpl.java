@@ -96,6 +96,22 @@ public class FreeBoadReplyServiceImpl implements FreeBoadReplyService {
 
 	
 	
+	
+	@Override
+	public void replyAlter(FreeBoardReplyVO vo) {
+		
+		freeBoardReplyao.replyAlter(vo);
+	}
+
+	@Override
+	public void replyDelete(Integer rno) {
+		// TODO Auto-generated method stub
+		
+		freeBoardReplyao.replyDelete(rno);
+	}
+
+	
+	
 }
 
 

@@ -176,11 +176,9 @@ public class BoardController {
 			@ModelAttribute BoardVO vo){
 		boardService.boardUpdate(vo);
 		
-		
-		
-		
 		return "redirect:listAll.do"+cri.mysqlSearchQuery(cri.getPage());
 	}
+	
 	
 
 	@RequestMapping(value="/delete.do", method=RequestMethod.POST)
@@ -192,6 +190,7 @@ public class BoardController {
 		boardService.boardDelete(bno);
 		return "redirect:listAll.do";
 	}
+	
 	
 	
 	

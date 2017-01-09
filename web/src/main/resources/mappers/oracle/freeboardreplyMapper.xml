@@ -53,6 +53,12 @@ select *
 	</select>
 	
 	
+	<update id="replyAlter">
+		UPDATE TBL_REPLY SET replytext =#{replytext}  WHERE rno=#{rno}
+	</update>
+	
+	
+
 </mapper>
 
 

@@ -17,5 +17,10 @@ public interface FreeBoadReplyDAO {
 	
 	public FreeBoardReplyVO detail(int rno);
 	
+	public void replyAlter(FreeBoardReplyVO vo);
+	
+	
+	public void replyDelete(Integer rno);
+	
 	
 }
