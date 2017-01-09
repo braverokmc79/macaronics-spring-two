@@ -94,6 +94,14 @@ public class FreeBoadReplyDAOImpl implements FreeBoadReplyDAO{
 		return sqlsession.selectList(namespace+".oracleList", map);
 	}
 
+
+
+	@Override
+	public FreeBoardReplyVO detail(int rno) {
+	
+		return sqlsession.selectOne(namespace+".detail", rno);
+	}
+
 	
 	
 	

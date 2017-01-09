@@ -15,5 +15,7 @@ public interface FreeBoadReplyDAO {
 	
 	public List<FreeBoardReplyVO> oracleList(Integer bno, int start, int end);
 	
+	public FreeBoardReplyVO detail(int rno);
+	
 	
 }

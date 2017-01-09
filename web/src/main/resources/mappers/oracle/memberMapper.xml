@@ -6,6 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="ORACLEmemberMapper">
 	
+		
+
 
 		<select id="memberList" resultType="MemberDTO">
 		 select * from tbl_member order by username

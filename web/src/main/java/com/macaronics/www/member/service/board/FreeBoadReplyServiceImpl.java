@@ -88,6 +88,14 @@ public class FreeBoadReplyServiceImpl implements FreeBoadReplyService {
 
 	
 	
+	@Override
+	public FreeBoardReplyVO detail(int rno) {
+		// TODO Auto-generated method stub
+		return freeBoardReplyao.detail(rno);
+	}
+
+	
+	
 }
 
 

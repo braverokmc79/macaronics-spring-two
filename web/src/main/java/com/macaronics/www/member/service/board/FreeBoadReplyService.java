@@ -16,6 +16,13 @@ public interface FreeBoadReplyService {
 	public int countOracleReply(Integer bno);
 	public List<FreeBoardReplyVO> oracleList(Integer bno, int start, int end, HttpSession session);
 	
+	//댓글의 상세정보
+	public FreeBoardReplyVO detail(int rno);
+	
+	
+	
 	
 	
 }
+
+

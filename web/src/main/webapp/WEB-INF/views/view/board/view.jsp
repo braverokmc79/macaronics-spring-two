@@ -19,6 +19,8 @@
 
   
 }
+
+
 </style>
 
 
@@ -130,8 +132,7 @@
                 	
                 	<input type="hidden" value="${param.displayPageNum }" name="displayPageNum">
 
-                	 <a  type="button" class="btn btn-primary"  id="btnList"  
-           style="float: right; "  >글 목록</a>	
+                	 <a type="button" class="btn btn-primary"  id="btnList"  style="float: right;" >글 목록</a>	
               	</td>
    		
               		 </tr>
@@ -191,7 +192,7 @@
                 <div class="aa-comments-area">
                         <h3> <span id="replyNum">${vo.cnt}</span>  개의 댓글 </h3>
                         <div class="comments">
-                         <ul class="commentlist">
+                         <ul class="commentlist" id="replyUl">
                
                          </ul>
                           <!-- comments pagination -->
@@ -257,7 +258,7 @@
                       <a href="#">Office</a>
                       <a href="#">Rent</a>
                       <a href="#">Sale</a>
-                      <a href="#">Villa</a>
+                      <a href="#" >Villa</a>
                     </div>                    
                   </div>
                   <!-- Start single sidebar -->
@@ -405,16 +406,14 @@ $(document).ready(function(){
 				secret_reply: secret_reply
 				
 			}),
-			success:function(result){
-				
+			success:function(result){			
 				if(result=="SUCCESS"){	
 					replyListAll2(1);
 					$("#replytext").val("");
 					var cnt =$("#replyNum").html();
 					
 					$("#replyNum").html((parseInt(cnt)+1));	
-				}
-				
+				}		
 			}
 			
 		});	
@@ -427,7 +426,15 @@ $(document).ready(function(){
 		rplyPage =$(this).attr("href");
 		replyListAll2(rplyPage);
 	});
+		
 	
+	$("#replyUl").on("mouseover", ".replyLi5", function(event){
+		
+		var rno=$(this).attr("data-rno");
+		$("#ddd").text(rno);
+		
+		
+	});
 	
 	
 });
@@ -501,7 +508,8 @@ function replyPage22(pager){
      }
 
     if(pager.curBlock < pager.totBlock){
-    	str +="<li>< a href='"+pager.nextPage+'">»</a></li>';
+    	str +="<li><a href='";
+    	str  +=pager.nextPage+"'>»</a></li>'";
     }
 
     $("#replyPage").html(str);
@@ -509,23 +517,56 @@ function replyPage22(pager){
 }
 
 
+function modalOpen(event){
+	
+	event.preventDefault();
+
+	var rno =$("#ddd").text();
+	var userid ="${loginUser.userid}";
+	
+	
+	$.getJSON("/freeboard_reply/replyView/"+rno, function(data){		
+		// alert(userid + "  : " + data.replyer);
+		
+		if(userid.length<1){
+			alert("로그인을 먼저 하세요!");
+			return;
+		}
+		
+		if(data.replyer==userid){
+			$("#modalBodayOne").html(data.replytext);		
+			
+			$("#replyModal").modal("show");		
+		}else{
+			alert("댓글쓴이만 수정 가능합니다.");
+			return;
+		} 
+	
+	});
+	
+	
+	
+}
+
 </script>
 
 
+	
 
 
 <script id="template" type="text/x-handlebars-template">
 {{#each .}}
- <li class="replyLi5">
+ <li class="replyLi5" data-rno ="{{rno}}">
    <div class="media">
      <div class="media-left">    
          <img alt="img" src="/resources/admin/dist/img/user3-128x128.jpg" class="media-object news-img">      
      </div>
      <div class="media-body">
-      <h4 class="author-name">{{replyer}}</h4>
+      <h4 class="author-name">{{rno}}  -  {{replyer}}</h4>
       <span class="comments-date"> {{regdate}}</span>
       <p>{{ replytext}}</p>
-      <a class="reply-btn" href="#">Reply</a>
+      <a class="reply-btn" href="#" onclick="javascript:modalOpen(event);" data-rno="{{rno}}">Reply</a>
+
      </div>
    </div>
 </li>
@@ -534,7 +575,28 @@ function replyPage22(pager){
 </script>
 
 
-
+<div class="modal" id="replyModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title"> ( <span id="ddd"></span> )  댓글 수정하기</h4>
+             	
+              </div>
+              <div class="modal-body">
+                <textarea rows="" cols="" id="modalBodayOne" class="form-control"></textarea>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-primary">수정하기</button>
+                <button type="button" class="btn btn-primary">삭제하기</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+</div>
 
   
 <%@ include file="../include/footer.jsp" %>

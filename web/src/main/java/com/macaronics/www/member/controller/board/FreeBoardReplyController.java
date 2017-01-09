@@ -126,7 +126,23 @@ public class FreeBoardReplyController {
 	}
 
 	
-	
+	@RequestMapping(value="/replyView/{rno}", method=RequestMethod.GET)
+	public ResponseEntity<FreeBoardReplyVO> replyView(@PathVariable("rno") Integer rno){
+		
+		
+		ResponseEntity<FreeBoardReplyVO> entity =null;
+		
+		try{
+			FreeBoardReplyVO  vo=service.detail(rno);
+			entity =new ResponseEntity<FreeBoardReplyVO>(vo , HttpStatus.OK );
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			entity =new ResponseEntity<FreeBoardReplyVO>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
 	
 	
 	

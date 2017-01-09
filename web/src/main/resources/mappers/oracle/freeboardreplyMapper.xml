@@ -48,7 +48,9 @@ select *
 	</delete>
 	
 	
-	
+	<select id="detail" resultType="FreeBoardReplyVO">
+	 select * from tbl_reply where rno =#{rno}
+	</select>
 	
 	
 </mapper>
