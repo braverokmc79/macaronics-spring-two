@@ -223,6 +223,30 @@ select *
 
 
 
+--컬럼 추가
+
+alter table tbl_board add ( show char(1) );
+
+update tbl_board set show ='y';
+
+select * from tbl_board;
+
+delete from tbl_board where bno =5;
+
+update tbl_board set show ='n' where bno =5;
+
+select * from tbl_board where show='y';
+
+commit;
+
+
+
+
+
+
+
+
+
 
 
 
