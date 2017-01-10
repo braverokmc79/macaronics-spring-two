@@ -863,5 +863,9 @@
   <!-- / Latest blog -->
   
   
+
+
+
+
   
-  <%@ include file="view/include/footer.jsp" %>
+<%@ include file="view/include/footer.jsp" %>
