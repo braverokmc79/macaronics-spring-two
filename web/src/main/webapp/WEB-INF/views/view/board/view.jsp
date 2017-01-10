@@ -17,9 +17,7 @@
 
   background-image: url("/resources/view/img/slider/1.jpg");
 
-  
 }
-
 
 </style>
 
@@ -73,7 +71,20 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding" >
-            
+           <c:choose>
+	           	<c:when test="${ vo.show !='y'}">
+	           		<table class="table table-hover">
+	           			 <tbody>
+	           			 	<tr>
+                			<th style="text-align: center;">삭제된 게시물 입니다.</th>
+                			</tr>
+               			 </tbody>
+	           		</table>
+	           	
+	           	</c:when>
+	           	<c:otherwise>
+	           	
+	           		 
             <form method="post" action="/board/insert.do"  name="formmm1" id="formmm1">
               <table class="table table-hover">
                 <thead>
@@ -137,10 +148,16 @@
    		
               		 </tr>
               	 </tfoot>
-            </table>
+           	 </table>
               
               
               </form>
+           	
+	           	</c:otherwise>
+           </c:choose>
+           
+           
+           
             </div>
             <!-- /.box-body -->
           </div>
@@ -151,10 +168,14 @@
                       <div class="aa-properties-content-bottom">
                         <nav>
                         
-                             
+          
+            
+                      
            <!-- 댓글 -->
                 <div class="row">
                 <hr style="  border: 1px #66AD44 solid;" >
+               
+                 <c:if test="${vo.show=='y' }"  >  <!-- show 여부 -->
                 <h3 >댓글 쓰기</h3>
                 	
                 	<form  name="replyform1" method="post" action="">
@@ -187,7 +208,13 @@
                 
                 </form>
                 
+              </c:if>   <!-- show 여부 -->
+                
+             
                 <hr>
+             
+             
+             
                 
                 <div class="aa-comments-area">
                         <h3> <span id="replyNum">${vo.cnt}</span>  개의 댓글 </h3>
@@ -200,9 +227,9 @@
                         </div>
                  </div>
             </div>
-                     
+              
+                   
                       	 <ul class="pagination" id="replyPage">
-                         
                          
                          
                           </ul>
@@ -338,8 +365,7 @@ $(document).ready(function(){
 		form1.attr("action" , "/board/listAll.do");
 		form1.attr("method", "get");
 		form1.submit();
-
-		
+	
 	});
 	
 	
@@ -355,13 +381,13 @@ $(document).ready(function(){
 	//삭제
 	$("#btnDelete").click(function(){
 		
-		var cnt =$("#replyNum").html();
+/* 		var cnt =$("#replyNum").html();
 		if(cnt >0){
 			
 			alert("댓글달린 게시물은 삭제 할수 없습니다.");
 			return;
 		}
-		
+		 */
 		if(confirm("정말 삭제 하시겠습니까?")){
 			
 			var form1 =$("#formmm1");

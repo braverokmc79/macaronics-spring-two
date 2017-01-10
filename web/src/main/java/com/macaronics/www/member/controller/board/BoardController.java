@@ -155,8 +155,6 @@ public class BoardController {
 	
 	
 	
-	
-	
 	//업데이트 화면 으로 가기
 	@RequestMapping(value="/updateform.do", method=RequestMethod.GET)
 	public String updateForm(
@@ -191,9 +189,6 @@ public class BoardController {
 			
 		}
 	}
-	
-	
-
 	
 	
 	

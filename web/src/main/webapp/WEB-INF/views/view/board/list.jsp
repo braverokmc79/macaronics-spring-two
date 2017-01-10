@@ -103,9 +103,7 @@
                <span class="label label-danger"> ${map.countList }</span> 개의 게시물이 있습니다.
               </p>
               <p>
-              
-              
-              
+            
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
@@ -117,35 +115,57 @@
                   <th>등록일</th>
                   <th>조회수</th>
                 </tr>
-               
+     
        <c:forEach items="${map.list }"  var="row">
-
+            
+          <c:choose>
+         	
+         	<c:when test="${ row.show eq 'n' }">
+         		<c:if test="${row.cnt == 0}">
+					 <td colspan="5" style="text-align: center;">삭제 된 게시물 입니다.</td>         	
+         		</c:if>
+         		
+         		<c:if test="${row.cnt > 0}">
+         		    <td class="rowTitle" colspan="5" style="text-align: center;">          
+        <a href="/board/view.do${pageAndSearch.searchQuery(param.curPage) }&bno=${row.bno }">삭제 된 게시물 입니다.
+			  <c:if test="${row.cnt  > 0}">
+				<span class="label label-danger">[ ${row.cnt }]</span>
+			  </c:if>
+ 			     </a>
+ 			     </td>
+ 			   </c:if>
+         </c:when>
+         	
+         	<c:otherwise>
                 <tr>
                   <td>${row.bno }</td>
-                  <td class="rowTitle">
-                  
-<a href="/board/view.do${pageAndSearch.searchQuery(param.curPage) }&bno=${row.bno }">${row.title } 
-			<c:if test="${row.cnt  > 0}">
+                 
+                  <td class="rowTitle">          
+        <a href="/board/view.do${pageAndSearch.searchQuery(param.curPage) }&bno=${row.bno }">${row.title } 
+			  <c:if test="${row.cnt  > 0}">
 				<span class="label label-danger">[ ${row.cnt }]</span>
-			</c:if>
- 			</a>
- 			
- 			</td>
+			  </c:if>
+ 			     </a>
+ 			     </td>
+ 			     
+ 			     
                   <td>${ row.writer }</td>
                   <td><span class="label label-success">
                   <fmt:formatDate value="${ row.regdate }"  pattern="yyyy-MM-dd hh:mm"/></span>
                   </td>
                   <td> <span class="badge bg-red">${ row.viewcnt }</span></td>
-                </tr>
-       
+              </tr>
+         	
+         	
+         	</c:otherwise>
+         </c:choose>  
+            
        </c:forEach>
          
               </tbody></table>
             </div>
             <!-- /.box-body -->
           </div>
-              
-             
                   </div>
                   <div class="row">
                     <div class="col-md-12">

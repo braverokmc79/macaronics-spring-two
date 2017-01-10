@@ -243,7 +243,17 @@ commit;
 
 
 
+drop VIEW v_free_board;
 
+	
+create VIEW v_free_board as 	
+select b.bno, b.content, b.title, b.viewcnt, m.email, m.member_level, b.regdate, m.username, b.writer, m.userid, b.show,
+		
+	(select count(*) from tbl_reply  where bno =b.bno) as cnt
+	from tbl_member m, tbl_board b where m.userid =b.writer ;	
+	
+commit;	
+	
 
 
 

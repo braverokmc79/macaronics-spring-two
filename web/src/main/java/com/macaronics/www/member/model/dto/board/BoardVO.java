@@ -1,6 +1,6 @@
 package com.macaronics.www.member.model.dto.board;
 
-import java.sql.Date;
+import java.util.Date;
 
 import com.macaronics.www.util.xss.XssDefender;
 
@@ -22,6 +22,12 @@ public class BoardVO {
 	
 	private int cnt;
 	
+	
+	private String show;
+	
+	
+	
+	
 	public void setTitle(String title) {
 		this.title = XssDefender.inputString(title);
 	}
@@ -31,5 +37,14 @@ public class BoardVO {
 	}
 	
 	
+
+	
+	
+	
+	
+	
 	
 }
+
+
+

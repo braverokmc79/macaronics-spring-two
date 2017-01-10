@@ -33,7 +33,7 @@ select * from
 (
 	select rownum as rn , A.*
 
- from	(select  rownum , bno, content, title, viewcnt, writer, userid, username ,regdate, cnt
+ from	(select  rownum , bno, content, title, viewcnt, writer, userid, username ,regdate, cnt, show
  		from v_free_board  
 		 where  bno >0 
 
@@ -51,13 +51,13 @@ select * from
 	
 	
 	<insert id="boardCreate">
-	insert into TBL_BOARD (BNO, TITLE, CONTENT, WRITER) 
-      VALUES((select nvl(max(bno)+1,1) from tbl_board), #{title}, #{content},  #{writer} )
+	insert into TBL_BOARD (BNO, TITLE, CONTENT, WRITER , show) 
+      VALUES((select nvl(max(bno)+1,1) from tbl_board), #{title}, #{content},  #{writer}, 'y' )
 	</insert>
 	
 	
 	<select id="boardRead" resultType="BoardVO">
-	select  bno, title, content, regdate , viewcnt , writer , (select count(*) from tbl_reply where  bno=#{bno}) as cnt  
+	select  bno, title, content, regdate , viewcnt , writer , show, (select count(*) from tbl_reply where  bno=#{bno}) as cnt  
 	from tbl_board    where bno=#{bno}
 	</select>
 	
@@ -74,7 +74,8 @@ select * from
 	
 	
 	<delete id="boardDelete">
-		delete from tbl_board where bno=#{bno}
+		update tbl_board
+			set show ='n' where bno =#{bno}
 	</delete>
 	
 	
@@ -100,6 +101,12 @@ select * from
 	</sql>
 	
 	 -->
+		
+	<update id="deleteAticle">
+		update tbl_board
+			set show ='n' where bno =#{bno}
+	</update>	
+		
 			
 </mapper>
 
