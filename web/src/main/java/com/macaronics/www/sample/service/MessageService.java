@@ -17,4 +17,6 @@ public interface MessageService {
 	
 	public List<MessageVO> messageList() throws Exception ;
 	
+	
+	
 }
