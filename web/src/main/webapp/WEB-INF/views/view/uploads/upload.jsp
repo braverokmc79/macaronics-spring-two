@@ -71,101 +71,38 @@
                   <div class="row">
                    <div class="box">
             <div class="box-header">
-              <h3 class="box-title" style="margin-bottom: 10px;">메시지 전송 테스트</h3>
+              <h3 class="box-title" style="margin-bottom: 10px;">업로드 테스트</h3>
+
 
               <div class="box-tools">	
            
    				<hr>
-   				<h5 style="color: green;">샘플 유저 아이디</h5>
-           			<hr>
-           		<div id="tbodyI">
-           		<table class="table" >    			
-           			<tr>
-           				<td>아이디</td> <td>패스워드</td><td>이름</td><td>포인트</td>
-           			</tr>
-           			
-           			<c:forEach items="${ userList}" var="row" >
-						<tr>
-           					<td>${row.userid}</td>
-           					<td>${row.upw }</td>
-           					<td>${row.uname }</td>
-           					<td>${row.upoint }</td>
-           				</tr>
-           			
-           			</c:forEach>	
+   				
            		
-           		</table>	
+           		<div>
+           		
+           		<h5>업로드할 파일을 선택해 주세요.</h5>
+           		<form action="/upload/uploadForm" method="post" enctype="multipart/form-data" role='form1'>
+           			
+           			<input type="file" name="file" class="form-control" id="fileName"> <br>
+           		
+           			<input type="submit" value="업로드" class="form-control" id="fileSubmit" >
+           		
+           		</form>
+           		<c:if test="${not empty realName }">
+           			<h3>업로드 된 파일 명 : ${realName }</h3>
+           		
+           		</c:if>	
+           			
            		</div>
-				</div>
+			</div>
 
-			<hr>
-			
-			<h5 style="color: green;">메시지 전송</h5>
-			  <form method="post" action="/messages/messageform" role="form1">
-			 <div class="table-responsive">
-			  <table class="table table-striped">
-           			
-           			<tr>
-           			  <th>받는 사람 아이디</th>
-           			  <td>
-           			 
-           				<select name="targetid"  id="targetid" class="form-control">
-           				<c:forEach items="${userList}" var="row">
-           					<option value="${row.userid }">${row.userid }</option>
-           				</c:forEach>
-           				</select>
-           				</td>
-           			</tr>
-           			<tr>
-           				
-           				<th>보내는 사람 아이디</th>
-           				<td>
-           				<select name="sender" id="sender" class="form-control">
-           				<c:forEach items="${userList}" var="row">
-           					<option value="${row.userid }">${row.userid }</option>
-           				</c:forEach>
-           				</select>
-           				
-           			</tr>
-           			
-           			<tr>
-           			<th>내용</th>
-           			<td >
-           			<textarea rows="5" cols="20" class="form-control" name="message" id="message" ></textarea>
-           			</td>
-           			</tr>
-           			
-           			<tr>
-           			<td colspan="2" style="text-align: center;">
-           			<input type="submit"  value="전송" class="btn btn-success" id="messageSubmit">
-           			</td>
-           			</tr>
-           	</table>
-           	</div>
-           	</form>
-			
-			<hr>
-				<h5 style="color: green;">메시지 내용</h5>
-
+				<hr>
+		
           	  </div>
              	
              	<hr>
-             	<div >
-             		<ul id="messageList">
-             			<c:forEach items="${messageList}" var="list">
 
-					<li>
-					번호: ${list.mid } - 받는사람: ${list.targetid } - 
-					
-					보낸사람 : ${list.sender}  - 메시지: ${list.message } 
-					- 보낸날짜: ${list.senddate}  - 개봉날짜 : ${list.opendate }
-					</li>
-             			
-             			</c:forEach>
-             		
-             		</ul>
-             	
-             	</div>
              	
             
             </div>
@@ -291,105 +228,47 @@
 
 
 <script>
+
+
 $(document).ready(function(){
 	
 	
-	$("#btnWrite").click(function(){
-				
-		location.href="/board/write.do";
-		
-	});
-	
-	
-	
-	$("#messageSubmit").click(function(event){
+	$("#fileSubmit").click(function(event){
 		
 		event.preventDefault();
 		
-		var targetid=$("#targetid").val();
-		var sender =$("#sender").val();
-		var message=$("#message").val();
+		var form=$("form[role='form1']");
 		
-		if(message.length <1){
-			alert("메시지를 입력하세요!");
-			return;
-		}		
-		//alert("target  : " + targetid + "  : " + sender+ " : "+ message);
+	
+	    var maxSize  = 7340032;    //7MB
+	   
+	    if($('#fileName').val().length < 1){
+	    	alert("파일을 선택 해 주세요!");
+	    	 return false;
+	    }
+	    
+	    if ($('#fileName').val() != ""  ) { 
+	        var size = document.getElementById("fileName").files[0].size;
+	       
+	         if(size > maxSize){
+	               alert("첨부파일 사이즈는 7MB 이내로 등록 가능합니다.");
+	               $('#fileName').val("");
+	               $('#fileName').focus();
+	                return false;
+	            }
+	    }
 		
-		$.ajax({
+		form.submit();
 			
-			url:"/messages/addmessage",
-			type:"POST",
-			datType:"text",
-			contentType:"application/json",
-			data:JSON.stringify({
-				targetid:targetid,
-				sender:sender,
-				message:message
-			}),
-			success:function(result){
-					
-					var template=Handlebars.compile($("#template").html());
-					var html =template(result.userList);
-					
-					
-					var str2 ='<table class="table" >';    			
-           			str2 += '<tr>';
-           			str2 += '<td>아이디</td> <td>패스워드</td><td>이름</td><td>포인트</td>';
-           			str2 += '</tr>';
-           			str2 +=html;
-           			str2 += "</table>";
-           			$("#tbodyI table").remove();
-					$("#tbodyI").html(str2);
-					$("#message").val("");
-					
-					var template2=Handlebars.compile($("#template2").html());
-					var html2=template2(result.messageList)
-					
-					$("#messageList").html(html2);		
-			}
-		});
+		
 	});
+
+	
 });
 
 
-function list(page){
-
-	location.href='/board/listAll.do'+page;
-
-}
 
 </script>
-
-<script id="template" type="text/x-handlebars-template">
-
-{{#each .}} 
- <tr>
-	<td>{{userid}}</td>
-	<td>{{upw }}</td>
-	<td>{{uname }}</td>
- 	<td>{{upoint }}</td>
-</tr>
-{{/each}} 
-        			
-</script>
-
-
-
-<script id="template2" type="text/x-handlebars-template">
-{{#each .}}
-
-
-<li>
-	번호: {{mid }} - 받는사람: {{targetid }} - 
-				
-	보낸사람 : {{sender}}  - 메시지: {{message }} 
-	- 보낸날짜: {{senddate}}  - 개봉날짜 : {{opendate }}
-</li>
-
-{{/each}}
-</script>
-
 
 
   

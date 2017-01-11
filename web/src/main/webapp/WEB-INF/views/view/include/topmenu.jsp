@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -24,6 +25,7 @@
                   <div class="aa-telephone-no">
                     <span class="fa fa-bars"></span>
                     서버 환경  :  <span style="color: red;">${ServerEnvironment }</span>
+                  
                   </div>
                   <div class="aa-email hidden-xs">
                     <span class="fa fa-envelope-o"></span> braverokmc79@gmail.com
@@ -90,7 +92,8 @@
               <ul class="dropdown-menu" role="menu">                
                 <li><a href="/board/listAll.do">Free 게시글목록</a></li>
                 <li><a href="/board/write.do">게시글 등록하기</a></li> 
-                <li><a href="/messages/messageform">메시지 전송테스트</a></li>                                            
+                <li><a href="/messages/messageform">메시지 전송테스트</a></li>
+                 <li><a href="/upload/uploadForm">업로드 테스트</a></li>                                            
               </ul>
             </li>
             
