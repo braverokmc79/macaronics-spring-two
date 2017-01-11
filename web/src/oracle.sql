@@ -256,7 +256,61 @@ commit;
 	
 
 
+create table tbl_user (
+ userid varchar2(50) not null,
+ upw varchar2(50) not null,
+ uname varchar2(100) not null,
+ upoint number default 0,
+ primary key(userid)
+
+);
+
+create table tbl_message (
+ mid number not null,
+ targetid varchar2(50) not null,
+ sender varchar2(50) not null,
+ message varchar2(4000) not null,
+ opendate date,
+ senddate date default sysdate,
+ primary key(mid) 
+);
+
+-- 시권스 생성
+
+create SEQUENCE message_seq START WITH 1
+
+INCREMENT  BY 1;
+
+
+alter table tbl_message add constraint fk_usertarget
+ foreign key (targetid) references tbl_user(userid);
+
+
+alter table tbl_message add constraint fk_usersender
+
+foreign key (sender ) references tbl_user(userid);
 
 
 
+insert into tbl_user (userid, upw, uname) 
+	values ('user00', 'user00', 'kim');
+
+insert into tbl_user (userid, upw, uname) 
+	values ('user01', 'user01', 'park');
+	
+insert into tbl_user (userid, upw, uname)
+ 	values ('user02', 'user02', 'hong');
+	 	
+insert into tbl_user (userid, upw, uname)
+	values ('user03', 'user02', 'choi');
+
+
+insert into tbl_user (userid, upw, uname)
+ 	values ('user04', 'user04', 'lee');
+
+ 	
+
+select * from tbl_user;
+
+-- user02가 user00에기 메시지를 전송 	
 

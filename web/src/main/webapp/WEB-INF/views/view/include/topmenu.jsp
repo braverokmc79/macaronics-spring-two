@@ -89,7 +89,8 @@
               <a class="dropdown-toggle" data-toggle="dropdown" href="/board/listAll.do">Free 게시판 <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">                
                 <li><a href="/board/listAll.do">Free 게시글목록</a></li>
-                <li><a href="/board/write.do">게시글 등록하기</a></li>                                            
+                <li><a href="/board/write.do">게시글 등록하기</a></li> 
+                <li><a href="/messages/messageform">메시지 전송테스트</a></li>                                            
               </ul>
             </li>
             

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="ORACLEmessageMapper">
+	<!-- 레코드 개수 계수 -->
+
+
+	<insert id="create">
+		insert into tbl_message (mid, targetid, sender, message)
+			values ( message_seq.nextval ,#{targetid}, #{sender}, #{message})
+	</insert>
+
+	<select id="readMessage" resultType="com.macaronics.www.sample.dto.MessageVO">
+		select * from tbl_message where mid =#{mid}
+	</select>
+
+
+	<select id="userList" resultType="com.macaronics.www.sample.dto.UserVO" >
+		select * from tbl_user 
+	</select>
+	
+	
+	<select id="messageList" resultType="com.macaronics.www.sample.dto.MessageVO">
+	
+		select * from TBL_MESSAGE order by MID desc
+	</select>
+	
+			
+</mapper>
+
