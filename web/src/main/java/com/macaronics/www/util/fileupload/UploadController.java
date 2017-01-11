@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,7 +54,8 @@ public class UploadController {
 	}
 	
 	
-	private String uploadFile (HttpServletRequest request, String originalName, byte[] fileData) throws Exception{
+	private String uploadFile (HttpServletRequest request, 
+			String originalName, byte[] fileData) throws Exception{
 		
 		UUID  uid =UUID.randomUUID();
 		
@@ -65,6 +67,37 @@ public class UploadController {
 		
 		return savedName;
 	}
+	
+	
+	
+	@RequestMapping(value="/uploadiframe", method=RequestMethod.GET)
+	public String uploadFormIframe() {
+		return JSP_PAGE+"/uploadiframe";
+	}
+	
+	
+	@RequestMapping(value="/uploadiframe", method=RequestMethod.POST)
+	public String uploadFormIrame(HttpServletRequest request,
+			MultipartFile file, Model model) throws Exception{
+		
+		logger.info("originalName :" + file.getOriginalFilename());
+		logger.info("size : " + file.getSize());
+		logger.info("contentType :" +file.getContentType());
+		
+		String savedName =uploadFile(request, file.getOriginalFilename(), file.getBytes());
+		
+		model.addAttribute("savedName", savedName);
+		
+		return JSP_PAGE+"/uploadiframeResult";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 		

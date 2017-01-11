@@ -93,7 +93,8 @@
                 <li><a href="/board/listAll.do">Free 게시글목록</a></li>
                 <li><a href="/board/write.do">게시글 등록하기</a></li> 
                 <li><a href="/messages/messageform">메시지 전송테스트</a></li>
-                 <li><a href="/upload/uploadForm">업로드 테스트</a></li>                                            
+                 <li><a href="/upload/uploadForm">업로드 테스트</a></li> 
+                 <li><a href="/upload/uploadiframe">업로드 iframe 테스트</a></li>                                            
               </ul>
             </li>
             
