@@ -314,3 +314,24 @@ select * from tbl_user;
 
 -- user02가 user00에기 메시지를 전송 	
 
+
+-- galler 
+
+create table tbl_gallery (
+	
+	idx NUMBER not null,
+	fileName VARCHAR2(100),
+	fileTypes varchar2(10) ,
+	filePath varchar2(100),
+	fileSize long,
+	createDate date DEFAULT sysdate,
+	updateDate DATE 
+	
+);
+
+create SEQUENCE gallery_seq 
+	start with 1 INCREMENT BY 1;
+
+commit;
+
+

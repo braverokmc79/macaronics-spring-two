@@ -35,7 +35,7 @@
 
 <!-- jQuery 2.2.3 -->
 <script src="/resources/admin/plugins/jQuery/jquery-2.2.3.min.js"></script>
-
+<script type="text/javascript"  src="/resources/view/js/handlebars-v4.0.5.js"></script>	
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

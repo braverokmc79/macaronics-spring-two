@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class UploadPath {
 
-	public static String attach_path ="resources/uploads/";
+	public static String attach_path ="WEB-INF/uploads/";
 	
 	public static String path(HttpServletRequest request){	
 		String uploadPath ="";

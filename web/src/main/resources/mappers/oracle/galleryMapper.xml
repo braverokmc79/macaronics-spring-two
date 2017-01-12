@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="ORACLEgalleryMapper">
+	<!-- 레코드 개수 계수 -->
+
+
+	<select id="galleryList" resultType="com.macaronics.www.user.model.dto.GalleryDTO">
+		select * from TBL_GALLERY order by idx desc
+	</select>
+
+	<insert id="insertGallery">
+		insert into tbl_gallery (IDX, FILENAME, FILETYPES, FILEPATH, FILESIZE) 
+	values (gallery_seq.nextval, #{fileName}, #{fileTypes},  #{filePath} , #{fileSize} )
+	
+	</insert>
+	
+	
+	<select id="readGallery" resultType="com.macaronics.www.user.model.dto.GalleryDTO">
+		select * from TBL_GALLERY where idx =#{idx}
+	</select>
+	
+	
+	<update id="updateGallery">
+		
+	UPDATE TBL_GALLERY SET FILENAME =#{fileName}, FILEPATH=#{filePath}, 
+		FILESIZE=#{fileSize}, FILETYPES=#{fileTypes} ,UPDATEDATE=sysdate
+	WHERE IDX=#{idx}
+	</update>
+	
+	
+	<delete id="deleteGallery">
+		delete from tbl_gallery where idx=#{idx} 
+	</delete>
+		
+		
+			
+</mapper>
+
