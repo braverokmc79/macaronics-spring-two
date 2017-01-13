@@ -38,7 +38,23 @@
 	board:1px dotted blue;
 
 }
+#uploadList{
+	
+	margin-top: 20px;
+	
+}
 
+#uploadList li{
+
+	margin-top: 10px;
+	
+}
+
+.btn-danger{
+
+	margin-left:5px;
+
+}
 </style>
 
 
@@ -160,14 +176,14 @@ function getFileList(fileName){
 		//이미지인 경우 이미지 표시
 		str +="<li><a href='/gallery/view/displayFile?fileName=" +getImageLink(fileName)+"' >";
 		str +="<image src='/gallery/view/displayFile?fileName="+fileName +"' />";
-		str +="</a></li>";
+		str +="</a><button class='btn btn-danger' onclick=\"javascript:uploadDelete('"+fileName+"', this)\">삭제</button></li>";
 		
 	}else{
 		//이미지가 아닌경우 이름만 표시
 		
 		str +="<li><a href='/gallery/view/displayFile?fileName="+fileName+"'>";
 		str +=getOriginalName(fileName);
-		str +="</a></li>";		
+		str +="</a><button class='btn btn-danger' onclick=\"javascript:uploadDelete('"+fileName+"', this)\">삭제</button></li>";		
 		
 	}
 	return str;
@@ -197,6 +213,28 @@ function checkImageType(fileName){
 	return fileName.match(pattern);
 }
 
+function uploadDelete(fileName, event){
+	
+	$.ajax({
+		
+		url:"/gallery/view/deleteFile",
+		type:"POST",
+		data : {
+			fileName:fileName
+		},
+		dataType :"text",
+		success:function(result){
+			
+			if(result=='deleted'){
+				$(event).parent("li").remove();			
+			}
+		}
+		
+	});
+	
+	
+	
+}
 
 
 </script>

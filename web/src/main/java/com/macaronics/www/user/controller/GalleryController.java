@@ -1,5 +1,6 @@
 package com.macaronics.www.user.controller;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -129,7 +131,38 @@ public class GalleryController {
 		return entity;
 	}
 	
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/deleteFile", method=RequestMethod.POST)
+	public ResponseEntity<String> deleteFile(HttpServletRequest request, String fileName){
 		
+		logger.info(" delete File : " + fileName);
+		
+		String forMatName =fileName.substring(fileName.lastIndexOf(".")+1);
+		
+		MediaType mType =MediaUtils.getMediaType(forMatName);
+		
+		if(mType!=null){
+			//원본 이미지 삭제
+			
+			String front = fileName.substring(0, 12);
+			String end =fileName.substring(14);
+			
+			File file =new File(UploadPath.path(request)+(front+end).replace('/', File.separatorChar));
+			if(file.exists()){
+				file.delete();
+			}
+			
+		}
+		//썸네일 이미지 및 일반 파일 삭제
+		new File(UploadPath.path(request)+fileName.replace('/', File.separatorChar)).delete();
+		
+		return new ResponseEntity<String>("deleted", HttpStatus.OK);
+	}
+	
+	
+	
 	
 	
 }
