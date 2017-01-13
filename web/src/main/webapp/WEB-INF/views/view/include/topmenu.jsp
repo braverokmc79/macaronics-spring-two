@@ -99,7 +99,14 @@
             </li>
             
             
-            <li><a href="gallery.html">GALLERY</a></li>                                         
+            <li class="dropdown">
+            	<a class="dropdown-toggle" data-toggle="dropdown" href="/gallery/list">GALLERY<span class="caret"></span></a>
+            	<ul class="dropdown-menu" role="menu">                
+                <li><a href="/gallery/list">GALLERY LIST</a></li> 
+                <li><a href="/gallery/view/gallery2">GALLERY UPLOAD TEST</a></li>                                            
+              </ul>
+            </li>                                         
+            
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="blog-archive.html">BLOG <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">                
@@ -115,3 +122,8 @@
     </nav> 
   </section>
   <!-- End menu section -->
+
+  
+  
+  
+  

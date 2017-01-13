@@ -54,7 +54,7 @@ small{
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">이미지 업로드 폼 - ( 370*220 ) : 7MB 이하</h3>
+              <h3 class="box-title">이미지 업로드  - ( 370*220 ) : 7MB 이하</h3>
 
 <div id="displayDiv7">
 
@@ -63,10 +63,10 @@ small{
 
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                 
+                 	
                 </div>
               </div>
-           
+           <span style="text-align: center; margin-top:20px; color:red;">업로드할 이미지를 올려 주세요</span>
            
             </div>
             <!-- /.box-header -->
@@ -199,12 +199,10 @@ $(document).ready(function(){
        			complete:function(xhr, textSuccess){
        				if(textSuccess =='success')
        				{
-       					alert("성공"+ xhr.responseText.size());
-       					var list = $.parseJSON(json);
-       	                var listLen = list.length;
-       	                var contentStr = "";
-       	             alert("listLen" +listLen);
-       					$("#galleryListId").html(par);			
+       					
+       				
+       					window.location.reload(true);
+       					
        					
        				}else{
        					alert("실패"+ xhr.responseText);
