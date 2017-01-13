@@ -158,15 +158,16 @@ function getFileList(fileName){
 	var str="";	
 	if(checkImageType(fileName)){
 		//이미지인 경우 이미지 표시
-		str +="<li><image src='/gallery/view/displayFile?fileName="+fileName +"' />";
-		str +="</li>";
+		str +="<li><a href='/gallery/view/displayFile?fileName=" +getImageLink(fileName)+"' >";
+		str +="<image src='/gallery/view/displayFile?fileName="+fileName +"' />";
+		str +="</a></li>";
 		
 	}else{
 		//이미지가 아닌경우 이름만 표시
 		
-		str +="<li>";
+		str +="<li><a href='/gallery/view/displayFile?fileName="+fileName+"'>";
 		str +=getOriginalName(fileName);
-		str +="</li>";		
+		str +="</a></li>";		
 		
 	}
 	return str;
