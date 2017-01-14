@@ -28,6 +28,8 @@ public interface BoardDAO {
 
 	public void attachDelete(String fileName);
 
+	public void updateAttach(String fileName, int bno);
+
 	
 	
 	

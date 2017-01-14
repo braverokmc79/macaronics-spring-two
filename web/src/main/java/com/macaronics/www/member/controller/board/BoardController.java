@@ -22,6 +22,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -162,6 +163,9 @@ public class BoardController {
 	
 	
 	
+	
+	
+	
 	//조회수 증가
 	@RequestMapping(value="/view.do", method=RequestMethod.GET)
 	public String viewDo(@ModelAttribute("cri") SearchCriteria cri,
@@ -187,6 +191,8 @@ public class BoardController {
 	}
 	
 	
+	
+
 	@RequestMapping(value="/update.do", method=RequestMethod.POST)
 	public String update(@RequestParam(required=false) Integer curPage,
 			@RequestParam(required=false) Integer page,

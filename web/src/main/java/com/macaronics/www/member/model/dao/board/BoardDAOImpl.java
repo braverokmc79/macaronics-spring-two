@@ -130,6 +130,20 @@ public class BoardDAOImpl implements BoardDAO {
 		sqlSession.delete(namespace+".attachDelete", fileName);
 	}
 
+	
+	
+	//첨부파일 업데이트
+	@Override
+	public void updateAttach(String fileName, int bno) {
+		// TODO Auto-generated method stub
+		logger.info("%%%%%%%%%%%%%%% //첨부파일 업데이트  번호 Bno " +bno);
+		logger.info("%%%%%%%%%%%%%%% //첨부파일 업데이트  fileName " +fileName);
+		Map<String, Object> map =new HashMap<>();
+		map.put("fileName", fileName);
+		map.put("bno", bno);
+		sqlSession.insert(namespace+".updateAttach", map);
+	}
+
 
 
 	

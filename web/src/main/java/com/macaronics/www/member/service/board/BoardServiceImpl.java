@@ -69,7 +69,6 @@ public class BoardServiceImpl implements BoardService {
 		try{
 			vo=boardDAO.boardRead(bno);
 		
-			
 			//조회수 증가	
 			
 			long update_time =0;
@@ -90,15 +89,38 @@ public class BoardServiceImpl implements BoardService {
 		return vo;
 	}
 
+	
+	@Transactional
 	@Override
 	public void boardUpdate(BoardVO vo) {
 		try{
-			boardDAO.boardUpdate(vo);
+			boardDAO.boardUpdate(vo);		
+			//첨부파일 첨가 및 업데이트
+			String[] files =vo.getFiles();
+			
+			if(files==null)return;
+			
+			logger.info(" 첨부 files : " +vo.getBno() + "  : "
+			+ vo.getFiles().toString());
+			
+			for(String fileName : files){	
+				try {
+					//기존에 파일 있으면 삭제
+					boardDAO.attachDelete(fileName);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}	
+			}
+			
+			for(String fileName : files){	
+			 boardDAO.updateAttach(fileName, vo.getBno());
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
 
+	
 	
 	@Override
 	public void boardDelete(Integer bno) {

@@ -30,23 +30,6 @@
 	vertical-align:middle;
 
 }
-.popup{
-	position: absolute;
-}
-.back{
-	background-color:gray;
-	opacity: 0.5;
-	width: 100%;
-	height: 300%;
-	overflow: hidden;
-	z-index:1101;
-}
-.show{
-	position: relative;
-	max-width: 1200px;
-	max-height: 800px;
-	overflow: auto;	
-}
 
 
 
@@ -387,6 +370,8 @@ $(document).ready(function(){
 	});
 	
 	
+	
+	//첨부 파일 삭제
 	$(".uploadedList").on("click", ".delbtn",function(event){
 		event.preventDefault();
 		var fileName=$(this).attr("href");

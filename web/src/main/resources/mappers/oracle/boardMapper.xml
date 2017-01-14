@@ -85,8 +85,6 @@ select * from
 	
 	
 	
-	
-	
 	<update id="boardUpdate">
 	 UPDATE tbl_board SET content=#{content},  title=#{title}, writer=#{writer} WHERE bno=#{bno}
 	</update> 
@@ -131,6 +129,12 @@ select * from
 	<delete id="attachDelete">
 		DELETE FROM TBL_ATTACH WHERE FULLNAME =#{fileName}
 	</delete>
+	
+	
+	<insert id="updateAttach">
+	insert into tbl_attach (fullName,  bno) values (#{fileName} , #{bno})
+	</insert>
+	
 			
 </mapper>
 

@@ -26,6 +26,19 @@
 
   
 }
+
+
+#fileDrop5{
+
+	background-color: #66AD44;
+	width: 100%;
+	height: 300px;
+	text-align: center;
+	color:#ffffff;
+	vertical-align:middle;
+
+}
+
 </style>
 
 
@@ -125,7 +138,14 @@
              		<td>이름</td>
              		<td><input type="text"  name="writer" id="writer" class="form-control" value="${vo.writer }" readonly="readonly"></td>
              	</tr>
-             
+                 <tr>
+             		<td>첨부 파일</td>
+             		<td id="fileDrop5">
+             		
+             		 파일을 끌어 올려 놓아 주세요.
+             		
+              		</td>
+             	</tr>
               </tbody>
               	<tfoot>
               		<tr>
@@ -155,9 +175,10 @@
               <hr>
            
               
-            
+          <div style="text-align:center"> 
             <button id="btnWrite" type="button" class="btn btn-warning">글 수정하기</button>
-              
+           
+          </div>    
               </form>
             </div>
             <!-- /.box-body -->
@@ -166,31 +187,7 @@
               
     
                   </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="aa-properties-content-bottom">
-                        <nav>
-                          <ul class="pagination">
-                            <li>
-                              <a aria-label="Previous" href="#">
-                                <span aria-hidden="true">«</span>
-                              </a>
-                            </li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li class="active"><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li>
-                              <a aria-label="Next" href="#">
-                                <span aria-hidden="true">»</span>
-                              </a>
-                            </li>
-                          </ul>
-                        </nav>
-                      </div>
-                    </div>
-                  </div>
+               
                 </div>
               
               
@@ -315,13 +312,10 @@ $(document).ready(function(){
 	
 	$("#btnWrite").click(function(){
 		var form1 = $("#formmm1");
-		
 		var title=$("#title");
 		var content =$("#content");
 		var writer =$("#writer");
 		
-		
-	
 		if(title.val().length < 1){
 			alert("제목을 입력 하세요");
 			title.focus();
@@ -339,6 +333,15 @@ $(document).ready(function(){
 			writer.focus();
 			return;
 		}
+		
+		var fileStr="";
+		$(".uploadedList .delbtn").each(function(index){
+			
+			fileStr +="<input type='hidden' name='files["+index+"]' value='"+$(this).attr("href"); 
+			fileStr  +="'>";
+		});	
+			
+		form1.append(fileStr);
 		
 		form1.submit();
 		
@@ -374,6 +377,47 @@ $(document).ready(function(){
 		}
 	
 	});
+	
+	
+	/* 첨부 파일 */
+	
+	
+	$("#fileDrop5").on("dragover dragenter", function(e){
+		
+		e.preventDefault();
+	});
+	
+	$("#fileDrop5").on("drop", function(e){
+		
+		e.preventDefault();
+		var files=e.originalEvent.dataTransfer.files;
+		var file=files[0];
+		var formData=new FormData();
+		formData.append("file", file);
+		
+		$.ajax({
+			
+			url:"/board/dropfileinsert.do",
+			data:formData,
+			dataType:"text",
+			type:"POST",
+			processData:false,
+			contentType:false,
+			success:function(data){
+				var template =Handlebars.compile($("#attchTemplate").html());
+
+	               var fileInfo =getFileInfo(data);
+					
+					var html =template(fileInfo);
+					
+					$(".uploadedList").append(html);
+		
+			}
+		
+		});
+		
+	});
+	
 	
 	
 	
