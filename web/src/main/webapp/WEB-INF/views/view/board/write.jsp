@@ -3,21 +3,32 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
   <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="/resources/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
 <%@ include file="../include/header.jsp" %>
 <%@ include file="../include/topmenu.jsp" %>
 
 <%@ include file="../../session_check.jsp" %>
+  <link rel="stylesheet" href="/resources/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
 
 <style type="text/css">
 
 #aa-property-header {
 
-  background-image: url("/resources/view/img/slider/1.jpg");
 
+
+  background-image: url("/resources/view/img/submenu/sub4.jpg");
   
+}
+#fileDrop5{
+
+	background-color: #66AD44;
+	width: 100%;
+	height: 300px;
+	text-align: center;
+	color:#ffffff;
+	vertical-align:middle;
+
 }
 </style>
 
@@ -53,8 +64,6 @@
 
 
 
-
-
   <!-- Start Blog  -->
   <section id="aa-blog">
     <div class="container">
@@ -79,7 +88,7 @@
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
             
-            <form method="post" action="/board/insert.do"  name="formmm1" id="formmm1">
+            <form method="post" action="/board/insert.do"  name="formmm1" id="formmm1">           
               <table class="table table-hover">
                 <thead>
                 	
@@ -119,52 +128,45 @@
              		<td><input type="text"  name="writer" id="writer" readonly="readonly" value="${sessionScope.loginUser.userid }" class="form-control"></td>
              	</tr>
              
-              </tbody>
-              	<tfoot>
-              		<tr>
-              			<td colspan="2"><button id="btnWrite" type="button" class="btn btn-warning">글 등록하기</button></td>
-              		</tr>
-              	</tfoot>
+             	<tr>
+             		<td>첨부 파일</td>
+             		<td id="fileDrop5">
+             		
+             		 파일을 끌어 올려 놓아 주세요.
+             		
+              		</td>
+             	</tr>
+
+              </tbody> 
             </table>
-              
-              
-              </form>
-            </div>
+                 <hr>		        	
+			<ul class="mailbox-attachments clearfix uploadedList">
+	
+	
+			</ul> 
+		      
+              <hr>
+     			<div style="text-align: center;">
+              	<button id="btnWrite" type="button" class="btn btn-warning">글 등록하기</button>
+              	</div>
+            </form>
+            
+           </div>
+            
+            
+            
             <!-- /.box-body -->
           </div>
+             
+                  </div>
+           
               
-               
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="aa-properties-content-bottom">
-                        <nav>
-                          <ul class="pagination">
-                            <li>
-                              <a aria-label="Previous" href="#">
-                                <span aria-hidden="true">«</span>
-                              </a>
-                            </li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li class="active"><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li>
-                              <a aria-label="Next" href="#">
-                                <span aria-hidden="true">»</span>
-                              </a>
-                            </li>
-                          </ul>
-                        </nav>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               
               
-              
               </div>
+              
+             
               <!-- Start blog sidebar -->
               <div class="col-md-4">
                 <aside class="aa-blog-sidebar">
@@ -275,7 +277,7 @@
 
 
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script>
 
 $(document).ready(function(){
@@ -283,6 +285,9 @@ $(document).ready(function(){
 
 	
 	$("#btnWrite").click(function(){
+		
+		var fileStr="";
+		
 		var form1 = $("#formmm1");
 		
 		var title=$("#title");
@@ -309,22 +314,112 @@ $(document).ready(function(){
 			return;
 		}
 		
+		$(".uploadedList .delbtn").each(function(index){
+			
+			fileStr +="<input type='hidden' name='files["+index+"]' value='"+$(this).attr("href"); 
+			fileStr  +="'>";
+		});	
+			
+		form1.append(fileStr);
 		form1.submit();
-		
 		
 		
 	});
 	
 	
 	
+	/* 첨부 파일 */
+	
+	
+	$("#fileDrop5").on("dragover dragenter", function(e){
+		
+		e.preventDefault();
+	});
+	
+	$("#fileDrop5").on("drop", function(e){
+		
+		e.preventDefault();
+		var files=e.originalEvent.dataTransfer.files;
+		var file=files[0];
+		var formData=new FormData();
+		formData.append("file", file);
+		
+		$.ajax({
+			
+			url:"/board/dropfileinsert.do",
+			data:formData,
+			dataType:"text",
+			type:"POST",
+			processData:false,
+			contentType:false,
+			success:function(data){
+				var template =Handlebars.compile($("#template").html());
+
+	               var fileInfo =getFileInfo(data);
+					
+					var html =template(fileInfo);
+					
+					$(".uploadedList").append(html);
+		
+			}
+		
+		});
+		
+	});
+	
+	
 });
+
+
+ function getFileInfo(fullName){
+	
+	var fileName, imgsrc, getLink;
+	
+	var fileLink;
+	
+	if(checkType(fullName)){
+		imgsrc ="/board/displayFile?fileName="+fullName;
+		fileLink=fullName.substr(14);
+		
+		var front =fullName.substr(0,12);
+		var end =fullName.substr(14);
+		
+		getLink="/board/displayFile?fileName="+front+end;
+	}else{
+		//일반파일 표시
+		imgsrc ="/resources/admin/dist/img/file.png";
+		fileLink=fullName.substr(12);
+		getLink="/board/displayFile?fileName="+fullName;
+	}
+	fileName=fileLink.substr(fileLink.indexOf("_")+1);
+	
+	return  {fileName:fileName , imgsrc:imgsrc, getLink:getLink, fullName:fullName};
+}
+
+
+function checkType(fileName){
+	var pattern =/jpg|png|jpeg|gif/i;
+	return fileName.match(pattern);
+} 
+
 
 
 
 </script>
 
 
-
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+ -->
+<script id="template" type="text/x-handlebars-template">
+<li style="max-width:200px; max-height:200px;">
+  <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+  <div class="mailbox-attachment-info">
+	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+	<a href="{{fullName}}" 
+     class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
+  </div>
+</li>                
+</script>  
 
   
 <%@ include file="../include/footer.jsp" %>

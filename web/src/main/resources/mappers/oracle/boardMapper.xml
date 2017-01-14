@@ -52,8 +52,17 @@ select * from
 	
 	<insert id="boardCreate">
 	insert into TBL_BOARD (BNO, TITLE, CONTENT, WRITER , show) 
-      VALUES((select nvl(max(bno)+1,1) from tbl_board), #{title}, #{content},  #{writer}, 'y' )
+      VALUES(seq_board.nextval, #{title}, #{content},  #{writer}, 'y' )
 	</insert>
+	
+	<!-- 첨부파일  -->		
+	<insert id="addAttach">
+		insert into tbl_attach (fullName, bno)
+		values (#{fullName} , seq_board.currval)
+	
+	</insert>	
+	
+	
 	
 	
 	<select id="boardRead" resultType="BoardVO">
@@ -107,6 +116,7 @@ select * from
 			set show ='n' where bno =#{bno}
 	</update>	
 		
+
 			
 </mapper>
 

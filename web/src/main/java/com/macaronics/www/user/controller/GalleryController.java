@@ -71,7 +71,6 @@ public class GalleryController {
 	
 	
 	
-	
 	@RequestMapping(value="/gallery2", method=RequestMethod.GET)
 	public String galleryPage2(){
 		

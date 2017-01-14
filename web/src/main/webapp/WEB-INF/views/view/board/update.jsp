@@ -21,7 +21,8 @@
 
 #aa-property-header {
 
-  background-image: url("/resources/view/img/slider/1.jpg");
+
+  background-image: url("/resources/view/img/submenu/sub4.jpg");
 
   
 }

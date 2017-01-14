@@ -1,29 +1,43 @@
 package com.macaronics.www.member.controller.board;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.macaronics.www.SqlServerEnvironment;
 import com.macaronics.www.member.model.dto.board.BoardVO;
 import com.macaronics.www.member.service.board.BoardService;
+import com.macaronics.www.util.fileupload.UploadPath;
 import com.macaronics.www.util.mysql.PageMaker;
 import com.macaronics.www.util.mysql.SearchCriteria;
 import com.macaronics.www.util.oralce.PageAndSearch;
 import com.macaronics.www.util.oralce.Pager;
+import com.macaronics.www.util.upload.MediaUtils;
+import com.macaronics.www.util.upload.UploadFileUtils;
 
 @Controller
 @RequestMapping("/board")
@@ -136,7 +150,7 @@ public class BoardController {
 	
 	@RequestMapping(value="/insert.do", method=RequestMethod.POST)
 	public String insertDo(@ModelAttribute  BoardVO  vo){
-		
+		logger.info("insert.do 파일 업로드 " + vo.getFiles() );	
 		boardService.boardCreate(vo);
 		return "redirect:listAll.do";
 	}
@@ -147,7 +161,7 @@ public class BoardController {
 	@RequestMapping(value="/view.do", method=RequestMethod.GET)
 	public String viewDo(@ModelAttribute("cri") SearchCriteria cri,
 			@RequestParam Integer bno, Model model, HttpSession session){
-				
+			
 		model.addAttribute("vo", boardService.boardRead(bno, session));
 		
 		return   JSP_PAGE+"view";
@@ -192,7 +206,6 @@ public class BoardController {
 	
 	
 	
-	
 
 	@RequestMapping(value="/delete.do", method=RequestMethod.POST)
 	public String delete(
@@ -203,6 +216,85 @@ public class BoardController {
 		boardService.boardDelete(bno);
 		return "redirect:listAll.do";
 	}
+	
+	
+	
+	
+	//파일 업로드 ajax
+	
+	@ResponseBody
+	@RequestMapping(value="/dropfileinsert.do", method=RequestMethod.POST, 
+			produces="text/plain;charset=UTF-8")
+	public ResponseEntity<String> fileInsertDO(HttpServletRequest request, MultipartFile file) throws Exception{
+		logger.info("originalName : " + file.getOriginalFilename());
+		
+		ResponseEntity<String> entity=null;
+		
+		try {
+			
+		
+			String fileName =UploadFileUtils.uploadFile(UploadPath.path(request), file.getOriginalFilename(), file.getBytes());
+			
+			entity=new ResponseEntity<String>(fileName , HttpStatus.CREATED);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			entity= new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+	
+	//파일 출력
+	
+	
+	@ResponseBody
+	@RequestMapping("/displayFile")
+	public ResponseEntity<byte[]> dispalyFile(HttpServletRequest request,String fileName) {
+		
+		InputStream in=null;
+		ResponseEntity<byte[]> entity =null;
+		
+		String formatName =fileName.substring(fileName.lastIndexOf(".")+1);
+		
+		MediaType mType =MediaUtils.getMediaType(formatName);
+		
+		HttpHeaders headers =new HttpHeaders();
+		
+		try {
+			in =new FileInputStream(UploadPath.path(request) +fileName);
+			if(mType!=null){
+				//이미지
+				headers.setContentType(mType);
+			}else{
+				fileName=fileName.substring(fileName.indexOf("_")+1);
+				String str="attachment; filename=\"";
+				str +=new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
+				str +="\"";
+				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+				headers.add("Content-Disposition", str);			
+			}
+					
+			entity =new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.OK);	
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			entity =new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+		}finally {
+			try {
+				in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}		
+		return entity;
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

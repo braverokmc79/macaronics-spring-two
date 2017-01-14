@@ -53,6 +53,15 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
+	public void addAttach(String fullName) {
+		
+		sqlSession.insert(namespace +".addAttach", fullName);	
+	}
+	
+	
+	
+	
+	@Override
 	public BoardVO boardRead(Integer bno) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".boardRead", bno);
@@ -109,6 +118,8 @@ public class BoardDAOImpl implements BoardDAO {
 	
 		return sqlSession.selectOne(namespace+".mysqlListSearchCount", cri);
 	}
+
+
 
 	
 }

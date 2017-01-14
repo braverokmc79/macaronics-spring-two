@@ -335,3 +335,30 @@ create SEQUENCE gallery_seq
 commit;
 
 
+
+
+create TABLE tbl_attach (
+	fullName varchar2(150) not null, --첨부파일 이름
+	bno number not null, --게시물 번호
+	regdate date default sysdate, --업로드 날짜
+	primary key(fullName)
+);
+
+-- bno 컬럼에 foreign key 설정
+alter table tbl_attach add CONSTRAINT fk_board_attach
+FOREIGN KEY (bno) REFERENCES  tbl_board(bno);
+
+commit;
+
+-- tbl_board 테이블의 bno 컬럼을 위한 시퀀스 생성
+create sequence seq_board
+start with 1 INCREMENT by 1;
+
+-- 게시판의 기존 게시물들은 삭제
+
+delete from tbl_reply;
+delete from tbl_board;
+
+commit;
+
+

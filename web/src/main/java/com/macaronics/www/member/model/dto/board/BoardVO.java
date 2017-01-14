@@ -21,11 +21,9 @@ public class BoardVO {
 	private String userid;
 	
 	private int cnt;
-	
-	
 	private String show;
-	
-	
+	//첨부파일의 이름 배열
+	private String[] files;
 	
 	
 	public void setTitle(String title) {
@@ -35,12 +33,6 @@ public class BoardVO {
 	public void setWriter(String writer) {
 		this.writer = XssDefender.inputString(writer);
 	}
-	
-	
-
-	
-	
-	
 	
 	
 	

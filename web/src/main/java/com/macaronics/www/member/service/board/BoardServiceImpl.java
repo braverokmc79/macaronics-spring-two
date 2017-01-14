@@ -39,11 +39,23 @@ public class BoardServiceImpl implements BoardService {
 		return list;
 	}
 
-	
+	@Transactional //트랜잭션 처리 method 로 설정
 	@Override
 	public void boardCreate(BoardVO vo) {
 		try{
+			
+			//게시물 등록
 			boardDAO.boardCreate(vo);
+			
+			//첨보 파일 정보 등록
+			String[] files=vo.getFiles(); //첨부파일 배열
+			logger.info(" 첨부파일  :"+ vo.getFiles());
+			//첨부파일이 없으면 종료
+			if(files==null) return;
+			//첨부파일들의 정보를  tbl_attach 테이블에 insert
+			for(String name : files){
+				boardDAO.addAttach(name);
+			}	
 		}catch(Exception e){
 			e.printStackTrace();
 		}
