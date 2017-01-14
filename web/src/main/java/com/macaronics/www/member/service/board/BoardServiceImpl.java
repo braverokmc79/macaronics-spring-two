@@ -116,6 +116,16 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.getBoard(bno);
 	}
 
+	//첨부 파일 가져오기
+	@Override
+	public List<String> getAttach(Integer bno) {
+		// TODO Auto-generated method stub
+		return boardDAO.getAttach(bno);
+	}
+
+	
+	
+	
 
 	@Override
 	public int countArticle(String search_option, String keyword) {
@@ -136,6 +146,13 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return boardDAO.mysqlListSearchCount(cri);
 	}
+
+	@Override
+	public void attachDelete(String fileName) {
+		boardDAO.attachDelete(fileName);
+		
+	}
+
 
 	
 	

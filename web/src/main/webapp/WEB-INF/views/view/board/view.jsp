@@ -15,11 +15,10 @@
 
 #aa-property-header {
 
-
- 
   background-image: url("/resources/view/img/submenu/sub4.jpg");
 
 }
+
 
 </style>
 
@@ -151,12 +150,17 @@
               		 </tr>
               	 </tfoot>
            	 </table>
-              
-              
               </form>
            	
 	           	</c:otherwise>
            </c:choose>
+           
+             <hr>		        	
+			<ul class="mailbox-attachments clearfix uploadedList">
+
+			</ul> 
+		      
+              <hr>
            
            
            
@@ -352,6 +356,12 @@
 
 
 
+<div class="popup back" style="display:none;"></div>
+<div id="popup_front" class="popup front" style="display:none;">
+<img id="popup_img">
+</div>
+
+
 
 <script>
 
@@ -359,6 +369,9 @@ $(document).ready(function(){
 	
 	//replyListAll();
 	replyListAll2(1);
+	
+	//첨부파일 목록 불러오기
+	listAttach();
 	
 	$("#btnList").click(function(){
 		
@@ -521,6 +534,23 @@ $(document).ready(function(){
 	
 	});
 	
+	
+	//이미지 쇼
+	$(".uploadedList").on("click", ".mailbox-attachment-info a", function(event){
+		
+		var fileLink=$(this).attr("href");
+		if(checkType(fileLink)){
+		//	event.preventDefault();
+			//alert("dd");
+			
+		}
+	});
+	
+	
+	
+	
+	
+	
 });
 
 
@@ -632,7 +662,73 @@ function modalOpen(event){
 }
 
 
+////////////첨부파일 목록 가져오기	
+function listAttach(){
+	
+	var bno =${vo.bno};
+	
+	var template =Handlebars.compile($("#attchTemplate").html());
+	
+	$.getJSON("/board/getAttch/"+bno, function(list){
+		
+		$(list).each(function(){
+			
+			var fileInfo=getFileInfo(this);
+			var html=template(fileInfo);
+			$(".uploadedList").append(html);
+			
+		});
+	});
+	
+	
+}
+
+
+
+function getFileInfo(fullName){
+	
+	var fileName, imgsrc, getLink;
+	
+	var fileLink;
+	
+	if(checkType(fullName)){
+		imgsrc ="/board/displayFile?fileName="+fullName;
+		fileLink=fullName.substr(14);
+		
+		var front =fullName.substr(0,12);
+		var end =fullName.substr(14);
+		
+		getLink="/board/displayFile?fileName="+front+end;
+	}else{
+		//일반파일 표시
+		imgsrc ="/resources/admin/dist/img/file.png";
+		fileLink=fullName.substr(12);
+		getLink="/board/displayFile?fileName="+fullName;
+	}
+	fileName=fileLink.substr(fileLink.indexOf("_")+1);
+	
+	return  {fileName:fileName , imgsrc:imgsrc, getLink:getLink, fullName:fullName};
+}
+
+
+function checkType(fileName){
+	var pattern =/jpg|png|jpeg|gif/i;
+	return fileName.match(pattern);
+} 
+
+
 </script>
+
+
+<script id="attchTemplate" type="text/x-handlebars-template">
+<li style="min-width:200px; max-width:200px; min-height:150px; max-height:150px;">
+  <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+
+<div class="mailbox-attachment-info" style="bottom:0px;">
+	<a href="{{getLink}}" class="mailbox-attachment-name" >{{fileName}}</a>
+  </div>
+</li>                
+</script>  
 
 
 

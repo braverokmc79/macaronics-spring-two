@@ -119,6 +119,17 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectOne(namespace+".mysqlListSearchCount", cri);
 	}
 
+	@Override
+	public List<String> getAttach(Integer bno) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".getAttach", bno);
+	}
+
+	@Override
+	public void attachDelete(String fileName) {
+		sqlSession.delete(namespace+".attachDelete", fileName);
+	}
+
 
 
 	

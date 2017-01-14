@@ -46,6 +46,11 @@
   
 <script type="text/javascript"  src="/resources/view/js/handlebars-v4.0.5.js"></script>	
 
+
+
+
+<script src="/resources/view/js/blueimp-gallery.min.js"></script>
+
   </head>
 <body class="aa-price-range">  
   <!-- Pre Loader --> 

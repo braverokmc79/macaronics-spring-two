@@ -14,18 +14,22 @@ public interface BoardService {
 	
 	public void boardCreate(BoardVO vo);
 	public BoardVO boardRead(Integer bno, HttpSession session);
+	
+	public List<String> getAttach(Integer bno);
+	
 	public void boardUpdate(BoardVO vo);
 	public void boardDelete(Integer bno);
 	public BoardVO getBoard(Integer bno);
 
 	
 	public int countArticle(String search_option, String keyword);
-
-
 	public List<BoardVO> mysqlListSearchCriteria(SearchCriteria cri);
 
 
 	public int mysqlListSearchCount(SearchCriteria cri);
+
+
+	public void attachDelete(String fileName);
 
 	
 	

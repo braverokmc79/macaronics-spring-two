@@ -30,6 +30,26 @@
 	vertical-align:middle;
 
 }
+.popup{
+	position: absolute;
+}
+.back{
+	background-color:gray;
+	opacity: 0.5;
+	width: 100%;
+	height: 300%;
+	overflow: hidden;
+	z-index:1101;
+}
+.show{
+	position: relative;
+	max-width: 1200px;
+	max-height: 800px;
+	overflow: auto;	
+}
+
+
+
 </style>
 
 
@@ -141,8 +161,7 @@
             </table>
                  <hr>		        	
 			<ul class="mailbox-attachments clearfix uploadedList">
-	
-	
+
 			</ul> 
 		      
               <hr>
@@ -152,12 +171,9 @@
             </form>
             
            </div>
-            
-            
-            
+           
             <!-- /.box-body -->
-          </div>
-             
+          </div>        
                   </div>
            
               
@@ -277,12 +293,15 @@
 
 
 
+
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script>
 
 $(document).ready(function(){
 	
-
+	
 	
 	$("#btnWrite").click(function(){
 		
@@ -368,6 +387,34 @@ $(document).ready(function(){
 	});
 	
 	
+	$(".uploadedList").on("click", ".delbtn",function(event){
+		event.preventDefault();
+		var fileName=$(this).attr("href");
+		var div =$(this).parent("div");
+		//alert(fileName);
+		$.ajax({
+			
+			url:"/board/getDelete",
+			type:"post",
+			contentType:"application/json",
+			data: fileName,
+			dataType:"text",
+			success:function(result){
+				
+				if(result=='deleted'){
+					
+					div.parent("li").remove();
+								
+				}
+			}
+		})
+		
+		
+	});
+	
+	
+	
+	
 });
 
 
@@ -405,13 +452,14 @@ function checkType(fileName){
 
 
 
+
 </script>
 
 
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
  -->
 <script id="template" type="text/x-handlebars-template">
-<li style="max-width:200px; max-height:200px;">
+<li style="min-width:200px; max-width:200px; min-height:150px; max-height:150px;">
   <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
   <div class="mailbox-attachment-info">
 	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>

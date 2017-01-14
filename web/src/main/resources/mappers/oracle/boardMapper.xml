@@ -71,10 +71,20 @@ select * from
 	</select>
 	
 	
+	<!-- 첨부 파일 가져오기 -->
+	<select id="getAttach" resultType="String">
+		select fullname from tbl_attach where bno =#{bno} order by regdate
+	</select>
+	
+	
 	<!--  조회수 증가 -->
 	<update id="viewCntUpdate">
 		update tbl_board set viewcnt = viewcnt+1 where bno=#{bno}
 	</update>
+	
+	
+	
+	
 	
 	
 	<update id="boardUpdate">
@@ -117,6 +127,10 @@ select * from
 	</update>	
 		
 
+
+	<delete id="attachDelete">
+		DELETE FROM TBL_ATTACH WHERE FULLNAME =#{fileName}
+	</delete>
 			
 </mapper>
 

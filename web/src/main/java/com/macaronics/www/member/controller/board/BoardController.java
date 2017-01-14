@@ -1,5 +1,8 @@
 package com.macaronics.www.member.controller.board;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,6 +24,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -232,7 +237,6 @@ public class BoardController {
 		
 		try {
 			
-		
 			String fileName =UploadFileUtils.uploadFile(UploadPath.path(request), file.getOriginalFilename(), file.getBytes());
 			
 			entity=new ResponseEntity<String>(fileName , HttpStatus.CREATED);
@@ -291,9 +295,53 @@ public class BoardController {
 	}
 	
 	
+	//첨부 파일 가져오기
+	
+	@ResponseBody
+	@RequestMapping(value="/getAttch/{bno}")
+	public List<String> getAttach(@PathVariable("bno") Integer bno){
+		
+		return boardService.getAttach(bno);
+	}
 	
 	
 	
+	//첨부 파일 개별 삭제
+	
+	@ResponseBody
+	@RequestMapping(value="/getDelete", method=RequestMethod.POST)
+	public ResponseEntity<String> attchOneDelete(HttpServletRequest request, @RequestBody String fileName){
+		
+		ResponseEntity<String > entity =null;
+		
+		logger.info("attchOneDelete : "+ fileName);
+		try{
+			String formatName =fileName.substring(fileName.lastIndexOf(".")+1);
+			
+			MediaType mType =MediaUtils.getMediaType(formatName);
+			logger.info("mType :" + mType);
+			if(mType!=null){
+				//원본 이미지 삭제
+				String front=fileName.substring(0, 12);
+				String end=fileName.substring(14);
+				new File(UploadPath.path(request)+(front+end).replace('/', File.separatorChar)).delete();
+			}
+			new File(UploadPath.path(request)+fileName.replace('/', File.separatorChar)).delete();
+			
+			try {
+				boardService.attachDelete(fileName);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			entity=new ResponseEntity<String>("deleted", HttpStatus.OK);
+		}catch(Exception e){
+			e.printStackTrace();
+			entity=new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
 	
 	
 	

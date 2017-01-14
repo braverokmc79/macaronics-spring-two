@@ -141,14 +141,22 @@
              
                 	<input type="hidden" value="${param.displayPageNum }" name="displayPageNum">
               			
-              			
-              			<button id="btnWrite" type="button" class="btn btn-warning">글 수정하기</button>
-              			
+              		
               			</td>
               		</tr>
               	</tfoot>
             </table>
+            
+             <hr>		        	
+			<ul class="mailbox-attachments clearfix uploadedList">
+
+			</ul> 
+		      
+              <hr>
+           
               
+            
+            <button id="btnWrite" type="button" class="btn btn-warning">글 수정하기</button>
               
               </form>
             </div>
@@ -298,12 +306,12 @@
 
 
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script>
 
 $(document).ready(function(){
 	
-
+	listAttach();
 	
 	$("#btnWrite").click(function(){
 		var form1 = $("#formmm1");
@@ -339,13 +347,108 @@ $(document).ready(function(){
 	});
 	
 	
+	//파일 자료 개별 삭제
+	$(".uploadedList").on("click", ".delbtn",function(event){
+		event.preventDefault();
+		
+		if(confirm("정말 삭제 하시겠습니까?")){
+			var fileName=$(this).attr("href");
+			var div =$(this).parent("div");
+			//alert(fileName);
+			$.ajax({
+				
+				url:"/board/getDelete",
+				type:"post",
+				contentType:"application/json",
+				data: fileName,
+				dataType:"text",
+				success:function(result){
+					
+					if(result=='deleted'){
+						
+						div.parent("li").remove();
+									
+					}
+				}
+			})	
+		}
+	
+	});
+	
+	
 	
 });
+
+////////////첨부파일 목록 가져오기	
+function listAttach(){
+
+var bno =${vo.bno};
+
+var template =Handlebars.compile($("#attchTemplate").html());
+
+	$.getJSON("/board/getAttch/"+bno, function(list){
+	
+		$(list).each(function(){
+		
+			var fileInfo=getFileInfo(this);
+			var html=template(fileInfo);
+			$(".uploadedList").append(html);
+		
+		});
+	});
+}
+
+
+
+function getFileInfo(fullName){
+
+	var fileName, imgsrc, getLink;
+	
+	var fileLink;
+
+	if(checkType(fullName)){
+		imgsrc ="/board/displayFile?fileName="+fullName;
+		fileLink=fullName.substr(14);
+		
+		var front =fullName.substr(0,12);
+		var end =fullName.substr(14);
+		
+		getLink="/board/displayFile?fileName="+front+end;
+	}else{
+		//일반파일 표시
+		imgsrc ="/resources/admin/dist/img/file.png";
+		fileLink=fullName.substr(12);
+		getLink="/board/displayFile?fileName="+fullName;
+	
+		}
+		fileName=fileLink.substr(fileLink.indexOf("_")+1);
+	
+	return  {fileName:fileName , imgsrc:imgsrc, getLink:getLink, fullName:fullName};
+}
+
+
+function checkType(fileName){
+	var pattern =/jpg|png|jpeg|gif/i;
+	return fileName.match(pattern);
+} 
+
+
+
 
 
 
 </script>
 
+<script id="attchTemplate" type="text/x-handlebars-template">
+<li style="min-width:200px; max-width:200px; min-height:150px; max-height:150px;">
+  <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+  <div class="mailbox-attachment-info">
+	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+	<a href="{{fullName}}" 
+     class="btn btn-default btn-xs pull-right delbtn" ><i class="fa fa-fw fa-remove"></i></a>
+  </div>
+</li>                
+</script>  
 
 
 
