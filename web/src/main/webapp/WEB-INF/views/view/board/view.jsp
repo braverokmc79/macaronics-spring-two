@@ -597,6 +597,16 @@ Handlebars.registerHelper("prettifyDate", function(timeValue){
 });
 
 
+Handlebars.registerHelper("eqReplyer", function(replyer, block){
+	
+	var accum ='';
+	if(replyer=='${loginUser.userid}' || 15 =='${loginUser.member_level}'){
+		accum +=block.fn();
+	}
+	return accum;
+});
+
+
 function printData (data){
 	var template =Handlebars.compile($("#template").html());
 	
@@ -637,7 +647,7 @@ function modalOpen(event){
 
 	var rno =$("#ddd").text();
 	var userid ="${loginUser.userid}";
-	
+	 var level="${loginUser.member_level}";
 	
 	$.getJSON("/freeboard_reply/replyView/"+rno, function(data){		
 		// alert(userid + "  : " + data.replyer);
@@ -647,7 +657,8 @@ function modalOpen(event){
 			return;
 		}
 		
-		if(data.replyer==userid){
+		//댓글 쓴 유저 및 관리자 수정 가능 
+		if(data.replyer==userid || 15==level){
 			$("#modalBodayOne").html(data.replytext);		
 			
 			$("#replyModal").modal("toggle");		
@@ -743,8 +754,9 @@ function checkType(fileName){
       <h4 class="author-name">{{rno}}  -  {{replyer}}</h4>
       <span class="comments-date"> {{regdate}}</span>
       <p>{{ replytext}}</p>
-      <a class="reply-btn" href="#" onclick="javascript:modalOpen(event);" data-rno="{{rno}}">Reply</a>
-
+	{{#eqReplyer replyer}}	
+    	  <a class="reply-btn" href="#" onclick="javascript:modalOpen(event);" data-rno="{{rno}}">Reply</a>
+    {{/eqReplyer}}
      </div>
    </div>
 </li>

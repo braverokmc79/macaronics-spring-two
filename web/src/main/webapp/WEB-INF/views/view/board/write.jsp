@@ -8,7 +8,10 @@
 <%@ include file="../include/topmenu.jsp" %>
 
 <%@ include file="../../session_check.jsp" %>
-  <link rel="stylesheet" href="/resources/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+
+
+<link rel="stylesheet" href="/resources/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
 
 <style type="text/css">

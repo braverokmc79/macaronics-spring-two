@@ -40,8 +40,23 @@
   </footer>
   <!-- / Footer -->
 
- 
 
+<script>
+$(document).ready(function(){
+	
+	//관리자 접근 페이지 레벨 확인
+	var adminInterceptorMessage ="${adminInterceptorMessage}";
+	if(adminInterceptorMessage.length >3){
+		alert(adminInterceptorMessage);
+		<%
+			session.removeAttribute("adminInterceptorMessage");
+		%>
+		location.href="/";
+	}
+	
+});
+
+</script>
 
   
   <!-- Include all compiled plugins (below), or include individual files as needed -->

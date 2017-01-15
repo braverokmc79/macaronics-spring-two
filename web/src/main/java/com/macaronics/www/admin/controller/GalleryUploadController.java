@@ -28,7 +28,7 @@ import com.macaronics.www.util.upload.MediaUtils;
 import com.macaronics.www.util.upload.UploadFileUtils;
 
 @Controller
-@RequestMapping("/gallery")
+@RequestMapping("/admin/gallery")
 public class GalleryUploadController {
 
 	

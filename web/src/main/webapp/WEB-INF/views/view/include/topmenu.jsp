@@ -28,7 +28,7 @@
                   
                   </div>
                   <div class="aa-email hidden-xs">
-                    <span class="fa fa-envelope-o"></span> braverokmc79@gmail.com
+                   <a href="/admin/index">개발자: JUNHO-CHOI</a> <span class="fa fa-envelope-o"></span><a href="mailto:braverokmc79@gmail.com">braverokmc79@gmail.com</a>
                   </div>
                 </div>              
               </div>
@@ -102,8 +102,8 @@
             <li class="dropdown">
             	<a class="dropdown-toggle" data-toggle="dropdown" href="/gallery/list">GALLERY<span class="caret"></span></a>
             	<ul class="dropdown-menu" role="menu">                
-                <li><a href="/gallery/view/list">GALLERY LIST</a></li> 
-                <li><a href="/gallery/view/gallery2">GALLERY UPLOAD TEST</a></li>                                            
+                <li><a href="/gallery/view/list.do">GALLERY LIST</a></li> 
+                <li><a href="/gallery/view/gallery2.do">GALLERY UPLOAD TEST</a></li>                                            
               </ul>
             </li>                                         
             

@@ -1,4 +1,4 @@
-package com.macaronics.www.util.log;
+package com.macaronics.www.util.aop;
 
 import java.util.Arrays;
 

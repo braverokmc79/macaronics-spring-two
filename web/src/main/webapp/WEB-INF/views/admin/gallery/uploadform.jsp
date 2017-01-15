@@ -83,7 +83,7 @@ small{
                    <div class="timeline-body"  id="galleryListId">
        			<c:forEach items="${list }" var="row">
        			
-                  <img src="/gallery/displayFile?fileName=${row.filePath }" alt="${row.fileName }" class="margin">
+                  <img src="/admin/gallery/displayFile?fileName=${row.filePath }" alt="${row.fileName }" class="margin">
                  
   	
        			
@@ -172,7 +172,7 @@ $(document).ready(function(){
        				formData.append("file", file);
        				$.ajax({
        					
-       					url :"/gallery/uploadAjax",
+       					url :"/admin/gallery/uploadAjax",
        					data:formData,
        					dataType:'text',
        					processData :false,
@@ -192,7 +192,7 @@ $(document).ready(function(){
        		      	   	
        		$.ajax({
        			
-       			url :"/gallery/get_gallery_list",
+       			url :"/admin/gallery/get_gallery_list",
        			type:"get",
        			dataType : "text",
        			contentType:"application/json",

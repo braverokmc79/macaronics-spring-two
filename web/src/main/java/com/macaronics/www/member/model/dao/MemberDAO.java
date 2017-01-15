@@ -16,4 +16,6 @@ public interface MemberDAO {
 	public MemberDTO checkLogin(MemberDTO dto);
 	
 	
+	
+	
 }

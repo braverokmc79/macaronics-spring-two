@@ -1,6 +1,7 @@
 package com.macaronics.www.member.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -31,9 +32,7 @@ public class MemberController {
 	@Inject
 	PasswordEncoding passwordEncoding;
 	
-	
-	
-	
+		
 	@RequestMapping(value="/list.do", method=RequestMethod.GET)
 	public String memberList(Model model){	
 		
@@ -49,7 +48,6 @@ public class MemberController {
 	}
 	
 	
-	
 	@RequestMapping(value="/loginform.do", method=RequestMethod.GET)
 	public String memberLoginForm(){
 		
@@ -60,6 +58,7 @@ public class MemberController {
 	}
 
 
+	@SuppressWarnings("unused")
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	public String memberLogin(@ModelAttribute MemberDTO  dto , HttpSession session , RedirectAttributes rttr){
 		
@@ -79,29 +78,32 @@ public class MemberController {
 				MemberDTO loginUser = memberService.viewMember(member.getUserid());
 				//가져온 member 를 세션에 저장한다.
 				session.setAttribute("loginUser",  loginUser);
-				return "redirect:/";
+			
+	
+				Object dest=session.getAttribute("dest");
+				return "redirect:"+(dest !=null ? (String)dest : "/");
 			
 			}else{			
 				//비밀 번호 오류	
 				rttr.addFlashAttribute("messageEmail", dto.getEmail());
 				rttr.addFlashAttribute("errorMessage", "비밀 번호가 틀립니다.");
 				return "redirect:loginform.do";
-			}
-						
-		}else{
-			//등록 되지 않은 이메일
-			rttr.addFlashAttribute("errorMessage", "등록되지 않은 이메일 입니다.");
-			return "redirect:loginform.do";		
+			}						
 		}
+		
+		   //등록 되지 않은 이메일
+			rttr.addFlashAttribute("errorMessage", "등록되지 않은 이메일 입니다.");
+			return "redirect:loginform.do";			
 	}
 	
 	
+	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
-	public String memberLogOut(HttpSession session){
+	public String memberLogOut(HttpSession session, HttpServletRequest request){
 		
-		session.invalidate();
-		
-		return "redirect:/";
+		Object dest=session.getAttribute("dest");
+		session.invalidate();	
+		return "redirect:"+(dest !=null ? (String)dest : "/");
 	}
 	
 	

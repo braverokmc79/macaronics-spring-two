@@ -5,7 +5,9 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
@@ -56,6 +58,40 @@
 	</beans:bean>
 	
 	
+	
+	<!-- 인터셉터 -->
+	<beans:import resource="interceptor-context.xml"/>
+	
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/**"/>
+			<beans:ref  bean="sampleInterceptor"/>
+		</interceptor>		
+		<interceptor>
+			<mapping path="/member/login.do"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/board/write.do"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/member/logout"/>
+			<beans:ref bean="logOutIntercepor" />
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/admin/**"/>
+			<beans:ref bean="adminInterceptor" />
+		</interceptor>
+		
+	</interceptors>
+
+
+
 
 </beans:beans>
 

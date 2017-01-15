@@ -45,7 +45,7 @@ public class GalleryController {
 	
 	
 	
-	@RequestMapping(value="/list", method=RequestMethod.GET)
+	@RequestMapping(value="/list.do", method=RequestMethod.GET)
 	public String galleryPage(Model model){	
 		try {
 			
@@ -71,7 +71,7 @@ public class GalleryController {
 	
 	
 	
-	@RequestMapping(value="/gallery2", method=RequestMethod.GET)
+	@RequestMapping(value="/gallery2.do", method=RequestMethod.GET)
 	public String galleryPage2(){
 		
 		return JSP_PAGE+"/gallery2";
