@@ -16,7 +16,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	private static final String LOGIN ="loginUser";
 	private static final Logger logger=LoggerFactory.getLogger(LoginInterceptor.class);
 	
-
+ 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {

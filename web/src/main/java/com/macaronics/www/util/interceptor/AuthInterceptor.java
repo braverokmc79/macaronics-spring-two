@@ -16,6 +16,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 	private static final Logger logger =LoggerFactory.getLogger(AuthInterceptor.class);
 	
 	
+	//로그인 한 유저만 접근 가능한 페이지
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {

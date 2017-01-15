@@ -64,17 +64,24 @@
 	
 	
 	<interceptors>
+		
+		
 		<interceptor>
 			<mapping path="/**"/>
 			<beans:ref  bean="sampleInterceptor"/>
 		</interceptor>		
+	
 		<interceptor>
 			<mapping path="/member/login.do"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 		
+		
+		<!-- 로그인한 유저만 접근 가능한 페이지 -->
 		<interceptor>
 			<mapping path="/board/write.do"/>
+			<mapping path="/board/insert.do"/>
+			<mapping path="/board/update.do"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 		
@@ -83,6 +90,7 @@
 			<beans:ref bean="logOutIntercepor" />
 		</interceptor>
 		
+		<!-- 관리자만 접근 가능한 페이지 -->
 		<interceptor>
 			<mapping path="/admin/**"/>
 			<beans:ref bean="adminInterceptor" />
