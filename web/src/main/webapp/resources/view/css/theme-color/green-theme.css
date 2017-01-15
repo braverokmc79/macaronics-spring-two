@@ -121,14 +121,14 @@ h2 {
 }
 
 #aa-footer .aa-footer-area .aa-footer-left p a:hover, #aa-footer .aa-footer-area .aa-footer-left p a:focus {
-  color: #66AD44;
+  color: black;
 }
 #aa-footer .aa-footer-area .aa-footer-middle a:hover, #aa-footer .aa-footer-area .aa-footer-middle a:focus {
-  color: #66AD44;
-  border-color: #66AD44;
+  color: black;
+  border-color: black;
 }
 #aa-footer .aa-footer-area .aa-footer-right a:hover, #aa-footer .aa-footer-area .aa-footer-right a:focus {
-  color: #66AD44;
+  color: black;
 }
 
 #aa-property-header .aa-property-header-inner .breadcrumb li.active {

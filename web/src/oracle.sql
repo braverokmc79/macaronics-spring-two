@@ -362,14 +362,66 @@ delete from tbl_board;
 commit;
 
 
-insert into product values (1,'레몬',1500,'레몬에 포함된 구연산은 피로회복에 좋습니다. 비타민 C도 풍부합니다.','lemon.jpg');
 
-insert into product values (2,'오렌지',2000,'비타민 C가 풍부합니다. 생과일 주스로 마시면 좋습니다.','orange.jpg');
+-- 상품 테이블
+create table product(
+	 product_id number ,
+ 	product_name varchar2(150),
+ 	price number default 0,
+ 	description varchar2(500),
+ 	picture_url varchar2(500),
+ 	regdate date default sysdate,
+	amount number default 100,
+	PRODUCT_STATE VARCHAR2 (50) DEFAULT '보통',
+	BIG_DESCRIPTION long,
+ 	primary key(product_id)
+);
 
-insert into product values (3,'키위',3000,'비타민 C가 매우 풍부합니다. 다이어트나 미용에 좋습니다.','kiwi.jpg');
 
-insert into product values (4,'포도',5000,'폴리페놀을 다량 함유하고 있어 항산화 작용을 합니다.','grape.jpg');
+insert into product (PRODUCT_ID, PRODUCT_NAME,
+ PRICE, DESCRIPTION, PICTURE_URL ,regdate) values (1,'[투데이특가] 퀸 사이즈
+극세사이불vs극세사토퍼',18900,'양면 모두 포근한 부드러운 극세사 원단으로 그레이색상에 세련된 플라워 디자인
+극세사차렵이불세트로 컴퓨터 원헤드 퀄팅을 하여 솜뭉침을 방지하며 디자인이 살아나게끔 꼼꼼하게 퀄팅 처리 하였습니다.','1.jpg' , 
+sysdate);
 
-into product values (5,'딸기',8000,'비타민 C나 플라보노이드를 다량 함유하고 있습니다.','strawberry.jpg');
+insert into product (PRODUCT_ID, PRODUCT_NAME,
+ PRICE, DESCRIPTION, PICTURE_URL ,regdate) values (2,'[투데이특가] 극세사
+대형 토끼 담요 150x200',5900,'
+부드럽고 촉감이 좋으며 털빠짐이 적습니다.
+퀀사이즈의 대형크기로 아이들방/카페/캠핑 및 다용도로 활용하기 좋습니다.','2.jpg',sysdate);
 
-insert into product values (6,'귤',7000,'시네피린을 함유하고 있어 감기 예방에 좋다고 합니다.','tangerine.jpg');
+insert into product (PRODUCT_ID, PRODUCT_NAME,
+ PRICE, DESCRIPTION, PICTURE_URL ,regdate) values (3,'[겨울시즌오프] 大 담요
+포그니 극세사 이불담요',8900,'보들보들 부드러운 촉감으로 겨울에도 포근하게 사용이 가능하며,
+ 담요를 접고 풀어지지 않게 끈 혹은 밴드를 사용하여 깔끔하게 정리됩니다.','3.jpg',sysdate);
+
+
+insert into product (PRODUCT_ID, PRODUCT_NAME,
+ PRICE, DESCRIPTION, PICTURE_URL ,regdate) values (4,'[겨울시즌마감] 카페트러그 세일하니 좋구나',
+8900,'따뜻하고부드러운 감촉 위생까지 생각한 극세사
+극세사는 매우 얇은 실을 촘촘하게 직조하여 면에 빈해
+가볍고 따뜻하합니다. 극세사 제품은 섬유조직이 촘촘하기에
+면에 비해흡수율이 좋으며 물세탁이 가능해 더욱 위생적입니다.','4.jpg',sysdate);
+
+
+
+insert into product (PRODUCT_ID, PRODUCT_NAME,
+ PRICE, DESCRIPTION, PICTURE_URL ,regdate) values (5,'BLMG 블루밍홈 
+철제 책상/테이블',28900,'블루밍홈 베이직 입식테이블은 고강도 철제 프레임으로 된 정교한
+x자형 지지대가 있어 무거운 물픔을 올려놓아도 걱정이 없습니다.
+또한 모서리가 라운딩처리되어 안전하게 테이블을 사용하실 수 있습니다.
+다양하게 연출가능한 베이직 입식테이블 지금 한번 만나보세요~
+어떤 분위기에도 잘 어울리는 옐로우비취와 화이트 두가지 색상이 있습니다.','5.jpg',sysdate);
+
+insert into product (PRODUCT_ID, PRODUCT_NAME,
+ PRICE, DESCRIPTION, PICTURE_URL ,regdate) values (6,'[투데이특가] 싱글침구
+매트커버+베개커버+솜',89500,'(폴리에스테르 100%)
+피치스킨 이란?
+가공처리한 원단으로 표면이 매우 부드러우며 내구성이 우수합니다.
+뛰어난 흡수력과 건조성으로 세탁이 간편합니다.','6.jpg',sysdate);
+
+
+commit;
+
+
+

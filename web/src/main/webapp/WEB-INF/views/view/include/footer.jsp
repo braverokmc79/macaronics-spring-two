@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 
 
   <!-- Footer -->
@@ -13,7 +13,8 @@
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="aa-footer-left">
                <p>Designed by <a rel="nofollow" href="http://www.markups.io/">MarkUps.io</a></p>
-              </div>
+              	<p>Reference
+<a rel="nofollow" href="http://www.wemakeprice.com/main/100900/?utm_source=daum_4tap_shobox&utm_medium=fourtap&utm_content=1581453&utm_campaign=sb_4tap_1&utm_term=daum_shobox&anchor=1581453" target="_blank">위메프</a></p>             </div>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="aa-footer-middle">

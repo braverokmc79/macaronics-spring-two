@@ -1,7 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
   
 <c:set value="<%= request.getRequestURI() %>" var="curUrl"  />
 
@@ -108,10 +108,10 @@
             </li>                                         
             
             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="blog-archive.html">BLOG <span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="blog-archive.html">상품 <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">                
-                <li><a href="blog-archive.html">BLOG</a></li>
-                <li><a href="blog-single.html">BLOG DETAILS</a></li>                                            
+                <li><a href="/shop/products/list.do">상품목록</a></li>
+                <li><a href="blog-single.html">상품목록</a></li>                                            
               </ul>
             </li>
             <li><a href="contact.html">CONTACT</a></li>

@@ -1,141 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">    
-    <title>Home Property | Properties Details</title>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %>
+<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/topmenu.jsp" %>
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    
-   
-    <!-- Font awesome -->
-    <link href="css/font-awesome.css" rel="stylesheet">
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.css" rel="stylesheet">   
-    <!-- slick slider -->
-    <link rel="stylesheet" type="text/css" href="css/slick.css">
-    <!-- price picker slider -->
-    <link rel="stylesheet" type="text/css" href="css/nouislider.css">
-    <!-- Theme color -->
-    <link id="switcher" href="css/theme-color/default-theme.css" rel="stylesheet">     
 
-    <!-- Main style sheet -->
-    <link href="css/style.css" rel="stylesheet">    
+<style type="text/css">
 
-   
-    <!-- Google Font -->
-    <link href='https://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>    
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    
+#aa-property-header {
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+ 
+  background-image: url("/resources/view/img/submenu/sub4.jpg");
+
   
+}
+.rowTitle a:hover{
 
-  </head>
-  <body class="aa-price-range">  
-  <!-- Pre Loader -->
-  <div id="aa-preloader-area">
-    <div class="pulse"></div>
-  </div>
-  <!-- SCROLL TOP BUTTON -->
-    <a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
-  <!-- END SCROLL TOP BUTTON -->
+	background-color: #F0AD4E;
+	color: #fff;
+	padding: 5px;
+	
+	
+	border-radius: 0.5em;
+}
+</style>
 
-
-  <!-- Start header section -->
-  <header id="aa-header">  
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="aa-header-area">
-            <div class="row">
-              <div class="col-md-6 col-sm-6 col-xs-6">
-                <div class="aa-header-left">
-                  <div class="aa-telephone-no">
-                    <span class="fa fa-phone"></span>
-                    1-900-523-3564
-                  </div>
-                  <div class="aa-email hidden-xs">
-                    <span class="fa fa-envelope-o"></span> info@markups.com
-                  </div>
-                </div>              
-              </div>
-              <div class="col-md-6 col-sm-6 col-xs-6">
-                <div class="aa-header-right">
-                  <a href="register.html" class="aa-register">Register</a>
-                  <a href="signin.html" class="aa-login">Login</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-  <!-- End header section -->
-  <!-- Start menu section -->
-  <section id="aa-menu-area">
-    <nav class="navbar navbar-default main-navbar" role="navigation">  
-      <div class="container">
-        <div class="navbar-header">
-          <!-- FOR MOBILE VIEW COLLAPSED BUTTON -->
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <!-- LOGO -->                                               
-          <!-- Text based logo -->
-          <a class="navbar-brand aa-logo" href="index.html"> Home <span>Property</span></a>
-          <!-- Image based logo -->
-          <!-- <a class="navbar-brand aa-logo-img" href="index.html"><img src="img/logo.png" alt="logo"></a> -->                     
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul id="top-menu" class="nav navbar-nav navbar-right aa-main-nav">
-            <li><a href="index.html">HOME</a></li>
-             <li class="dropdown active">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="properties.html">PROPERTIES <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">                
-                <li><a href="properties.html">PROPERTIES</a></li>
-                <li><a href="properties-detail.html">PROPERTIES DETAIL</a></li>                                            
-              </ul>
-            </li>
-            <li><a href="gallery.html">GALLERY</a></li>                                         
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="blog-archive.html">BLOG <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">                
-                <li><a href="blog-archive.html">BLOG</a></li>
-                <li><a href="blog-single.html">BLOG DETAILS</a></li>                                            
-              </ul>
-            </li>
-            <li><a href="contact.html">CONTACT</a></li>
-            <li><a href="404.html">404 PAGE</a></li>
-          </ul>                               
-        </div><!--/.nav-collapse -->       
-      </div>          
-    </nav> 
-  </section>
-  <!-- End menu section -->
 
   <!-- Start Proerty header  -->
-
   <section id="aa-property-header">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
           <div class="aa-property-header-inner">
-            <h2>Properties Details</h2>
+            <h2>Product Page</h2>
             <ol class="breadcrumb">
             <li><a href="#">HOME</a></li>            
-            <li class="active">APPARTMENT TITLE</li>
+            <li class="active">Products</li>
           </ol>
           </div>
         </div>
@@ -155,16 +56,16 @@
             <!-- Start properties content body -->
             <div class="aa-properties-details">
              <div class="aa-properties-details-img">
-               <img src="img/slider/1.jpg" alt="img">
+               
+               <img src="/products/img/${productDetail.picture_url}" alt="img">
                <img src="img/slider/2.jpg" alt="img">
                <img src="img/slider/3.jpg" alt="img">
              </div>
              <div class="aa-properties-info">
-               <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex, alias!</h2>
-               <span class="aa-price">$65000</span>
-               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae voluptatibus veniam non voluptate, ipsa eius magni aliquid ratione sit, odio reprehenderit in quis repudiandae dolor.</p>
-               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet consequatur, veritatis, ducimus in aliquam magnam voluptatibus ullam libero fugiat temporibus at, aliquid explicabo placeat eligendi, assumenda magni saepe eius consequuntur.</p>
-               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium dicta aliquid, autem, cum, impedit nostrum, rem molestias quisquam ab iure enim totam? Itaque esse ut adipisci officiis nulla repellendus ratione dolore, iste ex doloribus tenetur eos provident quam quasi maxime.</p>
+               <h2>${productDetail.product_name }</h2>
+               <span class="aa-price">￦<fmt:formatNumber value="${productDetail.price }"  pattern="#,###"/></span>
+               
+               <p>${productDetail.description }</p>
                <h4>Propery Features</h4>
                <ul>
                  <li>4 Bedroom</li>
@@ -182,7 +83,11 @@
                <h4>Property Video</h4>
                <iframe width="100%" height="480" src="https://www.youtube.com/embed/CegXQps0In4" frameborder="0" allowfullscreen></iframe>
                <h4>Property Map</h4>
-               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6851.201919469417!2d-86.11773906635584!3d33.47324776828677!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x888bdb60cc49c571%3A0x40451ca6baf275c7!2s36008+AL-77%2C+Talladega%2C+AL+35160%2C+USA!5e0!3m2!1sbn!2sbd!4v1460452919256" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6851.201919469417!2d-86.11773906635584!3d33.47324776828677!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x888bdb60cc49c571%3A0x40451ca6baf275c7!2s36008+AL-77%2C+Talladega%2C+AL+35160%2C+USA!5e0!3m2!1sbn!2sbd!4v1460452919256" width="100%" height="450" 
+               frameborder="0" style="border:0" allowfullscreen></iframe>
+     <a href="http://map.daum.net/?urlX=503123&urlY=1053865&urlLevel=3&map_type=TYPE_MAP&map_hybrid=false&SHOWMARK=true" target="_blank"><span style="background:#000;position:absolute;width:557px;opacity:.7;filter:alpha(opacity=70);color:#fff;overflow:hidden;font:12px/1.5 Dotum, '돋움', sans-serif;text-decoration:none;padding:7px 0px 0px 10px; height: 24px;">지도를 클릭하시면 위치정보를 확인하실 수 있습니다.</span><img width="565" height="308" src="http://map2.daum.net/map/mapservice?MX=503123&MY=1053865&SCALE=2.5&IW=565&IH=308&COORDSTM=WCONGNAMUL" style="border:1px solid #ccc"></a>
+
+
              </div>
              <!-- Properties social share -->
              <div class="aa-properties-social">
@@ -376,55 +281,24 @@
 
 
 
-  <!-- Footer -->
-  <footer id="aa-footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-        <div class="aa-footer-area">
-          <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="aa-footer-left">
-               <p>Designed by <a rel="nofollow" href="http://www.markups.io/">MarkUps.io</a></p>
-              </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="aa-footer-middle">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-google-plus"></i></a>
-                <a href="#"><i class="fa fa-youtube"></i></a>
-              </div>
-            </div>
-            <div class="col-md-6 col-sm-12 col-xs-12">
-              <div class="aa-footer-right">
-                <a href="#">Home</a>
-                <a href="#">Support</a>
-                <a href="#">License</a>
-                <a href="#">FAQ</a>
-                <a href="#">Privacy & Term</a>
-              </div>
-            </div>            
-          </div>
-        </div>
-      </div>
-      </div>
-    </div>
-  </footer>
-  <!-- / Footer -->
 
-  <!-- jQuery library -->
-  <!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
-  <script src="js/jquery.min.js"></script>   
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="js/bootstrap.js"></script>   
-  <!-- slick slider -->
-  <script type="text/javascript" src="js/slick.js"></script>
-  <!-- Price picker slider -->
-  <script type="text/javascript" src="js/nouislider.js"></script>
+
+
+<script>
+$(document).ready(function(){
+	
+
+	
+	
+});
+
+
+
+
+</script>
+
+
+
+
   
-  <!-- Custom js -->
-  <script src="js/custom.js"></script> 
-
-  </body>
-</html>
+<%@ include file="../include/footer.jsp" %>
