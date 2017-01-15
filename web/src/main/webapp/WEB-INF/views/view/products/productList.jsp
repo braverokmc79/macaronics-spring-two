@@ -5,7 +5,6 @@
 <%@ include file="../include/header.jsp" %>
 <%@ include file="../include/topmenu.jsp" %>
 
-
 <style type="text/css">
 
 #aa-property-header {

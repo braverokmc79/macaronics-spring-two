@@ -64,7 +64,8 @@
              <div class="aa-properties-info">
                <h2>${productDetail.product_name }</h2>
                <span class="aa-price">￦<fmt:formatNumber value="${productDetail.price }"  pattern="#,###"/></span>
-               
+               <button class="btn btn-warning" type="button">장바구니에 담기</button>
+               <button class="btn btn-danger" type="button">구매하기</button>
                <p>${productDetail.description }</p>
                <h4>Propery Features</h4>
                <ul>
