@@ -464,6 +464,19 @@ alter table cart add ( cart_regdate date default sysdate);
 commit;
 
 
+--중복 상품 그룹바이 처리
+
+	select  sum(price*amount) as money , PRODUCT_ID , product_name  ,price, sum(amount) as amount, 
+		
+		PICTURE_URL,PRODUCT_STATE,USERNAME,USERID
+	
+	from V_CART 
+
+	WHERE userid=#{userid}
+
+	group by product_id, product_name,price, PICTURE_URL,PRODUCT_STATE, USERNAME, USERID 
+;
+
 
 
 

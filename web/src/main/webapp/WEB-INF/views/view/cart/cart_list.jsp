@@ -64,13 +64,16 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <div class="aa-properties-content">            
+          <div class="aa-properties-content">
+          
+          <h3>${loginUser.username } 님 장바구니 내역</h3>
+          <div style="text-align: right;"> 배송료 <span style="color:#D9534F">3</span>만원 이상 구입시 무료</div>  
+           <hr>         
       <!-- cart box -->
               <div class="table-responsive">
 				<table class="table table-hover">
       <thead>
-        <tr>
-          
+        <tr>     
           <th>#</th>
           <th>상품명</th>
           <th>가격</th>
@@ -82,12 +85,11 @@
       </thead>
       <tbody>
 
-	
        <c:forEach items="${map.cartList }" var="row">
         <tr>      
           <td><img src="/products/img/${row.picture_url }" style="max-width: 150px; max-height: 100px;"></td>
           <td>${row.product_name }<span class="label label-warning">${row.product_state }</span></td>
-          <td>￦<fmt:formatNumber value="${row.price }"  pattern="#,###" /></td>
+          <td>￦<fmt:formatNumber value="${row.price }"  pattern="###,###" /></td>
           <td>
           <select>
           <c:forEach begin="1"  end="${row.product_amount }" var="i"> 
@@ -96,20 +98,18 @@
           		<option value="${i }" selected="selected">${i }</option>
           	</c:when>
           	<c:otherwise>
-          		<option value="${i }">${i }</option>
+          		<option value="${i}">${i }</option>
           	</c:otherwise>
           	</c:choose>	
           </c:forEach>
           </select>
           </td>
-          <td><span style="font-weight: bold;">￦<fmt:formatNumber value="${row.money }"  pattern="#,###" /></span></td>
-          <td>￦<fmt:formatNumber value="${row.deliver_money }" pattern="#.###" /></td>
+          <td><span style="font-weight: bold;">￦<fmt:formatNumber value="${row.money }"  pattern="###,###" /></span></td>
+          <td>￦<fmt:formatNumber value="${row.deliver_money }" pattern="###,###" /></td>
           <th scope="row"><button class="btn btn-danger" type="button"  onclick="cartDelete();">삭제</button></th>
         </tr>
         <tr>
      </c:forEach>    
-      
-      
       
       </tbody>
     </table>
@@ -126,11 +126,17 @@
                <table class="table table-hover">
                  <tbody>
                    <tr>
+                     <th>장바구니 총 합계 금액</th>
+                     <td>
+                  		￦ <fmt:formatNumber  pattern="###,###"  value="${list.total_sum - list.total_deliver_money }" />  
+                     </td>
+                   </tr>       
+                   <tr>
                      <th>배송비</th>
                      <td>
                      <c:choose>
                      	<c:when test="${list.total_deliver_money  >0}">
-                     	  <fmt:formatNumber  pattern="#,###"  value="${list.total_deliver_money }" />  
+                     	  ￦<fmt:formatNumber  pattern="###,###"  value="${list.total_deliver_money }" />  
                      	</c:when>
                      	<c:otherwise>
                      	   ￦ 0
@@ -140,10 +146,10 @@
                      </td>
                    </tr>
                    <tr>
-                     <th>전체 구매 가격</th>
+                     <th>전체 총 합계 금액</th>
                      <td>
                     
-                  		￦ <fmt:formatNumber  pattern="#,###"  value="${list.total_sum }" />  
+                  		￦ <fmt:formatNumber  pattern="###,###"  value="${list.total_sum }" />  
                      </td>
                    </tr>
                  </tbody>
@@ -155,16 +161,10 @@
                  	</td>
                  	</tr>
                  </tfoot>
-               </table>
-              
+               </table>       
   		 </div>  	
          	
-         	
-         	
          	 </div>	
-         
-         
-         
          
           </div>
         </div>

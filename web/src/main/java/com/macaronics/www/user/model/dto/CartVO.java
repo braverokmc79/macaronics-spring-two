@@ -23,7 +23,7 @@ public class CartVO {
 	private Integer product_amount; //상품 수량
 	
 	
-	private Integer deliver=10000 ;  //배송비 만원 이하 2500원 추가
+	private Integer deliver=30000 ;  //배송비 만원 이하 2500원 추가
 	private Integer deliver_money=2500; //기본 배송룡 2500
 	private Integer total_deliver_money; //총 배송료
 	

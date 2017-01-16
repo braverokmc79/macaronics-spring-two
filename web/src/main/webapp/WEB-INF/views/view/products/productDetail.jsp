@@ -79,11 +79,19 @@
               <div class="col-md-4"><label>수량</label></div>
               <div class="col-md-4">
               	
-               <select name=amount class="form-control">
-               		<c:forEach begin="1" end="${productDetail.amount }" step="1" var="i">
-               			<option value="${i}">${i}</option>
-               		</c:forEach>
-               </select>
+               <c:choose>
+               			<c:when test="${productDetail.amount >0 }">
+							<select name=amount class="form-control">
+               				<c:forEach begin="1" end="${productDetail.amount }" step="1" var="i">
+               					<option value="${i}">${i}</option>
+               					</c:forEach>
+              				</select>
+               			</c:when>
+               			<c:otherwise>
+               				<span class="label label-danger">품절</span>
+               			</c:otherwise>
+              	</c:choose>
+
                </div>
                <div class="col-md-4">
                <button class="btn btn-warning" type="button" onclick="cartAdd();">장바구니에 담기</button>
@@ -327,7 +335,7 @@
       <div class="modal-body" >
        <div style="text-align: center; ">
         <button type="button" class="btn btn-success" data-dismiss="modal">쇼핑계속하기</button>
-        <button type="button" class="btn btn-primary">장바구니 목록가기</button>
+        <button type="button" class="btn btn-primary" onclick="cartListGo()">장바구니 목록가기</button>
        </div>
       </div>
 
@@ -378,6 +386,12 @@ function cartAdd(){
 	
 }
 
+
+function cartListGo(){
+	
+	location.href="/shop/cart/list.do";
+	
+}
 </script>
 
 

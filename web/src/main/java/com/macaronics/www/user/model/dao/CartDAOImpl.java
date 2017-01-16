@@ -1,6 +1,8 @@
 package com.macaronics.www.user.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -37,9 +39,9 @@ public class CartDAOImpl implements CartDAO {
 	}
 
 	@Override
-	public void delete(int cart_id) {
+	public void delete(int product_id) {
 		// TODO Auto-generated method stub
-		session.delete(namespace+".delete", cart_id);
+		session.delete(namespace+".delete", product_id);
 	}
 
 	@Override
@@ -47,5 +49,23 @@ public class CartDAOImpl implements CartDAO {
 		
 		session.update(namespace+".update", cart_id);
 	}
+
+	@Override
+	public void upadeteProudAmout(Integer amount, Integer product_id) {
+		Map<String ,Object> map =new HashMap<>();
+		map.put("amount",  amount);
+		map.put("product_id", product_id);
+		
+		session.update(namespace+".upadeteProudAmout", map);	
+	}
+
+	@Override
+	public int prodcutAmount(Integer product_id) {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+".prodcutAmount", product_id);
+	}
+	
+	
+	
 
 }

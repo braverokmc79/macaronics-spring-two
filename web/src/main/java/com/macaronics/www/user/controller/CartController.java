@@ -62,14 +62,30 @@ public class CartController {
 		List<CartVO> cartList= cartService.listCart(member.getUserid());
 		for(CartVO vo :cartList){
 			logger.info(" 0000  : " +vo.toString());
-		}
+		}		
 		map.put("cartList", cartList);
 		map.put("cartSize", cartList.size());
 		mav.addObject("map", map);
 		mav.setViewName(JSP_PAGE+"cart_list");
+		
+		//그룹 바이로 기존에 있는 상품 업데이트 중복 제거 된상태
+		//수정 처리를 쉽게 하기위해
+		//기존 제품 삭제
+		for(CartVO vo :cartList){
+			cartService.delete(vo.getProduct_id());
+		}
+		//다시 상품 첨가
+		for(CartVO vo :cartList){
+			
+			cartService.insert(vo);
+		}
+		
 		return mav;
 	}
 	
 	
 	
 }
+
+
+

@@ -14,13 +14,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="listCart" resultType="com.macaronics.www.user.model.dto.CartVO">
 	
-	select * from v_cart where userid=#{userid} order by cart_regdate
+	select  sum(price*amount) as money , PRODUCT_ID , product_name  ,price, sum(amount) as amount, 
+		
+		PICTURE_URL,PRODUCT_STATE, USERNAME, USERID
 	
+	from V_CART 
+
+	WHERE userid=#{userid}
+
+	group by product_id, product_name,price, PICTURE_URL,PRODUCT_STATE, USERNAME, USERID 
+
 	</select>
 	
 	
+	<update id="upadeteProudAmout">
+	<![CDATA[ 
+	update PRODUCT set AMOUNT =AMOUNT - #{amount} where PRODUCT_ID =#{product_id} 
+	]]>
+	</update>
 	
 	
+	<!-- 상품 남은 총 수량 가져 오기 -->
+	
+	<select id="prodcutAmount" resultType="int">
+		select amount from PRODUCT  where product_id =#{product_id}
+	</select>
+	
+	
+	<delete id="delete">
+		delete  from cart where product_id =#{product_id}
+	</delete>
 	
 </mapper>
 
