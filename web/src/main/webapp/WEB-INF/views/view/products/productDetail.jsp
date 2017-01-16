@@ -11,7 +11,7 @@
 #aa-property-header {
 
  
-  background-image: url("/resources/view/img/submenu/sub4.jpg");
+  background-image: url("/resources/view/img/submenu/3.jpg");
 
   
 }
@@ -25,17 +25,7 @@
 	border-radius: 0.5em;
 }
 
-#box-alert{
- 	
- 	width:300px;
- 	height:200px;
- 	background-color: #f0ad4e;
- 	
-    top:50%;
-    left:50%;
-    
- 	
-}
+
 </style>
 
 

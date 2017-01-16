@@ -10,7 +10,7 @@
 #aa-property-header {
 
  
-  background-image: url("/resources/view/img/submenu/sub4.jpg");
+  background-image: url("/resources/view/img/submenu/3.jpg");
 
   
 }

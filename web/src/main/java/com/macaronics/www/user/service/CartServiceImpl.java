@@ -33,7 +33,29 @@ public class CartServiceImpl implements CartService {
 	public List<CartVO> listCart(String userid) {
 		List<CartVO> list =null;
 		try {
-			list=dao.listCart(userid);
+				list=dao.listCart(userid);
+				//전체 합계 계산
+				int sum=0;
+				int sum_deliver=0;
+				for(CartVO vo :list){
+					sum +=vo.getMoney();
+					
+					//배송비 차감
+					if(vo.getMoney() < vo.getDeliver()){
+						sum =sum-vo.getDeliver_money();
+					}else{
+						//배송비 0원
+						vo.setDeliver_money(0);
+					}
+					
+					//배송비
+					sum_deliver =vo.getDeliver_money();
+					vo.setTotal_deliver_money(sum_deliver);
+					
+					//전체가격
+					vo.setTotal_sum(sum);
+				}
+				
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

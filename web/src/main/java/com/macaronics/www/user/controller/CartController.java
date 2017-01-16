@@ -1,5 +1,9 @@
 package com.macaronics.www.user.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -11,8 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.macaronics.www.member.model.dto.MemberDTO;
 import com.macaronics.www.user.model.dto.CartVO;
@@ -23,6 +27,10 @@ import com.macaronics.www.user.service.CartService;
 public class CartController {
 
 	private static final Logger logger=LoggerFactory.getLogger(CartController.class);
+	
+	
+	private static final String JSP_PAGE = "/view/cart/";
+	
 	
 	@Inject
 	private CartService cartService;
@@ -46,6 +54,21 @@ public class CartController {
 		return entity;
 	}
 	
+	@RequestMapping("/list.do")
+	public ModelAndView list(HttpSession session, ModelAndView mav){
+		
+		Map<String, Object> map =new HashMap<>();
+		MemberDTO member=(MemberDTO)session.getAttribute("loginUser");
+		List<CartVO> cartList= cartService.listCart(member.getUserid());
+		for(CartVO vo :cartList){
+			logger.info(" 0000  : " +vo.toString());
+		}
+		map.put("cartList", cartList);
+		map.put("cartSize", cartList.size());
+		mav.addObject("map", map);
+		mav.setViewName(JSP_PAGE+"cart_list");
+		return mav;
+	}
 	
 	
 	

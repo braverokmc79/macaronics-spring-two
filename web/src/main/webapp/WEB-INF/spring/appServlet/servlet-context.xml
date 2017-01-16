@@ -87,6 +87,7 @@
 			<mapping path="/board/insert.do"/>
 			<mapping path="/board/update.do"/>
 			<mapping path="/shop/cart/insert.do/**"/>
+			<mapping path="/shop/cart/list.do" />
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 		

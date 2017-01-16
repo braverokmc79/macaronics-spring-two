@@ -12,7 +12,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	
-
+	<select id="listCart" resultType="com.macaronics.www.user.model.dto.CartVO">
+	
+	select * from v_cart where userid=#{userid} order by cart_regdate
+	
+	</select>
+	
+	
+	
 	
 	
 </mapper>

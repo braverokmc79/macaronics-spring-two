@@ -446,10 +446,22 @@ create SEQUENCE  seq_cart start WITH 1
  INCREMENT by 1;
  
 
+ 
+ 
+create or replace view v_cart as  
+select  
+	c.CART_ID , p.price,  c.AMOUNT, c.PRODUCT_ID, c.USERID, m.USERNAME ,p.PRODUCT_NAME ,p.PICTURE_URL, 
+	 p.AMOUNT as product_amount  ,p.PRODUCT_STATE, (price*c.amount) as money  , c.CART_REGDATE 
+	from 
+	 cart c, TBL_MEMBER m, PRODUCT p
+	where  c.USERID=m.USERID and c.PRODUCT_ID =p.PRODUCT_ID ; 
 
 commit;
 
+-- cart_regdate 추가
 
+alter table cart add ( cart_regdate date default sysdate);
+commit;
 
 
 

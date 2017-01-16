@@ -111,7 +111,7 @@
               <a class="dropdown-toggle" data-toggle="dropdown" href="blog-archive.html">상품 <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">                
                 <li><a href="/shop/products/list.do">상품목록</a></li>
-                <li><a href="blog-single.html">상품목록</a></li>                                            
+                <li><a href="/shop/cart/list.do">장바구니 목록</a></li>                                            
               </ul>
             </li>
             <li><a href="contact.html">CONTACT</a></li>
