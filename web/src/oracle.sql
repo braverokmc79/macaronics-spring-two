@@ -423,5 +423,36 @@ insert into product (PRODUCT_ID, PRODUCT_NAME,
 
 commit;
 
+-- 장바구니 테이블
+
+create table cart(
+	cart_id number not null primary key,
+	userid varchar2(50) not null,
+	product_id number not null,
+	amount number default 0
+);
+
+--foreign key 설정
+-- 제약조건 추가
+alter table cart add constraint cart_userid_fk
+FOREIGN KEY (userid) REFERENCES tbl_member(userid);
+
+alter table cart add constraint cart_productid_fk
+foreign key(product_id) REFERENCES  product(product_id);
+
+
+-- 시퀀스 추가
+create SEQUENCE  seq_cart start WITH 1 
+ INCREMENT by 1;
+ 
+
+
+commit;
+
+
+
+
+
+
 
 

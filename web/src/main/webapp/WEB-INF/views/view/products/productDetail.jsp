@@ -24,6 +24,18 @@
 	
 	border-radius: 0.5em;
 }
+
+#box-alert{
+ 	
+ 	width:300px;
+ 	height:200px;
+ 	background-color: #f0ad4e;
+ 	
+    top:50%;
+    left:50%;
+    
+ 	
+}
 </style>
 
 
@@ -63,10 +75,37 @@
              </div>
              <div class="aa-properties-info">
                <h2>${productDetail.product_name }</h2>
-               <span class="aa-price">￦<fmt:formatNumber value="${productDetail.price }"  pattern="#,###"/></span>
-               <button class="btn btn-warning" type="button">장바구니에 담기</button>
+              	
+            	 <c:if test="${productDetail.product_state !='보통' }" >
+                       	<span class="btn btn-info" >${productDetail.product_state }</span>
+                 </c:if>
+              <span class="aa-price">&nbsp;&nbsp;&nbsp;￦<fmt:formatNumber value="${productDetail.price }"  pattern="#,###"/></span>
+              <hr>
+               <div class="row" style="margin-bottom: 30px;">
+              <form method="post" action="/shop/cart/insert.do" name="form1">
+             
+               <input type="hidden" value="${ productDetail.product_id}" name="product_id" >
+              
+              <div class="col-md-4"><label>수량</label></div>
+              <div class="col-md-4">
+              	
+               <select name=amount class="form-control">
+               		<c:forEach begin="1" end="${productDetail.amount }" step="1" var="i">
+               			<option value="${i}">${i}</option>
+               		</c:forEach>
+               </select>
+               </div>
+               <div class="col-md-4">
+               <button class="btn btn-warning" type="button" onclick="cartAdd();">장바구니에 담기</button>
                <button class="btn btn-danger" type="button">구매하기</button>
+               </div>
+              
+              </form>
+              </div>
+              <hr>
+               
                <p>${productDetail.description }</p>
+              <hr>
                <h4>Propery Features</h4>
                <ul>
                  <li>4 Bedroom</li>
@@ -281,7 +320,30 @@
 
 
 
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button>
 
+<!-- Modal -->
+<div class="modal fade"   id="myModal"  tabindex="-1"   role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog"  >
+    <div class="modal-content" style="background-color: #F0AD4E;">
+      <div class="modal-header">
+     	 <div style="text-align:center; color:white;">
+        <h4 class="modal-title" >장바구니에 담았습니다.</h4>
+        </div>
+      </div>
+      <div class="modal-body" >
+       <div style="text-align: center; ">
+        <button type="button" class="btn btn-success" data-dismiss="modal">쇼핑계속하기</button>
+        <button type="button" class="btn btn-primary">장바구니 목록가기</button>
+       </div>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 
 
@@ -294,7 +356,37 @@ $(document).ready(function(){
 });
 
 
+function cartAdd(){
+	
+	var userid='${loginUser.userid}';
+	var amount =document.form1.amount.value;
+	var product_id=document.form1.product_id.value;
+	//alert(userid + " : " +amount + " : " + product_id );
+	if(userid.length <2){	
+		alert("로그인을 먼저 하세요");
+		return ;
+	}
 
+	$.ajax({
+		
+		url :"/shop/cart/insert.do/",
+		type:"POST",
+		dataType:"text",
+		contentType:"application/json",
+		data :JSON.stringify({
+			amount:amount,
+			product_id:product_id
+		}),
+		success:function(result){
+				alert(result);	
+				
+				$("#myModal").modal("show");
+		}
+		
+	});
+	
+	
+}
 
 </script>
 

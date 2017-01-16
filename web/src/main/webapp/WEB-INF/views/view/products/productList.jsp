@@ -91,7 +91,7 @@
                  <li>
                   <article class="aa-properties-item">
                     <a class="aa-properties-item-img" href="/shop/products/detail.do/${row.product_id }">
-                      <img alt="img" src="/products/img/${row.picture_url}">
+                      <img alt="img" src="/products/img/${row.picture_url}" style="max-height:345px ;min-height:345px ; max-height: 345px; min-width: 345px;">
                     </a>
                      <c:if test="${row.product_state !='보통' }" >
                        	<c:choose>
@@ -100,11 +100,16 @@
                      				베스트
                    	 			</div>
                        		</c:when>
-                       		<c:when test="${row.product_state =='Sale'}">
+                       		<c:when test="${row.product_state =='빅이벤트'}">
                        			<div class="aa-tag for-rent">
-                     				세일
+                     				빅이벤트
                    	 			</div>
                        		</c:when>
+                       		<c:when test="${row.product_state =='Sale'}">
+	                       	   <div class="aa-tag for-sale">
+	                         		 세일
+	                            </div>
+                            </c:when>
                        	</c:choose>              	
                    	 
                     </c:if>
