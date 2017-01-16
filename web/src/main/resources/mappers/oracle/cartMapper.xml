@@ -42,8 +42,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<delete id="delete">
-		delete  from cart where product_id =#{product_id}
+		delete  from cart where product_id =#{product_id} and userid=#{userid}
 	</delete>
+	
+	
+	<update id="update">
+	
+		UPDATE  cart set  AMOUNT =#{amount} WHERE PRODUCT_ID=#{product_id} and USERID =#{userid}
+	</update>
+	
+	
 	
 </mapper>
 

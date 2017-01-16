@@ -39,15 +39,23 @@ public class CartDAOImpl implements CartDAO {
 	}
 
 	@Override
-	public void delete(int product_id) {
-		// TODO Auto-generated method stub
-		session.delete(namespace+".delete", product_id);
+	public void delete(int product_id, String userid) {
+		
+		Map<String, Object> map =new HashMap<>();
+		map.put("product_id", product_id);
+		map.put("userid", userid);
+		session.delete(namespace+".delete", map);
 	}
 
 	@Override
-	public void update(int cart_id) {
+	public void update(Integer product_id, String userid, Integer amount) {
 		
-		session.update(namespace+".update", cart_id);
+		Map<String, Object> map =new HashMap<>();
+		map.put("product_id", product_id);
+		map.put("userid", userid);
+		map.put("amount", amount);
+		
+		session.update(namespace+".update", map);
 	}
 
 	@Override

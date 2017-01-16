@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -72,7 +73,7 @@ public class CartController {
 		//수정 처리를 쉽게 하기위해
 		//기존 제품 삭제
 		for(CartVO vo :cartList){
-			cartService.delete(vo.getProduct_id());
+			cartService.delete(vo.getProduct_id(), vo.getUserid());
 		}
 		//다시 상품 첨가
 		for(CartVO vo :cartList){
@@ -82,6 +83,30 @@ public class CartController {
 		
 		return mav;
 	}
+	
+	
+	//장바구니  삭제
+	
+	@RequestMapping(value="/cartDelete.do")
+	public String cartDelete(@RequestParam Integer product_id, 
+				@RequestParam String userid){
+		
+		cartService.delete(product_id, userid);
+		return "redirect:list.do";
+	}
+	
+	
+	//장바구니 업데이트
+	@RequestMapping(value="/cartUpdate.do" )
+	public String cartUpdate(@RequestParam Integer product_id, 
+			@RequestParam String userid, @RequestParam Integer amount
+			){
+		
+		cartService.update(product_id, userid, amount);
+		return "redirect:list.do";
+	}
+	
+	
 	
 	
 	

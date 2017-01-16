@@ -75,18 +75,18 @@ public class CartServiceImpl implements CartService {
 
 	
 	@Override
-	public void delete(int product_id) {
+	public void delete(int product_id, String userid) {
 		try {
-			dao.delete(product_id);	
+			dao.delete(product_id, userid);	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public void update(int cart_id) {
+	public void update(Integer product_id, String userid, Integer amount) {
 		try{
-			dao.update(cart_id);	
+			dao.update(product_id, userid, amount);	
 		}catch(Exception e){
 			e.printStackTrace();
 		}	
@@ -97,5 +97,6 @@ public class CartServiceImpl implements CartService {
 		// TODO Auto-generated method stub
 		return dao.prodcutAmount(product_id);
 	}
+
 
 }
