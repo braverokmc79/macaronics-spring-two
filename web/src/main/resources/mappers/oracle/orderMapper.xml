@@ -4,7 +4,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
-<mapper namespace="sample">
+<mapper namespace="ORACLEproductOrderMapper">
+	
+	
+	<select id="productOrder" resultType="com.macaronics.www.user.model.dto.ProductOrderVO" >
+		select * from TBL_PRODUCT_ORDER  where userid=#{userid}
+	
+	</select>
+
+
+	<insert id="productInsert">
+	insert into TBL_PRODUCT_ORDER
+ 		(order_idx , IDX, MONEY, PRODUCT_ID, PRODUCT_NAME, PRICE, AMOUNT, PICTURE_URL, PRODUCT_STATE, USERNAME, 
+ 			USERID , sum , total_deliver_money,  total_sum) 
+ 		values ( seq_order.nextval ,   #{idx}, 
+ 	#{money}, #{product_id}, #{product_name}, #{price}, #{amount},
+ 	
+ 		 #{picture_url}, #{product_state}, #{username}, #{userid} , #{sum} , 
+ 		 #{total_deliver_money} ,#{total_sum} )
+	
+	</insert>
+	
+	
+	
+	<select id="getAmoutProduct"  resultType="int">
+	 select amount from product where product_id =#{product_id}
+	</select>
 	
 	
 	

@@ -21,14 +21,13 @@ public class CartServiceImpl implements CartService {
 	@Inject
 	private CartDAO dao;
 	
-	@Transactional
+
 	@Override
 	public void insert(CartVO vo) {
 		try {
 			
 			dao.insert(vo);
-			//상품 총 수량 빼기
-			dao.upadeteProudAmout(vo.getAmount(), vo.getProduct_id());
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

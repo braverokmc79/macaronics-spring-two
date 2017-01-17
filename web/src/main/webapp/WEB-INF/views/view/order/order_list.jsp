@@ -35,10 +35,10 @@
       <div class="row">
         <div class="col-md-12">
           <div class="aa-property-header-inner">
-            <h2>CART Page</h2>
+            <h2>Payment Page</h2>
             <ol class="breadcrumb">
             <li><a href="/">HOME</a></li>            
-            <li class="active">장바구니</li>
+            <li class="active">결제대기</li>
           </ol>
           </div>
         </div>
@@ -66,19 +66,21 @@
         <div class="col-md-12">
           <div class="aa-properties-content">
           
-          <h3>${loginUser.username } 님 장바구니 내역</h3>
+          <h3>${loginUser.username }님 결제 대기내역</h3>
           <div style="text-align: right;"> 배송료 <span style="color:#D9534F">3</span>만원 이상 구입시 무료</div>  
            
          <c:choose>
-         	<c:when test="${cartSize <=0 }">
+         	<c:when test="${map.orderSize ==0 }">
          		<table class="table table-hover">
          			<tr>
-         				<td>
-         				<h3> 장바구니 내역이 없습니다. </h3>
+         			    <td style="text-align: center;">
+         				<h3 > 결제 대기내역이 없습니다.</h3>
          				</td>
          			</tr>
          		</table>
          	</c:when>
+         	
+         	
          	<c:otherwise>
         <!--  장바구니 내역 시작 --> 	
          	
@@ -103,35 +105,22 @@
       </thead>
       <tbody>
 
-       <c:forEach items="${map.cartList }" var="row">
+       <c:forEach items="${map.orderList }" var="row">
         <tr>      
           <td><img src="/products/img/${row.picture_url }" style="max-width: 150px; max-height: 100px;"></td>
           <td>${row.product_name }<span class="label label-warning">${row.product_state }</span></td>
           <td>￦<fmt:formatNumber value="${row.price }"  pattern="###,###" /></td>
          
           <td>
-         <c:if test="${row.product_amount > 0}" > 
-          <select onchange="amountChange(this.value, '${row.product_id}')">
-         	 <c:forEach begin="1"  end="${row.product_amount }" var="i"> 
-          	<c:choose>
-          	<c:when test="${ i ==row.amount}">
-          		<option value="${i }" selected="selected">${i }</option>
-          	</c:when>
-          	<c:otherwise>
-          		<option value="${i}">${i }</option>
-          	</c:otherwise>
-          	</c:choose>	
-          </c:forEach>
-          </select>
-          </c:if>
-          <c:if  test="${ row.product_amount < 0}">
-          	품절
-          </c:if>   
+
+			${row.amount}
+			
+       
           </td>
           
           <td><span style="font-weight: bold;">￦<fmt:formatNumber value="${row.money }"  pattern="###,###" /></span></td>
           <td>￦<fmt:formatNumber value="${row.deliver_money }" pattern="###,###" /></td>
-          <th scope="row"><button class="btn btn-danger" type="button"  onclick="cartDelete('${row.product_id}');">삭제</button></th>
+          <th scope="row"></th>
         </tr>
         <tr>
      </c:forEach>    
@@ -147,16 +136,16 @@
   <!-- cart box end-->         	        	
        <hr style="border:2px solid #66AD44 ;">
        <div class="table-responsive">
-               <h3 style="text-align: center; ">장바구니 총 내역</h3>
+               <h3 style="text-align: center;" ><span style="text-decoration: underline; ">결제 대기내역</span></h3>
                <h3></h3>
                <!-- 마지막 List 가져오기 -->
-                <c:set value="${map.cartList.get(map.cartList.size()-1) }" var="list" />
+                <c:set value="${map.orderList.get(map.orderList.size()-1) }" var="list" />
                <table class="table table-hover">
                  <tbody>
                    <tr>
                      <th>장바구니 총 합계 금액</th>
                      <td>
-                  		￦ <fmt:formatNumber  pattern="###,###"  value="${list.total_sum - list.total_deliver_money }" />  
+                  		￦ <fmt:formatNumber  pattern="###,###"  value="${list.sum }" />  
                      </td>
                    </tr>       
                    <tr>
@@ -176,7 +165,7 @@
                    <tr>
                      <th>전체 총 합계 금액</th>
                      <td>
-                    
+    
                   		￦ <fmt:formatNumber  pattern="###,###"  value="${list.total_sum }" />  
                      </td>
                    </tr>
@@ -184,7 +173,7 @@
                  <tfoot>
                  <tr>
                  	<td colspan="2" style="text-align: center;">
-                 		 <button  class="btn btn-primary" id="cartOrder" type="button">주문하기</button>
+                 		 <button  class="btn btn-danger" id="paymentBtn" type="button">결제하기</button>
                  		 <a href="/shop/products/list.do" class="btn btn-info">쇼핑 계속하기</a>
                  	</td>
                  	</tr>
@@ -192,14 +181,13 @@
                </table>       
   		 </div>  	
          
-         
-  <!--  장바구니 내역 끝 -->
-         	
-         	
-         	
-         	
+  <!--  결제 대기 내역 끝 -->
          	
          	</c:otherwise>
+        
+        
+        
+        
          </c:choose>  
            
        	
@@ -219,17 +207,20 @@
 
 <script>
 $(document).ready(function(){
+
+	var cartErrorMessage ="${cartErrorMessage}";
+	if(	cartErrorMessage.length >3){
+		alert(cartErrorMessage);
+	}
 	
 	/* 주문하기 */
-
-	$("#cartOrder").click(function(){
+	$("#paymentBtn").click(function(){
 		
-		if(confirm("현 정보대로 주문을 하시겠습니까?")){
+		if(confirm("결제를 하시겠습니까?")){
 			
 			
 		}
 	});
-	
 	
 	
 });

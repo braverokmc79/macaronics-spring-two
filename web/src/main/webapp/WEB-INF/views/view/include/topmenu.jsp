@@ -114,6 +114,7 @@
                 
                 <c:if test="${not empty loginUser }">
                  <li><a href="/shop/cart/list.do">장바구니 목록</a></li>  
+                 <li><a href="/shop/order/orderList.do">결제대기 목록</a></li>  
                  </c:if>                                          
               </ul>
             </li>

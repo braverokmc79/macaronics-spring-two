@@ -70,15 +70,21 @@
           <div style="text-align: right;"> 배송료 <span style="color:#D9534F">3</span>만원 이상 구입시 무료</div>  
            
          <c:choose>
-         	<c:when test="${cartSize <=0 }">
+         	<c:when test="${map.cartSize ==0 }">
          		<table class="table table-hover">
          			<tr>
-         				<td>
-         				<h3> 장바구니 내역이 없습니다. </h3>
+         				<td style="text-align: center;">
+         				<h3 > 장바구니 내역이 없습니다. </h3>
+         				</td>
+         			</tr>
+         			<tr>
+         				<td style="text-align: center;">
+         				 <a href="/shop/products/list.do" class="btn btn-info">쇼핑 하기</a>
          				</td>
          			</tr>
          		</table>
          	</c:when>
+         
          	<c:otherwise>
         <!--  장바구니 내역 시작 --> 	
          	
@@ -124,9 +130,10 @@
           </c:forEach>
           </select>
           </c:if>
-          <c:if  test="${ row.product_amount < 0}">
-          	품절
-          </c:if>   
+          <c:if  test="${ row.product_amount == 0 || empty row.product_amount}">
+          	<span class="label label-danger" >품절</span>
+          </c:if>
+              
           </td>
           
           <td><span style="font-weight: bold;">￦<fmt:formatNumber value="${row.money }"  pattern="###,###" /></span></td>
@@ -148,9 +155,12 @@
        <hr style="border:2px solid #66AD44 ;">
        <div class="table-responsive">
                <h3 style="text-align: center; ">장바구니 총 내역</h3>
+          
                <h3></h3>
                <!-- 마지막 List 가져오기 -->
                 <c:set value="${map.cartList.get(map.cartList.size()-1) }" var="list" />
+               
+               <form method="post" action="/shop/order/prodeuctInsertOrder.do"  name="orderForm1"> 
                <table class="table table-hover">
                  <tbody>
                    <tr>
@@ -184,22 +194,25 @@
                  <tfoot>
                  <tr>
                  	<td colspan="2" style="text-align: center;">
+                 		<input type="hidden" name="sum" value="${list.total_sum - list.total_deliver_money }" >
+                 		<input type="hidden" name="total_deliver_money" value="${list.total_deliver_money }" >
+                 		<input type="hidden" name="total_sum" value="${list.total_sum }" >
                  		 <button  class="btn btn-primary" id="cartOrder" type="button">주문하기</button>
                  		 <a href="/shop/products/list.do" class="btn btn-info">쇼핑 계속하기</a>
                  	</td>
                  	</tr>
                  </tfoot>
-               </table>       
+               </table>   
+               
+               </form>    
   		 </div>  	
          
          
   <!--  장바구니 내역 끝 -->
-         	
-         	
-         	
-         	
+         
          	
          	</c:otherwise>
+        
          </c:choose>  
            
        	
@@ -222,11 +235,17 @@ $(document).ready(function(){
 	
 	/* 주문하기 */
 
+	var cartErrorMessage ="${cartErrorMessage}";
+	if(	cartErrorMessage.length >3){
+		alert(cartErrorMessage);
+	}
+	
+	
 	$("#cartOrder").click(function(){
 		
 		if(confirm("현 정보대로 주문을 하시겠습니까?")){
 			
-			
+			document.orderForm1.submit();
 		}
 	});
 	

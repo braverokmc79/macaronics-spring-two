@@ -478,6 +478,45 @@ commit;
 ;
 
 
+-- 주문 테이블 추가
+
+
+create table tbl_product_order (
+	
+	idx varchar2(200) not null primary key ,
+	money number ,
+	product_id number,
+	product_name varchar2(200),
+	price number,
+	amount number,
+	sum number,
+	total_deliver_money number,
+	total_sum number,
+	picture_url varchar2(200),
+	product_state varchar2(50),
+	username varchar2(100),
+	userid varchar2(100),
+	
+	
+	regdate date default sysdate
+
+); 	
 
 
 
+
+-- 주문 테이블 제약 조건 추가
+alter table TBL_PRODUCT_ORDER add CONSTRAINT  order_userid_fk
+FOREIGN KEY (userid) REFERENCES tbl_member(userid);
+
+alter table TBL_PRODUCT_ORDER add constraint order_product_fk
+foreign key (product_id) references product(product_id);
+
+-- 주문 테이블 시퀀스 추가
+create SEQUENCE  seq_order 
+ start WITH 1  INCREMENT by 1;
+ 
+
+
+ 
+commit;

@@ -24,19 +24,21 @@
                       </a>
                       <ul class="sub">
                           <li><a class="" href="/users/userinfo?userid=${sessionScope.userid }">상세정보</a></li>                          
-                          <li><a class="" href="form_validation.html">Form Validation</a></li>
+                          <li><a class="" href="form_validation.html">회원정보수정</a></li>
+                          <li><a class="" href="form_validation.html">비밀번호변경</a></li>
                       </ul>
                   </li>  
                   
 				  <li class="sub-menu">
                       <a href="javascript:;" class="">
-                          <i class="icon_document_alt"></i>
-                          <span>Forms</span>
+                          <i class="icon_cart"></i>
+                          <span>나의 상품</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="form_component.html">Form Elements</a></li>                          
-                          <li><a class="" href="form_validation.html">Form Validation</a></li>
+                          <li><a class="" href="form_component.html">장바구니</a></li>                          
+                          <li><a class="" href="form_validation.html">결제대기</a></li>
+                          <li><a class="" href="form_validation.html">배송대기</a></li>
                       </ul>
                   </li>       
                   <li class="sub-menu">

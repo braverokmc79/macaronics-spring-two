@@ -10,7 +10,7 @@
             </div>
 
             <!--logo start-->
-            <a href="/users/index" class="logo">Nice <span class="lite">회원이름</span></a>
+            <a href="/users/index" class="logo">Macaronics <span class="lite">${loginUser.username } 님</span></a>
             <!--logo end-->
 
             <div class="nav search-row" id="top_menu">

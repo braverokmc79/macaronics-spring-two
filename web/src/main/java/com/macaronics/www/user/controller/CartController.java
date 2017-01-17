@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -63,7 +64,8 @@ public class CartController {
 		List<CartVO> cartList= cartService.listCart(member.getUserid());
 		for(CartVO vo :cartList){
 			logger.info(" 0000  : " +vo.toString());
-		}		
+		}
+		logger.info("cart Size : " +cartList.size());
 		map.put("cartList", cartList);
 		map.put("cartSize", cartList.size());
 		mav.addObject("map", map);
@@ -72,14 +74,17 @@ public class CartController {
 		//그룹 바이로 기존에 있는 상품 업데이트 중복 제거 된상태
 		//수정 처리를 쉽게 하기위해
 		//기존 제품 삭제
-		for(CartVO vo :cartList){
-			cartService.delete(vo.getProduct_id(), vo.getUserid());
+		if(cartList.size() > 0){
+			for(CartVO vo :cartList){
+				cartService.delete(vo.getProduct_id(), vo.getUserid());
+			}
+			//다시 상품 첨가
+			for(CartVO vo :cartList){
+				
+				cartService.insert(vo);
+			}	
 		}
-		//다시 상품 첨가
-		for(CartVO vo :cartList){
-			
-			cartService.insert(vo);
-		}
+
 		
 		return mav;
 	}
@@ -107,6 +112,65 @@ public class CartController {
 	}
 	
 	
+	
+	//Test
+	/*@RequestMapping("/update.do")
+	public String udateSampleDo(int[] amount, int[] product_id,
+			HttpSession session){
+		
+		MemberDTO dto =(MemberDTO)session.getAttribute("loginUser");
+		String userid =dto.getUserid();
+		for(int i=0; i<product_id.length ; i++){
+			CartVO vo =new CartVO();
+			vo.setUserid(userid);
+			vo.setProduct_id(product_id[i]);
+			vo.setAmount(amount[i]);
+			cartService.update(vo.getProduct_id(), userid, vo.getAmount());
+		}
+		
+		return "redirect:/shop/cart/list.do";
+	}*/
+	
+	
+	
+	/*쿼리
+	 Mapper.xml
+	 update cart set amount=amount+#{amount}
+	  where userid=#{userid} and product_id=#{product_id}
+	 
+	 */
+	// 배열로 값을 받아 처리 하려고 했으나 안된다.
+	//변경
+	
+	
+/*	@RequestMapping("/update.do")
+	public String udateSampleDo(HttpServletRequest request,
+			HttpSession session){
+		
+		MemberDTO dto =(MemberDTO)session.getAttribute("loginUser");
+		String userid =dto.getUserid();
+		//레코드 개수
+		int count =Integer.parseInt(request.getParameter("count"));
+		for(int i=0; i<count ; i++){
+			int amount =
+			 Integer.parseInt(request.getParameter("amount["+i+"]"));
+			int product_id=
+				Integer.parseInt(request.getParameter("product_id["+i+"]"));
+			CartVO vo =new CartVO();
+			vo.setUserid(userid);
+			vo.setProduct_id(product_id);
+			vo.setAmount(amount);
+			cartService.update(vo.getProduct_id(), userid, vo.getAmount());
+		}
+		return "redirect:/shop/cart/list.do";
+	}
+	*/
+	/*쿼리
+	 Mapper.xml
+	 update cart set amount=amount+#{amount}
+	  where userid=#{userid} and product_id=#{product_id}
+	 
+	 */
 	
 	
 	

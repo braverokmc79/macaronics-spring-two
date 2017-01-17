@@ -376,7 +376,7 @@ function cartAdd(){
 			product_id:product_id
 		}),
 		success:function(result){
-				alert(result);	
+				//alert(result);	
 				
 				$("#myModal").modal("show");
 		}
