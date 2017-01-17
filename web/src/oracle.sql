@@ -517,6 +517,50 @@ create SEQUENCE  seq_order
  start WITH 1  INCREMENT by 1;
  
 
-
- 
 commit;
+
+
+
+--관리자 계정
+
+create table tbl_admin(
+	userid varchar2(150) not null,
+	userpw varchar2(150) not null,
+	username varchar2(50) not null,
+	email varchar2(100),
+	regdate  date default sysdate ,
+	updatedate date default sysdate,
+	primary key(userid)
+	
+);
+
+-- 멤버 이메일로 유니크 제약조건 
+ALTER TABLE tbl_admin
+   ADD CONSTRAINT tbl_admin_email UNIQUE (email) VALIDATE;
+
+
+
+   
+-- 회원 레벨 컬럼 추가
+alter TABLE  tbl_admin ADD  ( member_level  number default 1 );
+
+
+
+INSERT INTO tbl_admin (USERID,
+                        USERPW,
+                        USERNAME,
+                        EMAIL,
+                        REGDATE,
+                        UPDATEDATE,
+                        MEMBER_LEVEL)
+     VALUES ('admin',
+             '$2a$10$hFgGQ08l4MSkvOZ2B6PWwOeudZ/7ZnCcp9IOcHzesKPEVMD2HiJGO',
+             '최준호',
+             'braverokmc79@gmail.com',
+             TO_DATE ('01/07/2017 22:08:55', 'MM/DD/YYYY HH24:MI:SS'),
+             TO_DATE ('01/07/2017 22:08:55', 'MM/DD/YYYY HH24:MI:SS'),
+             15);
+
+COMMIT;
+
+

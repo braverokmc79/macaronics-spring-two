@@ -24,6 +24,7 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 		
 		HttpSession session =request.getSession();
 		MemberDTO loginUser=(MemberDTO)session.getAttribute("loginUser");
+		
 		if(loginUser==null){
 			response.sendRedirect("/member/loginform.do");
 			return false;

@@ -28,7 +28,7 @@
                   
                   </div>
                   <div class="aa-email hidden-xs">
-                   <a href="/admin/index">개발자: JUNHO-CHOI</a> <span class="fa fa-envelope-o"></span><a href="mailto:braverokmc79@gmail.com">braverokmc79@gmail.com</a>
+                   <a href="/adminconfirm/loginform.do">개발자: JUNHO-CHOI</a> <span class="fa fa-envelope-o"></span><a href="mailto:braverokmc79@gmail.com">braverokmc79@gmail.com</a>
                   </div>
                 </div>              
               </div>
