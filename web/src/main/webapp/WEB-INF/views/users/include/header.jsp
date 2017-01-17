@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -27,10 +27,11 @@
     <!-- easy pie chart-->
     <link href="/resources/users/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
     <!-- owl carousel -->
-    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
+    <link rel="stylesheet" href="/resources/users/css/owl.carousel.css" type="text/css">
 	<link href="/resources/users/css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
     <!-- Custom styles -->
-	<link rel="stylesheet" href="css/fullcalendar.css">
+	<link rel="stylesheet" href="/resources/users/css/fullcalendar.css">
+	
 	<link href="/resources/users/css/widgets.css" rel="stylesheet">
     <link href="/resources/users/css/style.css" rel="stylesheet">
     <link href="/resources/users/css/style-responsive.css" rel="stylesheet" />
@@ -42,6 +43,9 @@
         Author: BootstrapMade
         Author URL: https://bootstrapmade.com
     ======================================================= -->
+ 
+  <script src="/resources/users/js/jquery-1.8.3.min.js"></script>
+ 
   </head>
 
 

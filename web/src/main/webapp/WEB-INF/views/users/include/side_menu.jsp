@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 
 
 
@@ -36,8 +36,8 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="form_component.html">장바구니</a></li>                          
-                          <li><a class="" href="form_validation.html">결제대기</a></li>
+                          <li><a class="" href="/user/myproduct/cart.do">장바구니</a></li>                          
+                          <li><a class="" href="/user/myproduct/paymentList.do">결제대기</a></li>
                           <li><a class="" href="form_validation.html">배송대기</a></li>
                       </ul>
                   </li>       
