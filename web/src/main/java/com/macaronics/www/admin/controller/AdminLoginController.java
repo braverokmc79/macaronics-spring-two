@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.macaronics.www.admin.model.dto.AdminLoginVO;
 import com.macaronics.www.admin.service.AdminLoginService;
-import com.macaronics.www.member.model.dto.MemberDTO;
 import com.macaronics.www.util.passwordencoder.PasswordEncoding;
 
 @Controller
@@ -77,7 +77,13 @@ public class AdminLoginController {
 	}
 	
 	
-	
+	@RequestMapping(value="/logout.do")
+	public String logOut(HttpSession session){
+		
+		session.removeAttribute("loginAdmin");
+		
+		return "redirect:/";
+	}
 	
 	
 }

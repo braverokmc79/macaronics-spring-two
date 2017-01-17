@@ -10,10 +10,19 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/resources/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"> 
+          <img src="/resources/admin/img/cjh.jpg" class="img-circle" alt="User Image"> 
         </div>
         <div class="pull-left info">
-          <p>관리자</p>
+          <p>          
+          <c:choose>
+              	<c:when test="${ not empty loginAdmin.username }">
+              	  ${loginAdmin.username }
+              	</c:when>
+              	<c:otherwise>
+              		 ${loginUser.username }
+              	</c:otherwise>
+              </c:choose>
+            </p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>

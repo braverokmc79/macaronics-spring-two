@@ -18,8 +18,8 @@
   <div class="login-box-body">
     <p class="login-box-msg">
     <c:choose>
-    	<c:when test="${not empty messageEmail }">
- 		   		<span style="color:red;">${messageEmail }</span>
+    	<c:when test="${not empty errorMessage }">
+ 		   		<span style="color:red;">${errorMessage }</span>
     	</c:when>
     	<c:otherwise>
  			   관리자 로그인 페이지

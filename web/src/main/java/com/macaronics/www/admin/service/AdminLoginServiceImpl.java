@@ -24,9 +24,9 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 	public AdminLoginVO loginCheck(AdminLoginVO vo) {
 		AdminLoginVO admin=null;
 		try{
-			logger.info( "loginCheck 파라미터 값 : " +vo.toString());
+			//logger.info( "loginCheck 파라미터 값 : " +vo.toString());
 			admin=adminLoginDAO.loginCheck(vo);
-			logger.info("loginCheck  넘겨 온 DB:" + admin.toString());
+			//logger.info("loginCheck  넘겨 온 DB:" + admin.toString());
 		}catch(Exception e){
 			e.printStackTrace();
 		}

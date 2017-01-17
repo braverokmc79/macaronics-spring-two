@@ -221,17 +221,27 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <!-- <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
-              <span class="hidden-xs">Alexander Pierce</span>
+            <img src="/resources/admin/img/cjh.jpg" class="user-image" alt="User Image"> 
+              <span class="hidden-xs">
+              <c:choose>
+              	<c:when test="${ not empty loginAdmin.username }">
+              	  ${loginAdmin.username }
+              	</c:when>
+              	<c:otherwise>
+              		 ${loginUser.username }
+              	</c:otherwise>
+              </c:choose>
+           
+              </span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="/resources/admin/img/cjh.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  JUNHO CHOI -  Developer
+                  <small>2017년 01 월 PROJECT</small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -255,7 +265,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="/adminconfirm/logout.do" class="btn btn-default btn-flat">로그아웃</a>
                 </div>
               </li>
             </ul>

@@ -102,6 +102,7 @@
 		<!-- 관리자만 접근 가능한 페이지 -->
 		<interceptor>
 			<mapping path="/admin/**"/>
+			<exclude-mapping path="/resources/**"/>
 			<beans:ref bean="adminInterceptor" />
 		</interceptor>
 		

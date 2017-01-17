@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.macaronics.www.admin.model.dto.AdminLoginVO;
 import com.macaronics.www.member.model.dto.MemberDTO;
 
 public class AdminInterceptor extends HandlerInterceptorAdapter {
@@ -24,22 +25,28 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 		
 		HttpSession session =request.getSession();
 		MemberDTO loginUser=(MemberDTO)session.getAttribute("loginUser");
-		
-		if(loginUser==null){
+		AdminLoginVO  loginAdmin =(AdminLoginVO)session.getAttribute("loginAdmin");
+		if(loginUser==null && loginAdmin==null){
 			response.sendRedirect("/member/loginform.do");
 			return false;
 		}else{			
 			
-			if(loginUser.getMember_level()==null){
-				response.sendRedirect("/member/loginform.do");
-				return false;
+			if(loginUser!=null){
+				//일반유저 검사
+				if(loginUser.getMember_level()==null ){
+					
+					response.sendRedirect("/member/loginform.do");
+					return false;
+				}
+				if(loginUser.getMember_level()<15){
+					logger.info(" 접속 자 레벨 " +loginUser.getMember_level() );
+					session.setAttribute("adminInterceptorMessage", "레벨 15 이상 관리자만 접근가능합니다.");
+					response.sendRedirect("/");
+					return false;
+				}
+				
 			}
-			if(loginUser.getMember_level()<15){
-				logger.info(" 접속 자 레벨 " +loginUser.getMember_level() );
-				session.setAttribute("adminInterceptorMessage", "레벨 15 이상 관리자만 접근가능합니다.");
-				response.sendRedirect("/");
-				return false;
-			}
+		
 		}	
 		return true;
 	}
