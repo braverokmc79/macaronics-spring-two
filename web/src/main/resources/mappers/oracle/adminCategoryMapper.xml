@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="ORACLEadminCategoryMapper">
+<!-- 	create sequence seq_category_one start with 1
+	increment by 1;
+
+create sequence seq_category_two start with 1
+	increment by 1;
+	
+create sequence seq_category_three start with 1
+ increment by 1;
+ -->
+	
+	
+	<insert id="categoryInsertOne">
+		insert into TBL_CATEGORY_ONE (IDX, TITLE) 
+			values (seq_category_one.nextval , #{title})	
+	</insert>
+	
+	
+	<select id="categoryOneList" resultType="com.macaronics.www.admin.model.dto.AdminCategoryVO">
+		select * from TBL_CATEGORY_ONE order by idx asc
+	</select>
+	
+	<update id="categoryOneUpdate">
+		update tbl_category_one set title=#{title} where idx=#{idx}
+	</update>
+	
+	<delete id="categoryOneDelete">
+	 delete from tbl_category_one where idx=#{idx}
+	</delete>
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

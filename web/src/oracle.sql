@@ -564,3 +564,100 @@ INSERT INTO tbl_admin (USERID,
 COMMIT;
 
 
+
+-- 카테고리
+
+create  table tbl_category_one (
+	
+	idx number PRIMARY KEY ,
+	title VARCHAR2(100)
+);
+
+
+create  table tbl_category_two(
+	bno number PRIMARY KEY, 
+	idx_one number  ,
+	title VARCHAR2(100)
+);
+
+
+
+create  table tbl_category_three(
+	rno	 number PRIMARY KEY ,
+	idx_one number , 
+	idx_two number  ,
+	title VARCHAR2(100)
+);
+
+
+
+--foreign key 설정
+-- 카테고리 제약조건 추가
+alter table TBL_CATEGORY_TWO add constraint category_two_idx_fk
+FOREIGN KEY (idx_one) REFERENCES tbl_category_one(idx);
+
+
+alter table tbl_category_three add constraint category_three_idx_one_fk
+foreign key(idx_one) REFERENCES  tbl_category_one(idx);
+
+
+alter table TBL_CATEGORY_THREE add constraint category_three_idx_two_fk
+FOREIGN KEY (idx_two) REFERENCES tbl_category_two(bno)
+
+;
+
+-- 카테고리 시퀀스 추가
+create sequence seq_category_one start with 1
+	increment by 1;
+
+create sequence seq_category_two start with 1
+	increment by 1;
+	
+create sequence seq_category_three start with 1
+ increment by 1;
+
+
+insert into TBL_CATEGORY_ONE (IDX, TITLE) 
+	values (seq_category_one.nextval , '과일');
+
+insert into tbl_category_two (BNO, IDX_ONE, TITLE) 
+
+VALUES (2, 1, '참외' );
+
+
+insert into TBL_CATEGORY_THREE (RNO, IDX_ONE, IDX_TWO, TITLE)
+
+VALUES (1, 1, 1, '맛있다'); 	
+
+
+insert into TBL_CATEGORY_THREE (RNO, IDX_ONE, IDX_TWO, TITLE)
+
+VALUES (2, 1, 2, '참외맛있다'); 	
+	
+	
+delete from TBL_CATEGORY_THREE WHERE RNO =2;
+
+
+select idx , bno, rno, one.title as category_one, two.TITLE as category_two, three.TITLE as category_three from 
+
+	TBL_CATEGORY_ONE one, TBL_CATEGORY_TWO two, TBL_CATEGORY_THREE three
+	
+	where one.IDX=two.idx_one and two.bno=three.IDX_TWO
+;
+
+--연속 삭제로 제약 조건 변경
+ALTER TABLE tbl_category_two
+   ADD CONSTRAINT category_two_idx_fk FOREIGN KEY (idx_one)
+       REFERENCES spring.tbl_category_one (idx) ON DELETE CASCADE
+       VALIDATE;
+
+ALTER TABLE tbl_category_three
+   ADD CONSTRAINT category_three_idx_one_fk FOREIGN KEY (idx_one)
+       REFERENCES spring.tbl_category_one (idx) ON DELETE CASCADE
+       VALIDATE;       
+       
+ALTER TABLE tbl_category_three
+   ADD CONSTRAINT category_three_idx_two_fk FOREIGN KEY (idx_two)
+       REFERENCES spring.tbl_category_two (bno) ON DELETE CASCADE
+       VALIDATE;
+       

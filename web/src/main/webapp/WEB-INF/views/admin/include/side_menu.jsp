@@ -40,7 +40,6 @@
 
 
 
-
       
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
@@ -60,7 +59,7 @@
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
-            <span>GALLERY</span>
+            <span>갤러리</span>
             <span class="pull-right-container">
               <span class="label label-primary pull-right">4</span>
             </span>
@@ -72,11 +71,24 @@
             <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
           </ul>
         </li>
+        
+        
         <li>
-          <a href="pages/widgets.html">
-            <i class="fa fa-th"></i> <span>Widgets</span>
+          <a href="/admin/category/register.do">
+            <i class="glyphicon glyphicon-align-right"></i> <span>카테고리등록</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-green">new</small>
+            
+            </span>
+          </a>
+        </li>
+        
+        
+        
+        <li >
+          <a href="/admin/shop/products/write.do">
+            <i class="glyphicon glyphicon-gift"></i> <span>상품등록</span>
+            <span class="pull-right-container">
+            
             </span>
           </a>
         </li>
