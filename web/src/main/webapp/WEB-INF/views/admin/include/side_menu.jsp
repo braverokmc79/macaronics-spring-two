@@ -44,7 +44,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header"><a href="/"  target="_blank">Macaronics Home</a></li>
-        <li class="active treeview">
+        <li>
           <a href="#">
             <i class="fa fa-fw fa-users"></i><span>회원관리</span>
             <span class="pull-right-container">

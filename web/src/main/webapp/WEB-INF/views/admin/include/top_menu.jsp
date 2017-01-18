@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="sidebar-mini skin-yellow-light layout-boxed">
 
 
 <div class="wrapper">

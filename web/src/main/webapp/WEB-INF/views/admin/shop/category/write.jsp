@@ -57,15 +57,7 @@ small{
            
             </div>
             <!-- /.box-header -->
-               PRODUCT_ID        NUMBER,
-   PRODUCT_NAME      VARCHAR2 (150),
-   PRICE             NUMBER DEFAULT 0,
-   DESCRIPTION       VARCHAR2 (500),
-   PICTURE_URL       VARCHAR2 (500),
-   REGDATE           DATE DEFAULT SYSDATE,
-   AMOUNT            NUMBER DEFAULT 100,
-   PRODUCT_STATE     VARCHAR2 (50) DEFAULT '보통',
-   BIG_DESCRIPTION   LONG
+
             <div class="box-body" >
           
        
@@ -87,7 +79,7 @@ small{
               <c:if test="${not empty categoryOne }">
               <div class="form-group">
                   <label >1차 카테고리 목록</label>
-                  <select class="form-control" id="categoryOne">
+                  <select class="form-control" id="categoryOne" onchange="CategoryOneChange()">
                     <c:forEach items="${ categoryOne}" var="row">
                     	<option value="${row.idx }" >${row.title }</option>
 					</c:forEach>
@@ -97,7 +89,7 @@ small{
               
                 <div class="form-group">
                   <label for="categoryOneTitle"></label>
-                  <input type="text" class="form-control" id="categoryOneTitle"  name="title" placeholder="1차카테고리 입력">
+                  <input type="text" class="form-control" id="categoryOneTitle"  name="title" placeholder="1차 카테고리 입력">
                 </div>
 
               </div>
@@ -109,6 +101,8 @@ small{
                 <button type="button" class="btn btn-danger" id="categoryOneDelete">삭제</button>
               </div>
             </form>
+          
+          
           </div>
           <!-- /.box -->
           
@@ -116,19 +110,54 @@ small{
           
 
           <!-- Form Element sizes -->
+         
           <div class="box box-success">
             <div class="box-header with-border">
-              <h3 class="box-title">Different Height</h3>
+               <h3 class="box-title">2차 카테고리 등록</h3>
             </div>
             <div class="box-body">
-              <input class="form-control input-lg" type="text" placeholder=".input-lg">
-              <br>
-              <input class="form-control" type="text" placeholder="Default input">
-              <br>
-              <input class="form-control input-sm" type="text" placeholder=".input-sm">
+           
+            <!-- form start -->
+            <form role='form2' method="post" action="/admin/category/categorytwoInsert.do" >
+              <div class="box-body">
+              <p>1차 카테고리 : <span id="categoryTwoP" style="color:red;"></span></p>
+              
+          
+              <div class="form-group">
+                  <label >2차 카테고리 목록</label>
+                  <select class="form-control" id="categoryTwo" >
+                    <c:forEach items="${ categoryTwo}" var="row">
+                    	<option value="${row.bno }" >${row.title }</option>
+					</c:forEach>
+                  </select>
+                </div>
+    		
+        
+                <div class="form-group">
+                  <label for="categoryTwoTitle"></label>
+                  <input type="hidden" value="" name="idx" id="categoryTwoIdx">
+                  <input type="hidden" value="" name="bno" id="categoryTwoBno">
+                  <input type="text" class="form-control" id="categoryTwoTitle"  name="title" placeholder="2차 카테고리 입력">
+                </div>
+
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button type="button" class="btn btn-primary" id="categoryTwoSubmitBtn">2차 카테고리 등록</button>
+                <button type="button" class="btn btn-warning" id="categoryTwoAlterBtn">수정</button>
+                <button type="button" class="btn btn-danger" id="categoryTwoDelete">삭제</button>
+              </div>
+            </form>
+ 
+           
             </div>
             <!-- /.box-body -->
           </div>
+         
+         
+         
+         
           <!-- /.box -->
 
           <div class="box box-danger">
@@ -268,50 +297,61 @@ small{
 
         </div>
         <!--/.col (left) -->
+        
+        
+        
         <!-- right column -->
         <div class="col-md-6">
+         
           <!-- Horizontal Form -->
           <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Horizontal Form</h3>
+              <h3 class="box-title"></h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal">
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-
-                  <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-
-                  <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-10">
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> Remember me
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- /.box-body -->
-              <div class="box-footer">
-                <button type="submit" class="btn btn-default">Cancel</button>
-                <button type="submit" class="btn btn-info pull-right">Sign in</button>
-              </div>
-              <!-- /.box-footer -->
-            </form>
+   
+        	   <div class="form-group" style="min-height: 200px;">
+                  <label>1차 카테고리 목록</label>
+                  <c:if test="${not empty categoryOne }">
+                   
+                  <select multiple="" class="form-control" disabled="" style="height: 190px;">
+                    <c:forEach items="${ categoryOne}" var="row">
+                    	<option value="${row.idx }" >${row.title }</option>
+					</c:forEach>
+                  </select>
+                 </c:if>
+               
+               </div>
+        
           </div>
           <!-- /.box -->
+          
+          
+                    <!-- Horizontal Form -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title"></h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+   
+        	   <div class="form-group" style="min-height: 260px;">
+                  <label>2차 카테고리 목록</label>
+                  <c:if test="${not empty categoryOne }">
+                   
+                  <select multiple="" class="form-control" disabled="" style="height: 190px;" id="showCategoryTwo">
+                   
+                  </select>
+                 </c:if>
+               
+               </div>
+        
+          </div>
+          <!-- /.box -->
+          
+          
+          
           <!-- general form elements disabled -->
           <div class="box box-warning">
             <div class="box-header with-border">
@@ -494,11 +534,15 @@ $(document).ready(function(){
 	if(message.length >3){
 		alert(message);
 	}
+	//2차 카테고리 호출
+	CategoryOneChange();
+	
 	// 1차 카테고리 등록
 	$("#categoryOneSubmitBtn").click(function(event){
 		event.preventDefault();
 		if($("#categoryOneTitle").val().length < 1){
 			alert("1차 카테고리를 입력 해 주세요!");
+			$("#categoryOneTitle").focus();
 			return;
 		}
 		
@@ -516,6 +560,12 @@ $(document).ready(function(){
 		$(".modal-title").text("1차 카테고리 수정");
 		$("#idx").val(idx);
 		$("#title").val(title);
+		
+		$("#modalSave").css("display", "");
+		$("#modalSave2").css("display", "none");
+		$("#modalSave3").css("display", "none");
+		
+		
 		$("#categoryModalOne").modal("toggle");
 
 	});
@@ -524,10 +574,20 @@ $(document).ready(function(){
 		
 		var idx= $("#idx").val();
 		
+		
+		if(idx ==""){
+			
+			alert("수정할 1차 카테고리가 없습니다.");
+			$("#categoryModalOne").modal("toggle");
+			return;
+		}
+		
+		
 		var title= $("#title").val();
 		
 		if(title.length <1){
 			alert("1차 카테고리를 입력 해주세요.");
+			
 			return;
 		}
 		
@@ -557,6 +617,12 @@ $(document).ready(function(){
 	$("#categoryOneDelete").click(function(){
 	
 		var idx =$("#categoryOne").val();
+		
+		if(idx==null){
+			alert("삭제할 1차 카테고리가 없습니다.");
+			return;
+		}
+		
 		var title =$("#categoryOne option:selected").text();
 	
 		if(confirm("하위 카테고리 목록 까지 삭제 됩니다. 정말 삭제 하시겠습니까?")){
@@ -578,13 +644,169 @@ $(document).ready(function(){
 	});
 	
 	
+	//2차 카테고리 등록
+	$("#categoryTwoSubmitBtn").click(function(){
+		var textconfirm =$("#categoryTwoP").text();
+		var categoryTwoTitle =$("#categoryTwoTitle").val();
+		if(textconfirm=="1차 카테고리 먼저 입력 해 주세요."){
+			alert(textconfirm);
+			return;
+		}
+		
+		if(categoryTwoTitle.length<1){
+			alert("2차 카테고리를 입력해주세요.");
+			$("#categoryTwoTitle").focus();
+			return;
+		}
+	
+		$("form[role='form2']").submit();
+		
+	});
 	
 	
 	
+	//2차 카테고리 데이터 수정 모달 전송
+	$("#categoryTwoAlterBtn").click(function(){
 	
+		var bno =$("#categoryTwo").val();
+		var title =$("#categoryTwo option:selected").text();
+		//alert(bno);
+		//alert(idx + " : " +title);
+		$(".modal-title").text("2차 카테고리 수정");
+		$("#bno").val(bno);
+		$("#title").val(title);
+		
+		$("#modalSave").css("display", "none");
+		$("#modalSave2").css("display", "");
+		$("#modalSave3").css("display", "none");
+		
+		$("#categoryModalOne").modal("toggle");
 
+	});
+	
+	$("#modalSave2").click(function(){
+		
+		var idx= $("#idx").val();
+		
+		var bno= $("#bno").val();
+		
+		if(bno==""){
+			alert("수정할 2차 카테고리가 없습니다.");
+			$("#categoryModalOne").modal("toggle");
+			return;
+		}
+		
+		var title= $("#title").val();
+		
+		if(title.length <1){
+			alert("2차 카테고리를 입력 해주세요.");
+			
+			return;
+		}
+		
+		//alert(idx + " : "+ title);
+		$.ajax({		
+			url :"/admin/category/categoryTwoUpdate.do",
+			type:"PUT",
+			datType:"text",
+			contentType:"application/json",
+			data:JSON.stringify({
+				bno:bno,
+				title:title
+			}),
+			success:function(result){
+				
+				if(result=="SUCCESS"){
+					alert("수정 했습니다.");
+					//2차 카테고리 목록 불러오기
+					CategoryTowList(idx);
+					$("#categoryModalOne").modal("toggle");
+				}
+			}
+		});
+		
+		
+	});
+	
+	
+	//2차 카테고리 삭제
+	$("#categoryTwoDelete").click(function(){
+	
+		var bno =$("#categoryTwo").val();
+		
+		if(bno==null){
+			alert("삭제할 2차 카테고리가 없습니다.");
+			return;
+		}
+		
+		var title =$("#categoryOne option:selected").text();
+	
+		if(confirm("하위 카테고리 목록 까지 삭제 됩니다. 정말 삭제 하시겠습니까?")){
+			$.ajax({
+				url :"/admin/category/categoryTwoDelete.do/"+bno,
+				type:"delete",
+				success:function(result){
+					
+					if(result=="deleted"){
+						alert("삭제 했습니다.");
+						location.href="/admin/category/register.do";	
+					}else{
+						alert(result);	
+					}
+						
+				}
+			});				
+		}		
+	});
+	
+	
+	
+	
+	
 });
-   
+ 
+
+//1 카테고리 체인지
+function CategoryOneChange(){
+	
+	var idx =$("#categoryOne").val();
+	$("#categoryTwoIdx").val(idx);
+	
+	var categoryOenText =$("#categoryOne option:selected").text();
+	if(categoryOenText.length<1){
+		$("#categoryTwoP").text("1차 카테고리 먼저 입력 해 주세요.");
+	}else{
+		$("#categoryTwoP").text(categoryOenText);	
+	}
+	//모달에 idx 전송
+	$("#idx").val(idx);
+	
+	//2차 카테고리 목록 불러오기
+	CategoryTowList(idx);
+	
+	
+}
+
+//2차 카테고리 목록 불러오기
+function CategoryTowList(idx){
+	
+	
+	$.getJSON("/admin/category/categoryTwoList.do/"+idx , function(data){
+		var str ="";
+		
+		$(data).each(function(){
+			str +="<option value="+this.bno+" >"+this.title+"</option>";
+			
+		});
+		$("#categoryTwo").html(str);
+		$("#showCategoryTwo").html(str);
+	});
+	
+	
+	
+}
+
+
 
 </script>
 
@@ -610,6 +832,8 @@ $(document).ready(function(){
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-outline" id="modalSave">수정하기</button>
+                <button type="button" class="btn btn-outline" id="modalSave2" style="display: none;" >수정하기</button>
+                <button type="button" class="btn btn-outline" id="modalSave3" style="display: none;">수정하기</button>
               </div>
             </div>
             <!-- /.modal-content -->

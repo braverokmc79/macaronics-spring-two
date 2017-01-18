@@ -22,7 +22,8 @@ public class LogAdvice {
 	
 	@Pointcut("execution( * com.macaronics.www.member.controller..*Controller.*(..))"
 			+ " or execution( * com.macaronics.www.member.model.dao.board..*Impl.*(..))"
-			+ " or execution( * com.macaronics.www.member.service.board..*Impl.*(..))" )
+			+ " or execution( * com.macaronics.www.member.service.board..*Impl.*(..))" 
+			 + " or execution( * com.macaronics.www.admin.controller..*Controller.*(..))" )
     public void logging() {   
     	
     	

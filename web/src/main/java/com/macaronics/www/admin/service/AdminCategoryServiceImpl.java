@@ -65,6 +65,54 @@ public class AdminCategoryServiceImpl implements AdminCategoryService {
 		
 	}
 
+
+	//2차카테고리 등록
+	@Override
+	public void categoryInsertTwo(AdminCategoryVO vo) {
+		try {
+			adminCategoryDAO.categoryInsertTwo(vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	//2차 카테고리 목록
+	@Override
+	public List<AdminCategoryVO> categoryTwoList(Integer idx) {
+		List<AdminCategoryVO> list=null;
+		try {
+			
+			list=adminCategoryDAO.categoryTwoList(idx);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	//2차 카테고리 업데이트
+	@Override
+	public void categoryTwoUpdate(AdminCategoryVO vo) {
+		try{
+			adminCategoryDAO.categoryTwoUpdate(vo);
+		}catch(Exception e){
+			e.printStackTrace();
+		}	
+	}
+
+
+	//2차 카테고리 삭제
+	@Override
+	public void categoryTwoDelete(Integer bno) {
+		try{
+			adminCategoryDAO.categoryTwoDelete(bno);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+
+
+
 	
 	
 

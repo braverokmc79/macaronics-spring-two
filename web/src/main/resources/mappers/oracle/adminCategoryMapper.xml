@@ -36,6 +36,32 @@ create sequence seq_category_three start with 1
 	
 	
 	
+	<!-- 2차 카테고리 -->
+	
+	<insert id="categoryInsertTwo">
+		insert into tbl_category_two (BNO, IDX_ONE, TITLE) 
+
+			VALUES (seq_category_two.nextval, #{idx}, #{title} )	
+	</insert>
+	
+	<select id="categoryTwoList" resultType="com.macaronics.www.admin.model.dto.AdminCategoryVO">
+		select * from tbl_category_two  where IDX_ONE=#{idx} order by bno asc
+	</select>
+	
+	
+	
+	<update id="categoryTwoUpdate">
+		update tbl_category_two set title=#{title} where bno=#{bno}
+	</update>
+	
+	
+	
+	<delete id="categoryTwoDelete">
+	 delete from tbl_category_two where bno=#{bno}
+	</delete>
+	
+	
+	
 </mapper>
 
 

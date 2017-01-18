@@ -1,5 +1,8 @@
 package com.macaronics.www.admin.controller;
 
+import java.io.OutputStream;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -37,6 +40,7 @@ public class AdminCategoryController {
 	
 		//1차 카테고리 목록 불러오기
 		model.addAttribute("categoryOne", adminCategoryService.categoryOneList());
+		
 		return JSP_PAGE+"write";
 	}
 	
@@ -94,9 +98,75 @@ public class AdminCategoryController {
 	
 	
 	
+	//2차 카테고리 등록
+	@RequestMapping(value="/categorytwoInsert.do", method=RequestMethod.POST)
+	public String categoryTwoInsertDo(AdminCategoryVO vo, RedirectAttributes rttr){
+		
+		logger.info("categoryTwoInsertDo :  " + vo.toString());
+		
+		adminCategoryService.categoryInsertTwo(vo);
+		rttr.addFlashAttribute("message", "등록 되었습니다.");
+		return "redirect:register.do";
+	}
+	
+	//2차 카테고리 불러오기
+	@ResponseBody
+	@RequestMapping(value="/categoryTwoList.do/{idx}", method=RequestMethod.GET)
+	public ResponseEntity<List<AdminCategoryVO>> categoryTwoList(@PathVariable("idx") Integer idx){
+		ResponseEntity<List<AdminCategoryVO>> entity=null;
+		List<AdminCategoryVO> list=null;
+		try{
+			
+			list =adminCategoryService.categoryTwoList(idx);
+			
+			entity=new ResponseEntity<List<AdminCategoryVO>>(list, HttpStatus.OK);
+		}catch(Exception e){
+			e.printStackTrace();
+			entity=new ResponseEntity<List<AdminCategoryVO>>(HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
+	}
 	
 	
+	//2차 카테고리 업데이트
+	@ResponseBody
+	@RequestMapping(value="/categoryTwoUpdate.do", method=RequestMethod.PUT)
+	public ResponseEntity<String> categoryTwoUpdate(@RequestBody AdminCategoryVO vo){
+		
+		ResponseEntity<String> entity=null;
+		try{
+			adminCategoryService.categoryTwoUpdate(vo);
+			entity =new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		}catch(Exception e){
+			e.printStackTrace();
+			entity =new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	
+	//2차 카테고리 삭제
+	@ResponseBody
+	@RequestMapping(value="/categoryTwoDelete.do/{bno}", method=RequestMethod.DELETE)
+	public ResponseEntity<String> categoryTwoDelete(@PathVariable("bno") Integer bno){
+		
+		ResponseEntity<String> entity=null;
+		try{
+			adminCategoryService.categoryTwoDelete(bno);
+			entity =new ResponseEntity<String>("deleted", HttpStatus.OK);
+		}catch(Exception e){
+			e.printStackTrace();
+			entity =new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 	
 	
 	
 }
+
+
+
+
+
