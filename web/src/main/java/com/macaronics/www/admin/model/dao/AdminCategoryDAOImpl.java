@@ -77,11 +77,38 @@ public class AdminCategoryDAOImpl implements AdminCategoryDAO {
 		
 	}
 
-	
-	
-	
-	
-	
+
+	@Override
+	public void categoryInsertThree(AdminCategoryVO vo) {
+		
+		sqlSession.insert(namespace+".categoryInsertThree", vo);
+	}
+
+
+	@Override
+	public List<AdminCategoryVO> categoryThreeList(Integer bno) {
+		
+		return sqlSession.selectList(namespace+".categoryThreeList", bno);
+	}
+
+
+	@Override
+	public void categoryThreeUpdate(AdminCategoryVO vo) {
+		sqlSession.update(namespace+".categoryThreeUpdate", vo);
+	}
+
+
+	@Override
+	public void categoryThreeDelete(Integer rno) {
+		sqlSession.delete(namespace+".categoryThreeDelete", rno);
+		
+	}
+
+
 	
 	
 }
+
+
+
+

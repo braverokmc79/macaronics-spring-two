@@ -111,6 +111,49 @@ public class AdminCategoryServiceImpl implements AdminCategoryService {
 	}
 
 
+	//3차 카테고리 등록
+	@Override
+	public void categoryInsertThree(AdminCategoryVO vo) {
+		try{
+			
+			adminCategoryDAO.categoryInsertThree(vo);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+
+	//3차 카테고리 목록
+	@Override
+	public List<AdminCategoryVO> categoryThreeList(Integer bno) {
+		
+		return adminCategoryDAO.categoryThreeList(bno);
+	}
+
+	
+	//3차 카테고리 수정
+	@Override
+	public void categoryThreeUpdate(AdminCategoryVO vo) {
+		try{
+			adminCategoryDAO.categoryThreeUpdate(vo);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+
+	//3차 카테고리 삭제
+	@Override
+	public void categoryThreeDelete(Integer rno) {
+		try{
+			adminCategoryDAO.categoryThreeDelete(rno);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+
+
 
 
 	

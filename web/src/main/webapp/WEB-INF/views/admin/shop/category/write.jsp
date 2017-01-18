@@ -125,10 +125,8 @@ small{
           
               <div class="form-group">
                   <label >2차 카테고리 목록</label>
-                  <select class="form-control" id="categoryTwo" >
-                    <c:forEach items="${ categoryTwo}" var="row">
-                    	<option value="${row.bno }" >${row.title }</option>
-					</c:forEach>
+                  <select class="form-control" id="categoryTwo" onchange="categoryTwoChange()">
+
                   </select>
                 </div>
     		
@@ -158,142 +156,63 @@ small{
          
          
          
-          <!-- /.box -->
-
-          <div class="box box-danger">
+         
+          <!-- Form Element sizes -->
+         
+          <div class="box box-success">
             <div class="box-header with-border">
-              <h3 class="box-title">Different Width</h3>
+               <h3 class="box-title">3차 카테고리 등록</h3>
             </div>
             <div class="box-body">
-              <div class="row">
-                <div class="col-xs-3">
-                  <input type="text" class="form-control" placeholder=".col-xs-3">
+           
+            <!-- form start -->
+            <form role='form3' method="post" action="/admin/category/categoryThreeInsert.do" >
+              <div class="box-body">
+              <p>1차 카테고리 : <span id="categoryThreeP" style="color:red;"></span></p>
+              <p>2차 카테고리 : <span id="categoryThreePtext" style="color:red;"></span></p>
+          	
+         
+           <div id="list3" >
+              <div class="form-group">
+                  <label >3차 카테고리 목록</label>
+                  <select class="form-control" id="categoryThree" >
+
+                  </select>
+             </div>
+    		
+        
+                <div class="form-group">
+                  <label for="categoryThreeTitle"></label>
+                 <input type="hidden" value="" name="idx" id="categoryThreeIdx">
+                 <input type="hidden" value="" name="bno" id="categoryThreeBno">
+                   <input type="hidden" value="" name="rno" id="categoryThreeRno">
+                  <input type="text" class="form-control" id="categoryThreeTitle"  name="title" placeholder="3차 카테고리 입력">
                 </div>
-                <div class="col-xs-4">
-                  <input type="text" class="form-control" placeholder=".col-xs-4">
-                </div>
-                <div class="col-xs-5">
-                  <input type="text" class="form-control" placeholder=".col-xs-5">
-                </div>
+
+              
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button type="button" class="btn btn-primary" id="categoryThreeSubmitBtn">3차 카테고리 등록</button>
+                <button type="button" class="btn btn-warning" id="categoryThreeAlterBtn">수정</button>
+                <button type="button" class="btn btn-danger" id="categoryThreeDelete">삭제</button>
               </div>
+         
+           </div> 
+          
+              </div>       
+            </form>
+ 
+           
             </div>
             <!-- /.box-body -->
           </div>
+         
+         
+         
           <!-- /.box -->
 
-          <!-- Input addon -->
-          <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Input Addon</h3>
-            </div>
-            <div class="box-body">
-              <div class="input-group">
-                <span class="input-group-addon">@</span>
-                <input type="text" class="form-control" placeholder="Username">
-              </div>
-              <br>
 
-              <div class="input-group">
-                <input type="text" class="form-control">
-                <span class="input-group-addon">.00</span>
-              </div>
-              <br>
-
-              <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control">
-                <span class="input-group-addon">.00</span>
-              </div>
-
-              <h4>With icons</h4>
-
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                <input type="email" class="form-control" placeholder="Email">
-              </div>
-              <br>
-
-              <div class="input-group">
-                <input type="text" class="form-control">
-                <span class="input-group-addon"><i class="fa fa-check"></i></span>
-              </div>
-              <br>
-
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-                <input type="text" class="form-control">
-                <span class="input-group-addon"><i class="fa fa-ambulance"></i></span>
-              </div>
-
-              <h4>With checkbox and radio inputs</h4>
-
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="input-group">
-                        <span class="input-group-addon">
-                          <input type="checkbox">
-                        </span>
-                    <input type="text" class="form-control">
-                  </div>
-                  <!-- /input-group -->
-                </div>
-                <!-- /.col-lg-6 -->
-                <div class="col-lg-6">
-                  <div class="input-group">
-                        <span class="input-group-addon">
-                          <input type="radio">
-                        </span>
-                    <input type="text" class="form-control">
-                  </div>
-                  <!-- /input-group -->
-                </div>
-                <!-- /.col-lg-6 -->
-              </div>
-              <!-- /.row -->
-
-              <h4>With buttons</h4>
-
-              <p class="margin">Large: <code>.input-group.input-group-lg</code></p>
-
-              <div class="input-group input-group-lg">
-                <div class="input-group-btn">
-                  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">Action
-                    <span class="fa fa-caret-down"></span></button>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                  </ul>
-                </div>
-                <!-- /btn-group -->
-                <input type="text" class="form-control">
-              </div>
-              <!-- /input-group -->
-              <p class="margin">Normal</p>
-
-              <div class="input-group">
-                <div class="input-group-btn">
-                  <button type="button" class="btn btn-danger">Action</button>
-                </div>
-                <!-- /btn-group -->
-                <input type="text" class="form-control">
-              </div>
-              <!-- /input-group -->
-              <p class="margin">Small <code>.input-group.input-group-sm</code></p>
-
-              <div class="input-group input-group-sm">
-                <input type="text" class="form-control">
-                    <span class="input-group-btn">
-                      <button type="button" class="btn btn-info btn-flat">Go!</button>
-                    </span>
-              </div>
-              <!-- /input-group -->
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
 
         </div>
         <!--/.col (left) -->
@@ -338,12 +257,12 @@ small{
    
         	   <div class="form-group" style="min-height: 260px;">
                   <label>2차 카테고리 목록</label>
-                  <c:if test="${not empty categoryOne }">
+               
                    
                   <select multiple="" class="form-control" disabled="" style="height: 190px;" id="showCategoryTwo">
                    
                   </select>
-                 </c:if>
+               
                
                </div>
         
@@ -351,149 +270,30 @@ small{
           <!-- /.box -->
           
           
-          
-          <!-- general form elements disabled -->
-          <div class="box box-warning">
+		          
+                    <!-- Horizontal Form -->
+          <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">General Elements</h3>
+              <h3 class="box-title"></h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
-              <form role="form">
-                <!-- text input -->
-                <div class="form-group">
-                  <label>Text</label>
-                  <input type="text" class="form-control" placeholder="Enter ...">
-                </div>
-                <div class="form-group">
-                  <label>Text Disabled</label>
-                  <input type="text" class="form-control" placeholder="Enter ..." disabled="">
-                </div>
-
-                <!-- textarea -->
-                <div class="form-group">
-                  <label>Textarea</label>
-                  <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                </div>
-                <div class="form-group">
-                  <label>Textarea Disabled</label>
-                  <textarea class="form-control" rows="3" placeholder="Enter ..." disabled=""></textarea>
-                </div>
-
-                <!-- input states -->
-                <div class="form-group has-success">
-                  <label class="control-label" for="inputSuccess"><i class="fa fa-check"></i> Input with success</label>
-                  <input type="text" class="form-control" id="inputSuccess" placeholder="Enter ...">
-                  <span class="help-block">Help block with success</span>
-                </div>
-                <div class="form-group has-warning">
-                  <label class="control-label" for="inputWarning"><i class="fa fa-bell-o"></i> Input with
-                    warning</label>
-                  <input type="text" class="form-control" id="inputWarning" placeholder="Enter ...">
-                  <span class="help-block">Help block with warning</span>
-                </div>
-                <div class="form-group has-error">
-                  <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> Input with
-                    error</label>
-                  <input type="text" class="form-control" id="inputError" placeholder="Enter ...">
-                  <span class="help-block">Help block with error</span>
-                </div>
-
-                <!-- checkbox -->
-                <div class="form-group">
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox">
-                      Checkbox 1
-                    </label>
-                  </div>
-
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox">
-                      Checkbox 2
-                    </label>
-                  </div>
-
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox" disabled="">
-                      Checkbox disabled
-                    </label>
-                  </div>
-                </div>
-
-                <!-- radio -->
-                <div class="form-group">
-                  <div class="radio">
-                    <label>
-                      <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                      Option one is this and that—be sure to include why it's great
-                    </label>
-                  </div>
-                  <div class="radio">
-                    <label>
-                      <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                      Option two can be something else and selecting it will deselect option one
-                    </label>
-                  </div>
-                  <div class="radio">
-                    <label>
-                      <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled="">
-                      Option three is disabled
-                    </label>
-                  </div>
-                </div>
-
-                <!-- select -->
-                <div class="form-group">
-                  <label>Select</label>
-                  <select class="form-control">
-                    <option>option 1</option>
-                    <option>option 2</option>
-                    <option>option 3</option>
-                    <option>option 4</option>
-                    <option>option 5</option>
+            <!-- form start -->
+   
+        	   <div class="form-group" style="min-height: 260px;">
+                  <label>3차 카테고리 목록</label>
+                
+                   
+                  <select multiple="" class="form-control" disabled="" style="height: 190px;" id="showCategoryThree">          
                   </select>
-                </div>
-                <div class="form-group">
-                  <label>Select Disabled</label>
-                  <select class="form-control" disabled="">
-                    <option>option 1</option>
-                    <option>option 2</option>
-                    <option>option 3</option>
-                    <option>option 4</option>
-                    <option>option 5</option>
-                  </select>
-                </div>
-
-                <!-- Select multiple-->
-                <div class="form-group">
-                  <label>Select Multiple</label>
-                  <select multiple="" class="form-control">
-                    <option>option 1</option>
-                    <option>option 2</option>
-                    <option>option 3</option>
-                    <option>option 4</option>
-                    <option>option 5</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label>Select Multiple Disabled</label>
-                  <select multiple="" class="form-control" disabled="">
-                    <option>option 1</option>
-                    <option>option 2</option>
-                    <option>option 3</option>
-                    <option>option 4</option>
-                    <option>option 5</option>
-                  </select>
-                </div>
-
-              </form>
-            </div>
-            <!-- /.box-body -->
+                
+               
+               </div>
+        
           </div>
-          <!-- /.box -->
+          <!-- /.box -->	
+
+      
+      
         </div>
         <!--/.col (right) -->
       </div>
@@ -761,6 +561,122 @@ $(document).ready(function(){
 	
 	
 	
+	//3차 카테고리 등록
+	$("#categoryThreeSubmitBtn").click(function(){
+		var textconfirm =$("#categoryThreePtext").text();
+		var categoryThreeTitle =$("#categoryThreeTitle").val();
+		
+		if(textconfirm=="2차 카테고리 먼저 입력 해 주세요."){
+			alert(textconfirm);
+			return;
+		}
+		
+		if(categoryThreeTitle.length<1){
+			alert("3차 카테고리를 입력해주세요.");
+			$("#categoryThreeTitle").focus();
+			return;
+		}
+	
+		$("form[role='form3']").submit();
+		
+		
+		
+	});
+	
+	
+	//3차 카테고리 데이터 수정 모달 전송
+	$("#categoryThreeAlterBtn").click(function(){
+	
+		var bno =$("#categoryThreeBno").val();
+		var rno =$("#categoryThree").val();
+		var title =$("#categoryThree option:selected").text();
+		//alert(bno);
+		//alert(idx + " : " +title);
+		$(".modal-title").text("3차 카테고리 수정");
+
+		$("#bno").val(bno);
+		$("#rno").val(rno);
+		
+		$("#title").val(title);
+		
+		$("#modalSave").css("display", "none");
+		$("#modalSave2").css("display", "none");
+		$("#modalSave3").css("display", "");
+		
+		$("#categoryModalOne").modal("toggle");
+
+	});
+	
+	$("#modalSave3").click(function(){
+		
+		var idx= $("#idx").val();
+		var bno= $("#bno").val();
+		var rno=$("#rno").val();
+	
+		var title= $("#title").val();
+		
+		if(title.length <1){
+			alert("3차 카테고리를 입력 해주세요.");
+			
+			return;
+		}
+		
+		//alert(idx + " : "+ title);
+		$.ajax({		
+			url :"/admin/category/categoryThreeUpdate.do",
+			type:"PUT",
+			datType:"text",
+			contentType:"application/json",
+			data:JSON.stringify({
+				rno:rno,
+				title:title
+			}),
+			success:function(result){
+				
+				if(result=="SUCCESS"){
+					alert("수정 했습니다.");
+					//3차 카테고리 목록 불러오기
+					CategoryThreeList(bno);
+					$("#categoryModalOne").modal("toggle");
+				}
+			}
+		});
+		
+		
+	});
+	
+	
+	//3차 카테고리 삭제하기
+	$("#categoryThreeDelete").click(function(){
+		var bno =$("#categoryThreeBno").val();
+		var rno =$("#categoryThree option:selected").val();
+		
+		//alert(bno +" " + " :" +rno);
+
+		var title =$("#categoryThree option:selected").text();
+	
+		
+		if(confirm("카테고리  : '" + title + "' 을 정말 삭제 하시겠습니까?")){
+			$.ajax({
+				url :"/admin/category/categoryThreeDelete.do/"+rno,
+				type:"delete",
+				success:function(result){
+					
+					if(result=="deleted"){
+						alert("삭제 했습니다.");
+						//3차 카테고리 목록 불러오기
+						CategoryThreeList(bno);
+					}else{
+						alert(result);	
+					}
+						
+				}
+			});		
+		}
+	});
+
+	
+	
 	
 	
 });
@@ -770,13 +686,20 @@ $(document).ready(function(){
 function CategoryOneChange(){
 	
 	var idx =$("#categoryOne").val();
+	//2차카테고리 idx
 	$("#categoryTwoIdx").val(idx);
+	//3차카테고리 idx
+	$("#categoryThreeIdx").val(idx);
+	
 	
 	var categoryOenText =$("#categoryOne option:selected").text();
 	if(categoryOenText.length<1){
 		$("#categoryTwoP").text("1차 카테고리 먼저 입력 해 주세요.");
 	}else{
-		$("#categoryTwoP").text(categoryOenText);	
+		//2차카테고리 텍스트
+		$("#categoryTwoP").text(categoryOenText);
+		//3차카테고리 텍스트
+		$("#categoryThreeP").text(categoryOenText);
 	}
 	//모달에 idx 전송
 	$("#idx").val(idx);
@@ -784,7 +707,7 @@ function CategoryOneChange(){
 	//2차 카테고리 목록 불러오기
 	CategoryTowList(idx);
 	
-	
+
 }
 
 //2차 카테고리 목록 불러오기
@@ -800,9 +723,59 @@ function CategoryTowList(idx){
 		});
 		$("#categoryTwo").html(str);
 		$("#showCategoryTwo").html(str);
+		
+		//사이즈 호출
+		//alert("2차 사이즈  :" +$("#categoryTwo option").size());
+		//3차 카테고리 체인지
+		var twoSize=$("#categoryTwo option").size();
+		
+		if(twoSize==0){
+			//3차 숨김
+			$("#list3").css("display","none");
+			$("#showCategoryThree").html("");
+		}else{
+			//3차 보임
+			$("#list3").css("display","");
+		}
+		categoryTwoChange();
+		
+		
 	});
 	
+}
+
+
+// 2차카테고리 체인지
+function categoryTwoChange(){
+		
+	var bno =$("#categoryTwo").val();
+	var bnoText=$("#categoryTwo option:selected").text();
+	//alert("2차 체인지" +bno + "   :   "+ bnoText);
+	//3차에 값 삽입
+	$("#categoryThreeBno").val(bno);
+	$("#categoryThreePtext").text(bnoText);
 	
+	CategoryThreeList(bno);
+}
+
+
+
+//3차 카테고리 목록 불러오기
+function CategoryThreeList(bno){
+	
+	
+	$.getJSON("/admin/category/categoryThreeList.do/"+bno , function(data){
+		var str ="";
+		
+		$(data).each(function(){
+			str +="<option value="+this.rno+" >"+this.title+"</option>";
+			
+		});
+		$("#categoryThree").html(str);
+		$("#showCategoryThree").html(str);
+		
+		
+	});
 	
 }
 
@@ -826,7 +799,7 @@ function CategoryTowList(idx){
               <div class="modal-body">
                       <input type="hidden" name="idx" id="idx"  class="form-control" >
 			          <input type="hidden" name="bno" id="bno"  class="form-control" >
-			          <input type="hidden" name="rno" id="rno"  class="form-control" >
+			          rno :<input type="text" name="rno" id="rno"  class="form-control" >
 			          <input type="text" name="title" class="form-control" id="title">
               </div>
               <div class="modal-footer">

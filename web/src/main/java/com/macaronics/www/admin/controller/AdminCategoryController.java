@@ -162,6 +162,75 @@ public class AdminCategoryController {
 		return entity;
 	}
 	
+	//3차 카테고리 등록
+	
+	@RequestMapping(value="/categoryThreeInsert.do", method=RequestMethod.POST)
+	public String categoryThreeInsertDo(AdminCategoryVO vo, RedirectAttributes rttr){
+		
+		logger.info("categoryThreeInsertDo :  " + vo.toString());
+		
+		adminCategoryService.categoryInsertThree(vo);
+		rttr.addFlashAttribute("message", "등록 되었습니다.");
+		return "redirect:register.do";
+		
+	}
+	
+	
+	
+	//3차 카테고리 불러오기
+	@ResponseBody
+	@RequestMapping(value="/categoryThreeList.do/{bno}", method=RequestMethod.GET)
+	public ResponseEntity<List<AdminCategoryVO>> categoryThreeList(@PathVariable("bno") Integer bno){
+		ResponseEntity<List<AdminCategoryVO>> entity=null;
+		List<AdminCategoryVO> list=null;
+		try{
+			
+			list =adminCategoryService.categoryThreeList(bno);
+			
+			entity=new ResponseEntity<List<AdminCategoryVO>>(list, HttpStatus.OK);
+		}catch(Exception e){
+			e.printStackTrace();
+			entity=new ResponseEntity<List<AdminCategoryVO>>(HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
+	}
+	
+	//3차 카테고리 수정하기
+	@ResponseBody
+	@RequestMapping(value="/categoryThreeUpdate.do", method=RequestMethod.PUT)
+	public ResponseEntity<String> categoryThreeUpdate(@RequestBody AdminCategoryVO vo){
+		
+		ResponseEntity<String> entity=null;
+		try{
+			adminCategoryService.categoryThreeUpdate(vo);
+			entity =new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		}catch(Exception e){
+			e.printStackTrace();
+			entity =new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+
+	
+	
+	//3차 카테고리 삭제하기
+	@ResponseBody
+	@RequestMapping(value="/categoryThreeDelete.do/{rno}", method=RequestMethod.DELETE)
+	public ResponseEntity<String> categoryThreeDelete(@PathVariable("rno") Integer rno){
+		
+		ResponseEntity<String> entity=null;
+		try{
+			adminCategoryService.categoryThreeDelete(rno);
+			entity =new ResponseEntity<String>("deleted", HttpStatus.OK);
+		}catch(Exception e){
+			e.printStackTrace();
+			entity =new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	
 	
 	
 }
