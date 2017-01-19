@@ -15,28 +15,27 @@ public class ProductShopVO {
 	private Integer category_bno;
 	private Integer category_rno;
 	
-	
-	
-	
 	private String product_name;
 	private Integer price;
 	private String description; 
 	private String  picture_url;
 
 	private Date regdate;
-    private MultipartFile file1;
+	private Date updatedate;
+	private MultipartFile file1;
 	
     private Integer deliver; // default 3만
     private Integer deliver_money; // default 2500
     
     private Integer amount;  //수량
     private String product_state; //상태
-    private long big_description; //
+    private String big_description; //
 
     private String[] mfiles;
 
+    
+  //////////////////////////////////////////
     private String productName;
-   
     
     private Integer categoryIdx;
 	private Integer categoryBno;
@@ -47,8 +46,13 @@ public class ProductShopVO {
     
     private String bigDescription;
     
-
+///////////////////////////////
+    //카테고리 title
+    private String category1_title;
+    private String category2_title;
+    private String category3_title;
     
+    private Integer view_count; // 조회수
 }
 
 

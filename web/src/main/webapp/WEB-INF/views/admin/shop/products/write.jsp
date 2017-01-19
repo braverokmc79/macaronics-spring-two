@@ -368,7 +368,7 @@ $(document).ready(function(){
 		
 		$(".uploadedList .delbtn").each(function(index){
 			
-			str +="<input type='hidden' name='mfiles["+index+"]' value='"+$(this).attr("href") +"'>";
+			str +="<input type='hidden' name='mfiles["+index+"]' value='"+$(this).attr("data-img") +"'>";
 			
 		});
 		

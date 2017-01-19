@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<insert id="productInsert">
 		insert INTO PRODUCT (PRODUCT_ID, PRODUCT_NAME, PRICE, DESCRIPTION,
 	 PICTURE_URL,  AMOUNT, PRODUCT_STATE, BIG_DESCRIPTION, 
-	 "category_idx", "category_bno", "category_rno", "deliver", "deliver_money" ) 
+	 CATEGORY_IDX, CATEGORY_BNO, CATEGORY_RNO, DELIVER, DELIVER_MONEY ) 
 	 
 	 values (seq_product.nextval, #{productName} , #{price} , #{description} , 
 	 #{picture_url}, #{amount}, #{productState}, #{bigDescription},
@@ -18,15 +18,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	
-
-	
-	
 	<!-- 첨부파일 -->
 	<insert id="addAttach">
 		insert into TBL_PRODUCT_ATTACH (FULLNAME, PRODUCT_ID) 
 		 values (#{fullName} , seq_product.currval)
 	</insert>
 
+	
+	<select id="productList" resultType="com.macaronics.www.user.model.dto.ProductShopVO">
+		select * from v_product  order by regdate desc
+	</select>
+	
+	
 	
 </mapper>
 

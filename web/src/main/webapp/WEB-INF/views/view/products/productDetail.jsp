@@ -102,7 +102,9 @@
               </div>
               <hr>
                
-               <p>${productDetail.description }</p>
+               <div class="col-md-8">${productDetail.description }</div>
+               
+               
               <hr>
                <h4>Propery Features</h4>
                <ul>
@@ -119,12 +121,12 @@
                  <li>Security System</li>
                </ul>
                <h4>Property Video</h4>
-               <iframe width="100%" height="480" src="https://www.youtube.com/embed/CegXQps0In4" frameborder="0" allowfullscreen></iframe>
-               <h4>Property Map</h4>
-               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6851.201919469417!2d-86.11773906635584!3d33.47324776828677!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x888bdb60cc49c571%3A0x40451ca6baf275c7!2s36008+AL-77%2C+Talladega%2C+AL+35160%2C+USA!5e0!3m2!1sbn!2sbd!4v1460452919256" width="100%" height="450" 
-               frameborder="0" style="border:0" allowfullscreen></iframe>
-     <a href="http://map.daum.net/?urlX=503123&urlY=1053865&urlLevel=3&map_type=TYPE_MAP&map_hybrid=false&SHOWMARK=true" target="_blank"><span style="background:#000;position:absolute;width:557px;opacity:.7;filter:alpha(opacity=70);color:#fff;overflow:hidden;font:12px/1.5 Dotum, '돋움', sans-serif;text-decoration:none;padding:7px 0px 0px 10px; height: 24px;">지도를 클릭하시면 위치정보를 확인하실 수 있습니다.</span><img width="565" height="308" src="http://map2.daum.net/map/mapservice?MX=503123&MY=1053865&SCALE=2.5&IW=565&IH=308&COORDSTM=WCONGNAMUL" style="border:1px solid #ccc"></a>
-
+     
+     			<p>
+     			${productDetail.big_description }
+     			</p>
+     
+     
 
              </div>
              <!-- Properties social share -->

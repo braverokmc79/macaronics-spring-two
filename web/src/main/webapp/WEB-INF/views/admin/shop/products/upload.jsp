@@ -9,7 +9,7 @@
   	<div class="mailbox-attachment-info">
 	<a href="" class="mailbox-attachment-name">${originalFilename}</a>
 	<a href="${originalImage}" 
-     class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
+     class="btn btn-default btn-xs pull-right delbtn" data-img="${thumNameImage}"><i class="fa fa-fw fa-remove"></i></a>
 	
   </div>
 </li> 	

@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.macaronics.www.user.model.dao.ProductDAO;
 import com.macaronics.www.user.model.dto.ProductShopVO;
@@ -21,14 +22,24 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public List<ProductShopVO> productList() throws Exception {
-		// TODO Auto-generated method stub
+		
+
+		
 		return dao.productList();
 	}
 
+	@Transactional
 	@Override
 	public ProductShopVO detailProduct(Integer product_id) {
-		// TODO Auto-generated method stub
-		return dao.detailProduct(product_id);
+		ProductShopVO vo =null;
+		try{
+			vo=dao.detailProduct(product_id);
+			//조회수 증가		
+			dao.updateViewCount(product_id);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return vo;
 	}
 
 	@Override

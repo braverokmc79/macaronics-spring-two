@@ -198,6 +198,24 @@ public class AdminShopProductController {
 	
 	
 	
+	//관리자 상품 목록
+	
+	@RequestMapping(value="/proudctList", method=RequestMethod.GET)
+	public String proudctList(Model model){
+		
+		List<ProductShopVO> list =null;
+		try{
+			
+			list=adminShopProductService.productList();
+			model.addAttribute("list", list);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return JSP_PAGE+"productList";
+	}
+	
+	
+	
 	
 	
 	

@@ -1,5 +1,7 @@
 package com.macaronics.www.admin.model.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -36,6 +38,13 @@ public class AdminShopProductDAOImpl implements AdminShopProductDAO {
 		
 		sqlSession.insert(namespace+".addAttach" , fullName);
 		
+	}
+
+
+	@Override
+	public List<ProductShopVO> productList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".productList");
 	}
 
 	

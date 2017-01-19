@@ -1,6 +1,6 @@
 package com.macaronics.www.admin.model.dto;
 
-import java.util.Arrays;
+import java.util.Date;
 
 import lombok.Data;
 
@@ -27,9 +27,11 @@ public class AdminShopProductVO {
     
     private String bigDescription;
 
-	
+	private Date regdate;
+	private Date updatedate;
     
     
+	private Integer view_count; // 조회수
     
     
 }

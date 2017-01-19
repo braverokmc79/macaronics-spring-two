@@ -34,10 +34,12 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public ProductShopVO detailProduct(Integer product_id) {
-		// TODO Auto-generated method stub
+		
 		return sqlSession.selectOne(namespace+".detailProduct",  product_id);
 	}
 
+	
+	
 	@Override
 	public void updateProduct(ProductShopVO vo) {
 		// TODO Auto-generated method stub
@@ -48,6 +50,15 @@ public class ProductDAOImpl implements ProductDAO {
 	public void deleteProduct(Integer product_id) {
 		// TODO Auto-generated method stub
 		sqlSession.delete(namespace+".deleteProduct", product_id);
+	}
+
+	
+	//조회수 증가
+	@Override
+	public void updateViewCount(Integer product_id) {
+	
+		sqlSession.update(namespace+".updateViewCount", product_id);
+		
 	}
 	
 	

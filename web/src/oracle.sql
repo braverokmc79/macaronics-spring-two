@@ -375,15 +375,20 @@ create table product(
  	description varchar2(500),
  	picture_url varchar2(500),
  	regdate date default sysdate,
+ 	updatedate date,
 	amount number default 100,
 	PRODUCT_STATE VARCHAR2 (50) DEFAULT '보통',
 	BIG_DESCRIPTION long,
 	deliver  number,
 	deliver_money number,
+	
  	primary key(product_id)
 
 
 );
+
+-- product view 카운터 
+alter table product add ( view_count number DEFAULT 0);
 
 insert into product (PRODUCT_ID, PRODUCT_NAME,
  PRICE, DESCRIPTION, PICTURE_URL ,regdate) values (1,'[투데이특가] 퀸 사이즈
@@ -695,7 +700,26 @@ create SEQUENCE  seq_product START WITH 10
 
   
   
-  
+-- 상품 뷰 생성
+
+create view v_product as
+
+(
+
+select  
+
+p.PRODUCT_ID, p.AMOUNT, p.BIG_DESCRIPTION, p.CATEGORY_BNO, p.CATEGORY_IDX, p.CATEGORY_RNO,p.DELIVER
+
+,p.DELIVER_MONEY, p.DESCRIPTION, p.PICTURE_URL, p.PRICE, p.PRODUCT_NAME,p.PRODUCT_STATE,p.REGDATE,p.UPDATEDATE
+
+,p.view_count
+, c1.title as category1_title  ,  c2.title as category2_title   , c3.TITLE as category3_title
+		
+	from product p , TBL_CATEGORY_ONE c1, TBL_CATEGORY_TWO c2, TBL_CATEGORY_THREE c3
+	
+	where p.category_idx =c1.IDX and p.category_bno=c2.BNO and p.category_rno =c3.RNO
+
+);  
   
 	
 	

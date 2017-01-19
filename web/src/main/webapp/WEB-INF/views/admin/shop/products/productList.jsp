@@ -1,13 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
-    
-<%@ include file="../include/header.jsp" %>      
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+     
+<%@ include file="../../include/header.jsp" %>      
       
-<%@ include file="../include/top_menu.jsp" %>
+<%@ include file="../../include/top_menu.jsp" %>
 
-<%@ include file="../include/side_menu.jsp" %>      
+<%@ include file="../../include/side_menu.jsp" %>      
       
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script> 
+
+
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>      
+      
+ 
+ 
  
  
   <!-- Content Wrapper. Contains page content -->
@@ -17,12 +27,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        회원관리
-        <small>회원목록</small>
+        상품 목록  
       </h1>
+
+      
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">회원목록</li>
+        <li class="active">Gallery</li>
       </ol>
     </section>
 
@@ -32,10 +43,13 @@
 
 <div class="row">
         <div class="col-xs-12">
+
+
+
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">회원상태 테이블</h3>
-
+              <h3 class="box-title">상품</h3>
+      <p style="margin-bottom: 50px;"></p>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
                   <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
@@ -50,27 +64,48 @@
             <div class="box-body table-responsive no-padding">
               <table class="table table-hover">
                 <tbody><tr>
-                  <th>아이디</th>
-                  <th>이름</th>
-                  <th>이메일</th>
-                  <th>상태 </th>
-                  <th>가입일</th> 
+                  <th>등록번호</th>
+                  <th style="max-width: 150px;">이미지</th>
+                  <th>상품이름</th>
+                  <th>이벤트 상태 :조회수 </th>
+                  <th> 카테고리</th>
+                  <th style="max-width: 150px;">등록일</th>  
                 </tr>
    
    
    <c:forEach items="${list }" var="row">
-		<tr class="memberInfoTr" data-userid="${row.userid }">
-		<td>${row.userid }</td>
-		<td><a href="/admin/memberInfo.do?userid=${ row.userid}" >${row.username }</a></td>
-		<td>${row.email }</td>
-		<td><span class="label label-success" data-toggle="modal" data-target="#checkPw" >패스워드 체크</span></td>
-		<td>${row.regdate }</td>
+		<tr >
+		
+		<td><span class="badge bg-purple">${row.product_id }</span>
+		
+		<a href="/shop/products/detail.do/${row.product_id }"><span class="label label-primary">상세보기</span></a>
+		 <a href=""><span class="label label-warning">수정하기</span></a>
+		<a href=""><span class="label label-danger"> 삭제하기</span></a>
+		
+		</td>
+		
+		<td><img src="/products/img${row.picture_url }"  style="max-height: 100px; max-width: 100px;"></td>
+		
+		<td><a href="" >${row.product_name }</a></td>
+		
+		<td>${row.product_state }   : <span class="label label-primary">${row.view_count }</span></td>
+		
+		<td><span class="label label-primary">${row.category1_title }</span> > 
+		<span class="label label-success">${row.category2_title }</span> >
+		<span class="label label-danger">${row.category3_title }</span> </td>
+		
+		
+		<td><fmt:formatDate   value="${row.regdate }"  pattern="yyyy-MM-dd hh:mm"  /></td>
+		
+		
 		</tr>
 	</c:forEach>
-              
+            
               </tbody>
               
+              <tfoot>
               
+              </tfoot>
               
               </table>
             </div>
@@ -78,18 +113,15 @@
           </div>
           <!-- /.box -->
        
-       
+     
+
+
+
+          <!-- /.box -->
         </div>
       </div>
 
-
-
-
-
     </section>
-
-
-
 
 
   <div class="modal modal-danger" id="checkPw">
@@ -115,61 +147,32 @@
   </div>
    <!-- /.modal -->
 
-<script type="text/javascript">
 
+
+
+
+
+<script>
+  
 $(document).ready(function(){
-	
-	
-	$(".memberInfoTr").on("click", function(){
-		var userid=$(this).attr("data-userid");
-		$("#confirmPassword").val("");
-		
-		$("#modal_Id").val(userid);	
-			
-	
-	});
-	
-	$("#confirmPwd").click(function(){
-		var userid=$("#modal_Id").val();	
-		var confirmPassword=$("#confirmPassword").val();
-		if(confirmPassword.trim().length <1 ){
-			alert("패스워드를 입력 하세요!");
-			return;
-		}
-		
-		$.ajax({
-			
-			type:"POST",
-			url:"/admin/checkPwd",
-			data: {
-				userid :userid,
-				confirmPassword :confirmPassword
-			},
-			dataType:"text",
-			success:function(result){
-				alert(result);
-				
-				
-				$("#confirmPassword").val("");
-			}
-		});
-		
-	});
-	
+
 	
 	
 });
-
-
 </script>
 
 
-  
-<%@ include file="../include/content_footer.jsp" %>
+
+
+
+
 
   
-<%@ include file="../include/control_sidebar.jsp" %>
+<%@ include file="../../include/content_footer.jsp" %>
+
+  
+<%@ include file="../../include/control_sidebar.jsp" %>
   
   
-<%@ include file="../include/footer.jsp" %>  
+<%@ include file="../../include/footer.jsp" %>  
   

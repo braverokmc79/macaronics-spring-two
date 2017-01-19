@@ -1,5 +1,7 @@
 package com.macaronics.www.admin.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -45,6 +47,13 @@ public class AdminShopProductServiceImpl implements AdminShopProductService {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+
+
+	@Override
+	public List<ProductShopVO> productList() {
+		// TODO Auto-generated method stub
+		return adminShopProductDao.productList();
 	}
 
 	

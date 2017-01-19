@@ -30,9 +30,9 @@ public class ProductController {
 	public String productList(Model model) throws Exception{
 		List<ProductShopVO> list=service.productList();
 		
-		for(ProductShopVO  vo : list){
+/*		for(ProductShopVO  vo : list){
 			logger.info(" ********** " +vo.toString());
-		}
+		}*/
 		model.addAttribute("productList" ,list);
 		return JSP_PAGE+"productList";
 	}
@@ -44,8 +44,12 @@ public class ProductController {
 			, ModelAndView mav
 			) throws Exception {
 		
+		ProductShopVO vo =service.detailProduct(product_id);
+		logger.info("productDetail ####################################");
+		logger.info(vo.toString());
+		
 		mav.setViewName(JSP_PAGE+"/productDetail");
-		mav.addObject("productDetail", service.detailProduct(product_id));
+		mav.addObject("productDetail", vo);
 		
 		return mav;
 	}

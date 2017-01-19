@@ -450,6 +450,8 @@ $(document).ready(function(){
 		var categoryTwoTitle =$("#categoryTwoTitle").val();
 		if(textconfirm=="1차 카테고리 먼저 입력 해 주세요."){
 			alert(textconfirm);
+			$("#categoryTwoTitle").val("");
+			$("#categoryOneTitle").focus();
 			return;
 		}
 		

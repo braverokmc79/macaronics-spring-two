@@ -12,4 +12,8 @@ public interface ProductDAO {
 	void deleteProduct(Integer product_id);
 	
 	
+	//조회수 증가
+	public void updateViewCount(Integer product_id);
+	
+	
 }
