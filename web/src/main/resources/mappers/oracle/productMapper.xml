@@ -20,6 +20,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update product set view_count =view_count+1 where product_id=#{product_id}
 	</update>
 	
+	<!-- 첨부파일 -->
+	<select id="getAttach" resultType="string">
+		select fullName from TBL_PRODUCT_ATTACH where product_id=#{product_id} order by regdate
+	</select>
+	
 </mapper>
 
 

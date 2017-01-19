@@ -27,18 +27,21 @@ public class AdminShopProductServiceImpl implements AdminShopProductService {
 		try{
 					
 			String[] files =vo.getMfiles();
-		   
+		  //대표 이미지 설정 
 		    for(int i=0; i<files.length; i++){
 			   	if(i==0){
 			   		vo.setPicture_url(files[i]);
 			   	}
 			   	
 			 }
-		    String descritpion=XssDefender.inputString(vo.getDescription());
+		    
+		    //태그 제거
+		    String descritpion=XssDefender.removeTag(vo.getDescription());
 		    vo.setDescription(descritpion);
+		    
 		    adminShopProductDao.productInsert(vo);
 		    
-		    
+		    //첨부파일 등록
 		    for(String file :files){
 		    	adminShopProductDao.addAttach(file);
 		    }
@@ -54,6 +57,66 @@ public class AdminShopProductServiceImpl implements AdminShopProductService {
 	public List<ProductShopVO> productList() {
 		// TODO Auto-generated method stub
 		return adminShopProductDao.productList();
+	}
+
+
+	@Override
+	public void delteAttachImg(String fullname) {
+		
+		adminShopProductDao.delteAttachImg(fullname);
+	}
+
+
+	@Transactional
+	@Override
+	public void updateProduct(ProductShopVO vo) {
+		
+		try{
+			
+			String[] files =vo.getMfiles();
+		  //대표 이미지 설정 
+		    for(int i=0; i<files.length; i++){
+			   	if(i==0){
+			   		vo.setPicture_url(files[i]);
+			   	}
+			   	
+			 }
+		    adminShopProductDao.updateProduct(vo);
+		    
+		    //DB에 있는 기존  첨부 파일 삭제
+		    Integer product_id =vo.getProduct_id();
+		    
+		    adminShopProductDao.deleteAttach(product_id);
+		    
+		    String[] files2 =vo.getMfiles();
+		    if(files2 ==null){
+		    	return;
+		    }
+		    //DB에 파일 다시 첨가
+		    for(String fileName :files){
+		    	adminShopProductDao.replaceAttach(fileName, product_id);
+		    }
+		    
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+
+
+	@Override
+	public void productDelete(Integer product_id) {
+		
+		
+		adminShopProductDao.deleteAttach(product_id);
+		
+	}
+
+	//구매 중인 상품이 있는지 확인
+	@Override
+	public int productOrederConfirm(Integer product_id) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

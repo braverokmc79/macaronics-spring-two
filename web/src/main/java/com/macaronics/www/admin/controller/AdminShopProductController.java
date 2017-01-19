@@ -1,7 +1,9 @@
 package com.macaronics.www.admin.controller;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,17 +20,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.macaronics.www.admin.model.dto.AdminCategoryVO;
-import com.macaronics.www.admin.model.dto.AdminShopProductVO;
+import com.macaronics.www.admin.model.dto.AdminProductAttchVO;
 import com.macaronics.www.admin.service.AdminCategoryService;
 import com.macaronics.www.admin.service.AdminShopProductService;
 import com.macaronics.www.user.model.dto.ProductShopVO;
+import com.macaronics.www.user.service.ProductService;
 import com.macaronics.www.util.fileupload.UploadPath;
 import com.macaronics.www.util.upload.MediaUtils;
 import com.macaronics.www.util.upload.UploadFileUtils;
@@ -40,6 +45,8 @@ public class AdminShopProductController {
 	
 	private static final String JSP_PAGE ="/admin/shop/products/";
 	
+	private static final String ATTACH_PATH ="WEB-INF/uploads/productsImg/";
+	
 	private static final Logger logger=LoggerFactory.getLogger(AdminShopProductController.class);
 	
 	@Inject
@@ -47,6 +54,11 @@ public class AdminShopProductController {
 	
 	@Inject
 	private AdminShopProductService adminShopProductService;
+	
+	
+	
+	@Inject
+	private ProductService productService;
 	
 	
 	@RequestMapping(value="/write")
@@ -139,7 +151,7 @@ public class AdminShopProductController {
 			return JSP_PAGE+"erroUpload";
 		}
 			
-		UploadPath.attach_path="WEB-INF/uploads/productsImg/";
+		UploadPath.attach_path=ATTACH_PATH;
 		UploadPath.path(request);
 		String thumNameImage =UploadFileUtils.uploadFile(UploadPath.path(request),
 									file.getOriginalFilename(), file.getBytes());
@@ -163,7 +175,7 @@ public class AdminShopProductController {
 		InputStream in =null;
 		ResponseEntity<byte[]> entity =null;
 		logger.info("File Name : " + fileName);
-		UploadPath.attach_path="WEB-INF/uploads/productsImg/";
+		UploadPath.attach_path=ATTACH_PATH;
 		
 		try{
 			String formatName =fileName.substring(fileName.lastIndexOf(".")+1);
@@ -198,8 +210,7 @@ public class AdminShopProductController {
 	
 	
 	
-	//관리자 상품 목록
-	
+	//관리자 상품 목록	
 	@RequestMapping(value="/proudctList", method=RequestMethod.GET)
 	public String proudctList(Model model){
 		
@@ -215,6 +226,102 @@ public class AdminShopProductController {
 	}
 	
 	
+	
+	//관리자 상품 수정
+	@RequestMapping(value="/productUpdateform/{product_id}", method=RequestMethod.GET)
+	public String productUpdateForm(@PathVariable("product_id") Integer product_id
+			,  Model model) {	
+			try{
+				ProductShopVO vo =productService.detailProduct(product_id);
+				
+				List<String>  getAttchList=productService.getAttach(product_id);
+				
+				
+				if(getAttchList.size() >0){
+					
+					List<AdminProductAttchVO> attachList=new ArrayList<>();
+					for(String thumnail : getAttchList){
+						AdminProductAttchVO attach = new AdminProductAttchVO();
+						String front =thumnail.substring(0, 12);
+						String end =thumnail.substring(14);	
+						
+						attach.setThumNail(thumnail);
+						attach.setFullName(front+end);
+						attach.setFileName(thumnail.substring(thumnail.indexOf("_")+1));
+						attachList.add(attach);
+					}
+					model.addAttribute("attachList", attachList);
+				}
+			
+				model.addAttribute("product", vo);
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			return JSP_PAGE+"alter";	
+	}
+	
+	
+	//상품 수정
+	@RequestMapping(value="/updateProduct", method=RequestMethod.POST)
+	public String updateProduct(ProductShopVO vo){
+		
+		//logger.info(" -------" + vo.toString());
+		
+		adminShopProductService.updateProduct(vo);
+		return "redirect:proudctList";
+	}
+	
+	
+	
+	//첨부 파일 이미지 삭제
+	@ResponseBody
+	@RequestMapping(value="/imgdelete", method=RequestMethod.POST)
+	public ResponseEntity<String> delteImg(@RequestParam String img, HttpServletRequest request){
+		ResponseEntity<String> entity=null;
+		try{
+			
+			logger.info("img : " +img);
+			
+			if(img!=null){
+			  UploadPath.attach_path=ATTACH_PATH;
+			  File file =new File(UploadPath.path(request) +img.replace('/', File.separatorChar));
+			  file.delete();
+			 
+			  String front =img.substring(0, 12);
+			  String end =img.substring(14);
+			  new File(UploadPath.path(request) +(front+end).replace('/', File.separatorChar)).delete();
+			 
+			  //DB 삭제
+			  adminShopProductService.delteAttachImg(img);
+			}
+			
+			entity =new ResponseEntity<String>("deleted", HttpStatus.OK);
+		}catch(Exception e){
+			e.printStackTrace();
+			entity =new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	
+	
+	//상품 삭제
+	@RequestMapping(value="prodductDelete", method=RequestMethod.POST)
+	public String productDelete(@RequestParam Integer product_id, RedirectAttributes rttr){
+		
+		int num =adminShopProductService.productOrederConfirm(product_id);
+		
+		if(num  >0){
+			rttr.addFlashAttribute("deleteErrorMessage", "구매 중인 상품은 삭제 할 수 없습니다.");
+			return "redirect:proudctList"; 
+		}
+		
+		
+		adminShopProductService.productDelete(product_id);
+		
+		return "redirect:proudctList";
+	}
 	
 	
 	

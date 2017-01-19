@@ -5,7 +5,7 @@
 
 
 <li>
-  	<span class="mailbox-attachment-icon has-img"><img src="/products/img/${thumNameImage}" alt="Attachment"></span>
+  	<span class="mailbox-attachment-icon has-img"><img src="/products/img/${thumNameImage}" alt="Attachment" style="max-width: 150px; max-height: 150px;"></span>
   	<div class="mailbox-attachment-info">
 	<a href="" class="mailbox-attachment-name">${originalFilename}</a>
 	<a href="${originalImage}" 

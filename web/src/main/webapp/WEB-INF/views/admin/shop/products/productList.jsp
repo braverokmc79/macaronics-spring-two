@@ -79,7 +79,7 @@
 		<td><span class="badge bg-purple">${row.product_id }</span>
 		
 		<a href="/shop/products/detail.do/${row.product_id }"><span class="label label-primary">상세보기</span></a>
-		 <a href=""><span class="label label-warning">수정하기</span></a>
+		 <a href="/admin/shop/products/productUpdateform/${row.product_id}"><span class="label label-warning">수정하기</span></a>
 		<a href=""><span class="label label-danger"> 삭제하기</span></a>
 		
 		</td>
@@ -88,7 +88,17 @@
 		
 		<td><a href="" >${row.product_name }</a></td>
 		
-		<td>${row.product_state }   : <span class="label label-primary">${row.view_count }</span></td>
+		<td>
+		<c:choose>
+			<c:when test="${row.product_state =='보통' }">
+			보통
+			</c:when>
+			<c:otherwise>
+				<span class="label label-warning">${row.product_state }</span> 
+			</c:otherwise>
+		</c:choose>
+	
+		 : <span class="label label-primary">${row.view_count }</span></td>
 		
 		<td><span class="label label-primary">${row.category1_title }</span> > 
 		<span class="label label-success">${row.category2_title }</span> >
@@ -156,9 +166,11 @@
   
 $(document).ready(function(){
 
-	
+	alert("ㅇㅇ");	
 	
 });
+
+
 </script>
 
 

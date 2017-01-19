@@ -12,5 +12,8 @@ public interface ProductService {
 	public void updateProduct(ProductShopVO vo);
 	void deleteProduct(Integer product_id);
 	
+	
+	//첨부 파일
+	public List<String> getAttach(Integer product_id) throws Exception;
 
 }

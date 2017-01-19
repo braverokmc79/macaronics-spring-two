@@ -1,5 +1,6 @@
 package com.macaronics.www.user.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -45,12 +46,19 @@ public class ProductController {
 			) throws Exception {
 		
 		ProductShopVO vo =service.detailProduct(product_id);
-		logger.info("productDetail ####################################");
-		logger.info(vo.toString());
+		
+		List<String>  attach=service.getAttach(product_id);
+		List<String>  fullName=new ArrayList<>(); 
+		for(String str :attach){
+			String front =str.substring(0, 12);
+			String end =str.substring(14);
+			fullName.add(front+end);
+		}
+		
 		
 		mav.setViewName(JSP_PAGE+"/productDetail");
 		mav.addObject("productDetail", vo);
-		
+		mav.addObject("fullName",fullName);
 		return mav;
 	}
 	

@@ -1,6 +1,8 @@
 package com.macaronics.www.admin.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -45,6 +47,38 @@ public class AdminShopProductDAOImpl implements AdminShopProductDAO {
 	public List<ProductShopVO> productList() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".productList");
+	}
+
+
+	@Override
+	public void delteAttachImg(String fullname) {
+		
+		sqlSession.delete(namespace+".delteAttachImg", fullname);
+	}
+
+
+	@Override
+	public void deleteAttach(Integer proudct_id) throws Exception {
+		
+		sqlSession.delete(namespace+".deleteAttach", proudct_id);
+	}
+
+
+	@Override
+	public void replaceAttach(String fullName, Integer product_id) throws Exception {
+		Map<String , Object> pramMap =new HashMap<>();
+		
+		pramMap.put("fullName", fullName);
+		pramMap.put("product_id", product_id);
+		
+		sqlSession.insert(namespace+".replaceAttach", pramMap);
+	}
+
+
+	@Override
+	public void updateProduct(ProductShopVO vo) {
+		
+		sqlSession.update(namespace+".updateProduct", vo);
 	}
 
 	

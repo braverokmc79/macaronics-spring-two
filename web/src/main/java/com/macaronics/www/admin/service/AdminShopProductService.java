@@ -10,8 +10,19 @@ public interface AdminShopProductService {
 	
 	
 	public List<ProductShopVO> productList();
+
+
+	public void delteAttachImg(String fullname);
 	
 	
+	// 상품 수정
+	public void updateProduct(ProductShopVO vo);
+
+
+	public void productDelete(Integer product_id);
+
+
+	public int productOrederConfirm(Integer product_id);
 	
 	
 }

@@ -11,7 +11,20 @@ public interface AdminShopProductDAO {
 	//첨부파일
 	public void addAttach(String fullName) throws Exception;
 	
+	//첨부파일 삭제 1
+	public void delteAttachImg(String fullname);
 	
+	//첨부파일 삭제 2
+	public void deleteAttach(Integer proudct_id) throws Exception;
+	
+	public void replaceAttach(String fullName, Integer product_id) throws Exception;
+	
+	//상품 목록
 	public List<ProductShopVO> productList();
+
+	
+	// 상품 수정
+	public void updateProduct(ProductShopVO vo);
+	
 	
 }

@@ -76,10 +76,33 @@ small{
         <div class="page-header">
           <h1>Macaronics <small>상품 등록</small></h1>
         </div>
+        
+      <div class="col-md-9">
+      <div class="box-body pad table-responsive">
+        <table class="table">
+        <tr>
+        <th> 등록된 카테고리 :
+        		<button class="btn btn-warning" type="button" id="categoryAlterBtn">카테고리 수정하기 </button>
+        </th>
+     	<td>
+     	<span class="btn btn-block btn-success btn-xs">1차 : ${ product.category1_title}</span>
      
-          <form role="form" method="post"  action="/admin/shop/products/insertProduct"  enctype="multipart/form-data">
+     	<span class="btn btn-block btn-info btn-xs">2차 : ${ product.category2_title}</span>
+     	
+     	<span class="btn btn-block btn-danger btn-xs">3차 : ${ product.category3_title}</span>
+     	</td>
+     	</tr>
+     	</table>
+  		</div>
+  		</div>
+  		
+  		
+          <form role="form" method="post"  action="/admin/shop/products/updateProduct"  enctype="multipart/form-data">
+           
              <div class="col-md-6 col-md-offset-3">
-            <div class="form-group">
+           	
+           	 <div style="display: none;" id="categoryDIV"> 
+           	 <div class="form-group">
               <label for="categoryIdx">1차 카테고리</label>
            
            	  <select name="categoryIdx" class="form-control" id="categoryIdx" onchange="categoryOneChange()"> 
@@ -100,23 +123,23 @@ small{
            	  	
            	  </select>
             </div>
-            
+          </div>
        
             <div class="form-group">
               <label for="productName">상품명</label>
-              <input type="text" class="form-control" id="productName" name="productName" placeholder="상품명">
+              <input type="text" class="form-control" id="productName" name="productName" value="${product.product_name }">
             </div>
             
             
             <div class="form-group">
               <label for="price">가격(원)</label>
-              <input type="text" class="form-control"  id="price" name="price" >
+              <input type="text" class="form-control"  id="price" name="price"  value="${product.price }">
               <p class="help-block"></p>
             </div>
            
             <div class="form-group">
               <label for="amount">수량(개)</label>
-              <input type="text" class="form-control"  id="amount" name="amount" >
+              <input type="text" class="form-control"  id="amount" name="amount"  value="${product.amount }">
               <p class="help-block"></p>
             </div>
       
@@ -124,30 +147,31 @@ small{
            
             <div class="form-group">
               <label for="product_state">상품 상태</label>
+             
               <select name="productState" class="form-control" id="productState"> 
-           	  	<option value="보통">보통</option>
-           	  	<option value="Best">Best</option>
-           	  	<option value="빅이벤트">빅이벤트</option>
-           	  	<option value="Sale">Sale</option>
+           	  	<option value="보통"  <c:if test="${product.product_state =='보통'}"  >selected</c:if>>보통</option>
+           	  	<option value="Best"  <c:if test="${product.product_state =='Best'}"  >selected</c:if>>Best</option>
+           	  	<option value="빅이벤트"  <c:if test="${product.product_state =='빅이벤트'}"  >selected</c:if>>빅이벤트</option>
+           	  	<option value="Sale"  <c:if test="${product.product_state =='Sale'}"  >selected</c:if>>Sale</option>
            	  </select>
             </div>
          
          
             <div class="form-group">
               <label for="username">배송료 무료 상한 가격 설정 </label>
-              <input type="text" name="deliver"   class="form-control" id="deliver" placeholder="30,000">
+              <input type="text" name="deliver"   class="form-control" id="deliver" value="${product.deliver }">
             </div>
             
             <div class="form-group">
               <label for="username">배송 비용 설정</label>
-              <input type="text" name="deliverMoney"  class="form-control" id="deliverMoney" placeholder="2,500">
+              <input type="text" name="deliverMoney"  class="form-control" id="deliverMoney" value="${product.deliver_money }">
             </div>
             
             
             <div class="form-group">
               <label for="description">상품 간략 설명 (1000 글자 이하)</label>
-              <textarea class="form-control" id="description" name="description" onkeyup="chkword(this, 1000)" ></textarea>
-              
+              <textarea class="form-control" id="description" name="description" onkeyup="chkword(this, 1000)" > ${product.description }</textarea>
+             
             </div>
             
      
@@ -168,6 +192,19 @@ small{
 					</div>
 
 				<ul class="mailbox-attachments clearfix uploadedList">
+	<c:forEach items="${attachList }" var="attach">
+				<li>
+  	<span class="mailbox-attachment-icon has-img"><img src="/products/img/${attach.thumNail}" alt="Attachment" style="max-width: 150px; max-height: 150px;"></span>
+  		<div class="mailbox-attachment-info">
+		<a href="" class="mailbox-attachment-name">${attach.fileName}</a>
+		<a href="/products/img/${attach.fullName}" 
+     class="btn btn-default btn-xs pull-right delbtn" data-img="${attach.thumNail}"><i class="fa fa-fw fa-remove"></i></a>
+	
+  		</div>
+		</li> 	
+
+	</c:forEach>	
+
 		
 				</ul>
 			</div>
@@ -176,7 +213,7 @@ small{
         
            <div class="form-group">
               <label for="bigDescription">상품 상세 내용</label>
-              <textarea class="form-control" id="bigDescription" name="bigDescription"></textarea>
+              <textarea class="form-control" id="bigDescription" name="bigDescription">${product.big_description }</textarea>
              <script type="text/javascript">
 	$(document).ready(function() {
 		//아이디가 content 에 서머노트를 적용 한다.
@@ -196,7 +233,8 @@ small{
       
         
             <div class="form-group text-center">
-              <button type="button" class="btn btn-info" id="registerBtn">상품 등록<i class="fa fa-check spaceLeft"></i></button>
+             <input type="hidden" value="${product.product_id }" name="product_id">
+              <button type="button" class="btn btn-info" id="registerBtn">상품 수정<i class="fa fa-check spaceLeft"></i></button>
               <button type="reset" class="btn btn-warning">리셋<i class="fa fa-times spaceLeft"></i></button>
             </div>
       
@@ -220,28 +258,6 @@ small{
     </section>
 
 
-  <div class="modal modal-danger" id="checkPw">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span></button>
-          <h4 class="modal-title">패스워드 입력</h4>
-        </div>
-        <div class="modal-body">
-          <input type="hidden" name="userid" id="modal_Id"  class="form-control" >
-          <input type="text" name="confirmPassword" class="form-control" id="confirmPassword">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-outline" id="confirmPwd">패스워드 확인</button>
-        </div>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
-   <!-- /.modal -->
 
 
 
@@ -287,11 +303,20 @@ $(document).ready(function(){
 		
 		
 		//alert( " productName :" + productName + " : categoryRno " +categoryRno);
-		if($.trim(categoryRno) =='' ){
-			alert("3차 카테고리를 설정 하세요!");
-			$("#categoryRno").focus();
-			return;
-		}	
+		
+		
+		
+		if(($("#categoryDIV").css("display"))=="block"){
+			
+			if($.trim(categoryRno) =='' ){
+				alert("3차 카테고리를 설정 하세요!");
+				$("#categoryRno").focus();
+				return;
+			}	
+			
+		}
+
+
 		
 		if($.trim($("#productName").val())==''){
 			alert("상품명을 입력 하세요!");
@@ -414,6 +439,20 @@ $(document).ready(function(){
 		
 		
 	});
+	
+	
+	//카테고리 수정하기
+	
+	$("#categoryAlterBtn").click(function(){
+		
+		$("#categoryDIV").show("slow");
+		
+		if(($("#categoryDIV").css("display"))!="none"){
+			alert("디스플레이가 !none 입니다." + $("#categoryDIV").css("display"));
+		}
+		
+	});
+	
 	
 	//업로드 이미지 삭제하기
 	$(".uploadedList").on("click",  ".delbtn" ,function(event){

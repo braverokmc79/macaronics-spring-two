@@ -60,6 +60,12 @@ public class ProductDAOImpl implements ProductDAO {
 		sqlSession.update(namespace+".updateViewCount", product_id);
 		
 	}
+
+	@Override
+	public List<String> getAttach(Integer product_id) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".getAttach", product_id);
+	}
 	
 	
 

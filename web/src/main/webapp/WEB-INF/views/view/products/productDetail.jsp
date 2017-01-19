@@ -58,10 +58,10 @@
             <!-- Start properties content body -->
             <div class="aa-properties-details">
              <div class="aa-properties-details-img">
+               <c:forEach items="${fullName }" var="img">
+              	 <img src="/products/img/${img}" alt="img">
+               </c:forEach>
                
-               <img src="/products/img/${productDetail.picture_url}" alt="img">
-               <img src="img/slider/2.jpg" alt="img">
-               <img src="img/slider/3.jpg" alt="img">
              </div>
              <div class="aa-properties-info">
                <h2>${productDetail.product_name }</h2>
@@ -102,10 +102,13 @@
               </div>
               <hr>
                
-               <div class="col-md-8">${productDetail.description }</div>
-               
-               
-              <hr>
+               <div class="col-md-12">${productDetail.description }
+               <hr>
+               <c:if test="${ not empty loginUser || not empty loginAdmin }">
+                <a class="btn btn-danger" type="button" href="/admin/shop/products/productUpdateform/${productDetail.product_id}">(관리자) 상품 수정하기</a>
+              	 <hr>
+               </c:if>
+             
                <h4>Propery Features</h4>
                <ul>
                  <li>4 Bedroom</li>
@@ -126,7 +129,7 @@
      			${productDetail.big_description }
      			</p>
      
-     
+     		</div>
 
              </div>
              <!-- Properties social share -->

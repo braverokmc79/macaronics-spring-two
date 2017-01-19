@@ -30,6 +30,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
+	<!-- 첨부 파일 개별 삭제 -->
+	<delete id="delteAttachImg">
+		 delete from tbl_product_attach where fullname=#{fullname}  
+	</delete>
+	
+	<delete id="deleteAttach">
+		delete from tbl_product_attach where product_id=#{product_id}
+	</delete>
+	
+	
+	<insert id="replaceAttach">
+	 insert into TBL_PRODUCT_ATTACH (FULLNAME, PRODUCT_ID) 
+		 values (#{fullName} , #{product_id})
+	</insert>
+	
+	<!-- 상품 업데이트 하기 -->
+	<update id="updateProduct">
+	
+		
+  UPDATE PRODUCT SET PRODUCT_NAME =#{productName}, PRICE=#{price}, DESCRIPTION=#{description},
+
+	PICTURE_URL =#{picture_url}, AMOUNT=#{amount}, PRODUCT_STATE =#{productState}, BIG_DESCRIPTION=#{bigDescription},
+	CATEGORY_IDX=#{categoryIdx} , CATEGORY_BNO=#{categoryBno} , CATEGORY_RNO=#{categoryRno},
+	 DELIVER=#{deliver} , DELIVER_MONEY=#{deliverMoney},
+	UPDATEDATE =sysdate WHERE  PRODUCT_ID =#{product_id}
+	
+	
+	</update>
 	
 </mapper>
 

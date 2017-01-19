@@ -15,5 +15,7 @@ public interface ProductDAO {
 	//조회수 증가
 	public void updateViewCount(Integer product_id);
 	
+	//첨부 파일
+	public List<String> getAttach(Integer product_id) throws Exception;
 	
 }

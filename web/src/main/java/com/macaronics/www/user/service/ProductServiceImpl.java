@@ -54,4 +54,15 @@ public class ProductServiceImpl implements ProductService {
 		dao.deleteProduct(product_id);
 	}
 
+	
+	//첨부 파일
+	@Override
+	public List<String> getAttach(Integer product_id) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.getAttach(product_id);
+	}
+
+	
+	
+	
 }
