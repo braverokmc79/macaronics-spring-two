@@ -365,7 +365,11 @@ commit;
 
 -- 상품 테이블
 create table product(
-	 product_id number ,
+
+    product_id number ,	
+    category_idx number,
+	category_bno number,
+	category_rno number,
  	product_name varchar2(150),
  	price number default 0,
  	description varchar2(500),
@@ -374,9 +378,12 @@ create table product(
 	amount number default 100,
 	PRODUCT_STATE VARCHAR2 (50) DEFAULT '보통',
 	BIG_DESCRIPTION long,
+	deliver  number,
+	deliver_money number,
  	primary key(product_id)
-);
 
+
+);
 
 insert into product (PRODUCT_ID, PRODUCT_NAME,
  PRICE, DESCRIPTION, PICTURE_URL ,regdate) values (1,'[투데이특가] 퀸 사이즈
@@ -661,3 +668,34 @@ ALTER TABLE tbl_category_three
        REFERENCES spring.tbl_category_two (bno) ON DELETE CASCADE
        VALIDATE;
        
+
+       
+       
+-- 상품 첨부파일 테이블 생성
+create table tbl_product_attach(
+	fullname VARCHAR2(200) not null,
+	PRODUCT_ID int not null,
+	regdate date default sysdate,
+	PRIMARY key(fullname)
+
+);
+
+
+-- 제약 조건 추가
+alter table tbl_product_attach add CONSTRAINT 
+	fk_product_attach FOREIGN KEY (product_id) 
+	REFERENCES  product (product_id) on DELETE CASCADE VALIDATE ;
+
+	
+	
+-- 상품 테이블  시퀀스 추가
+
+create SEQUENCE  seq_product START WITH 10
+  INCREMENT BY 1;	
+
+  
+  
+  
+  
+	
+	

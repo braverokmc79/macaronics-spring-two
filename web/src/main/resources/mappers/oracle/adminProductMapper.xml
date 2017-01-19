@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="ORACLEadminShopProductMapper">
+	
+		<insert id="productInsert">
+		insert INTO PRODUCT (PRODUCT_ID, PRODUCT_NAME, PRICE, DESCRIPTION,
+	 PICTURE_URL,  AMOUNT, PRODUCT_STATE, BIG_DESCRIPTION, 
+	 "category_idx", "category_bno", "category_rno", "deliver", "deliver_money" ) 
+	 
+	 values (seq_product.nextval, #{productName} , #{price} , #{description} , 
+	 #{picture_url}, #{amount}, #{productState}, #{bigDescription},
+	 #{categoryIdx},  #{categoryBno},  #{categoryRno}, #{deliver}, #{deliverMoney}
+	 	)
+	</insert>
+	
+	
+
+	
+	
+	<!-- 첨부파일 -->
+	<insert id="addAttach">
+		insert into TBL_PRODUCT_ATTACH (FULLNAME, PRODUCT_ID) 
+		 values (#{fullName} , seq_product.currval)
+	</insert>
+
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

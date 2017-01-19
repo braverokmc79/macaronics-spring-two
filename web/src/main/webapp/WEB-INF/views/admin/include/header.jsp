@@ -35,8 +35,8 @@
   <link rel="stylesheet" href="/resources/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
 <!-- jQuery 2.2.3 -->
-<script src="/resources/admin/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<script type="text/javascript"  src="/resources/view/js/handlebars-v4.0.5.js"></script>	
+
+
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,6 +44,10 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+     
+     
+     
+<script src="/resources/admin/plugins/jQuery/jquery-2.2.3.min.js"></script>
 </head>
 
 

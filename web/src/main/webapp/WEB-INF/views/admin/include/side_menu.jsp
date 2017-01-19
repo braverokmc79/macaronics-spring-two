@@ -74,7 +74,7 @@
         
         
         <li>
-          <a href="/admin/category/register.do">
+          <a href="/admin/category/register">
             <i class="glyphicon glyphicon-align-right"></i> <span>카테고리등록</span>
             <span class="pull-right-container">
             
@@ -85,7 +85,7 @@
         
         
         <li >
-          <a href="/admin/shop/products/write.do">
+          <a href="/admin/shop/products/write">
             <i class="glyphicon glyphicon-gift"></i> <span>상품등록</span>
             <span class="pull-right-container">
             

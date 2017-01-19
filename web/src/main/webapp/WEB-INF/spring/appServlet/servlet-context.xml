@@ -103,6 +103,7 @@
 		<interceptor>
 			<mapping path="/admin/**"/>
 			<exclude-mapping path="/resources/**"/>
+			<exclude-mapping path="/products/img/**"/>
 			<beans:ref bean="adminInterceptor" />
 		</interceptor>
 		

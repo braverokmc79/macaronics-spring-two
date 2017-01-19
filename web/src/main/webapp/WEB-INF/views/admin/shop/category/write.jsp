@@ -74,7 +74,7 @@ small{
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form1" method="post" action="/admin/category/categoryoneInsert.do" >
+            <form role="form1" method="post" action="/admin/category/categoryoneInsert" >
               <div class="box-body">
               <c:if test="${not empty categoryOne }">
               <div class="form-group">
@@ -118,7 +118,7 @@ small{
             <div class="box-body">
            
             <!-- form start -->
-            <form role='form2' method="post" action="/admin/category/categorytwoInsert.do" >
+            <form role='form2' method="post" action="/admin/category/categorytwoInsert" >
               <div class="box-body">
               <p>1차 카테고리 : <span id="categoryTwoP" style="color:red;"></span></p>
               
@@ -166,7 +166,7 @@ small{
             <div class="box-body">
            
             <!-- form start -->
-            <form role='form3' method="post" action="/admin/category/categoryThreeInsert.do" >
+            <form role='form3' method="post" action="/admin/category/categoryThreeInsert" >
               <div class="box-body">
               <p>1차 카테고리 : <span id="categoryThreeP" style="color:red;"></span></p>
               <p>2차 카테고리 : <span id="categoryThreePtext" style="color:red;"></span></p>
@@ -393,7 +393,7 @@ $(document).ready(function(){
 		
 		//alert(idx + " : "+ title);
 		$.ajax({		
-			url :"/admin/category/categoryUpdate.do",
+			url :"/admin/category/categoryUpdate",
 			type:"PUT",
 			datType:"text",
 			contentType:"application/json",
@@ -405,7 +405,7 @@ $(document).ready(function(){
 				
 				if(result=="SUCCESS"){
 					alert("수정 했습니다.");
-					location.href="/admin/category/register.do";	
+					location.href="/admin/category/register";	
 				}
 			}
 		});
@@ -427,13 +427,13 @@ $(document).ready(function(){
 	
 		if(confirm("하위 카테고리 목록 까지 삭제 됩니다. 정말 삭제 하시겠습니까?")){
 			$.ajax({
-				url :"/admin/category/categoryDelete.do/"+idx,
+				url :"/admin/category/categoryDelete/"+idx,
 				type:"delete",
 				success:function(result){
 					
 					if(result=="deleted"){
 						alert("삭제 했습니다.");
-						location.href="/admin/category/register.do";	
+						location.href="/admin/category/register";	
 					}else{
 						alert(result);	
 					}
@@ -506,7 +506,7 @@ $(document).ready(function(){
 		
 		//alert(idx + " : "+ title);
 		$.ajax({		
-			url :"/admin/category/categoryTwoUpdate.do",
+			url :"/admin/category/categoryTwoUpdate",
 			type:"PUT",
 			datType:"text",
 			contentType:"application/json",
@@ -543,13 +543,13 @@ $(document).ready(function(){
 	
 		if(confirm("하위 카테고리 목록 까지 삭제 됩니다. 정말 삭제 하시겠습니까?")){
 			$.ajax({
-				url :"/admin/category/categoryTwoDelete.do/"+bno,
+				url :"/admin/category/categoryTwoDelete/"+bno,
 				type:"delete",
 				success:function(result){
 					
 					if(result=="deleted"){
 						alert("삭제 했습니다.");
-						location.href="/admin/category/register.do";	
+						location.href="/admin/category/register";	
 					}else{
 						alert(result);	
 					}
@@ -623,7 +623,7 @@ $(document).ready(function(){
 		
 		//alert(idx + " : "+ title);
 		$.ajax({		
-			url :"/admin/category/categoryThreeUpdate.do",
+			url :"/admin/category/categoryThreeUpdate",
 			type:"PUT",
 			datType:"text",
 			contentType:"application/json",
@@ -658,7 +658,7 @@ $(document).ready(function(){
 		
 		if(confirm("카테고리  : '" + title + "' 을 정말 삭제 하시겠습니까?")){
 			$.ajax({
-				url :"/admin/category/categoryThreeDelete.do/"+rno,
+				url :"/admin/category/categoryThreeDelete/"+rno,
 				type:"delete",
 				success:function(result){
 					
@@ -714,7 +714,7 @@ function CategoryOneChange(){
 function CategoryTowList(idx){
 	
 	
-	$.getJSON("/admin/category/categoryTwoList.do/"+idx , function(data){
+	$.getJSON("/admin/category/categoryTwoList/"+idx , function(data){
 		var str ="";
 		
 		$(data).each(function(){
@@ -764,7 +764,7 @@ function categoryTwoChange(){
 function CategoryThreeList(bno){
 	
 	
-	$.getJSON("/admin/category/categoryThreeList.do/"+bno , function(data){
+	$.getJSON("/admin/category/categoryThreeList/"+bno , function(data){
 		var str ="";
 		
 		$(data).each(function(){

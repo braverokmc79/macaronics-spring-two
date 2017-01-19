@@ -35,7 +35,7 @@ public class AdminCategoryController {
 	
 	
 	
-	@RequestMapping(value="/register.do")
+	@RequestMapping(value="/register")
 	public String categoryForm(Model model){
 	
 		//1차 카테고리 목록 불러오기
@@ -47,7 +47,7 @@ public class AdminCategoryController {
 		
 	
 	//1차 카테고리 등록
-	@RequestMapping(value="/categoryoneInsert.do", method=RequestMethod.POST)
+	@RequestMapping(value="/categoryoneInsert", method=RequestMethod.POST)
 	public String categoryOneInsertDo(AdminCategoryVO vo, RedirectAttributes rttr){
 		
 		logger.info("categoryOneInsertDo :  " + vo.toString());
@@ -62,7 +62,7 @@ public class AdminCategoryController {
 	//1차 카테고리 수정하기
 	
 	@ResponseBody
-	@RequestMapping(value="/categoryUpdate.do", method={RequestMethod.PUT, RequestMethod.PATCH})
+	@RequestMapping(value="/categoryUpdate", method={RequestMethod.PUT, RequestMethod.PATCH})
 	public ResponseEntity<String> categroyOneUpdateDo(@RequestBody AdminCategoryVO vo){
 		
 		ResponseEntity<String> entity =null;
@@ -83,7 +83,7 @@ public class AdminCategoryController {
 	
 	//1차 카테고리 삭제하기
 	@ResponseBody
-	@RequestMapping(value="/categoryDelete.do/{idx}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/categoryDelete/{idx}", method=RequestMethod.DELETE)
 	public ResponseEntity<String> categoryOneDeleteDo(@PathVariable("idx") Integer idx){
 		ResponseEntity<String> entity =null;
 		try{
@@ -99,7 +99,7 @@ public class AdminCategoryController {
 	
 	
 	//2차 카테고리 등록
-	@RequestMapping(value="/categorytwoInsert.do", method=RequestMethod.POST)
+	@RequestMapping(value="/categorytwoInsert", method=RequestMethod.POST)
 	public String categoryTwoInsertDo(AdminCategoryVO vo, RedirectAttributes rttr){
 		
 		logger.info("categoryTwoInsertDo :  " + vo.toString());
@@ -111,7 +111,7 @@ public class AdminCategoryController {
 	
 	//2차 카테고리 불러오기
 	@ResponseBody
-	@RequestMapping(value="/categoryTwoList.do/{idx}", method=RequestMethod.GET)
+	@RequestMapping(value="/categoryTwoList/{idx}", method=RequestMethod.GET)
 	public ResponseEntity<List<AdminCategoryVO>> categoryTwoList(@PathVariable("idx") Integer idx){
 		ResponseEntity<List<AdminCategoryVO>> entity=null;
 		List<AdminCategoryVO> list=null;
@@ -131,7 +131,7 @@ public class AdminCategoryController {
 	
 	//2차 카테고리 업데이트
 	@ResponseBody
-	@RequestMapping(value="/categoryTwoUpdate.do", method=RequestMethod.PUT)
+	@RequestMapping(value="/categoryTwoUpdate", method=RequestMethod.PUT)
 	public ResponseEntity<String> categoryTwoUpdate(@RequestBody AdminCategoryVO vo){
 		
 		ResponseEntity<String> entity=null;
@@ -148,7 +148,7 @@ public class AdminCategoryController {
 	
 	//2차 카테고리 삭제
 	@ResponseBody
-	@RequestMapping(value="/categoryTwoDelete.do/{bno}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/categoryTwoDelete/{bno}", method=RequestMethod.DELETE)
 	public ResponseEntity<String> categoryTwoDelete(@PathVariable("bno") Integer bno){
 		
 		ResponseEntity<String> entity=null;
@@ -164,7 +164,7 @@ public class AdminCategoryController {
 	
 	//3차 카테고리 등록
 	
-	@RequestMapping(value="/categoryThreeInsert.do", method=RequestMethod.POST)
+	@RequestMapping(value="/categoryThreeInsert", method=RequestMethod.POST)
 	public String categoryThreeInsertDo(AdminCategoryVO vo, RedirectAttributes rttr){
 		
 		logger.info("categoryThreeInsertDo :  " + vo.toString());
@@ -179,7 +179,7 @@ public class AdminCategoryController {
 	
 	//3차 카테고리 불러오기
 	@ResponseBody
-	@RequestMapping(value="/categoryThreeList.do/{bno}", method=RequestMethod.GET)
+	@RequestMapping(value="/categoryThreeList/{bno}", method=RequestMethod.GET)
 	public ResponseEntity<List<AdminCategoryVO>> categoryThreeList(@PathVariable("bno") Integer bno){
 		ResponseEntity<List<AdminCategoryVO>> entity=null;
 		List<AdminCategoryVO> list=null;
@@ -198,7 +198,7 @@ public class AdminCategoryController {
 	
 	//3차 카테고리 수정하기
 	@ResponseBody
-	@RequestMapping(value="/categoryThreeUpdate.do", method=RequestMethod.PUT)
+	@RequestMapping(value="/categoryThreeUpdate", method=RequestMethod.PUT)
 	public ResponseEntity<String> categoryThreeUpdate(@RequestBody AdminCategoryVO vo){
 		
 		ResponseEntity<String> entity=null;
@@ -216,7 +216,7 @@ public class AdminCategoryController {
 	
 	//3차 카테고리 삭제하기
 	@ResponseBody
-	@RequestMapping(value="/categoryThreeDelete.do/{rno}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/categoryThreeDelete/{rno}", method=RequestMethod.DELETE)
 	public ResponseEntity<String> categoryThreeDelete(@PathVariable("rno") Integer rno){
 		
 		ResponseEntity<String> entity=null;
