@@ -56,8 +56,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 DELIVER=#{deliver} , DELIVER_MONEY=#{deliverMoney},
 	UPDATEDATE =sysdate WHERE  PRODUCT_ID =#{product_id}
 	
-	
 	</update>
+	
+	
+	<!-- 상품 삭제 -->
+	<delete id="productDelete">
+		delete from PRODUCT  where  product_id=#{product_id}
+	</delete>
+	
+	
+	<!-- 결제 대기 상품 목록 확인 -->
+	<select id="productOrederConfirm" resultType="int">
+		select count(*) from TBL_PRODUCT_ORDER where PRODUCT_ID=#{product_id}
+	</select>
+	
+	
 	
 </mapper>
 

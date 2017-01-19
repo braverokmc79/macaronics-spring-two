@@ -234,6 +234,8 @@ public class AdminShopProductController {
 			try{
 				ProductShopVO vo =productService.detailProduct(product_id);
 				
+				
+				//첨부파일 불러오기
 				List<String>  getAttchList=productService.getAttach(product_id);
 				
 				
@@ -307,19 +309,51 @@ public class AdminShopProductController {
 	
 	
 	//상품 삭제
-	@RequestMapping(value="prodductDelete", method=RequestMethod.POST)
-	public String productDelete(@RequestParam Integer product_id, RedirectAttributes rttr){
+	@RequestMapping(value="/prodductDelete", method=RequestMethod.POST)
+	public String productDelete(@RequestParam Integer product_id, HttpServletRequest request, 
+			RedirectAttributes rttr){
 		
 		int num =adminShopProductService.productOrederConfirm(product_id);
 		
+		logger.info(" productDelete  : product_id " + product_id +" 구매 중인 상품 확인 num :" + num);
 		if(num  >0){
 			rttr.addFlashAttribute("deleteErrorMessage", "구매 중인 상품은 삭제 할 수 없습니다.");
 			return "redirect:proudctList"; 
 		}
 		
+		try{
 		
-		adminShopProductService.productDelete(product_id);
-		
+			//첨부파일 불러오기
+			List<String>  getAttchList=productService.getAttach(product_id);
+			if(getAttchList.size() >0){
+				 UploadPath.attach_path=ATTACH_PATH;
+				
+				 logger.info(" productDelete   첨부 파일 사이즈  : 	"+ getAttchList.size() );
+				 for(String thumnail : getAttchList){
+					
+					 File file =new File(UploadPath.path(request) +thumnail.replace('/', File.separatorChar));
+					 if(file.exists()){
+						 file.delete();
+					 }
+					 
+					 //원본 삭제
+					 String front =thumnail.substring(0, 12);
+					 String end =thumnail.substring(14);
+					 File file2=new File(UploadPath.path(request) +(front+end).replace('/', File.separatorChar));
+					 if(file2.exists()){
+						 file2.delete();
+					 }
+				}
+				//DB : product_id 를 가진 이미지 전체 삭제
+				 adminShopProductService.deleteAttach(product_id);	
+				 
+			}
+			//DB 삭제
+			 logger.info(" productDelete   //DB 삭제");
+			adminShopProductService.productDelete(product_id);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return "redirect:proudctList";
 	}
 	

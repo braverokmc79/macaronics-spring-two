@@ -80,7 +80,7 @@
 		
 		<a href="/shop/products/detail.do/${row.product_id }"><span class="label label-primary">상세보기</span></a>
 		 <a href="/admin/shop/products/productUpdateform/${row.product_id}"><span class="label label-warning">수정하기</span></a>
-		<a href=""><span class="label label-danger"> 삭제하기</span></a>
+		<a href="#" onclick="deleteProduct(${row.product_id })"><span class="label label-danger"> 삭제하기</span></a>
 		
 		</td>
 		
@@ -134,6 +134,12 @@
     </section>
 
 
+<form action="/admin/shop/products/prodductDelete" method="post" name="deleteForm">
+
+ <input type="hidden" name="product_id" id="hidden_product_id" >
+</form>
+
+
   <div class="modal modal-danger" id="checkPw">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -165,12 +171,25 @@
 <script>
   
 $(document).ready(function(){
-
-	alert("ㅇㅇ");	
+	var deleteErrorMessage ="${deleteErrorMessage}";
+	if($.trim(deleteErrorMessage).length >1){
+		alert(deleteErrorMessage);
+	}	
 	
 });
 
-
+function deleteProduct(product_id){
+	//$(this).preventDefault();
+	
+	//alert(product_id);
+	
+	if(confirm("정말 삭제 하시겠습니까?")){
+		
+		$("#hidden_product_id").val(product_id);
+		document.deleteForm.submit();
+	}
+	
+}
 </script>
 
 

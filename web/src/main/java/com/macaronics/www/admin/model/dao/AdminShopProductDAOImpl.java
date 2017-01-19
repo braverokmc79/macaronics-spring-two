@@ -81,6 +81,20 @@ public class AdminShopProductDAOImpl implements AdminShopProductDAO {
 		sqlSession.update(namespace+".updateProduct", vo);
 	}
 
+
+	@Override
+	public int productOrederConfirm(Integer product_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".productOrederConfirm", product_id);
+	}
+
+
+	@Override
+	public void productDelete(Integer product_id) {
+	
+		sqlSession.delete(namespace+".productDelete", product_id);
+	}
+
 	
 	
 	

@@ -25,6 +25,10 @@ public interface AdminShopProductDAO {
 	
 	// 상품 수정
 	public void updateProduct(ProductShopVO vo);
+
+	public int productOrederConfirm(Integer product_id);
+
+	public void productDelete(Integer product_id);
 	
 	
 }

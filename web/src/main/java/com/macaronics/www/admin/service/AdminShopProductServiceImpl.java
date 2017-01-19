@@ -103,12 +103,17 @@ public class AdminShopProductServiceImpl implements AdminShopProductService {
 		
 	}
 
-
+	@Transactional
 	@Override
 	public void productDelete(Integer product_id) {
 		
-		
-		adminShopProductDao.deleteAttach(product_id);
+		try{
+			
+			//상품 삭제
+			adminShopProductDao.productDelete(product_id);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -116,7 +121,19 @@ public class AdminShopProductServiceImpl implements AdminShopProductService {
 	@Override
 	public int productOrederConfirm(Integer product_id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return adminShopProductDao.productOrederConfirm(product_id);
+	}
+
+
+	@Override
+	public void deleteAttach(Integer product_id) {
+		try {
+			adminShopProductDao.deleteAttach(product_id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	

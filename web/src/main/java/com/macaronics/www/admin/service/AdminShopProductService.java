@@ -23,6 +23,9 @@ public interface AdminShopProductService {
 
 
 	public int productOrederConfirm(Integer product_id);
+
+
+	public void deleteAttach(Integer product_id);
 	
 	
 }
