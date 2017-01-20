@@ -18,16 +18,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	
+	
+	
+	
 	<!-- 첨부파일 -->
 	<insert id="addAttach">
 		insert into TBL_PRODUCT_ATTACH (FULLNAME, PRODUCT_ID) 
 		 values (#{fullName} , seq_product.currval)
 	</insert>
 
+	<!-- 상품 리스트 -->
+	
+	
+	
+	
+	
 	
 	<select id="productList" resultType="com.macaronics.www.user.model.dto.ProductShopVO">
 		select * from view_product  order by regdate desc
 	</select>
+	
+	
+	
+	
 	
 	
 	<!-- 첨부 파일 개별 삭제 -->

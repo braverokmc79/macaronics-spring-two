@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +22,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,6 +36,8 @@ import com.macaronics.www.admin.service.AdminShopProductService;
 import com.macaronics.www.user.model.dto.ProductShopVO;
 import com.macaronics.www.user.service.ProductService;
 import com.macaronics.www.util.fileupload.UploadPath;
+import com.macaronics.www.util.oralce.PageAndSearch;
+import com.macaronics.www.util.oralce.Pager;
 import com.macaronics.www.util.upload.MediaUtils;
 import com.macaronics.www.util.upload.UploadFileUtils;
 
@@ -212,18 +215,46 @@ public class AdminShopProductController {
 	
 	//관리자 상품 목록	
 	@RequestMapping(value="/proudctList", method=RequestMethod.GET)
-	public String proudctList(Model model){
+	public String proudctList(Model model, PageAndSearch pas){
 		
 		List<ProductShopVO> list =null;
 		try{
 			
-			list=adminShopProductService.productList();
-			model.addAttribute("list", list);
+			int count =productService.countArticle(pas.getSearch_option(), pas.getKeyword());
+			
+			//페이지 나누기 관련 처리
+			if(pas.getCurPage()==null){pas.setCurPage(1);}
+			
+			Pager.PAGE_SCALE=20; //페이지당 20개씩
+			
+			Pager pager =new Pager(count, pas.getCurPage());
+			int start =pager.getPageBegin();
+			int end=pager.getPageEnd();
+			
+			
+			//List<BoardVO> list=boardService.boardList(start, end, pas.getSearch_option(), pas.getKeyword());
+			list=productService.productList(start, end, pas.getSearch_option(), pas.getKeyword());
+			
+			Map<String, Object> map =new HashMap<>();
+			map.put("countList", count);
+			map.put("pager", pager);
+		
+			
+			model.addAttribute("map",map);
+			
+			
+			model.addAttribute("pageAndSearch",pas);
+			model.addAttribute("productList" ,list);
+		
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		return JSP_PAGE+"productList";
 	}
+	
+	
+	
+	
 	
 	
 	

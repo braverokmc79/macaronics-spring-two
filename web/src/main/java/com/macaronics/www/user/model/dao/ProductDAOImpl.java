@@ -1,6 +1,8 @@
 package com.macaronics.www.user.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -23,13 +25,19 @@ public class ProductDAOImpl implements ProductDAO {
 	
 	
 	private final static String namespace=SqlServerEnvironment.SQL+"productMapper";
-	
-	
+
 	
 	@Override
-	public List<ProductShopVO> productList() throws Exception {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".productList");
+	public List<ProductShopVO> productList(int start, int end, String search_option, String keyword)
+			throws Exception {
+		Map<String, Object> map =new HashMap<>();
+		
+		map.put("start", start);
+		map.put("end", end);
+		map.put("search_option", search_option);
+		map.put("keyword", keyword);
+		
+		return sqlSession.selectList(namespace+".productList", map);
 	}
 
 	@Override
@@ -65,6 +73,19 @@ public class ProductDAOImpl implements ProductDAO {
 	public List<String> getAttach(Integer product_id) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".getAttach", product_id);
+	}
+	
+	
+	
+
+	@Override
+	public int countArticle(String search_option, String keyword) {
+		
+		Map<String, Object> map =new HashMap<>();
+		map.put("search_option", search_option);
+		map.put("keyword", keyword);
+		
+		return sqlSession.selectOne(namespace+".countArticle", map);
 	}
 	
 	

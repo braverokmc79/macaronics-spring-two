@@ -21,13 +21,12 @@ public class ProductServiceImpl implements ProductService {
 	private ProductDAO dao;
 	
 	@Override
-	public List<ProductShopVO> productList() throws Exception {
-		
-
-		
-		return dao.productList();
+	public List<ProductShopVO> productList(int start, int end, String search_option, String keyword) throws Exception {
+	
+		return dao.productList(start, end, search_option, keyword);
 	}
 
+	
 	@Transactional
 	@Override
 	public ProductShopVO detailProduct(Integer product_id) {
@@ -60,6 +59,14 @@ public class ProductServiceImpl implements ProductService {
 	public List<String> getAttach(Integer product_id) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.getAttach(product_id);
+	}
+
+	
+	
+	@Override
+	public int countArticle(String search_option, String keyword) {
+		// TODO Auto-generated method stub
+		return dao.countArticle(search_option, keyword);
 	}
 
 	

@@ -89,7 +89,7 @@
                <c:forEach items="${productList}" var="row">
               
                  <li>
-                  <article class="aa-properties-item" style="min-height: 650px;;max-height: 650px; margin-bottom: 10px;">
+                  <article class="aa-properties-item" >
                     <a class="aa-properties-item-img" href="/shop/products/detail.do/${row.product_id }">
                       <img alt="img" src="/products/img/${row.picture_url.substring(0,12) }${row.picture_url.substring(14)}" style="max-height:345px ;min-height:345px ; max-height: 345px; min-width: 345px;">
                     </a>
@@ -126,7 +126,7 @@
                         
                       <c:choose>
 				           <c:when test="${fn:length(row.description) > 14}">
-				            <c:out value="${fn:substring(row.description, 0, 100)}"/>....
+				            <c:out value="${fn:substring(row.description, 0, 50)}"/>....
 				           </c:when>
 				           <c:otherwise>
 				            <c:out value="${row.description}"/>
@@ -154,29 +154,72 @@
            
            
            
-            <div class="aa-properties-content-bottom">
-              <nav>
-                <ul class="pagination">
-                  <li>
-                    <a href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  </li>
-                  <li><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li class="active"><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
-                  <li>
-                    <a href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
+    <div class="aa-properties-content-bottom">
+                        <nav>
+                    
+                          <ul class="pagination">
+                           
+                           <c:if test="${map.pager.curBlock  > 1 }">
+                               <li>
+                               <a aria-label="Previous" href="javascript:list('${pageAndSearch.searchQuery(1) }')">
+                                <span aria-hidden="true">시작</span>
+                              </a>
+                              </li>
+                           </c:if>
+                           
+                           <c:if test="${map.pager.curBlock  > 1 }">
+                            <li>
+                              <a aria-label="Previous" href="javascript:list('${pageAndSearch.searchQuery(map.pager.prevPage) }')">
+                                <span aria-hidden="true">«</span>
+                              </a>
+                            </li>
+                            </c:if>
+   
+                          <c:forEach begin="${ map.pager.blockBegin }"  end="${ map.pager.blockEnd }" var="page">
+                           	<c:choose>
+                           		<c:when test="${ page ==map.pager.curPage }">
+                           			<li class="active"> 
+                            		  <a href="javascript:list('${pageAndSearch.searchQuery(page) }')" >${page}</a>
+                            		</li>
+                           		</c:when>
+                           		<c:otherwise>
+                           			<li > 
+                            		  <a href="javascript:list('${pageAndSearch.searchQuery(page) }')" >${page}</a>
+                            		</li>	
+                           		</c:otherwise>
+                           	</c:choose>
+                           
+                          </c:forEach>
+                    
+           				<c:if test="${ map.pager.curBlock < map.pager.totBlock }">
+                            <li>
+                              <a aria-label="Next" href="javascript:list('${ pageAndSearch.searchQuery(map.pager.nextPage) }')">
+                                <span aria-hidden="true">»</span>
+                              </a>
+                            </li>
+                        </c:if> 
+                        <c:if test="${map.pager.curPage < map.pager.totPage }">
+                          <li>
+                              <a aria-label="Next" href="javascript:list('${ pageAndSearch.searchQuery(map.pager.totPage) }')">
+                                <span aria-hidden="true">끝</span>
+                              </a>
+                            </li>
+                        </c:if>    
+                          </ul>
+                      
+                      </nav>
+                      </div>
+                    
+                    
+            
+            
+            
+            
+            
           </div>
         </div>
+        
+        
         <!-- Start properties sidebar -->
         <div class="col-md-4">
           <aside class="aa-properties-sidebar">
@@ -289,7 +332,18 @@
 
 
 
+<script type="text/javascript">
 
+
+
+function list(page){
+
+	location.href='/shop/products/list.do'+page;
+
+}
+
+
+</script>
 
 
 

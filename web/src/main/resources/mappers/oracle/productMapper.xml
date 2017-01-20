@@ -6,10 +6,64 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="ORACLEproductMapper">
 	
+	
+		<!-- 레코드 개수 계수 -->
+	<select id="countArticle" resultType="int">
+	   select count(*)  from view_product  where PRODUCT_ID > 0
+	   <!-- 	 <include refid="search"></include> -->
+	</select>
 		
 	<select id="productList" resultType="com.macaronics.www.user.model.dto.ProductShopVO">
-		select * from view_product  order by regdate desc
+		select * from
+
+(
+
+select rownum as rn , A.*
+	from (
+	
+	select  rownum ,
+
+p.PRODUCT_ID, p.AMOUNT,  p.CATEGORY_BNO, p.CATEGORY_IDX, p.CATEGORY_RNO,p.DELIVER
+
+,p.DELIVER_MONEY, p.DESCRIPTION, p.PICTURE_URL, p.PRICE, p.PRODUCT_NAME,p.PRODUCT_STATE,p.REGDATE, p.UPDATEDATE
+
+,p.view_count
+, c1.title as category1_title  ,  c2.title as category2_title   , c3.TITLE as category3_title
+		
+	from product p , TBL_CATEGORY_ONE c1, TBL_CATEGORY_TWO c2, TBL_CATEGORY_THREE c3
+	
+	where p.category_idx =c1.IDX and p.category_bno=c2.BNO and p.category_rno =c3.RNO
+	
+	 <include refid="search"></include>
+	
+	order by p.PRODUCT_ID desc , p.REGDATE desc
+	)
+	
+	A 
+		
+)		where  rn BETWEEN #{start} and #{end}
+
+		
 	</select>
+	
+<sql id="search">
+		
+<!-- 		<if test="search_option !=null">					
+			<if test="search_option =='title' || search_option =='writer' || search_option=='content' || search_option=='username' ">
+				and   ${search_option} like  '%' || #{keyword} || '%'
+			</if>
+		</if>
+	
+	<if test="search_option == 'all'">
+			 and   ( title like  '%' || #{keyword} || '%' )		  
+			  or  (  writer like  '%' || #{keyword} || '%' )
+			     or ( content like  '%' || #{keyword} || '%'  )
+	</if>
+		 -->	
+</sql>	
+	
+	
+	
 	
 	<select id="detailProduct" resultType="com.macaronics.www.user.model.dto.ProductShopVO">
 		select * from view2_product where product_id=#{product_id}
@@ -24,6 +78,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getAttach" resultType="string">
 		select fullName from TBL_PRODUCT_ATTACH where product_id=#{product_id} order by regdate
 	</select>
+	
+	
+	
 	
 </mapper>
 

@@ -41,7 +41,7 @@ public class SampleInterceptor extends HandlerInterceptorAdapter{
 		}
 		
 		if(request.getMethod().equals("GET")){
-			logger.info("logoutDest : " +(uri +query));
+		//	logger.info("logoutDest : " +(uri +query));
 				
 			//로그아웃 페이지면 저장 하지 않는다.
 			String saveDest =uri+query;
@@ -52,7 +52,7 @@ public class SampleInterceptor extends HandlerInterceptorAdapter{
 				//저장 하지 않는다.
 			}else{
 				request.getSession().setAttribute("dest", saveDest);
-				logger.info("saveLogoutDest : " +(uri +query));
+			//	logger.info("saveLogoutDest : " +(uri +query));
 			}
 		}
 	}

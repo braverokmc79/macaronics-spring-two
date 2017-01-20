@@ -48,7 +48,7 @@
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">상품</h3>
+              <h3 class="box-title">상품 등록수 - <span class="badge bg-green"> ${map.countList } EA</span> </h3>
       <p style="margin-bottom: 50px;"></p>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
@@ -73,7 +73,7 @@
                 </tr>
    
    
-   <c:forEach items="${list }" var="row">
+   <c:forEach items="${productList }" var="row">
 		<tr >
 		
 		<td><span class="badge bg-purple">${row.product_id }</span>
@@ -126,8 +126,66 @@
           </div>
           <!-- /.box -->
        
+    
+           
+           
+     <div class="aa-properties-content-bottom">
+                        <nav>
+                    
+                          <ul class="pagination">
+                           
+                           <c:if test="${map.pager.curBlock  > 1 }">
+                               <li>
+                               <a aria-label="Previous" href="javascript:list('${pageAndSearch.searchQuery(1) }')">
+                                <span aria-hidden="true">시작</span>
+                              </a>
+                              </li>
+                           </c:if>
+                           
+                           <c:if test="${map.pager.curBlock  > 1 }">
+                            <li>
+                              <a aria-label="Previous" href="javascript:list('${pageAndSearch.searchQuery(map.pager.prevPage) }')">
+                                <span aria-hidden="true">«</span>
+                              </a>
+                            </li>
+                            </c:if>
+   
+                          <c:forEach begin="${ map.pager.blockBegin }"  end="${ map.pager.blockEnd }" var="page">
+                           	<c:choose>
+                           		<c:when test="${ page ==map.pager.curPage }">
+                           			<li class="active"> 
+                            		  <a href="javascript:list('${pageAndSearch.searchQuery(page) }')" >${page}</a>
+                            		</li>
+                           		</c:when>
+                           		<c:otherwise>
+                           			<li > 
+                            		  <a href="javascript:list('${pageAndSearch.searchQuery(page) }')" >${page}</a>
+                            		</li>	
+                           		</c:otherwise>
+                           	</c:choose>
+                           
+                          </c:forEach>
+                    
+           				<c:if test="${ map.pager.curBlock < map.pager.totBlock }">
+                            <li>
+                              <a aria-label="Next" href="javascript:list('${ pageAndSearch.searchQuery(map.pager.nextPage) }')">
+                                <span aria-hidden="true">»</span>
+                              </a>
+                            </li>
+                        </c:if> 
+                        <c:if test="${map.pager.curPage < map.pager.totPage }">
+                          <li>
+                              <a aria-label="Next" href="javascript:list('${ pageAndSearch.searchQuery(map.pager.totPage) }')">
+                                <span aria-hidden="true">끝</span>
+                              </a>
+                            </li>
+                        </c:if>    
+                          </ul>
+                      
+                      </nav>
+                      </div>
+                    
      
-
 
 
           <!-- /.box -->
@@ -135,6 +193,10 @@
       </div>
 
     </section>
+
+
+
+
 
 
 <form action="/admin/shop/products/prodductDelete" method="post" name="deleteForm">
@@ -193,9 +255,13 @@ function deleteProduct(product_id){
 	}
 	
 }
+
+function list(page){
+
+	location.href='/admin/shop/products/proudctList'+page;
+
+}
 </script>
-
-
 
 
 

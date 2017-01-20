@@ -21,7 +21,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		
-		logger.info(" Loing postHandle");
+	//	logger.info(" Loing postHandle");
 		
 	}
 	
@@ -36,7 +36,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session =request.getSession();
 		if(session.getAttribute(LOGIN)!=null){
 			// 로그인 전 기존에 남아 있는 정보 삭제
-			logger.info("clear login data before");
+		//	logger.info("clear login data before");
 			session.removeAttribute(LOGIN);
 		}
 		return true;

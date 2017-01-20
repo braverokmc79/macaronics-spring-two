@@ -22,7 +22,7 @@ public class LogOutIntercepor extends HandlerInterceptorAdapter{
 		HttpSession session =request.getSession();
 		//로그 아웃으로 가기전 uri 정보 저장
 		if(session.getAttribute("loginUser")!=null){
-			logger.info("LogOut current ");
+			//logger.info("LogOut current ");
 			
 			// 현재 uri 정보 저장
 		//	saveDest(request);
@@ -43,7 +43,7 @@ public class LogOutIntercepor extends HandlerInterceptorAdapter{
 		}
 		
 		if(request.getMethod().equals("GET")){
-			logger.info("dest : " +(uri +query));
+		//	logger.info("dest : " +(uri +query));
 			request.getSession().removeAttribute("dest");
 			request.getSession().setAttribute("dest", uri+query);
 		}

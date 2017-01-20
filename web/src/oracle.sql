@@ -758,7 +758,7 @@ create view view_product as
 
 (
 
-select  
+select  rownum as rn,
 
 p.PRODUCT_ID, p.AMOUNT,  p.CATEGORY_BNO, p.CATEGORY_IDX, p.CATEGORY_RNO,p.DELIVER
 
@@ -771,8 +771,7 @@ p.PRODUCT_ID, p.AMOUNT,  p.CATEGORY_BNO, p.CATEGORY_IDX, p.CATEGORY_RNO,p.DELIVE
 	
 	where p.category_idx =c1.IDX and p.category_bno=c2.BNO and p.category_rno =c3.RNO
 
-);  
-  	
+); 
 
 
 -- p.BIG_DESCRIPTION, 포함
@@ -795,5 +794,41 @@ p.PRODUCT_ID, p.AMOUNT,  p.CATEGORY_BNO, p.CATEGORY_IDX, p.CATEGORY_RNO,p.DELIVE
 
 );  
   	
-		 commit;
+ commit;
+ 
+ 
+-- 상품 테이블 검색 쿼리 설정
+
+
+select * from
+
+(
+
+select rownum as rn , A.*
+	from (
+	
+	select  rownum ,
+
+p.PRODUCT_ID, p.AMOUNT,  p.CATEGORY_BNO, p.CATEGORY_IDX, p.CATEGORY_RNO,p.DELIVER
+
+,p.DELIVER_MONEY, p.DESCRIPTION, p.PICTURE_URL, p.PRICE, p.PRODUCT_NAME,p.PRODUCT_STATE,p.REGDATE, p.UPDATEDATE
+
+,p.view_count
+, c1.title as category1_title  ,  c2.title as category2_title   , c3.TITLE as category3_title
+		
+	from product p , TBL_CATEGORY_ONE c1, TBL_CATEGORY_TWO c2, TBL_CATEGORY_THREE c3
+	
+	where p.category_idx =c1.IDX and p.category_bno=c2.BNO and p.category_rno =c3.RNO
+	
+	
+	order by p.PRODUCT_ID desc , p.REGDATE desc
+	)
+	
+	A 
+		
+)		where  rn BETWEEN  1 and 10 ;
+
+
+ 
+ 
 	
