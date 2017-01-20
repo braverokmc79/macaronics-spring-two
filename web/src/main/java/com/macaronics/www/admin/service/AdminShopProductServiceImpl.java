@@ -43,7 +43,7 @@ public class AdminShopProductServiceImpl implements AdminShopProductService {
 		    
 		    //첨부파일 등록
 		    for(String file :files){
-		    	adminShopProductDao.addAttach(file);
+		    	//adminShopProductDao.addAttach(file);
 		    }
 	 
 	

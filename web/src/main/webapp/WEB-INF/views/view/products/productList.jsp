@@ -89,9 +89,9 @@
                <c:forEach items="${productList}" var="row">
               
                  <li>
-                  <article class="aa-properties-item">
+                  <article class="aa-properties-item" style="min-height: 650px;;max-height: 650px; margin-bottom: 10px;">
                     <a class="aa-properties-item-img" href="/shop/products/detail.do/${row.product_id }">
-                      <img alt="img" src="/products/img/${row.picture_url}" style="max-height:345px ;min-height:345px ; max-height: 345px; min-width: 345px;">
+                      <img alt="img" src="/products/img/${row.picture_url.substring(0,12) }${row.picture_url.substring(14)}" style="max-height:345px ;min-height:345px ; max-height: 345px; min-width: 345px;">
                     </a>
                      <c:if test="${row.product_state !='보통' }" >
                        	<c:choose>
@@ -114,19 +114,19 @@
                    	 
                     </c:if>
                       
-                    <div class="aa-properties-item-content">
+                    <div class="aa-properties-item-content" >
                       <div class="aa-properties-info">
-                        <span>5 Rooms</span>
-                        <span>2 Beds</span>
-                        <span>3 Baths</span>
-                        <span>${ row.amount }</span>
+                        <span class="label label-warning">${row.product_state}</span>
+                        <span>기본 배송비 : <fmt:formatNumber value="${row.deliver_money }" pattern="#,###"/>원</span>
+                        <span>조회 : ${row.view_count}</span>
+                        <span>남은 수량 :${ row.amount } EA</span>
                       </div>
                       <div class="aa-properties-about">
                         <h3><a href="#">${row.product_name }</a></h3>
                         
                       <c:choose>
 				           <c:when test="${fn:length(row.description) > 14}">
-				            <c:out value="${fn:substring(row.description, 0, 50)}"/>....
+				            <c:out value="${fn:substring(row.description, 0, 100)}"/>....
 				           </c:when>
 				           <c:otherwise>
 				            <c:out value="${row.description}"/>
@@ -289,18 +289,6 @@
 
 
 
-<script>
-$(document).ready(function(){
-	
-
-	
-	
-});
-
-
-
-
-</script>
 
 
 

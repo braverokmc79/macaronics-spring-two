@@ -721,5 +721,79 @@ p.PRODUCT_ID, p.AMOUNT, p.BIG_DESCRIPTION, p.CATEGORY_BNO, p.CATEGORY_IDX, p.CAT
 
 );  
   
+
+
+
+
+
+-- long 타입을 clob 타입으로 변경후 자가 복제
+
+DECLARE
+BEGIN
+   DECLARE
+      CURSOR CURSOR_NAME
+      IS
+         SELECT PRODUCT_ID, PRODUCT_NAME, PRICE, DESCRIPTION, PICTURE_URL, REGDATE, AMOUNT, PRODUCT_STATE, BIG_DESCRIPTION,
+                CATEGORY_IDX, CATEGORY_BNO, CATEGORY_RNO, DELIVER, DELIVER_MONEY, UPDATEDATE,VIEW_COUNT
+           FROM product2;
+   BEGIN
+      FOR I IN CURSOR_NAME
+      LOOP
+         INSERT INTO product2 (PRODUCT_ID, PRODUCT_NAME, PRICE, DESCRIPTION, PICTURE_URL, REGDATE, AMOUNT, PRODUCT_STATE, BIG_DESCRIPTION,
+                CATEGORY_IDX, CATEGORY_BNO, CATEGORY_RNO, DELIVER, DELIVER_MONEY, UPDATEDATE,VIEW_COUNT
+				)
+              VALUES (seq_product.NEXTVAL,  I.PRODUCT_NAME, I.PRICE,  I.DESCRIPTION,  I.PICTURE_URL,   I.REGDATE,
+                     
+                      I.AMOUNT,  I.PRODUCT_STATE, I.BIG_DESCRIPTION,  I.CATEGORY_IDX, I.CATEGORY_BNO,
+                      I.CATEGORY_RNO,   I.DELIVER,I.DELIVER_MONEY,  I.UPDATEDATE,
+                       I.VIEW_COUNT);
+         
+      END LOOP;
+   END;
+END;
+
+
+-- p.BIG_DESCRIPTION, 제거
+create view view_product as 
+
+(
+
+select  
+
+p.PRODUCT_ID, p.AMOUNT,  p.CATEGORY_BNO, p.CATEGORY_IDX, p.CATEGORY_RNO,p.DELIVER
+
+,p.DELIVER_MONEY, p.DESCRIPTION, p.PICTURE_URL, p.PRICE, p.PRODUCT_NAME,p.PRODUCT_STATE,p.REGDATE,p.UPDATEDATE
+
+,p.view_count
+, c1.title as category1_title  ,  c2.title as category2_title   , c3.TITLE as category3_title
+		
+	from product p , TBL_CATEGORY_ONE c1, TBL_CATEGORY_TWO c2, TBL_CATEGORY_THREE c3
 	
+	where p.category_idx =c1.IDX and p.category_bno=c2.BNO and p.category_rno =c3.RNO
+
+);  
+  	
+
+
+-- p.BIG_DESCRIPTION, 포함
+create view view2_product as 
+
+(
+
+select  
+
+p.PRODUCT_ID, p.AMOUNT,  p.CATEGORY_BNO, p.CATEGORY_IDX, p.CATEGORY_RNO,p.DELIVER
+
+,p.DELIVER_MONEY, p.DESCRIPTION, p.PICTURE_URL, p.PRICE, p.PRODUCT_NAME,p.PRODUCT_STATE,p.REGDATE,p.UPDATEDATE
+
+,p.view_count
+, c1.title as category1_title  ,  c2.title as category2_title   , c3.TITLE as category3_title
+		
+	from product p , TBL_CATEGORY_ONE c1, TBL_CATEGORY_TWO c2, TBL_CATEGORY_THREE c3
+	
+	where p.category_idx =c1.IDX and p.category_bno=c2.BNO and p.category_rno =c3.RNO
+
+);  
+  	
+		 commit;
 	

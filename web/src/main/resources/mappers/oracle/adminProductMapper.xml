@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="ORACLEadminShopProductMapper">
 	
 		<insert id="productInsert">
-		insert INTO PRODUCT (PRODUCT_ID, PRODUCT_NAME, PRICE, DESCRIPTION,
+		insert INTO product (PRODUCT_ID, PRODUCT_NAME, PRICE, DESCRIPTION,
 	 PICTURE_URL,  AMOUNT, PRODUCT_STATE, BIG_DESCRIPTION, 
 	 CATEGORY_IDX, CATEGORY_BNO, CATEGORY_RNO, DELIVER, DELIVER_MONEY ) 
 	 
@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	
 	<select id="productList" resultType="com.macaronics.www.user.model.dto.ProductShopVO">
-		select * from v_product  order by regdate desc
+		select * from view_product  order by regdate desc
 	</select>
 	
 	

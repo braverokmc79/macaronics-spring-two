@@ -78,15 +78,18 @@
 		
 		<td><span class="badge bg-purple">${row.product_id }</span>
 		
-		<a href="/shop/products/detail.do/${row.product_id }"><span class="label label-primary">상세보기</span></a>
+		
 		 <a href="/admin/shop/products/productUpdateform/${row.product_id}"><span class="label label-warning">수정하기</span></a>
 		<a href="#" onclick="deleteProduct(${row.product_id })"><span class="label label-danger"> 삭제하기</span></a>
 		
 		</td>
 		
-		<td><img src="/products/img${row.picture_url }"  style="max-height: 100px; max-width: 100px;"></td>
+		<td><a href="/shop/products/detail.do/${row.product_id }"><img src="/products/img${row.picture_url }"  style="max-height: 100px; max-width: 100px;"></a></td>
 		
-		<td><a href="" >${row.product_name }</a></td>
+		<td><a href="/shop/products/detail.do/${row.product_id }" >${row.product_name }</a>
+		&nbsp;￦<fmt:formatNumber  pattern="###,###" value="${row.price }" /></td>
+			
+		
 		
 		<td>
 		<c:choose>

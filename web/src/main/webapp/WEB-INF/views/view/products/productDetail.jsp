@@ -105,26 +105,21 @@
                <div class="col-md-12">${productDetail.description }
                <hr>
                <c:if test="${ not empty loginUser || not empty loginAdmin }">
-                <a class="btn btn-danger" type="button" href="/admin/shop/products/productUpdateform/${productDetail.product_id}">(관리자) 상품 수정하기</a>
+                <a class="btn btn-warning" type="button" href="/admin/shop/products/productUpdateform/${productDetail.product_id}">(관리자) 상품 수정하기</a>
+<a class="btn btn-danger" type="button" onclick="deleteProduct(${productDetail.product_id })"  href="#">(관리자) 상품 삭제하기</a>
               	 <hr>
                </c:if>
              
-               <h4>Propery Features</h4>
-               <ul>
-                 <li>4 Bedroom</li>
-                 <li>3 Baths</li>
-                 <li>Kitchen</li>
-                 <li>Air Condition</li>
-                 <li>Belcony</li>
-                 <li>Gym</li>
-                 <li>Garden</li>
-                 <li>CCTV</li>
-                 <li>Children Play Ground</li>
-                 <li>Comunity Center</li>
-                 <li>Security System</li>
+               <h4>상세정보</h4>
+              
+   
+              <c:if test='${ request.getRequestURL().contains("50")}'>
+               <ul>       
+                 <%@ include file="deal.jsp" %>
                </ul>
-               <h4>Property Video</h4>
-     
+             </c:if>
+     			
+     			
      			<p>
      			${productDetail.big_description }
      			</p>
@@ -323,10 +318,6 @@
 
 
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Launch demo modal
-</button>
 
 <!-- Modal -->
 <div class="modal fade"   id="myModal"  tabindex="-1"   role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -400,6 +391,40 @@ function cartListGo(){
 </script>
 
 
+
+
+<form action="/admin/shop/products/prodductDelete" method="post" name="deleteForm">
+
+ <input type="hidden" name="product_id" id="hidden_product_id" >
+</form>
+
+
+
+
+<script>
+
+/* 삭제하기 */
+$(document).ready(function(){
+	var deleteErrorMessage ="${deleteErrorMessage}";
+	if($.trim(deleteErrorMessage).length >1){
+		alert(deleteErrorMessage);
+	}	
+	
+});
+
+function deleteProduct(product_id){
+	//$(this).preventDefault();
+	
+	//alert(product_id);
+	
+	if(confirm("정말 삭제 하시겠습니까?")){
+		
+		$("#hidden_product_id").val(product_id);
+		document.deleteForm.submit();
+	}
+	
+}
+</script>
 
 
   

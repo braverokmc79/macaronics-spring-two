@@ -448,7 +448,7 @@ $(document).ready(function(){
 		$("#categoryDIV").show("slow");
 		
 		if(($("#categoryDIV").css("display"))!="none"){
-			alert("디스플레이가 !none 입니다." + $("#categoryDIV").css("display"));
+			//alert("디스플레이가 !none 입니다." + $("#categoryDIV").css("display"));
 		}
 		
 	});

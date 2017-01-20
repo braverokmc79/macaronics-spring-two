@@ -8,11 +8,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 		
 	<select id="productList" resultType="com.macaronics.www.user.model.dto.ProductShopVO">
-		select * from v_product  order by regdate desc
+		select * from view_product  order by regdate desc
 	</select>
 	
 	<select id="detailProduct" resultType="com.macaronics.www.user.model.dto.ProductShopVO">
-		select * from v_product where product_id=#{product_id}
+		select * from view2_product where product_id=#{product_id}
 	</select>
 	
 	<!-- 조회수 증가 -->

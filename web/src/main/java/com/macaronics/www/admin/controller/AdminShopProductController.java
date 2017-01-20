@@ -129,7 +129,7 @@ public class AdminShopProductController {
 		logger.info(vo.toString());		
 		adminShopProductService.productInsert(vo);
 		
-		return "redirect:/admin/index";
+		return "redirect:proudctList";
 	}
 	
 	
@@ -249,7 +249,7 @@ public class AdminShopProductController {
 						
 						attach.setThumNail(thumnail);
 						attach.setFullName(front+end);
-						attach.setFileName(thumnail.substring(thumnail.indexOf("_")+1));
+						attach.setFileName(thumnail.substring(thumnail.lastIndexOf("_")+1));
 						attachList.add(attach);
 					}
 					model.addAttribute("attachList", attachList);
