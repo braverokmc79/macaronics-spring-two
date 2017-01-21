@@ -117,45 +117,35 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="aa-single-advance-search">
-                  <input type="text" placeholder="Type Your Location">
+                  <input type="text" placeholder="">
                 </div>
               </div>
               <div class="col-md-2">
                 <div class="aa-single-advance-search">
-                  <select>
-                   <option value="0" selected>Category</option>
-                    <option value="1">Flat</option>
-                    <option value="2">Land</option>
-                    <option value="3">Plot</option>
-                    <option value="4">Commercial</option>
+                   <select class="form-control" id="categoryOne" onchange="CategoryOneChange()">
+                    <c:forEach items="${ categoryOne}" var="row">
+                    	<option value="${row.idx }" >${row.title }</option>
+					</c:forEach>
                   </select>
                 </div>
               </div>
               <div class="col-md-2">
                  <div class="aa-single-advance-search">
-                  <select>
-                    <option value="0" selected>Type</option>
-                    <option value="1">Flat</option>
-                    <option value="2">Land</option>
-                    <option value="3">Plot</option>
-                    <option value="4">Commercial</option>
+                  <select class="form-control" id="categoryTwo" onchange="categoryTwoChange()">
+
                   </select>
               </div>
               </div>
               <div class="col-md-2">
                  <div class="aa-single-advance-search">
-                  <select>
-                    <option value="0" selected>Type</option>
-                    <option value="1">Flat</option>
-                    <option value="2">Land</option>
-                    <option value="3">Plot</option>
-                    <option value="4">Commercial</option>
+                  <select class="form-control" id="categoryThree" >
+
                   </select>
               </div>
               </div>
               <div class="col-md-2">
                 <div class="aa-single-advance-search">
-                  <input class="aa-search-btn" type="submit" value="Search">
+                  <input class="aa-search-btn" type="submit" value="검색">
                 </div>
               </div>
             </div>
@@ -659,7 +649,119 @@
   </section>
   <!-- / Latest blog -->
 
+<script>
 
+$(document).ready(function(){
+	
+	
+	//2차 카테고리 호출
+	CategoryOneChange();
+	
+	
+});
+
+
+//1 카테고리 체인지
+function CategoryOneChange(){
+	
+	var idx =$("#categoryOne").val();
+	//2차카테고리 idx
+	$("#categoryTwoIdx").val(idx);
+	//3차카테고리 idx
+	$("#categoryThreeIdx").val(idx);
+	
+	
+	var categoryOenText =$("#categoryOne option:selected").text();
+	if(categoryOenText.length<1){
+		$("#categoryTwoP").text("1차 카테고리 먼저 입력 해 주세요.");
+	}else{
+		//2차카테고리 텍스트
+		$("#categoryTwoP").text(categoryOenText);
+		//3차카테고리 텍스트
+		$("#categoryThreeP").text(categoryOenText);
+	}
+	//모달에 idx 전송
+	$("#idx").val(idx);
+	
+	//2차 카테고리 목록 불러오기
+	CategoryTowList(idx);
+	
+
+}
+
+//2차 카테고리 목록 불러오기
+function CategoryTowList(idx){
+	
+	
+	$.getJSON("/categoryTwoList/"+idx , function(data){
+		var str ="";
+		
+		$(data).each(function(){
+			str +="<option value="+this.bno+" >"+this.title+"</option>";
+			
+		});
+		$("#categoryTwo").html(str);
+		$("#showCategoryTwo").html(str);
+		
+		//사이즈 호출
+		//alert("2차 사이즈  :" +$("#categoryTwo option").size());
+		//3차 카테고리 체인지
+		var twoSize=$("#categoryTwo option").size();
+		
+		if(twoSize==0){
+			//3차 숨김
+			$("#list3").css("display","none");
+			$("#showCategoryThree").html("");
+		}else{
+			//3차 보임
+			$("#list3").css("display","");
+		}
+		categoryTwoChange();
+		
+		
+	});
+	
+}
+
+
+// 2차카테고리 체인지
+function categoryTwoChange(){
+		
+	var bno =$("#categoryTwo").val();
+	var bnoText=$("#categoryTwo option:selected").text();
+	//alert("2차 체인지" +bno + "   :   "+ bnoText);
+	//3차에 값 삽입
+	$("#categoryThreeBno").val(bno);
+	$("#categoryThreePtext").text(bnoText);
+	
+	CategoryThreeList(bno);
+}
+
+
+
+//3차 카테고리 목록 불러오기
+function CategoryThreeList(bno){
+	
+	
+	$.getJSON("/categoryThreeList/"+bno , function(data){
+		var str ="";
+		
+		$(data).each(function(){
+			str +="<option value="+this.rno+" >"+this.title+"</option>";
+			
+		});
+		$("#categoryThree").html(str);
+		$("#showCategoryThree").html(str);
+		
+		
+	});
+	
+}
+
+
+
+
+</script>
 
 
 
