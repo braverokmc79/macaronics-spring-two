@@ -24,7 +24,7 @@
                 <div class="aa-header-left">
                   <div class="aa-telephone-no">
                     <span class="fa fa-bars"></span>
-                    서버 환경  :  <span style="color: red;">${ServerEnvironment }</span>
+                   <a href="http://macaronics.comlu.com/" target="_blank">서버 환경  :  <span style="color: red;">${ServerEnvironment }</span></a>	
                   
                   </div>
                   <div class="aa-email hidden-xs">

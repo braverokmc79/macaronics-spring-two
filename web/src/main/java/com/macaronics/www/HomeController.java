@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.macaronics.www.admin.model.dto.AdminCategoryVO;
+import com.macaronics.www.admin.model.dto.AdminRecommendedVO;
 import com.macaronics.www.admin.service.AdminCategoryService;
+import com.macaronics.www.admin.service.AdminRecommendedService;
 import com.macaronics.www.user.service.HomeService;
 
 /**
@@ -38,24 +40,27 @@ public class HomeController {
 	
 	@Inject
 	private AdminCategoryService adminCategoryService;
-	
+
+	@Inject
+	private AdminRecommendedService adminRecommendedService;
 	
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Locale locale, Model model, AdminRecommendedVO vo) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 	
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		String formattedDate = dateFormat.format(date);
 		
-		
+		// 기본 값 1
+		Integer currProductId =adminRecommendedService.getProductId(vo);
 		
 		Map<String, Object> map =new HashMap<>();
 		map.put("newProductList", homeService.newProudctList());
 		map.put("bestProductList", homeService.bestProductList());
 		map.put("eventProductList", homeService.eventProductList());
-		
+		map.put("recommendProduct", adminRecommendedService.detailProduct(currProductId));
 		
 		model.addAttribute("map", map);
 		

@@ -93,7 +93,7 @@
           </a>
         </li>
         
-        <li >
+        <li>	
           <a href="/admin/shop/products/proudctList">
             <i class="glyphicon glyphicon-list"></i> <span>상품 목록</span>
             <span class="pull-right-container">
@@ -101,6 +101,16 @@
             </span>
           </a>
         </li>
+        
+         <li >
+          <a href="/admin/recommended/registerForm">
+            <i class="glyphicon glyphicon-heart-empty"></i> <span>오늘의 추천 상품 등록</span>
+            <span class="pull-right-container">
+            
+            </span>
+          </a>
+        </li>
+        
         
         
         <li class="treeview">

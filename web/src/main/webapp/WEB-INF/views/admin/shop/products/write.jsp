@@ -110,13 +110,13 @@ small{
             
             <div class="form-group">
               <label for="price">가격(원)</label>
-              <input type="text" class="form-control"  id="price" name="price" >
+              <input type="text" class="form-control" numberonly="true"  id="price" name="price" >
               <p class="help-block"></p>
             </div>
            
             <div class="form-group">
               <label for="amount">수량(개)</label>
-              <input type="text" class="form-control"  id="amount" name="amount" >
+              <input type="text" class="form-control"   numberonly="true" id="amount" name="amount" >
               <p class="help-block"></p>
             </div>
       
@@ -135,12 +135,12 @@ small{
          
             <div class="form-group">
               <label for="username">배송료 무료 상한 가격 설정 </label>
-              <input type="text" name="deliver"   class="form-control" id="deliver" placeholder="30,000">
+              <input type="text" name="deliver"  numberonly="true"  class="form-control" id="deliver" placeholder="30,000">
             </div>
             
             <div class="form-group">
               <label for="username">배송 비용 설정</label>
-              <input type="text" name="deliverMoney"  class="form-control" id="deliverMoney" placeholder="2,500">
+              <input type="text" name="deliverMoney" numberonly="true"  class="form-control" id="deliverMoney" placeholder="2,500">
             </div>
             
             
@@ -440,7 +440,12 @@ $(document).ready(function(){
 		});
 	});
 	
+
 	
+	
+	$(document).on("keyup", "input:text[numberOnly]", function() {$(this).val( $(this).val().replace(/[^0-9]/gi,"") );});
+
+	$(document).on("keyup", "input:text[datetimeOnly]", function() {$(this).val( $(this).val().replace(/[^0-9:\-]/gi,"") );});	
 	
 	
 });

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="ORACLErecommenderProductMapper">
+	
+	
+	<select id="confirmProductId" resultType="int">
+	
+	select count(*) from product where product_id =#{product_id}
+	</select>
+	
+	
+	<update id="registerProduct">
+	
+	UPDATE TBL_RECOMMEND_PRODUCT SET PRODUCT_ID=#{product_id}   WHERE RECOMMENDCODE=#{recommendcode}
+	</update>
+	
+	<select id="getProductId" resultType="int">
+		select product_id from TBL_RECOMMEND_PRODUCT WHERE RECOMMENDCODE=#{recommendcode}
+	</select>
+	
+	
+     <select id="detailProduct" resultType="com.macaronics.www.user.model.dto.ProductShopVO">
+		select * from view2_product where product_id=#{product_id}
+	</select>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

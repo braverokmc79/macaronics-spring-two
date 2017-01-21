@@ -829,6 +829,26 @@ p.PRODUCT_ID, p.AMOUNT,  p.CATEGORY_BNO, p.CATEGORY_IDX, p.CATEGORY_RNO,p.DELIVE
 )		where  rn BETWEEN  1 and 10 ;
 
 
- 
- 
+-- 추천 상품 테이블
+create table tbl_recommend_product (
 	
+	recommendCode number PRIMARY KEY ,
+	product_id number
+
+) 
+ -- 제약 조건 추가
+alter table tbl_recommend_product add constraint
+
+	fk_recommend_product FOREIGN KEY (product_id)
+	REFERENCES  product(product_id) on DELETE CASCADE VALIDATE ;	
+	
+
+	
+-- 샘플 등록
+
+	
+insert into TBL_RECOMMEND_PRODUCT (RECOMMENDCODE, PRODUCT_ID) 
+ VALUES (1, 11);
+ 
+ commit;
+ 

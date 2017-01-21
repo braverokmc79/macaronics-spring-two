@@ -191,7 +191,9 @@
             <div class="row">
               <div class="col-md-5">
                 <div class="aa-about-us-left">
-                  <img src="/resources/view/img/about-us.png" alt="image">
+                  <a href="/shop/products/detail.do/${map.recommendProduct.product_id }" >
+                  <img src="/products/img${map.recommendProduct.picture_url.substring(0,12) }${map.recommendProduct.picture_url.substring(14)}"  
+                  style="min-width:432px; max-width:432px; min-height:334px; max-height:334px;" alt="img"></a>
                 </div>
               </div>
               <div class="col-md-7">
@@ -200,15 +202,16 @@
                     <h2>오늘의 추천 상품</h2>
                     <span></span>
                   </div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat ab dignissimos vitae maxime adipisci blanditiis rerum quae quos! Id at rerum maxime modi fugit vero corrupti, ad atque sit laborum ipsum sunt blanditiis suscipit odio, aut nostrum assumenda nobis rem a maiores temporibus non commodi laboriosam, doloremque expedita! Corporis, provident?</p>                  
-                  <ul>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, blanditiis.</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia.</li>                    
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, blanditiis.</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia.</li>
-                  </ul>
+                  <p>                  
+                 ${map.recommendProduct.description}
+                   </p>
+                  <ul id="recommendUL">
+                     <li><h3>${map.recommendProduct.product_name }</h3></li>
+                  	<li><span class="label label-warning">${map.recommendProduct.product_state }</span></li>
+                  	<li>￦ <fmt:formatNumber value="${map.recommendProduct.price }" pattern="###,###"/></li>
+                  	<li><i class="glyphicon glyphicon-eye-open"></i> ${map.recommendProduct.view_count }</li>
+                  	<li> <a href="/shop/products/detail.do/${map.recommendProduct.product_id }" class="aa-secondary-btn">상세보기</a></li>
+                  </ul> 
                 </div>
               </div>
             </div>
@@ -230,10 +233,7 @@
         </div>
         <div class="aa-latest-properties-content">
           <div class="row">
-          
-       
-          
-          
+        
             <c:forEach items="${map.newProductList }" var="row"> 
           
          
