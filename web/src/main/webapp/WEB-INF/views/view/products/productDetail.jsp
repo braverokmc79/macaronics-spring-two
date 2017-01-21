@@ -130,77 +130,81 @@
              <!-- Properties social share -->
              <div class="aa-properties-social">
                <ul>
-                 <li>Share</li>
-                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                 <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                 <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                 <li>공유</li>
+                 <li><a href="https://ko-kr.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                 <li><a href="https://twitter.com/?lang=ko" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                 <li><a href="https://plus.google.com/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                 <li><a href="https://kr.pinterest.com/" target="_blank"><i class="fa fa-pinterest"></i></a></li>
                </ul>
              </div>
+            
              <!-- Nearby properties -->
              <div class="aa-nearby-properties">
                <div class="aa-title">
-                 <h2>Nearby Properties</h2>
+                 <h2>다른 고객님들이 이 상품과 함께 구매하신 상품</h2>
                  <span></span>
                </div>
                <div class="aa-nearby-properties-area">
                  <div class="row">
+                 
+                 <c:forEach items="${trp }"  var="row">
                    <div class="col-md-6">
                      <article class="aa-properties-item">
                         <a class="aa-properties-item-img" href="#">
-                          <img alt="img" src="img/item/1.jpg">
+                          <img alt="img" src="/products/img/${row.picture_url.substring(0,12) }${row.picture_url.substring(14)}" 
+                          style="max-height:345px ;min-height:345px ; max-height: 345px; min-width: 345px;">
                         </a>
-                        <div class="aa-tag for-sale">
-                          For Sale
-                        </div>
+                     <c:if test="${row.product_state !='보통' }" >
+                       	<c:choose>
+                       		<c:when test="${row.product_state =='Best' }">
+									<div class="aa-tag sold-out">
+                     				베스트
+                   	 			</div>
+                       		</c:when>
+                       		<c:when test="${row.product_state =='빅이벤트'}">
+                       			<div class="aa-tag for-rent">
+                     				빅이벤트
+                   	 			</div>
+                       		</c:when>
+                       		<c:when test="${row.product_state =='Sale'}">
+	                       	   <div class="aa-tag for-sale">
+	                         		 세일
+	                            </div>
+                            </c:when>
+                       	</c:choose>              	
+                   	 
+                    </c:if>
                         <div class="aa-properties-item-content">
                           <div class="aa-properties-info">
-                            <span>5 Rooms</span>
-                            <span>2 Beds</span>
-                            <span>3 Baths</span>
-                            <span>1100 SQ FT</span>
+                        <span class="label label-warning">${row.product_state}</span>
+                        <span>기본 배송비 : <fmt:formatNumber value="${row.deliver_money }" pattern="#,###"/>원</span>
+                        <span>조회 : ${row.view_count}</span>
+                        <span>남은 수량 :${ row.amount } EA</span>
                           </div>
                           <div class="aa-properties-about">
-                            <h3><a href="#">Appartment Title</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestiae vero ducimus quibusdam odit vitae.</p>                      
+                            <h3><a href="/shop/products/detail.do/${row.product_id }">${row.product_name }</a></h3>
+                      <c:choose>
+				           <c:when test="${fn:length(row.description) > 14}">
+				            <c:out value="${fn:substring(row.description, 0, 150)}"/>....
+				           </c:when>
+				           <c:otherwise>
+				            <c:out value="${row.description}"/>
+				           </c:otherwise> 
+         			 </c:choose>
+                                                  
                           </div>
                           <div class="aa-properties-detial">
                             <span class="aa-price">
-                              $35000
+                                   	￦<fmt:formatNumber value="${row.price }" pattern="#,###"/>
                             </span>
-                            <a class="aa-secondary-btn" href="#">View Details</a>
+                            <a class="aa-secondary-btn" href="/shop/products/detail.do/${row.product_id }">상세보기</a>
                           </div>
                         </div>
                       </article>
                    </div>
-                   <div class="col-md-6">
-                     <article class="aa-properties-item">
-                      <a class="aa-properties-item-img" href="#">
-                        <img alt="img" src="img/item/2.jpg">
-                      </a>
-                      <div class="aa-tag for-sale">
-                        For Sale
-                      </div>
-                      <div class="aa-properties-item-content">
-                        <div class="aa-properties-info">
-                          <span>5 Rooms</span>
-                          <span>2 Beds</span>
-                          <span>3 Baths</span>
-                          <span>1100 SQ FT</span>
-                        </div>
-                        <div class="aa-properties-about">
-                          <h3><a href="#">Appartment Title</a></h3>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestiae vero ducimus quibusdam odit vitae.</p>                      
-                        </div>
-                        <div class="aa-properties-detial">
-                          <span class="aa-price">
-                            $35000
-                          </span>
-                          <a class="aa-secondary-btn" href="#">View Details</a>
-                        </div>
-                      </div>
-                    </article>
-                   </div>
+                </c:forEach>  
+                
+                
                  </div>
                </div>
 
@@ -214,36 +218,30 @@
           <aside class="aa-properties-sidebar">
             <!-- Start Single properties sidebar -->
             <div class="aa-properties-single-sidebar">
-              <h3>Properties Search</h3>
+              <h3>상품 검색</h3>
               <form action="">
                 <div class="aa-single-advance-search">
-                  <input type="text" placeholder="Type Your Location">
+                  <input type="text" placeholder="">
                 </div>
                 <div class="aa-single-advance-search">
-                  <select id="" name="">
-                   <option selected="" value="0">Category</option>
-                    <option value="1">Flat</option>
-                    <option value="2">Land</option>
-                    <option value="3">Plot</option>
-                    <option value="4">Commercial</option>
+                
+                
+                   <select class="form-control" id="categoryOne" onchange="CategoryOneChange()">
+                    <c:forEach items="${ categoryOne}" var="row">
+                    	<option value="${row.idx }" >${row.title }</option>
+					</c:forEach>
+                  </select>
+                
+                
+                </div>
+                <div class="aa-single-advance-search">
+                  <select class="form-control" id="categoryTwo" onchange="categoryTwoChange()">
+
                   </select>
                 </div>
                 <div class="aa-single-advance-search">
-                  <select id="" name="">
-                    <option selected="" value="0">Type</option>
-                    <option value="1">Flat</option>
-                    <option value="2">Land</option>
-                    <option value="3">Plot</option>
-                    <option value="4">Commercial</option>
-                  </select>
-                </div>
-                <div class="aa-single-advance-search">
-                  <select id="" name="">
-                    <option selected="" value="0">Type</option>
-                    <option value="1">Flat</option>
-                    <option value="2">Land</option>
-                    <option value="3">Plot</option>
-                    <option value="4">Commercial</option>
+                  <select class="form-control" id="categoryThree" >
+
                   </select>
                 </div>
                 <div class="aa-single-filter-search">
@@ -256,59 +254,57 @@
                   </div>                  
                 </div>
                 <div class="aa-single-filter-search">
-                  <span>PRICE ($)</span>
+                  <span>PRICE (원)</span>
                   <span>FROM</span>
-                  <span id="skip-value-lower2" class="example-val">30.00</span>
+                  <span id="skip-value-lower2" class="example-val">1,000</span>
                   <span>TO</span>
-                  <span id="skip-value-upper2" class="example-val">100.00</span>
+                  <span id="skip-value-upper2" class="example-val">2,000,000</span>
                   <div id="aa-price-range" class="noUi-target noUi-ltr noUi-horizontal noUi-background">
                   </div>      
                 </div>
                 <div class="aa-single-advance-search">
-                  <input type="submit" value="Search" class="aa-search-btn">
+                  <input type="submit" value="검색" class="aa-search-btn">
                 </div>
               </form>
             </div> 
+           
+           
             <!-- Start Single properties sidebar -->
             <div class="aa-properties-single-sidebar">
-              <h3>Populer Properties</h3>
+              <h3>인기 상품</h3>
+             
+             
+             <c:forEach items="${vbp }" var="row">
+             
               <div class="media">
                 <div class="media-left">
-                  <a href="#">
-                    <img class="media-object" src="img/item/1.jpg" alt="img">
+                  <a href="/shop/products/detail.do/${row.product_id }">
+                    <img class="media-object" src="/products/img/${row.picture_url}" alt="img">
                   </a>
                 </div>
                 <div class="media-body">
-                  <h4 class="media-heading"><a href="#">This is Title</a></h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>                
-                  <span>$65000</span>
+                  <h4 class="media-heading"><a href="/shop/products/detail.do/${row.product_id }">${row.product_name }</a></h4>
+                    <c:choose>
+				           <c:when test="${fn:length(row.description) > 14}">
+				            <c:out value="${fn:substring(row.description, 0, 50)}"/>....
+				           </c:when>
+				           <c:otherwise>
+				            <c:out value="${row.description}"/>
+				           </c:otherwise> 
+         			 </c:choose>              
+                  <span class="label label-danger">￦<fmt:formatNumber value="${row.price }" pattern="###,###"/></span>
                 </div>              
               </div>
-              <div class="media">
-                <div class="media-left">
-                  <a href="#">
-                    <img class="media-object" src="img/item/1.jpg" alt="img">
-                  </a>
-                </div>
-                <div class="media-body">
-                  <h4 class="media-heading"><a href="#">This is Title</a></h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>                
-                  <span>$65000</span>
-                </div>              
-              </div>
-              <div class="media">
-                <div class="media-left">
-                  <a href="#">
-                    <img class="media-object" src="img/item/1.jpg" alt="img">
-                  </a>
-                </div>
-                <div class="media-body">
-                  <h4 class="media-heading"><a href="#">This is Title</a></h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>                
-                  <span>$65000</span>
-                </div>              
-              </div>
+     
+     
+		     </c:forEach>
+     
+           
+           
             </div>
+         
+         
+         
           </aside>
         </div>
       </div>
@@ -424,6 +420,122 @@ function deleteProduct(product_id){
 	}
 	
 }
+</script>
+
+
+
+<script>
+
+$(document).ready(function(){
+	
+	
+	//2차 카테고리 호출
+	CategoryOneChange();
+	
+	
+});
+
+
+//1 카테고리 체인지
+function CategoryOneChange(){
+	
+	var idx =$("#categoryOne").val();
+	//2차카테고리 idx
+	$("#categoryTwoIdx").val(idx);
+	//3차카테고리 idx
+	$("#categoryThreeIdx").val(idx);
+	
+	
+	var categoryOenText =$("#categoryOne option:selected").text();
+	if(categoryOenText.length<1){
+		$("#categoryTwoP").text("1차 카테고리 먼저 입력 해 주세요.");
+	}else{
+		//2차카테고리 텍스트
+		$("#categoryTwoP").text(categoryOenText);
+		//3차카테고리 텍스트
+		$("#categoryThreeP").text(categoryOenText);
+	}
+	//모달에 idx 전송
+	$("#idx").val(idx);
+	
+	//2차 카테고리 목록 불러오기
+	CategoryTowList(idx);
+	
+
+}
+
+//2차 카테고리 목록 불러오기
+function CategoryTowList(idx){
+	
+	
+	$.getJSON("/categoryTwoList/"+idx , function(data){
+		var str ="";
+		
+		$(data).each(function(){
+			str +="<option value="+this.bno+" >"+this.title+"</option>";
+			
+		});
+		$("#categoryTwo").html(str);
+		$("#showCategoryTwo").html(str);
+		
+		//사이즈 호출
+		//alert("2차 사이즈  :" +$("#categoryTwo option").size());
+		//3차 카테고리 체인지
+		var twoSize=$("#categoryTwo option").size();
+		
+		if(twoSize==0){
+			//3차 숨김
+			$("#list3").css("display","none");
+			$("#showCategoryThree").html("");
+		}else{
+			//3차 보임
+			$("#list3").css("display","");
+		}
+		categoryTwoChange();
+		
+		
+	});
+	
+}
+
+
+// 2차카테고리 체인지
+function categoryTwoChange(){
+		
+	var bno =$("#categoryTwo").val();
+	var bnoText=$("#categoryTwo option:selected").text();
+	//alert("2차 체인지" +bno + "   :   "+ bnoText);
+	//3차에 값 삽입
+	$("#categoryThreeBno").val(bno);
+	$("#categoryThreePtext").text(bnoText);
+	
+	CategoryThreeList(bno);
+}
+
+
+
+//3차 카테고리 목록 불러오기
+function CategoryThreeList(bno){
+	
+	
+	$.getJSON("/categoryThreeList/"+bno , function(data){
+		var str ="";
+		
+		$(data).each(function(){
+			str +="<option value="+this.rno+" >"+this.title+"</option>";
+			
+		});
+		$("#categoryThree").html(str);
+		$("#showCategoryThree").html(str);
+		
+		
+	});
+	
+}
+
+
+
+
 </script>
 
 

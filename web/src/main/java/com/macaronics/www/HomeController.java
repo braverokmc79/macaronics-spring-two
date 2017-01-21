@@ -53,7 +53,7 @@ public class HomeController {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		String formattedDate = dateFormat.format(date);
 		
-		// 기본 값 1
+		// 기본 값 = 1
 		Integer currProductId =adminRecommendedService.getProductId(vo);
 		
 		Map<String, Object> map =new HashMap<>();

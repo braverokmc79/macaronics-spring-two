@@ -69,6 +69,44 @@ public class ProductServiceImpl implements ProductService {
 		return dao.countArticle(search_option, keyword);
 	}
 
+
+	@Override
+	public List<ProductShopVO> togetherRecommendProduct(Integer category_rno) {
+		List<ProductShopVO> list=null;
+		try {
+			list=dao.togetherRecommendProduct(category_rno);
+		} catch (Exception e) {
+				e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+
+	@Override
+	public List<ProductShopVO> viewsBnoProduct(Integer category_bno) {
+		List<ProductShopVO> list=null;
+		try {
+			list =dao.viewsBnoProduct(category_bno);
+		} catch (Exception e) {
+				e.printStackTrace();
+		}
+		return list;
+	}
+
+
+	@Override
+	public List<ProductShopVO> viewsProduct() {
+		List<ProductShopVO> list=null;
+		try {
+			list =dao.viewsProduct();
+		} catch (Exception e) {
+				e.printStackTrace();
+		}
+		return list;
+		
+	}
+
 	
 	
 	

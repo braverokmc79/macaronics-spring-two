@@ -9,12 +9,18 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.macaronics.www.admin.model.dto.AdminCategoryVO;
+import com.macaronics.www.admin.service.AdminCategoryService;
 import com.macaronics.www.member.model.dto.board.BoardVO;
 import com.macaronics.www.user.model.dto.ProductShopVO;
 import com.macaronics.www.user.service.ProductService;
@@ -31,6 +37,13 @@ public class ProductController {
 	
 	@Inject
 	private ProductService service;
+	
+	
+	
+	@Inject
+	private AdminCategoryService adminCategoryService;
+
+	
 	
 	@RequestMapping(value="/list.do")
 	public String productList(Model model , PageAndSearch pas) throws Exception{
@@ -57,18 +70,18 @@ public class ProductController {
 	
 		
 		model.addAttribute("map",map);
+		//1차 카테고리 목록 불러오기
+		model.addAttribute("categoryOne", adminCategoryService.categoryOneList());
 		
+		//인기상품
+		//조회수가 많은 상품을 가져온다.
+		List<ProductShopVO> viewsProduct =service.viewsProduct();
+		model.addAttribute("vbp", viewsProduct);
 		
 		model.addAttribute("pageAndSearch",pas);
 		model.addAttribute("productList" ,list);
 		return JSP_PAGE+"productList";
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 	@RequestMapping(value="/detail.do/{product_id}")
@@ -86,12 +99,69 @@ public class ProductController {
 			fullName.add(front+end);
 		}
 		
+
 		
 		mav.setViewName(JSP_PAGE+"/productDetail");
 		mav.addObject("productDetail", vo);
 		mav.addObject("fullName",fullName);
+		
+		
+		//1차 카테고리 목록 불러오기
+		mav.addObject("categoryOne", adminCategoryService.categoryOneList());
+		//다른 고객님들이 이 상품과 함께 구매하신 상품
+		//3번 rno 카테고리가 같고  상품 을 가지고 온다 
+		//logger.info("*****" + vo.toString());
+		 List<ProductShopVO> togetherRecommendProduct =service.togetherRecommendProduct(vo.getCategory_rno()); 
+		//인기상품
+		//2번 카테고리가 같고 조회수가 많은 상품을 가져온다.
+		 List<ProductShopVO> viewsBnoProduct =service.viewsBnoProduct(vo.getCategory_bno());
+		 mav.addObject("trp", togetherRecommendProduct);
+		 mav.addObject("vbp", viewsBnoProduct);
 		return mav;
 	}
+	
+	
+	
+	//2차 카테고리 불러오기
+	@ResponseBody
+	@RequestMapping(value="/categoryTwoList/{idx}", method=RequestMethod.GET)
+	public ResponseEntity<List<AdminCategoryVO>> categoryTwoList(@PathVariable("idx") Integer idx){
+		ResponseEntity<List<AdminCategoryVO>> entity=null;
+		List<AdminCategoryVO> list=null;
+		try{
+			
+			list =adminCategoryService.categoryTwoList(idx);
+			
+			entity=new ResponseEntity<List<AdminCategoryVO>>(list, HttpStatus.OK);
+		}catch(Exception e){
+			e.printStackTrace();
+			entity=new ResponseEntity<List<AdminCategoryVO>>(HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
+	}
+	
+	
+	
+	//3차 카테고리 불러오기
+	@ResponseBody
+	@RequestMapping(value="/categoryThreeList/{bno}", method=RequestMethod.GET)
+	public ResponseEntity<List<AdminCategoryVO>> categoryThreeList(@PathVariable("bno") Integer bno){
+		ResponseEntity<List<AdminCategoryVO>> entity=null;
+		List<AdminCategoryVO> list=null;
+		try{
+			
+			list =adminCategoryService.categoryThreeList(bno);
+			
+			entity=new ResponseEntity<List<AdminCategoryVO>>(list, HttpStatus.OK);
+		}catch(Exception e){
+			e.printStackTrace();
+			entity=new ResponseEntity<List<AdminCategoryVO>>(HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
+	}
+	
 	
 	
 	

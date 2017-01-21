@@ -21,5 +21,11 @@ public interface ProductDAO {
 	public List<String> getAttach(Integer product_id) throws Exception;
 	
 	public int countArticle(String search_option, String keyword);
+
+	public List<ProductShopVO> togetherRecommendProduct(Integer category_rno);
+
+	public List<ProductShopVO> viewsBnoProduct(Integer category_bno);
+
+	public List<ProductShopVO> viewsProduct();
 	
 }

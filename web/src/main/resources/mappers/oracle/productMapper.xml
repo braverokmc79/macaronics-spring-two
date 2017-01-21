@@ -82,6 +82,116 @@ p.PRODUCT_ID, p.AMOUNT,  p.CATEGORY_BNO, p.CATEGORY_IDX, p.CATEGORY_RNO,p.DELIVE
 	
 	
 	
+	<!-- //다른 고객님들이 이 상품과 함께 구매하신 상품 -->
+	<select id="togetherRecommendProduct" resultType="com.macaronics.www.user.model.dto.ProductShopVO">
+<![CDATA[
+	select * from
+	
+	(
+	
+	select rownum as rn , A.*
+		from (
+		
+		select  rownum ,
+	
+	p.PRODUCT_ID, p.AMOUNT,  p.CATEGORY_BNO, p.CATEGORY_IDX, p.CATEGORY_RNO,p.DELIVER
+	
+	,p.DELIVER_MONEY, p.DESCRIPTION, p.PICTURE_URL, p.PRICE, p.PRODUCT_NAME,p.PRODUCT_STATE,p.REGDATE, p.UPDATEDATE
+	
+	,p.view_count
+	, c1.title as category1_title  ,  c2.title as category2_title   , c3.TITLE as category3_title
+			
+		from product p , TBL_CATEGORY_ONE c1, TBL_CATEGORY_TWO c2, TBL_CATEGORY_THREE c3
+		
+		where p.category_idx =c1.IDX and p.category_bno=c2.BNO and p.category_rno =c3.RNO
+		
+			and  p.category_rno=#{rno}
+		
+		order by p.PRODUCT_ID desc , p.REGDATE desc
+		)
+		
+		A 
+			
+	)		where  rn BETWEEN  1 and 2 
+
+	
+]]>	
+	</select>
+	
+	
+	<!-- //인기상품 -->
+	
+	<select id="viewsBnoProduct" resultType="com.macaronics.www.user.model.dto.ProductShopVO" >
+<![CDATA[	
+	select * from
+	
+	(
+	
+	select rownum as rn , A.*
+		from (
+		
+		select  rownum ,
+	
+	p.PRODUCT_ID, p.AMOUNT,  p.CATEGORY_BNO, p.CATEGORY_IDX, p.CATEGORY_RNO,p.DELIVER
+	
+	,p.DELIVER_MONEY, p.DESCRIPTION, p.PICTURE_URL, p.PRICE, p.PRODUCT_NAME,p.PRODUCT_STATE,p.REGDATE, p.UPDATEDATE
+	
+	,p.view_count
+	, c1.title as category1_title  ,  c2.title as category2_title   , c3.TITLE as category3_title
+			
+		from product p , TBL_CATEGORY_ONE c1, TBL_CATEGORY_TWO c2, TBL_CATEGORY_THREE c3
+		
+		where p.category_idx =c1.IDX and p.category_bno=c2.BNO and p.category_rno =c3.RNO
+		
+			and  p.category_bno=#{bno}
+		
+		order by view_count desc,  p.PRODUCT_ID desc 
+		)
+		
+		A 
+			
+	)		where  rn BETWEEN  1 and 3 
+	
+		
+]]>		
+	</select>
+	
+	
+	<!-- 상품 리스트 조회수가 많은 상품을 인기상품 함-->
+		<select id="viewsProduct" resultType="com.macaronics.www.user.model.dto.ProductShopVO" >
+<![CDATA[	
+	select * from
+	
+	(
+	
+	select rownum as rn , A.*
+		from (
+		
+		select  rownum ,
+	
+	p.PRODUCT_ID, p.AMOUNT,  p.CATEGORY_BNO, p.CATEGORY_IDX, p.CATEGORY_RNO,p.DELIVER
+	
+	,p.DELIVER_MONEY, p.DESCRIPTION, p.PICTURE_URL, p.PRICE, p.PRODUCT_NAME,p.PRODUCT_STATE,p.REGDATE, p.UPDATEDATE
+	
+	,p.view_count
+	, c1.title as category1_title  ,  c2.title as category2_title   , c3.TITLE as category3_title
+			
+		from product p , TBL_CATEGORY_ONE c1, TBL_CATEGORY_TWO c2, TBL_CATEGORY_THREE c3
+		
+		where p.category_idx =c1.IDX and p.category_bno=c2.BNO and p.category_rno =c3.RNO
+		
+		order by view_count desc,  p.PRODUCT_ID desc 
+		)
+		
+		A 
+			
+	)		where  rn BETWEEN  1 and 3 
+	
+		
+]]>		
+	</select>
+	
+	
 </mapper>
 
 

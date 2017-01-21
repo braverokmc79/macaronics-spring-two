@@ -71,10 +71,9 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public List<String> getAttach(Integer product_id) throws Exception {
-		// TODO Auto-generated method stub
+		
 		return sqlSession.selectList(namespace+".getAttach", product_id);
 	}
-	
 	
 	
 
@@ -87,7 +86,29 @@ public class ProductDAOImpl implements ProductDAO {
 		
 		return sqlSession.selectOne(namespace+".countArticle", map);
 	}
+
+	@Override
+	public List<ProductShopVO> togetherRecommendProduct(Integer rno) {
+		logger.info("rno 값 : " + rno);
+		return sqlSession.selectList(namespace+".togetherRecommendProduct", rno);
+	}
+
+	@Override
+	public List<ProductShopVO> viewsBnoProduct(Integer bno) {
+		logger.info("bno 값 : " + bno);
+		return sqlSession.selectList(namespace+".viewsBnoProduct", bno);
+	}
+
+	@Override
+	public List<ProductShopVO> viewsProduct() {
+		
+		return sqlSession.selectList(namespace+".viewsProduct" );
+	}
 	
 	
 
 }
+
+
+
+
