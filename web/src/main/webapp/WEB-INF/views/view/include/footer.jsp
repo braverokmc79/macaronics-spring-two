@@ -18,15 +18,15 @@
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="aa-footer-middle">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-google-plus"></i></a>
-                <a href="#"><i class="fa fa-youtube"></i></a>
+                <a href="https://ko-kr.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
+                <a href="https://twitter.com/?lang=ko" target="_blank"><i class="fa fa-twitter" ></i></a>
+                <a href="https://plus.google.com/" target="_blank"><i class="fa fa-google-plus"></i></a>
+                <a href="https://www.youtube.com/" target="_blank"><i class="fa fa-youtube"></i></a>
               </div>
             </div>
             <div class="col-md-6 col-sm-12 col-xs-12">
               <div class="aa-footer-right">
-                <a href="#">Home</a>
+                <a href="/">Home</a>
                 <a href="#">Support</a>
                 <a href="#">License</a>
                 <a href="#">FAQ</a>

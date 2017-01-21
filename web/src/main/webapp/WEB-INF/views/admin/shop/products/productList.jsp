@@ -48,7 +48,7 @@
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">상품 등록수 - <span class="badge bg-green"> ${map.countList } EA</span> </h3>
+              <h3 class="box-title">상품 개수 - <span class="badge bg-green"> ${map.countList } EA</span> </h3>
       <p style="margin-bottom: 50px;"></p>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">

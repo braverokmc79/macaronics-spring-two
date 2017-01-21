@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>    
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %>
+
 <%@ include file="view/include/header.jsp" %>
 <%@ include file="view/include/topmenu.jsp" %>
   
@@ -204,7 +207,7 @@
               <div class="col-md-7">
                 <div class="aa-about-us-right">
                   <div class="aa-title">
-                    <h2>About Us</h2>
+                    <h2>오늘의 추천 상품</h2>
                     <span></span>
                   </div>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat ab dignissimos vitae maxime adipisci blanditiis rerum quae quos! Id at rerum maxime modi fugit vero corrupti, ad atque sit laborum ipsum sunt blanditiis suscipit odio, aut nostrum assumenda nobis rem a maiores temporibus non commodi laboriosam, doloremque expedita! Corporis, provident?</p>                  
@@ -231,20 +234,46 @@
     <div class="container">
       <div class="aa-latest-property-area">
         <div class="aa-title">
-          <h2>Latest Properties</h2>
+          <h2>신상품</h2>
           <span></span>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum sit ea nobis quae vero voluptatibus.</p>         
+          <p>아침에 출근 도장 ${ serverTime } , Macaronics Shop 신규상품을 만나보세요!</p>         
         </div>
         <div class="aa-latest-properties-content">
           <div class="row">
+          
+       
+          
+          
+            <c:forEach items="${map.newProductList }" var="row"> 
+          
+         
             <div class="col-md-4">
-              <article class="aa-properties-item">
-                <a href="#" class="aa-properties-item-img">
-                  <img src="/resources/view/img/item/1.jpg" alt="img">
+              <article class="aa-properties-item" style="min-width:360px; max-width:360px; min-height:435px; max-height:435px; ">
+                <a href="/shop/products/detail.do/${row.product_id }" class="aa-properties-item-img">
+                  <img src="/products/img/${row.picture_url.substring(0,12) }${row.picture_url.substring(14)}"  
+                  style="min-width:360px; max-width:360px; min-height:220px; max-height:220px;" alt="img">
                 </a>
-                <div class="aa-tag for-sale">
-                  For Sale
-                </div>
+                     <c:if test="${row.product_state !='보통' }" >
+                       	<c:choose>
+                       		<c:when test="${row.product_state =='Best' }">
+									<div class="aa-tag sold-out">
+                     				베스트
+                   	 			</div>
+                       		</c:when>
+                       		<c:when test="${row.product_state =='빅이벤트'}">
+                       			<div class="aa-tag for-rent">
+                     				빅이벤트
+                   	 			</div>
+                       		</c:when>
+                       		<c:when test="${row.product_state =='Sale'}">
+	                       	   <div class="aa-tag for-sale">
+	                         		 세일
+	                            </div>
+                            </c:when>
+                       	</c:choose>              	
+                   	 
+                    </c:if>
+                
                 <div class="aa-properties-item-content">
                   <div class="aa-properties-info">
                     <span>5 Rooms</span>
@@ -252,159 +281,35 @@
                     <span>3 Baths</span>
                     <span>1100 SQ FT</span>
                   </div>
-                  <div class="aa-properties-about">
-                    <h3><a href="#">Appartment Title</a></h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestiae vero ducimus quibusdam odit vitae.</p>                      
+                  <div class="aa-properties-about" style="color:#666">
+                    <h3><a href="/shop/products/detail.do/${row.product_id }">${row.product_name }</a></h3>
+                    <c:choose>
+				           <c:when test="${fn:length(row.description) > 14}">
+				           <p> <c:out value="${fn:substring(row.description, 0, 60)}"/>..</p>
+				           </c:when>
+				           <c:otherwise>
+				           <p> <c:out value="${row.description}"/></p>
+				           </c:otherwise> 
+         			 </c:choose>                      
+               
+                 
                   </div>
                   <div class="aa-properties-detial">
-                    <span class="aa-price">
-                      $35000
+                    <span class="aa-price" style="color:#666">
+                      		   ￦ <fmt:formatNumber value="${row.price }" pattern="###,###"  />
                     </span>
-                    <a href="#" class="aa-secondary-btn">View Details</a>
+                    <a href="/shop/products/detail.do/${row.product_id }" class="aa-secondary-btn">상세보기</a>
                   </div>
                 </div>
               </article>
             </div>
-            <div class="col-md-4">
-              <article class="aa-properties-item">
-                <a href="#" class="aa-properties-item-img">
-                  <img src="/resources/view/img/item/2.jpg" alt="img">
-                </a>
-                <div class="aa-tag for-rent">
-                  For Rent
-                </div>
-                <div class="aa-properties-item-content">
-                  <div class="aa-properties-info">
-                    <span>5 Rooms</span>
-                    <span>2 Beds</span>
-                    <span>3 Baths</span>
-                    <span>1100 SQ FT</span>
-                  </div>
-                  <div class="aa-properties-about">
-                    <h3><a href="#">Appartment Title</a></h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestiae vero ducimus quibusdam odit vitae.</p>                      
-                  </div>
-                  <div class="aa-properties-detial">
-                    <span class="aa-price">
-                      $11000
-                    </span>
-                    <a href="#" class="aa-secondary-btn">View Details</a>
-                  </div>
-                </div>
-              </article>
-            </div>
-            <div class="col-md-4">
-              <article class="aa-properties-item">
-                <a href="#" class="aa-properties-item-img">
-                  <img src="/resources/view/img/item/3.jpg" alt="img">
-                </a>
-                <div class="aa-tag sold-out">
-                  Sold Out
-                </div>
-                <div class="aa-properties-item-content">
-                  <div class="aa-properties-info">
-                    <span>5 Rooms</span>
-                    <span>2 Beds</span>
-                    <span>3 Baths</span>
-                    <span>1100 SQ FT</span>
-                  </div>
-                  <div class="aa-properties-about">
-                    <h3><a href="#">Appartment Title</a></h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestiae vero ducimus quibusdam odit vitae.</p>                      
-                  </div>
-                  <div class="aa-properties-detial">
-                    <span class="aa-price">
-                      $15000
-                    </span>
-                    <a href="#" class="aa-secondary-btn">View Details</a>
-                  </div>
-                </div>
-              </article>
-            </div>
-            <div class="col-md-4">
-              <article class="aa-properties-item">
-                <a href="#" class="aa-properties-item-img">
-                  <img src="/resources/view/img/item/4.jpg" alt="img">
-                </a>
-                <div class="aa-tag for-sale">
-                  For Sale
-                </div>
-                <div class="aa-properties-item-content">
-                  <div class="aa-properties-info">
-                    <span>5 Rooms</span>
-                    <span>2 Beds</span>
-                    <span>3 Baths</span>
-                    <span>1100 SQ FT</span>
-                  </div>
-                  <div class="aa-properties-about">
-                    <h3><a href="#">Appartment Title</a></h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestiae vero ducimus quibusdam odit vitae.</p>                      
-                  </div>
-                  <div class="aa-properties-detial">
-                    <span class="aa-price">
-                      $35000
-                    </span>
-                    <a href="#" class="aa-secondary-btn">View Details</a>
-                  </div>
-                </div>
-              </article>
-            </div>
-            <div class="col-md-4">
-              <article class="aa-properties-item">
-                <a href="#" class="aa-properties-item-img">
-                  <img src="/resources/view/img/item/5.jpg" alt="img">
-                </a>                
-                <div class="aa-tag sold-out">
-                  Sold Out
-                </div>
-                <div class="aa-properties-item-content">
-                  <div class="aa-properties-info">
-                    <span>5 Rooms</span>
-                    <span>2 Beds</span>
-                    <span>3 Baths</span>
-                    <span>1100 SQ FT</span>
-                  </div>
-                  <div class="aa-properties-about">
-                    <h3><a href="#">Appartment Title</a></h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestiae vero ducimus quibusdam odit vitae.</p>                      
-                  </div>
-                  <div class="aa-properties-detial">
-                    <span class="aa-price">
-                      $11000
-                    </span>
-                    <a href="#" class="aa-secondary-btn">View Details</a>
-                  </div>
-                </div>
-              </article>
-            </div>
-            <div class="col-md-4">
-              <article class="aa-properties-item">
-                <a href="#" class="aa-properties-item-img">
-                  <img src="/resources/view/img/item/6.jpg" alt="img">
-                </a>
-                <div class="aa-tag for-rent">
-                  For Rent
-                </div>
-                <div class="aa-properties-item-content">
-                  <div class="aa-properties-info">
-                    <span>5 Rooms</span>
-                    <span>2 Beds</span>
-                    <span>3 Baths</span>
-                    <span>1100 SQ FT</span>
-                  </div>
-                  <div class="aa-properties-about">
-                    <h3><a href="#">Appartment Title</a></h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestiae vero ducimus quibusdam odit vitae.</p>                      
-                  </div>
-                  <div class="aa-properties-detial">
-                    <span class="aa-price">
-                      $15000
-                    </span>
-                    <a href="#" class="aa-secondary-btn">View Details</a>
-                  </div>
-                </div>
-              </article>
-            </div>
+           
+           
+            </c:forEach>
+           
+           
+
+          
           </div>
         </div>
       </div>
@@ -419,9 +324,9 @@
         <div class="col-md-12">
           <div class="aa-service-area">
             <div class="aa-title">
-              <h2>Our Service</h2>
+              <h2>Macraonics</h2>
               <span></span>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum sit ea nobis quae vero voluptatibus.</p>
+              <p>JUNHO CHOI , portfolio</p>
             </div>
             <!-- service content -->
             <div class="aa-service-content">
@@ -429,11 +334,23 @@
                 <div class="col-md-3">
                   <div class="aa-single-service">
                     <div class="aa-service-icon">
-                      <span class="fa fa-home"></span>
+                      <span class="fa fa-check"></span>
                     </div>
                     <div class="aa-single-service-content">
-                      <h4><a href="#">Property Sale</a></h4>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto repellendus quasi asperiores itaque dolorem at.</p>
+                      <h4><a href="http://macaronics.esy.es/">Flash &  PHP</a></h4>
+                      <p>Development Date : 2010 년 4월 </p>
+                      <p>참여도 : 100% 단독 portfolio</p>
+                      </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="aa-single-service">
+                    <div class="aa-service-icon">
+                      <span class="fa fa-crosshairs"></span>
+                    </div>
+                    <div class="aa-single-service-content">
+                      <h4><a href="http://www.han5200.or.kr/">Flash & ASP</a></h4>
+                      <p>유지보수 : 2010 년 12월 </p>
                     </div>
                   </div>
                 </div>
@@ -443,8 +360,9 @@
                       <span class="fa fa-check"></span>
                     </div>
                     <div class="aa-single-service-content">
-                      <h4><a href="#">Property Rent</a></h4>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto repellendus quasi asperiores itaque dolorem at.</p>
+                      <h4><a href="http://braverokmc.dothome.co.kr/">CodeIgniter PHP</a></h4>
+                      <p>Development Date : 2016 년 4월 </p>
+                       <p>참여도 : 100% 단독 portfolio</p>
                     </div>
                   </div>
                 </div>
@@ -454,22 +372,18 @@
                       <span class="fa fa-crosshairs"></span>
                     </div>
                     <div class="aa-single-service-content">
-                      <h4><a href="#">Property Development</a></h4>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto repellendus quasi asperiores itaque dolorem at.</p>
+                      <h4><a href="http://braverokmc.cafe24.com/MacaronicsServlet?command=index">MVC JSP</a></h4>
+                      <p>Development Date : 2016년 8월</p>
+                     <p>참여도 : 100% 단독 portfolio</p>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-3">
-                  <div class="aa-single-service">
-                    <div class="aa-service-icon">
-                      <span class="fa fa-bar-chart-o"></span>
-                    </div>
-                    <div class="aa-single-service-content">
-                      <h4><a href="#">Market Analysis</a></h4>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto repellendus quasi asperiores itaque dolorem at.</p>
-                    </div>
-                  </div>
-                </div>
+                
+
+                
+                
+                
+                
               </div>
             </div>
           </div>
@@ -485,7 +399,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="aa-promo-banner-area">
-            <h3>Find Your Best Property</h3>
+            <h3>라코스테 15% 쿠폰</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, ex illum corporis quibusdam numquam quisquam optio explicabo. Officiis odit quia odio dignissimos eius repellat id!</p>
             <a href="#" class="aa-view-btn">View Details</a>
           </div>
@@ -502,149 +416,46 @@
         <div class="col-md-12">
           <div class="aa-agents-area">
             <div class="aa-title">
-              <h2>Our Agents</h2>
+              <h2>이벤트 상품</h2>
               <span></span>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum sit ea nobis quae vero voluptatibus.</p>
+              <p >적립금 최대  1만원 증정</p>
             </div>
             <!-- agents content -->
             <div class="aa-agents-content">
               <ul class="aa-agents-slider">
-                <li>
+                
+              <c:forEach items="${map.eventProductList }" var="row">
+              
+              	          <li>       
                   <div class="aa-single-agents">
                     <div class="aa-agents-img">
-                      <img src="/resources/view/img/agents/agent-1.png" alt="agent member image">
+                      <div class="aa-tag for-rent">
+                     	<span class="label label-danger ">이벤트</span>
+                   	 </div>
+                     <a href="/shop/products/detail.do/${row.product_id }" ><img src="/products/img/${row.picture_url.substring(0,12) }${row.picture_url.substring(14)}"  
+                  style="min-width:262px; max-width:262px; min-height:330px; max-height:330px;" alt="img"  alt="Event Products"></a> 
                     </div>
                     <div class="aa-agetns-info">
-                      <h4><a href="#">Philip Smith</a></h4>
-                      <span>Top Agent</span>
+                      <h4><a href="#">${row.product_name }</a></h4>
+                      <span class="label label-warning">SNS 공유시 상품 증정</span>
                       <div class="aa-agent-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                        <a href="https://ko-kr.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
+                        <a href="https://twitter.com/?lang=ko" target="_blank"><i class="fa fa-twitter"></i></a>
+                        <a href="https://kr.linkedin.com/"  target="_blank"><i class="fa fa-linkedin"></i></a>
+                        <a href="https://plus.google.com/"  target="_blank"><i class="fa fa-google-plus"></i></a>
                       </div>
                     </div>
                   </div>
                 </li>
-                <li>
-                  <div class="aa-single-agents">
-                    <div class="aa-agents-img">
-                      <img src="/resources/view/img/agents/agent-5.png" alt="agent member image">
-                    </div>
-                    <div class="aa-agetns-info">
-                      <h4><a href="#">Adam Barney</a></h4>
-                      <span>Expert Agent</span>
-                      <div class="aa-agent-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="aa-single-agents">
-                    <div class="aa-agents-img">
-                      <img src="/resources/view/img/agents/agent-3.png" alt="agent member image">
-                    </div>
-                    <div class="aa-agetns-info">
-                      <h4><a href="#">Paul Walker</a></h4>
-                      <span>Director</span>
-                      <div class="aa-agent-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="aa-single-agents">
-                    <div class="aa-agents-img">
-                      <img src="/resources/view/img/agents/agent-4.png" alt="agent member image">
-                    </div>
-                    <div class="aa-agetns-info">
-                      <h4><a href="#">John Smith</a></h4>
-                      <span>Jr. Agent</span>
-                      <div class="aa-agent-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                 <li>
-                  <div class="aa-single-agents">
-                    <div class="aa-agents-img">
-                      <img src="/resources/view/img/agents/agent-1.png" alt="agent member image">
-                    </div>
-                    <div class="aa-agetns-info">
-                      <h4><a href="#">Philip Smith</a></h4>
-                      <span>Top Agent</span>
-                      <div class="aa-agent-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="aa-single-agents">
-                    <div class="aa-agents-img">
-                      <img src="/resources/view/img/agents/agent-5.png" alt="agent member image">
-                    </div>
-                    <div class="aa-agetns-info">
-                      <h4><a href="#">Adam Barney</a></h4>
-                      <span>Expert Agent</span>
-                      <div class="aa-agent-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="aa-single-agents">
-                    <div class="aa-agents-img">
-                      <img src="/resources/view/img/agents/agent-3.png" alt="agent member image">
-                    </div>
-                    <div class="aa-agetns-info">
-                      <h4><a href="#">Paul Walker</a></h4>
-                      <span>Director</span>
-                      <div class="aa-agent-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="aa-single-agents">
-                    <div class="aa-agents-img">
-                      <img src="/resources/view/img/agents/agent-4.png" alt="agent member image">
-                    </div>
-                    <div class="aa-agetns-info">
-                      <h4><a href="#">John Smith</a></h4>
-                      <span>Jr. Agent</span>
-                      <div class="aa-agent-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                </li>
+              
+              
+              </c:forEach>  
+                
+      
+     
+     
+             
+             
               </ul>
             </div>
           </div>
@@ -792,64 +603,53 @@
         <div class="col-md-12">
           <div class="aa-latest-blog-area">
             <div class="aa-title">
-              <h2>Latest News</h2>
+              <h2>베스트 상품</h2>
               <span></span>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe magni, est harum repellendus. Accusantium, nostrum!</p>
+              <p>
+              베스트오브베스트. 건강식품. 
+              화장품. 가전상품. 가정용품. 주방용품 ... Macaronics : Shop 최고의 상품은? 
+              </p>
+              <p>Macaronics Mall에서 Best </p>
             </div>
             <div class="aa-latest-blog-content">
               <div class="row">
+             
+             <c:forEach items="${map.bestProductList }" var="row"> 
                 <!-- start single blog -->
                 <div class="col-md-4">
                   <article class="aa-blog-single">
                     <figure class="aa-blog-img">
-                      <a href="#"><img src="/resources/view/img/blog-img-1.jpg" alt="img"></a>
-                      <span class="aa-date-tag">15 April, 16</span>
+                      <a href="/shop/products/detail.do/${row.product_id }">
+                    <img src="/products/img/${row.picture_url.substring(0,12) }${row.picture_url.substring(14)}"  
+                    style="min-width:360px; max-width:360px; min-height:240px; max-height:240px;" alt="img"  alt="Best Products"> 
+                    </a>
+                      <span class="aa-date-tag">BEST</span>
                     </figure>
                     <div class="aa-blog-single-content">
-                      <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
+                      <h3><a href="#">${row.product_name }</a></h3>
+                      <p>
+                     <c:choose>
+                     	<c:when test="${fn:length(row.description) >14 }">
+                     		<c:out value="${fn:substring(row.description, 0, 60)}"/>..
+                     	</c:when>
+                     	<c:otherwise>
+                     	  <c:out value="${row.description }" />
+                     	</c:otherwise>
+                     </c:choose>
+                     </p>
+                     
                       <div class="aa-blog-single-bottom">
-                        <a href="#" class="aa-blog-author"><i class="fa fa-user"></i> Admin</a>
-                        <a href="#" class="aa-blog-comments"><i class="fa fa-comment-o"></i>6</a>
+                        <a href="/shop/products/detail.do/${row.product_id }" class="aa-blog-author"><i class="glyphicon glyphicon-gift"></i> ${row.category3_title }</a>
+                        <a href="/shop/products/detail.do/${row.product_id }" class="aa-blog-comments"><i class="glyphicon glyphicon-eye-open"></i>${row.view_count }</a>
                       </div>
                     </div>
                    
                   </article>
                 </div>
-                <!-- start single blog -->
-                <div class="col-md-4">
-                  <article class="aa-blog-single">
-                    <figure class="aa-blog-img">
-                      <a href="#"><img src="/resources/view/img/blog-img-2.jpg" alt="img"></a>
-                      <span class="aa-date-tag">15 April, 16</span>
-                    </figure>
-                    <div class="aa-blog-single-content">
-                      <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
-                      <div class="aa-blog-single-bottom">
-                        <a href="#" class="aa-blog-author"><i class="fa fa-user"></i> Admin</a>
-                        <a href="#" class="aa-blog-comments"><i class="fa fa-comment-o"></i>6</a>
-                      </div>
-                    </div>                   
-                  </article>
-                </div>
-                <!-- start single blog -->
-                <div class="col-md-4">
-                  <article class="aa-blog-single">
-                    <figure class="aa-blog-img">
-                      <a href="#"><img src="/resources/view/img/blog-img-3.jpg" alt="img"></a>
-                      <span class="aa-date-tag">15 April, 16</span>
-                    </figure>
-                    <div class="aa-blog-single-content">
-                      <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
-                      <div class="aa-blog-single-bottom">
-                        <a href="#" class="aa-blog-author"><i class="fa fa-user"></i> Admin</a>
-                        <a href="#" class="aa-blog-comments"><i class="fa fa-comment-o"></i>6</a>
-                      </div>
-                    </div>                   
-                  </article>
-                </div>
+             
+             </c:forEach>
+             
+             
               </div>
             </div>
           </div>
