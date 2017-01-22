@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 
@@ -71,7 +72,7 @@
                   <div class="row">
                    <div class="box">
             <div class="box-header">
-              <h3 class="box-title" style="margin-bottom: 10px;">메시지 전송 테스트</h3>
+              <h3 class="box-title" style="margin-bottom: 10px;">실시간 메시지 전송 테스트</h3>
 
               <div class="box-tools">	
            
@@ -129,15 +130,17 @@
            			</tr>
            			
            			<tr>
-           			<th>내용</th>
-           			<td >
-           			<textarea rows="5" cols="20" class="form-control" name="message" id="message" ></textarea>
+           			<th colspan="2">내용</th>
+           			</tr>
+           			<tr>
+           			<td colspan="2">
+           			<textarea rows="5" cols="20" class="form-control" name="message" id="message" onkeyup="chkword(this, 3000)" ></textarea>
            			</td>
            			</tr>
            			
            			<tr>
            			<td colspan="2" style="text-align: center;">
-           			<input type="submit"  value="전송" class="btn btn-success" id="messageSubmit">
+           			<input type="submit"  value="전송" class="btn btn-success" id="messageSubmit" >
            			</td>
            			</tr>
            	</table>
@@ -151,19 +154,38 @@
              	
              	<hr>
              	<div >
-             		<ul id="messageList">
-             			<c:forEach items="${messageList}" var="list">
-
-					<li>
-					번호: ${list.mid } - 받는사람: ${list.targetid } - 
-					
-					보낸사람 : ${list.sender}  - 메시지: ${list.message } 
-					- 보낸날짜: ${list.senddate}  - 개봉날짜 : ${list.opendate }
-					</li>
-             			
-             			</c:forEach>
              		
-             		</ul>
+             		<div id="messageList" class="table-responsive">
+             			<table class="table table-striped">
+ 
+						<tr>
+							<td>번호 </td>
+						<td>받는사람 </td>
+						<td>보낸사람</td>
+						<td>내용</td>
+						</tr>
+         
+             			<c:forEach items="${messageList}" var="list">
+							
+		
+									<tr>
+						<td><small>${list.mid }</small></td>
+						
+						<td><small>${list.targetid }</small></td>
+						
+						<td><small>${list.sender}</small></td> 
+						
+						<td><small>${list.message}</small>
+						<small class="badge bg-red"><fmt:formatDate value="${list.senddate }"  pattern="yyyy-MM-dd HH:mm"/></small>
+						</td> 
+						
+					
+					
+						</tr>
+		
+             			</c:forEach>
+             			</table>
+             		</div>
              	
              	</div>
              	
@@ -178,106 +200,7 @@
         
              
               <!-- Start blog sidebar -->
-              <div class="col-md-4">
-                <aside class="aa-blog-sidebar">
-                  <!-- Start single sidebar -->
-                  <div class="aa-blog-sidebar-single">
-                    <form action="">
-                      <div class="aa-blog-search">
-                        <input class="aa-search-text" type="text" placeholder="Search...">
-                        <button class="aa-search-submit" type="submit">
-                          <i class="fa fa-search"></i>
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                  <!-- Start single sidebar -->
-                  <div class="aa-blog-sidebar-single">
-                    <h3>Categories</h3>
-                    <ul class="aa-blog-catg">
-                      <li>Properties <span>15000</span></li>
-                      <li>Apartment <span>5000</span></li>
-                      <li>Office  <span>3000</span></li>
-                      <li>Residential <span>4500</span></li>
-                      <li>Commercial <span>1000</span>
-                          <ul>
-                            <li>category 2.1 <span>50</span></li>
-                            <li>category 2.2 <span>100</span></li>
-                          </ul>
-                      </li>
-                      <li>Villa <span>800</span></li>
-                      <li>Bungalow  <span>200</span></li>
-                      <li>News <span>375</span></li>
-                      <li>Reviews <span>458</span></li>
-                    </ul>
-                  </div>
-                  <!-- Start single sidebar -->
-                  <div class="aa-blog-sidebar-single">
-                    <h3>Tags</h3>
-                    <div class="tag-cloud">
-                      <a href="#">Apartment</a>
-                      <a href="#">Propery</a>
-                      <a href="#">Residential</a>
-                      <a href="#">Commercial</a>
-                      <a href="#">Office</a>
-                      <a href="#">Rent</a>
-                      <a href="#">Sale</a>
-                      <a href="#">Villa</a>
-                    </div>                    
-                  </div>
-                  <!-- Start single sidebar -->
-                  <div class="aa-blog-sidebar-single">
-                    <h3>Recent Post</h3>
-                    <div class="aa-blog-recent-post">
-                      <div class="media">
-                        <div class="media-left">
-                          <a href="#">
-                            <img alt="img" src="img/blog-img-3.jpg" class="media-object">
-                          </a>
-                        </div>
-                        <div class="media-body">
-                          <h4 class="media-heading"><a href="#">This is Title</a></h4>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>                
-                          <span>15 April, 16</span>
-                        </div>              
-                      </div>
-                      <div class="media">
-                        <div class="media-left">
-                          <a href="#">
-                            <img alt="img" src="img/blog-img-2.jpg" class="media-object">
-                          </a>
-                        </div>
-                        <div class="media-body">
-                          <h4 class="media-heading"><a href="#">This is Title</a></h4>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>                
-                          <span>15 April, 16</span>
-                        </div>              
-                      </div>
-                      <div class="media">
-                        <div class="media-left">
-                          <a href="#">
-                            <img alt="img" src="img/blog-img-1.jpg" class="media-object">
-                          </a>
-                        </div>
-                        <div class="media-body">
-                          <h4 class="media-heading"><a href="#">This is Title</a></h4>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>                
-                          <span>15 April, 16</span>
-                        </div>              
-                      </div>
-                    </div>                    
-                  </div>
-                  <!-- Start single sidebar -->
-                  <div class="aa-blog-sidebar-single">                    
-                    <div class="aa-banner-ads">
-                      <a href="#">
-                        <img src="img/banner-ads.jpg" alt="banner img">
-                      </a>
-                    </div>                    
-                  </div>
-                </aside>
-              </div>
-          
+				<%@ include  file="../include/blogsidebar.jsp" %>
           
           
             </div>
@@ -350,6 +273,16 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
 });
 
 
@@ -358,6 +291,40 @@ function list(page){
 	location.href='/board/listAll.do'+page;
 
 }
+
+//글자수 제한
+
+function chkword(obj, maxByte) {
+
+       var strValue = obj.value;
+       var strLen = strValue.length;
+       var totalByte = 0;
+       var len = 0;
+       var oneChar = "";
+       var str2 = "";
+
+       for (var i = 0; i < strLen; i++) {
+           oneChar = strValue.charAt(i);
+           if (escape(oneChar).length > 4) {
+               totalByte += 2;
+           } else {
+               totalByte++;
+           }
+
+           // 입력한 문자 길이보다 넘치면 잘라내기 위해 저장
+           if (totalByte <= maxByte) {
+               len = i + 1;
+           }
+       }
+
+       // 넘어가는 글자는 자른다.
+       if (totalByte > maxByte) {
+           alert(maxByte + "자를 초과 입력 할 수 없습니다.");
+           str2 = strValue.substr(0, len);
+           obj.value = str2;
+           chkword(obj, 3000);
+       }
+   }
 
 </script>
 
@@ -377,20 +344,44 @@ function list(page){
 
 
 <script id="template2" type="text/x-handlebars-template">
+
+<table class="table table-striped">
+ 
+<tr>
+	<td>번호 </td>
+<td>받는사람 </td>
+<td>보낸사람</td>
+<td>내용</td>
+
+</tr>
+
 {{#each .}}
+<tr>
+<td><small>{{mid }}</small></td>
+
+<td><small>{{targetid }}</small></td>
+
+<td><small>{{sender}}</small></td> 
+
+<td><small>{{message }}</small>
+<small class="badge bg-red">{{senddate}}</small>
+</td> 
 
 
-<li>
-	번호: {{mid }} - 받는사람: {{targetid }} - 
-				
-	보낸사람 : {{sender}}  - 메시지: {{message }} 
-	- 보낸날짜: {{senddate}}  - 개봉날짜 : {{opendate }}
-</li>
-
+</tr>
 {{/each}}
+
+</table>
 </script>
 
 
 
+
+    
   
 <%@ include file="../include/footer.jsp" %>
+
+
+
+
+

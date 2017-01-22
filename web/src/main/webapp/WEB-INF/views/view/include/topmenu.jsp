@@ -87,6 +87,14 @@
             <li <c:if test='${curUrl.contains("home") }'> class="active"</c:if> >
             	<a href="/">HOME</a>
             </li>
+            
+            <c:if test="${not empty loginUser }">
+                 <li><a href="/shop/cart/list.do">장바구니</a></li>  
+                 <li><a href="/shop/order/orderList.do">결제대기 상품</a></li>  
+           </c:if> 
+            
+            
+            
              <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="/board/listAll.do">Free 게시판 <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">                
@@ -118,8 +126,12 @@
                  </c:if>                                          
               </ul>
             </li>
-            <li><a href="contact.html">CONTACT</a></li>
-           <li><a href="404.html">404 PAGE</a></li>
+         
+         
+            <li><a href="contact.html">이벤트</a></li>
+           <li><a href="404.html">Q&A</a></li>
+         
+         
           </ul>                            
         </div><!--/.nav-collapse -->       
       </div>          

@@ -35,8 +35,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.macaronics.www.SqlServerEnvironment;
+import com.macaronics.www.admin.service.AdminCategoryService;
 import com.macaronics.www.member.model.dto.board.BoardVO;
 import com.macaronics.www.member.service.board.BoardService;
+import com.macaronics.www.user.model.dto.ProductShopVO;
+import com.macaronics.www.user.service.ProductService;
 import com.macaronics.www.util.fileupload.UploadPath;
 import com.macaronics.www.util.mysql.PageMaker;
 import com.macaronics.www.util.mysql.SearchCriteria;
@@ -55,6 +58,12 @@ public class BoardController {
 	
 	@Inject
 	private BoardService boardService;
+	
+	@Inject
+	private ProductService productService;
+	
+	@Inject
+	private AdminCategoryService adminCategoryService;
 	
 	
 	@RequestMapping(value="/listAll.do", method=RequestMethod.GET)
@@ -82,8 +91,20 @@ public class BoardController {
 			// MYSQL DB 일 경우
 			mv =mysqlPageList(cri);
 		}	
+		
+		
+		
+		//1차 카테고리 목록 불러오기
+		mv.addObject("categoryOne", adminCategoryService.categoryOneList());
+		
+		//조회수가 많은 상품을 가져온다.
+		List<ProductShopVO> viewsProduct =productService.viewsProduct();
+		mv.addObject("vbp", viewsProduct);
+		
 		return mv;
 	}
+	
+	
 	
 	
 	// 오라클 페이지 리스트 페이지 
@@ -148,7 +169,15 @@ public class BoardController {
 	
 	
 	@RequestMapping(value="/write.do", method=RequestMethod.GET)
-	public String writeDo (){
+	public String writeDo (Model model){
+		
+		
+		//1차 카테고리 목록 불러오기
+		model.addAttribute("categoryOne", adminCategoryService.categoryOneList());
+		
+		//조회수가 많은 상품을 가져온다.
+		List<ProductShopVO> viewsProduct =productService.viewsProduct();
+		model.addAttribute("vbp", viewsProduct);
 		
 		return JSP_PAGE+"write";
 	}
@@ -170,7 +199,10 @@ public class BoardController {
 	@RequestMapping(value="/view.do", method=RequestMethod.GET)
 	public String viewDo(@ModelAttribute("cri") SearchCriteria cri,
 			@RequestParam Integer bno, Model model, HttpSession session){
-			
+		
+		//1차 카테고리 목록 불러오기
+		common(model);
+	
 		model.addAttribute("vo", boardService.boardRead(bno, session));
 		
 		return   JSP_PAGE+"view";
@@ -185,6 +217,9 @@ public class BoardController {
 			@RequestParam Integer bno,   Model model){
 		 BoardVO  vo = boardService.getBoard(bno);
 		
+		//1차 카테고리 목록 불러오기
+		common(model);
+		 
 		 model.addAttribute("vo", vo);
 		
 		return JSP_PAGE+"update";
@@ -351,6 +386,17 @@ public class BoardController {
 	
 	
 	
+	public void common(Model model){
+		
+		//1차 카테고리 목록 불러오기
+		model.addAttribute("categoryOne", adminCategoryService.categoryOneList());
+		
+		//조회수가 많은 상품을 가져온다.
+		List<ProductShopVO> viewsProduct =productService.viewsProduct();
+		model.addAttribute("vbp", viewsProduct);
+	
+		
+	}
 	
 	
 	
