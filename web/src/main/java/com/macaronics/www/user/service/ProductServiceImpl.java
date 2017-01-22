@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.macaronics.www.user.model.dao.ProductDAO;
 import com.macaronics.www.user.model.dto.ProductShopVO;
+import com.macaronics.www.util.oralce.PageAndSearch;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -21,9 +22,9 @@ public class ProductServiceImpl implements ProductService {
 	private ProductDAO dao;
 	
 	@Override
-	public List<ProductShopVO> productList(int start, int end, String search_option, String keyword) throws Exception {
+	public List<ProductShopVO> productList(int start, int end, PageAndSearch pas) throws Exception {
 	
-		return dao.productList(start, end, search_option, keyword);
+		return dao.productList(start, end, pas);
 	}
 
 	

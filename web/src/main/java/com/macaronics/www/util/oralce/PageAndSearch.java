@@ -9,7 +9,8 @@ public class PageAndSearch extends Pager {
 
 	private String search_option;
 	private String keyword;
-	
+	private String sortby;
+	private Integer show;
 
 	public  String searchQuery(Integer curPage){
 		if(curPage==null){
@@ -19,6 +20,8 @@ public class PageAndSearch extends Pager {
 				UriComponentsBuilder.newInstance()
 				.queryParam("curPage", curPage )
 				.queryParam("search_option", getSearch_option())
+				.queryParam("sortby", getSortby())
+				.queryParam("show", getShow())
 				.queryParam("keyword", getKeyword())
 				.build();
 		
@@ -45,11 +48,41 @@ public class PageAndSearch extends Pager {
 		this.keyword = keyword;
 	}
 
+	
+
+	public String getSortby() {
+		return sortby;
+	}
+
+
+	public void setSortby(String sortby) {
+		this.sortby = sortby;
+	}
+
+
+
+
+
+	public Integer getShow() {
+		return show;
+	}
+
+
+	public void setShow(Integer show) {
+		this.show = show;
+	}
+
 
 	@Override
 	public String toString() {
-		return "PageAndSearch [search_option=" + search_option + ", keyword=" + keyword + "]";
+		return "PageAndSearch [search_option=" + search_option + ", keyword=" + keyword + ", sortby=" + sortby
+				+ ", show=" + show + "]";
 	}
 
+
+
+	
+	
+	
 
 }

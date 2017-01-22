@@ -3,11 +3,12 @@ package com.macaronics.www.user.service;
 import java.util.List;
 
 import com.macaronics.www.user.model.dto.ProductShopVO;
+import com.macaronics.www.util.oralce.PageAndSearch;
 
 public interface ProductService {
 	
 
-	public List<ProductShopVO> productList(int start, int end, String search_option, String keyword)
+	public List<ProductShopVO> productList(int start, int end, PageAndSearch pas)
 			throws Exception;
 	
 	ProductShopVO detailProduct(Integer product_id);

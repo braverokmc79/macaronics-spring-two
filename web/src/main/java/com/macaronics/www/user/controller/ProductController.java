@@ -53,7 +53,29 @@ public class ProductController {
 		//페이지 나누기 관련 처리
 		if(pas.getCurPage()==null){pas.setCurPage(1);}
 		
-		Pager.PAGE_SCALE=20; //페이지당 20개씩
+		
+
+		if(pas.getShow()==null){
+			Pager.PAGE_SCALE=20; //페이지당 20개씩 기본값
+			pas.setShow(20);
+		}else{
+			Pager.PAGE_SCALE= pas.getShow();
+		}
+		if(pas.getSortby()==null || pas.getSortby().equals("")){
+			pas.setSortby("product_id");
+		}
+		boolean sortby =false;
+		//잘못된 입력 방지
+		if(pas.getSortby().equals("product_id")||pas.getSortby().equals("product_name")||
+				pas.getSortby().equals("price")||pas.getSortby().equals("regdate")){
+			
+			sortby=true;
+		}
+		
+		if(!sortby){
+			pas.setSortby("product_id");
+		}
+		
 		
 		Pager pager =new Pager(count, pas.getCurPage());
 		int start =pager.getPageBegin();
@@ -61,7 +83,7 @@ public class ProductController {
 		
 		
 		//List<BoardVO> list=boardService.boardList(start, end, pas.getSearch_option(), pas.getKeyword());
-		List<ProductShopVO> list=service.productList(start, end, pas.getSearch_option(), pas.getKeyword());
+		List<ProductShopVO> list=service.productList(start, end, pas);
 		
 		
 		Map<String, Object> map =new HashMap<>();
@@ -163,6 +185,24 @@ public class ProductController {
 	}
 	
 	
+	//3차 카테고리 모든 목록 불러오기
+	@ResponseBody
+	@RequestMapping(value="/categoryAllThreeList", method=RequestMethod.GET)
+	public ResponseEntity<List<AdminCategoryVO>> categoryAllThreeList(){
+		ResponseEntity<List<AdminCategoryVO>> entity=null;
+		List<AdminCategoryVO> list=null;
+		try{
+			
+			list =adminCategoryService.categoryAllThreeList();
+			
+			entity=new ResponseEntity<List<AdminCategoryVO>>(list, HttpStatus.OK);
+		}catch(Exception e){
+			e.printStackTrace();
+			entity=new ResponseEntity<List<AdminCategoryVO>>(HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
+	}
 	
 	
 	

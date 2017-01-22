@@ -52,16 +52,23 @@
       <p style="margin-bottom: 50px;"></p>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                  <input type="text" name="table_search"  id="table_search" value="${param.keyword }" class="form-control pull-right" placeholder="Search">
 
                   <div class="input-group-btn">
-                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                    <button type="button" class="btn btn-default" id="searchBtn"><i class="fa fa-search"></i></button>
                   </div>
                 </div>
               </div>
             </div>
             <!-- /.box-header -->
+                 <div style="margin-bottom: 15px;"> 
+                  <select class="form-control" id="categoryThree" onchange="searchChange()">
+						
+                  </select>
+                 </div> 
             <div class="box-body table-responsive no-padding">
+  
+              
               <table class="table table-hover">
                 <tbody><tr>
                   <th>등록번호</th>
@@ -72,7 +79,13 @@
                   <th style="max-width: 150px;">등록일</th>  
                 </tr>
    
-   
+   				<c:if test="${map.countList ==0}">
+   					<tr>
+   					                  <td colspan="6" style="text-align: center;">검색된 상품이 없습니다.</td>
+
+   					</tr>
+   				</c:if>
+   			
    <c:forEach items="${productList }" var="row">
 		<tr >
 		
@@ -239,7 +252,37 @@ $(document).ready(function(){
 	var deleteErrorMessage ="${deleteErrorMessage}";
 	if($.trim(deleteErrorMessage).length >1){
 		alert(deleteErrorMessage);
-	}	
+	}
+	
+	
+	
+	$.getJSON("/shop/products/categoryAllThreeList" , function(data){
+		var str ="<option value='' >ALL</option>";
+		
+		var keyword='${param.keyword}';
+		
+		$(data).each(function(){
+			var addClass= keyword ==this.title ? 'selected' : '' ;
+			str +="<option value="+this.title+" " +addClass +" >"+this.title+"</option>";
+			
+		});
+		$("#categoryThree").html(str);
+		
+	});
+	
+	
+	$("#searchBtn").click(function(){
+		
+		var curPage ="${param.curPage}";
+		var keyword=$("#table_search").val();
+		
+		//alert(sortby + " : " + show);
+		var str='/admin/shop/products/proudctList?curPage='+curPage;
+		str +='&keyword='+keyword;
+		location.href=str;
+		
+	});
+	
 	
 });
 
@@ -261,6 +304,23 @@ function list(page){
 	location.href='/admin/shop/products/proudctList'+page;
 
 }
+
+
+function searchChange(){
+	
+	var keyword=$("#categoryThree option:selected").val();
+
+	var curPage ="${param.curPage}";
+	
+	//alert(sortby + " : " + show);
+	var str='/admin/shop/products/proudctList?curPage='+curPage;
+	str +='&keyword='+keyword;
+	location.href=str;
+	
+	
+	
+}
+
 </script>
 
 

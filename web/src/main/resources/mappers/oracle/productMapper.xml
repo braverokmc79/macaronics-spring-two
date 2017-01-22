@@ -10,8 +10,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- 레코드 개수 계수 -->
 	<select id="countArticle" resultType="int">
 	   select count(*)  from view_product  where PRODUCT_ID > 0
-	   <!-- 	 <include refid="search"></include> -->
+	  
+	  	<if test="keyword !=null">	 
+		 and  
+		  (category3_title like '%' || #{keyword} || '%' )
+		 	or
+		 (product_name like '%' || #{keyword} || '%' )
+		
+      </if>
 	</select>
+	
+	
 		
 	<select id="productList" resultType="com.macaronics.www.user.model.dto.ProductShopVO">
 		select * from
@@ -36,7 +45,8 @@ p.PRODUCT_ID, p.AMOUNT,  p.CATEGORY_BNO, p.CATEGORY_IDX, p.CATEGORY_RNO,p.DELIVE
 	
 	 <include refid="search"></include>
 	
-	order by p.PRODUCT_ID desc , p.REGDATE desc
+	order by ${sortby} desc 
+	
 	)
 	
 	A 
@@ -59,7 +69,15 @@ p.PRODUCT_ID, p.AMOUNT,  p.CATEGORY_BNO, p.CATEGORY_IDX, p.CATEGORY_RNO,p.DELIVE
 			  or  (  writer like  '%' || #{keyword} || '%' )
 			     or ( content like  '%' || #{keyword} || '%'  )
 	</if>
-		 -->	
+		 -->
+	<if test="keyword !=null">	 
+		 and  
+		  (c3.TITLE like '%' || #{keyword} || '%' )
+		 	or
+		 (product_name like '%' || #{keyword} || '%' )
+		 
+		
+   </if>
 </sql>	
 	
 	

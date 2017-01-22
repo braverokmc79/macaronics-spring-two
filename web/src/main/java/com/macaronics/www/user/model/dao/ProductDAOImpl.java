@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.macaronics.www.SqlServerEnvironment;
 import com.macaronics.www.user.model.dto.ProductShopVO;
+import com.macaronics.www.util.oralce.PageAndSearch;
 
 @Repository
 public class ProductDAOImpl implements ProductDAO {
@@ -28,15 +29,17 @@ public class ProductDAOImpl implements ProductDAO {
 
 	
 	@Override
-	public List<ProductShopVO> productList(int start, int end, String search_option, String keyword)
+	public List<ProductShopVO> productList(int start, int end, PageAndSearch pas)
 			throws Exception {
 		Map<String, Object> map =new HashMap<>();
 		
 		map.put("start", start);
 		map.put("end", end);
-		map.put("search_option", search_option);
-		map.put("keyword", keyword);
+		map.put("search_option", pas.getSearch_option());
+		map.put("keyword", pas.getKeyword());
+		map.put("sortby", pas.getSortby());
 		
+		logger.info("************ sortby : " + pas.getSortby());
 		return sqlSession.selectList(namespace+".productList", map);
 	}
 

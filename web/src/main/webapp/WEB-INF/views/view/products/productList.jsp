@@ -48,7 +48,6 @@
 
 
 
-
   <!-- Start Properties  -->
   <section id="aa-properties">
     <div class="container">
@@ -59,21 +58,26 @@
             <div class="aa-properties-content-head">              
               <div class="aa-properties-content-head-left">
                 <form action="" class="aa-sort-form">
-                  <label for="">Sort by</label>
-                  <select name="">
-                    <option value="1" selected="Default">Default</option>
-                    <option value="2">Name</option>
-                    <option value="3">Price</option>
-                    <option value="4">Date</option>
+                  <label for="sortby">정렬</label>
+                  <select name="sortby" onchange="sortBy()" id="sortby">
+                    <option value="product_id"  <c:if test="${ param.sortby=='product_id' }" >selected</c:if>      >Default</option>
+                    <option value="product_name"  <c:if test="${ param.sortby=='product_name' }" >selected</c:if>      >상품명</option>
+                    <option value="price"  <c:if test="${ param.sortby=='price' }" >selected</c:if>      >가격</option>
+                    <option value="regdate"  <c:if test="${ param.sortby=='regdate' }" >selected</c:if>      >등록일</option>
+                  
                   </select>
                 </form>
                 <form action="" class="aa-show-form">
-                  <label for="">Show</label>
-                  <select name="">
-                    <option value="1" selected="12">6</option>
-                    <option value="2">12</option>
-                    <option value="3">24</option>
+                  <label for="show">보기</label>
+                  <select name="show" onchange="sortBy()" id="show" >
+                    <option value="10" <c:if test="${ param.show=='10' }" >selected</c:if> >10</option>
+                    <option value="20" <c:if test="${ param.show=='20' }" >selected</c:if>>20</option>
+                    <option value="30" <c:if test="${ param.show=='30' }" >selected</c:if>>30</option>
+                    <option value="50" <c:if test="${ param.show=='50' }" >selected</c:if>>50</option>
+                    <option value="100" <c:if test="${ param.show=='100' }" >selected</c:if>>100</option>
                   </select>
+                
+          			<label for="show" >상품수 <span class="label label-danger" id="productCount">${map.countList }</span></label>
                 </form>
               </div>
               <div class="aa-properties-content-head-right">
@@ -81,14 +85,21 @@
                 <a id="aa-list-properties" href="#"><span class="fa fa-list"></span></a>
               </div>            
             </div>
-          
+   
           
             <!-- Start properties content body -->
             <div class="aa-properties-content-body">
+                <c:if test="${map.countList ==0}">
+              		<div style="text-align: center; margin-top: 20px;">검색 결과가 없습니다.</div>
+              	</c:if>
+              
+             
               <ul class="aa-properties-nav">
 	
-                
+      
                <c:forEach items="${productList}" var="row">
+              
+
               
                  <li>
                   <article class="aa-properties-item" >
@@ -231,7 +242,7 @@
               <h3>상품 검색</h3>
               <form action="">
                 <div class="aa-single-advance-search">
-                  <input type="text" placeholder="">
+                  <input type="text" placeholder=""  id="keyword" value="${param.keyword }">
                 </div>
                 <div class="aa-single-advance-search">
                 
@@ -356,6 +367,32 @@ $(document).ready(function(){
 	CategoryOneChange();
 	
 	
+	//검색
+	
+	$(".aa-search-btn").click(function(event){
+		event.preventDefault();
+		var keyword=$("#keyword").val();
+		
+		var sortby =$("#sortby").val();
+		var show =$("#show option:selected").val();
+		var curPage ="${param.curPage}";
+		var search_option="${param.search_option}";
+		
+		
+		
+		//alert("검색 :" +keyword);
+	
+		var str='/shop/products/list.do?curPage='+curPage+'&search_option='+search_option;
+		str +='&sortby='+sortby;
+		str +='&show='+show;
+		str +='&keyword='+keyword;
+		location.href=str;
+		
+	});
+	
+	//
+	
+	
 });
 
 
@@ -456,7 +493,22 @@ function CategoryThreeList(bno){
 	
 }
 
+function sortBy(){
+	
+	var sortby =$("#sortby").val();
+	var show =$("#show option:selected").val();
+	var curPage ="${param.curPage}";
+	var search_option="${param.search_option}";
+	var keyword="${param.keyword}";
+	
 
+	//alert(sortby + " : " + show);
+	var str='/shop/products/list.do?curPage='+curPage+'&search_option='+search_option;
+	str +='&sortby='+sortby;
+	str +='&show='+show;
+	str +='&keyword='+keyword;
+	location.href=str;
+}
 
 
 </script>

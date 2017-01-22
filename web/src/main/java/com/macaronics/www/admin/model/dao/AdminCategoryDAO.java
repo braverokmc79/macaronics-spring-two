@@ -30,6 +30,8 @@ public interface AdminCategoryDAO {
 	public void categoryThreeUpdate(AdminCategoryVO vo);
 
 	public void categoryThreeDelete(Integer rno);
+
+	public List<AdminCategoryVO> categoryAllThreeList();
 	
 	
 }

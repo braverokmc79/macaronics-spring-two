@@ -117,7 +117,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="aa-single-advance-search">
-                  <input type="text" placeholder="">
+                  <input type="text" placeholder="" id="keyword">
                 </div>
               </div>
               <div class="col-md-2">
@@ -657,6 +657,24 @@ $(document).ready(function(){
 	//2차 카테고리 호출
 	CategoryOneChange();
 	
+	
+	//검색
+	
+	$(".aa-search-btn").click(function(event){
+		event.preventDefault();
+		var keyword=$("#keyword").val();
+
+		var show =20;
+		var curPage =1;
+	
+		//alert("검색 :" +keyword);
+	
+		var str='/shop/products/list.do?curPage='+curPage;
+		str +='&show='+show;
+		str +='&keyword='+keyword;
+		location.href=str;
+		
+	});
 	
 });
 

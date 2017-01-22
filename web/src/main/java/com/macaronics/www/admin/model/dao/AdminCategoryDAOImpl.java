@@ -105,6 +105,13 @@ public class AdminCategoryDAOImpl implements AdminCategoryDAO {
 	}
 
 
+	@Override
+	public List<AdminCategoryVO> categoryAllThreeList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".categoryAllThreeList");
+	}
+
+
 	
 	
 }

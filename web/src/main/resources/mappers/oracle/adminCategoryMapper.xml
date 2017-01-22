@@ -81,6 +81,13 @@ create sequence seq_category_three start with 1
 	  delete from TBL_CATEGORY_THREE where rno=#{rno}
 	</delete>
 	
+	
+	<!-- 3차카테고리 모든 항목 불러오기 -->
+	<select id="categoryAllThreeList" resultType="com.macaronics.www.admin.model.dto.AdminCategoryVO">
+	 select * from TBL_CATEGORY_THREE  order by rno asc
+	</select>
+	
+	
 </mapper>
 
 

@@ -39,5 +39,8 @@ public interface AdminCategoryService {
 
 
 	public void categoryThreeDelete(Integer rno);
+
+
+	public List<AdminCategoryVO> categoryAllThreeList();
 	
 }

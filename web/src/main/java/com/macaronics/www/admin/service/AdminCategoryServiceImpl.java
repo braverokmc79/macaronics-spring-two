@@ -154,6 +154,13 @@ public class AdminCategoryServiceImpl implements AdminCategoryService {
 	}
 
 
+	@Override
+	public List<AdminCategoryVO> categoryAllThreeList() {
+		// TODO Auto-generated method stub
+		return adminCategoryDAO.categoryAllThreeList();
+	}
+
+
 
 
 	
