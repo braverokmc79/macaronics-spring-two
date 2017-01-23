@@ -112,6 +112,8 @@
               <ul class="dropdown-menu" role="menu">                
                 <li><a href="/gallery/view/list.do">GALLERY LIST</a></li> 
                 <li><a href="/gallery/view/gallery2.do">GALLERY UPLOAD TEST</a></li>                                            
+             	<li> <a href="#" id="proguardGUi">프로가드 실행</a></li>
+             
               </ul>
             </li>                                         
             
@@ -149,6 +151,29 @@
   <!-- End menu section -->
 
   
-  
+<script>
+$(document).ready(function(){
+	
+	$("#proguardGUi").click(function(event){
+		event.preventDefault();
+		
+		$.ajax({
+			
+			url:"/proguardgui/exe.do",
+			type:"get",
+			success:function(result){
+				
+				//alert(result);
+			}
+			
+		});
+	});
+		
+		
+	
+	
+});
+
+</script> 
   
   

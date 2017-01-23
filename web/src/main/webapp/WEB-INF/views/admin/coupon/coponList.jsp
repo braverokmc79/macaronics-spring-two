@@ -52,19 +52,15 @@
       <p style="margin-bottom: 50px;"></p>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search"  id="table_search" value="${param.keyword }" class="form-control pull-right" placeholder="Search">
+         
 
-                  <div class="input-group-btn">
-                    <button type="button" class="btn btn-default" id="searchBtn"><i class="fa fa-search"></i></button>
-                  </div>
+         
                 </div>
               </div>
             </div>
             <!-- /.box-header -->
                  <div style="margin-bottom: 15px;"> 
-                  <select class="form-control" id="categoryThree" onchange="searchChange()">
-						
-                  </select>
+  
                  </div> 
             <div class="box-body table-responsive no-padding">
   
