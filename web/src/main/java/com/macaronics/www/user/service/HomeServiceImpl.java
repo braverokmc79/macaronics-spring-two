@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.macaronics.www.user.model.dao.HomeDAO;
+import com.macaronics.www.user.model.dto.CouponVO;
 import com.macaronics.www.user.model.dto.ProductShopVO;
 
 
@@ -57,6 +58,24 @@ public class HomeServiceImpl implements HomeService {
 			
 		}
 		return list;
+	}
+
+	@Override
+	public int couponLastProudctIdx() {
+		// TODO Auto-generated method stub
+		return homedao.couponLastProudctIdx();
+	}
+
+	@Override
+	public CouponVO lastCouponProduct() {
+		
+		CouponVO vo=null;
+		try {
+			vo=homedao.lastCouponProduct(couponLastProudctIdx());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return vo;
 	}
 
 	

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="ORACLE.CouponMapper">
+	
+	<select id="getRead" resultType="com.macaronics.www.user.model.dto.CouponVO">
+		select * from TBL_COUPON  where idx =#{idx}
+	</select>
+	
+	
+	<update id="viewCoutUpdate">
+	
+		update tbl_coupon set view_count=view_count+1 where idx =#{idx}
+	</update>
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

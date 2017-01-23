@@ -852,3 +852,24 @@ insert into TBL_RECOMMEND_PRODUCT (RECOMMENDCODE, PRODUCT_ID)
  
  commit;
  
+ 
+ 
+-- 쿠폰 테이블 생성
+
+create table tbl_coupon (
+	
+	idx NUMBER PRIMARY KEY ,
+	title varchar2(200),
+	content long,
+	view_count number,
+	img_url varchar2(200),
+	regdate date default sysdate
+	
+);
+create sequence seq_coupon
+
+start with 1 increment by 1;
+
+ 
+ 
+ 

@@ -109,7 +109,7 @@
             
             <li class="dropdown">
             	<a class="dropdown-toggle" data-toggle="dropdown" href="/gallery/list">갤러리<span class="caret"></span></a>
-            	<ul class="dropdown-menu" role="menu">                
+              <ul class="dropdown-menu" role="menu">                
                 <li><a href="/gallery/view/list.do">GALLERY LIST</a></li> 
                 <li><a href="/gallery/view/gallery2.do">GALLERY UPLOAD TEST</a></li>                                            
               </ul>
@@ -128,7 +128,16 @@
             </li>
          
          
-            <li><a href="contact.html">이벤트</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="/coupon/couponList.do">이벤트<span class="caret"></span></a>
+           	  <ul class="dropdown-menu" role="menu">                
+                <li><a href="/coupon/couponList.do">이벤트</a></li> 
+                <li><a href="/coupon/couponList.do">쿠폰</a></li>                                            
+              </ul>
+           
+            </li>
+            
+           
            <li><a href="404.html">Q&A</a></li>
          
          

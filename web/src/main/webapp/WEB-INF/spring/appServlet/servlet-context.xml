@@ -33,6 +33,7 @@
 	-->
 	<resources mapping="/resources/**" location="/resources/" />
 	
+	<resources mapping="/coupon/**" location="/WEB-INF/uploads/coupon/" />
 	<resources mapping="/products/img/**" location="/WEB-INF/uploads/productsImg/" />
 	
 	

@@ -99,7 +99,7 @@
                            <!-- Start single sidebar -->
                   <div class="aa-blog-sidebar-single">                    
                     <div class="aa-banner-ads">
-                      <a href="#">
+                      <a href="/coupon/couponList.do">
                         <img src="/resources/view/img/sidebar3.png" alt="banner img" 
                         style="min-width:320px; max-width:320px; min-height:600px; max-height:600px;">
                       </a>

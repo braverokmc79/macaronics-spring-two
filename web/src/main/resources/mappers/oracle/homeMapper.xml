@@ -109,6 +109,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	
+	<select id="couponLastProudctIdx" resultType="int">
+		select idx from tbl_coupon where idx=(select nvl(max(idx),1) from tbl_coupon)
+	</select>
+	
+	
+	<select id="lastCouponProduct" resultType="com.macaronics.www.user.model.dto.CouponVO">
+		select * from TBL_COUPON  where idx =#{idx}
+	</select>
+	
 	
 </mapper>
 

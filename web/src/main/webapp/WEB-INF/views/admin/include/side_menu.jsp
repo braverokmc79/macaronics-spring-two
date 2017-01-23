@@ -105,11 +105,76 @@
          <li >
           <a href="/admin/recommended/registerForm">
             <i class="glyphicon glyphicon-heart-empty"></i> <span>오늘의 추천 상품 등록</span>
-            <span class="pull-right-container">
-            
+            <span class="pull-right-container"> 
             </span>
           </a>
         </li>
+        
+        <li>
+          <a href="/admin/recommended/registerForm">
+             <img src="/resources/admin/img/coupon.jpg"  style="max-height: 18px; max-width: 18px;"><span> 쿠폰 관리</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="/admin/coupon/registerForm"><i class="fa fa-circle-o"></i> 쿠폰등록</a></li>
+            <li><a href="/admin/coupon/couponList"><i class="fa fa-circle-o"></i> 쿠폰목록</a></li>
+          </ul>
+        </li>
+        
+        
+        <li>
+          <a href="/admin/recommended/registerForm">
+            <img src="/resources/admin/img/event.jpg"  style="max-height: 18px; max-width: 18px;"><span> 이벤트 관리</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+            <ul class="treeview-menu">
+            <li class="active"><a href="/admin/memberList.do"><i class="fa fa-circle-o"></i> 이벤트등록</a></li>
+            <li><a href="index2.html"><i class="fa fa-circle-o"></i> 이벤트목록</a></li>
+          </ul>
+        </li>
+        
+        
+        
+         <li>
+          <a href="/admin/recommended/registerForm">
+            <i class="glyphicon glyphicon-picture"></i> <span>메인상품 관리</span>
+            <span class="pull-right-container">   
+            </span>
+          </a>
+        </li>
+        
+        
+    	<li>
+          <a href="/admin/recommended/registerForm">
+            <i class="glyphicon glyphicon-question-sign"></i> <span>Q&A 관리</span>
+            <span class="pull-right-container">   
+            </span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a href="/admin/recommended/registerForm">
+            <i class="glyphicon glyphicon-shopping-cart"></i> <span>장바구니 관리</span>
+            <span class="pull-right-container">   
+            </span>
+          </a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="/admin/recommended/registerForm">
+            <i class="glyphicon glyphicon-off" ></i> <span>결제 상품 관리</span>
+            <span class="pull-right-container">   
+            </span>
+          </a>
+        </li>
+        
         
         
         

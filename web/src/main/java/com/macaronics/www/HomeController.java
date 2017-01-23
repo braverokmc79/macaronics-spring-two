@@ -24,6 +24,7 @@ import com.macaronics.www.admin.model.dto.AdminCategoryVO;
 import com.macaronics.www.admin.model.dto.AdminRecommendedVO;
 import com.macaronics.www.admin.service.AdminCategoryService;
 import com.macaronics.www.admin.service.AdminRecommendedService;
+import com.macaronics.www.user.model.dto.CouponVO;
 import com.macaronics.www.user.service.HomeService;
 
 /**
@@ -38,11 +39,15 @@ public class HomeController {
 	@Inject
 	private HomeService homeService;
 	
+	
+	
 	@Inject
 	private AdminCategoryService adminCategoryService;
 
 	@Inject
 	private AdminRecommendedService adminRecommendedService;
+	
+	
 	
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -67,6 +72,11 @@ public class HomeController {
 		//1차 카테고리 목록 불러오기
 		model.addAttribute("categoryOne", adminCategoryService.categoryOneList());
 		model.addAttribute("serverTime", formattedDate );
+		
+		//쿠폰
+		CouponVO  couponVO=homeService.lastCouponProduct();
+		model.addAttribute("couponVO", couponVO);
+		
 		return "home";
 	}
 	

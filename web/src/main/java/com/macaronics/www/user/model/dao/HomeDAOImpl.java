@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.macaronics.www.SqlServerEnvironment;
+import com.macaronics.www.user.model.dto.CouponVO;
 import com.macaronics.www.user.model.dto.ProductShopVO;
 
 
@@ -40,6 +41,18 @@ public class HomeDAOImpl implements HomeDAO {
 	public List<ProductShopVO> eventProductList() {
 		
 		return sqlSession.selectList(namespace+".eventProductList");
+	}
+
+	@Override
+	public int couponLastProudctIdx() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".couponLastProudctIdx");
+	}
+
+	@Override
+	public CouponVO lastCouponProduct(Integer idx) {
+	
+		return sqlSession.selectOne(namespace+".lastCouponProduct", idx);
 	}
 
 	

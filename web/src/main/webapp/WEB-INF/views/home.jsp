@@ -165,7 +165,7 @@
             </div>
             <div class="col-md-6">
               <div class="aa-single-filter-search">
-                <span>PRICE ($)</span>
+                <span>PRICE (원)</span>
                 <span>FROM</span>
                 <span id="skip-value-lower2" class="example-val">30.00</span>
                 <span>TO</span>
@@ -372,8 +372,6 @@
 
                 
                 
-                
-                
               </div>
             </div>
           </div>
@@ -389,9 +387,10 @@
       <div class="row">
         <div class="col-md-12">
           <div class="aa-promo-banner-area">
-            <h3>라코스테 15% 쿠폰</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, ex illum corporis quibusdam numquam quisquam optio explicabo. Officiis odit quia odio dignissimos eius repellat id!</p>
-            <a href="#" class="aa-view-btn">View Details</a>
+            <h3>${couponVO.title }</h3>
+            <p style="display: block;"><a href="/coupon/couponList.do?couponview=main">
+            <img src="/coupon${couponVO.img_url.substring(0,12) }${couponVO.img_url.substring(14)}"  style="width: 200px; height:150px;"></a></p>
+            <a href="/coupon/couponList.do?couponview=main" class="aa-view-btn">상세보기</a>
           </div>
         </div>
       </div>
