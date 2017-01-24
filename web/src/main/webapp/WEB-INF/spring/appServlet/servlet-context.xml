@@ -69,8 +69,7 @@
 	
 	
 	<interceptors>
-		
-		
+
 		<interceptor>
 			<mapping path="/**"/>
 			<beans:ref  bean="sampleInterceptor"/>

@@ -84,6 +84,8 @@
           
           <hr>
           <div style="text-align: center;">
+          
+          <c:if test="${not empty loginUser || not empty loginAdmin }">
            <c:if test="${sessionScope.loginUser.userid ==vo.writer   || sessionScope.loginUser.member_level >=15}"> 	
            			<input type="hidden"  name="bno" value="${vo.bno }">
               			<a type="button" class="btn btn-warning" href="/admin/coupon/couponUpdateForm/${coupon.idx}">수정하기</a>
@@ -92,6 +94,7 @@
 		 	 <button class="label label-danger"  type="button" id="couponDelete">삭제하기</button>
 		 	</form>
 		
+          	</c:if>
           	</c:if>
           </div>
         </div>

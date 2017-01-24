@@ -71,7 +71,9 @@
     
     <import resource="appServlet/security-context.xml"/>
   
-    
+  
+  	<!-- 이메일  -->
+    <import resource="appServlet/mail-context.xml"/>
     
 </beans>
 
