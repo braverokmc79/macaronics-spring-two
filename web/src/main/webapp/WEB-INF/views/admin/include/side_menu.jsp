@@ -61,7 +61,7 @@
             <i class="fa fa-files-o"></i>
             <span>갤러리</span>
             <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
+              <span class="label label-primary pull-right"></span>
             </span>
           </a>
           <ul class="treeview-menu">
@@ -200,12 +200,12 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
-            <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
+            <li><a href="/admin/pdf/board"><i class="fa fa-circle-o text-yellow"></i>게시판 출력</a></li>
+   <!--          <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
             <li><a href="pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
             <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
             <li><a href="pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-            <li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
+            <li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li> -->
           </ul>
         </li>
 
@@ -232,7 +232,6 @@
 
 
         <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-
 
 
       </ul>
