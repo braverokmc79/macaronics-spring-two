@@ -871,5 +871,16 @@ create sequence seq_coupon
 start with 1 increment by 1;
 
  
- 
+ -- 카테고리 별 상품 개수	
+	
+select 
+  count(c3.title) product_count , c3.TITLE as category_name
+		
+	from product p , TBL_CATEGORY_ONE c1, TBL_CATEGORY_TWO c2, TBL_CATEGORY_THREE c3
+	
+	where p.category_idx =c1.IDX and p.category_bno=c2.BNO and p.category_rno =c3.RNO
+	
+group by c3.TITLE order by c3.TITLE asc
+
+	 
  

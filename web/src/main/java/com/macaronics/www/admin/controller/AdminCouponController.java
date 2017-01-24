@@ -42,12 +42,13 @@ public class AdminCouponController {
 	private CouponService couponService;
 	
 	
-	
-	
 	private final String JSP_PAGE ="/admin/coupon/";
 	
 	private final String PATH ="WEB-INF/uploads/coupon";
 
+	
+	
+	
 	@RequestMapping(value="/registerForm", method=RequestMethod.GET)
 	public String coponRegisterForm(){
 		
