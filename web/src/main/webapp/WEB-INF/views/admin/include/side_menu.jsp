@@ -215,11 +215,15 @@
 
           </a>
         </li>
-        <li>
-          <a href="pages/mailbox/mailbox.html">
-            <i class="fa fa-envelope"></i> <span>메일 보내기</span>
-
+        <li class="treeview">
+          <a href="/admin/mail/composeForm">
+            <i class="fa fa-envelope"></i> <span>메일</span>
           </a>
+          
+          <ul class="treeview-menu">
+            <li class="active"><a href="/admin/mail/composeForm"><i class="fa fa-circle-o text-red"></i> 메일 보내기</a></li>
+            <li><a href="/admin/mail/senderEmailList"><i class="fa fa-circle-o text-yellow"></i>보낸 메일 리스트</a></li>
+          </ul>
         </li>
 
 

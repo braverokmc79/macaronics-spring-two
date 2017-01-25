@@ -12,6 +12,11 @@ public class PageAndSearch extends Pager {
 	private String sortby;
 	private Integer show;
 
+	
+	private Integer start;
+	private Integer end;
+	
+	
 	public  String searchQuery(Integer curPage){
 		if(curPage==null){
 			curPage=1;
@@ -70,6 +75,31 @@ public class PageAndSearch extends Pager {
 
 	public void setShow(Integer show) {
 		this.show = show;
+	}
+
+
+	
+	
+	
+	
+	
+	public Integer getStart() {
+		return start;
+	}
+
+
+	public void setStart(Integer start) {
+		this.start = start;
+	}
+
+
+	public Integer getEnd() {
+		return end;
+	}
+
+
+	public void setEnd(Integer end) {
+		this.end = end;
 	}
 
 

@@ -32,8 +32,11 @@
 	mapping="url pattern" logaction="실제경로" 
 	-->
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/resources/temp/**" location="/resources/temp/" />
+	
 	
 	<resources mapping="/coupon/**" location="/WEB-INF/uploads/coupon/" />
+	<resources mapping="/mailbox/**" location="/WEB-INF/uploads/mailbox/" />
 	<resources mapping="/products/img/**" location="/WEB-INF/uploads/productsImg/" />
 	
 	

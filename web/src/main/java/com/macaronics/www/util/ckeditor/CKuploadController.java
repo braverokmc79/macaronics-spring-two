@@ -51,7 +51,7 @@ public class CKuploadController {
 			byte[] bytes =upload.getBytes();
 			
 			
-			UploadPath.attach_path =PATH +path+"/";
+			UploadPath.attach_path =PATH +path+File.separatorChar;
 			String uploadPath =UploadPath.path(request)+fileName;
 			
 			

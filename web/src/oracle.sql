@@ -882,5 +882,34 @@ select
 	
 group by c3.TITLE order by c3.TITLE asc
 
+
+
+
+-- 이메일 테이블
+
+create TABLE  tbl_email (
+	idx number PRIMARY  KEY ,
+	senderName varchar2(100),
+	senderMail varchar2(100),
+	receiveMail varchar2(100),
+    subject varchar2(100),
+	message long,
+	regdate date default sysdate
 	 
+);
+
+CREATE  SEQUENCE seq_mail
+ START WITH 1 INCREMENT BY 1;
+ 
+ 
+ 
+select * from (
+select rownum as rn, A.* from ( select rownum , IDX, SENDERNAME, SENDERMAIL, RECEIVEMAIL, SUBJECT, 
+regdate from tbl_email order by regdate desc) A 
+)
+WHERE rn between 200 and 300;
+--
+
+
+
  

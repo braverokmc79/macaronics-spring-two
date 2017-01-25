@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="ORACLE.amdinEmailMapper">
+
+
+	
+	<insert id="senderEmail">
+	insert INTO TBL_EMAIL (IDX, SENDERNAME, SENDERMAIL, RECEIVEMAIL, SUBJECT) 
+
+	VALUES (seq_mail.nextval, #{senderName}, #{senderMail}, #{receiveMail} , #{subject}  )
+	</insert>
+	
+	
+	
+	<select id="emailCount"  resultType="int">
+		select count(*) from tbl_email
+	</select>
+	
+	
+	
+	<select id="emailList" resultType="com.macaronics.www.admin.model.dto.AdminEmailVO">
+	select * from (
+	select rownum as rn, A.* from ( select rownum , IDX, SENDERNAME, SENDERMAIL, RECEIVEMAIL, SUBJECT, 
+	regdate from tbl_email order by regdate desc) A 
+	)
+	WHERE rn between #{start} and #{end}
+
+	</select>
+	
+	
+	<delete id="deleteEmail">
+	delete FROM TBL_EMAIL WHERE IDX=#{idx}
+	</delete>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
