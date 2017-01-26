@@ -15,11 +15,14 @@
 <!--  스프링 부트에 내장되어 있는 /connect/facebook 액션으로 이동 -->
 <!-- ConnectController -->
 
-<form action="/connect/facebook" method="post">
- <input type="hidden" name="scope" value="user_posts" >
- <button>페이스북 로그인</button>
-</form>
 
+
+<%
+	
+    session.invalidate();
+	
+	response.sendRedirect("/hello");
+%>
 
 
 </body>

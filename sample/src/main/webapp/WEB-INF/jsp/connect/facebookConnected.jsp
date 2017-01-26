@@ -7,20 +7,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<%@ include file="../include/header.jsp" %>
 </head>
 <body>
-<%@ include file="../include/menu.jsp" %>
-<h2>페이브북 접속</h2>
-<!--  스프링 부트에 내장되어 있는 /connect/facebook 액션으로 이동 -->
-<!-- ConnectController -->
-
-<form action="/connect/facebook" method="post">
- <input type="hidden" name="scope" value="user_posts" >
- <button>페이스북 로그인</button>
-</form>
 
 
 
+<h3>페이스북에 로그인 되었습니다.</h3>
+
+		<p>
+			You are now connected to your Facebook account.
+			Click <a href="/">here</a> to see some entries from your Facebook feed.
+		</p>
+
+<a href="/">메인으로 이동</a>
+
+<%
+	response.sendRedirect("/");
+%>
 </body>
 </html>
