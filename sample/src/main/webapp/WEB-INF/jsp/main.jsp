@@ -37,6 +37,28 @@ ${name } 님 환영합니다. <br>
 
 ${sessionScope.username } 님 환영합니다. <br>
 
+<img src="https://graph.facebook.com/${id }/picture">
+생년월일 : ${macaronicUser.birthday } <br>
+
+이메일 : ${macaronicUser.email } <br>
+성별 : ${macaronicUser.gender } <br>
+<br>
+${macaronicUser.toString() }
+
+<br><br>
+
+<h2>타임라인</h2>
+
+<c:forEach var="post" items="${feed }">
+<b>${post.from.name }</b>
+${post.message }
+<img src="${post.picture }">
+<hr>
+
+</c:forEach>
+
+
+
 
 
 </body>
