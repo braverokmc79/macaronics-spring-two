@@ -1,4 +1,4 @@
-package com.example;
+package com.comlu.macaronics;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class FaceBookLoginApplicationTests {
+public class SampleApplicationTests {
 
 	@Test
 	public void contextLoads() {

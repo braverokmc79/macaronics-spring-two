@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.comlu.macaronics</groupId>
-	<artifactId>FaceBookLogin</artifactId>
+	<artifactId>sample</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>FaceBookLogin</name>
+	<name>sample</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -18,26 +18,53 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 	</properties>
 
+	<repositories>
+
+		<repository>
+
+			<id>codelds</id>
+
+			<url>https://code.lds.org/nexus/content/groups/main-repo</url>
+
+		</repository>
+
+	</repositories>
+
+
+
+
 	<dependencies>
+	
+	<!-- 스프링 부트용 jdbc 라이브러리 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
+		
+		
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>1.2.0</version>
 		</dependency>
+		
+	
+	
+		<!-- 페이스북 라이브러리 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-social-facebook</artifactId>
 		</dependency>
+		
+		
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -48,6 +75,62 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- war로 배포할 경우 -->
+
+		<dependency>
+
+			<groupId>org.springframework.boot</groupId>
+
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+
+			<scope>provided</scope>
+
+		</dependency>
+	
+			<!-- 오라클 라이브러리 -->
+
+		<dependency>
+
+			<groupId>com.oracle</groupId>
+
+			<artifactId>ojdbc6</artifactId>
+
+			<version>11.2.0.3</version>
+
+		</dependency>
+	
+	
+	
+		<!-- spring boot auto restart -->
+
+		<dependency>
+
+			<groupId>org.springframework.boot</groupId>
+
+			<artifactId>spring-boot-devtools</artifactId>
+
+			<optional>true</optional>
+
+		</dependency>
+	
+		
+<!-- JSP 를 사용하기 위한 설정 -->
+<!-- jstl 라이브러리 -->
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>jstl</artifactId>
+	</dependency>
+	<!-- jsp 라이브러리 -->
+	<dependency>
+		<groupId>org.apache.tomcat.embed</groupId>
+		<artifactId>tomcat-embed-jasper</artifactId>
+		<scope>provided</scope>
+	</dependency>
+			
+		
+		
+		
 	</dependencies>
 
 	<build>
