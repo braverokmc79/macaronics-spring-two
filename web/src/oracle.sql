@@ -910,6 +910,36 @@ regdate from tbl_email order by regdate desc) A
 WHERE rn between 200 and 300;
 --
 
+-- 한줄 메모장
+create SEQUENCE  seq_memo
+start with 1 INCREMENT  by 1;
+commit;
+CREATE TABLE tbl_memo (
+	
+	idx NUMBER PRIMARY KEY ,
+	userid VARCHAR2(100) not NULL ,
+	friendName VARCHAR2(100) NOT NULL ,
+	memo VARCHAR2(4000) not null,
+	email VARCHAR2(100) null,
+	phone VARCHAR2(100) null,
+	post_date date default sysdate
+);
 
 
+insert INTO TBL_MEMO (IDX, WRITER, MEMO) 
+
+ values ( seq_memo.nextval, 'writer' , 'memo'); 
  
+select * from tbl_memo;
+ 
+--
+
+
+ select * from ( select rownum  as rn, A.*  from 
+ 
+  ( select rownum ,  EMAIL, friendName, idx, memo, phone, post_date from tbl_memo 
+	 
+	where userid='braverokmc' order by idx desc )  A
+ 
+ ) where  rn BETWEEN 50 and 56 ;
+	 

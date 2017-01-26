@@ -40,19 +40,22 @@
                           <li><a class="" href="/user/myproduct/paymentList.do">결제대기</a></li>
                           <li><a class="" href="form_validation.html">배송대기</a></li>
                       </ul>
-                  </li>       
+                  </li>  
+                       
                   <li class="sub-menu">
                       <a href="javascript:;" class="">
-                          <i class="icon_desktop"></i>
-                          <span>UI Fitures</span>
+                          <i class="icon_clipboard"></i>
+                          <span>한줄 메모장</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
-                      <ul class="sub">
-                          <li><a class="" href="general.html">Elements</a></li>
-                          <li><a class="" href="buttons.html">Buttons</a></li>
-                          <li><a class="" href="grids.html">Grids</a></li>
+                   <ul class="sub">
+                          <li><a class="" href="/users/memo/list.do">메모 목록</a></li>                          
+                          <li><a class="" href="/users/memo/memoWriteForm">한줄 메목 적기</a></li>
                       </ul>
                   </li>
+                  
+                  
+                  
                   <li>
                       <a class="" href="widgets.html">
                           <i class="icon_genius"></i>

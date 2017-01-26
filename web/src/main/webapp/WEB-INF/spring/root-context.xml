@@ -75,6 +75,11 @@
   	<!-- 이메일  -->
     <import resource="appServlet/mail-context.xml"/>
     
+    <!--  mybatis mapper interface bean 을 자동으로 검색하여 생성함 -->
+    <mybatis-spring:scan base-package="com.macaronics.www.user.model.dao.memo"/>
+    
+    
+    
 </beans>
 
 
