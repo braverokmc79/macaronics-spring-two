@@ -50,9 +50,9 @@ ${macaronicUser.toString() }
 <h2>타임라인</h2>
 
 <c:forEach var="post" items="${feed }">
-<b>${post.from.name }</b>
-${post.message }
-<img src="${post.picture }">
+<b>${post.from.name }</b> <!-- 작성자 -->
+${post.message }			<!-- 메시지 -->
+<img src="${post.picture }"> <!-- 이미지 -->
 <hr>
 
 </c:forEach>

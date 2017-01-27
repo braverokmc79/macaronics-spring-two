@@ -1,4 +1,4 @@
-package com.comlu.macaronics.DTO;
+package com.comlu.macaronics.dto;
 
 
 

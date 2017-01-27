@@ -943,3 +943,22 @@ select * from tbl_memo;
  
  ) where  rn BETWEEN 50 and 56 ;
 	 
+
+ 
+  -- 페이스북의 게시물 정보
+
+create table tbl_facebook_feed(
+	idx NUMBER not null PRIMARY KEY ,
+	id VARCHAR2(500) not null  ,
+	name VARCHAR2(50),
+	message long,
+	picture VARCHAR2(500),
+	created_time VARCHAR2(100)
+
+);
+
+
+create SEQUENCE seq_facebook_feed 
+
+ start WITH 1 increment by 1;
+

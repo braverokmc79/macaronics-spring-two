@@ -5,11 +5,11 @@
 
 <div style="text-align:center;">
 	<c:choose>
-		<c:when test="${sessionScope.username ==null }">
+		<c:when test="${sessionScope.macaronicUser.name ==null }">
 		  <a href="/member/login">로그인</a>
 		</c:when>
 		<c:otherwise>
-		${sessionScope.username  }님이 로그인 중입니다. 
+		${sessionScope.macaronicUser.name  }님이 로그인 중입니다. 
 			<a href="/member/logout">로그아웃</a>
 		</c:otherwise>
 	</c:choose>
