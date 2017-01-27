@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Insert title here</title>
+<meta th:include="/include/header::header" th:remove="tag"></meta>
+
+</head>
+<body>
+<div th:include="/include/menu::menu" th:remove="tag"></div>
+
+<h2>피드 목록</h2>
+
+
+<div th:each="post:${feed}">
+
+<b> <span th:text="${post.id}"></span></b>  <br/><!-- 작성자 -->
+<br/>
+<b> <span th:text="${post.name}"></span></b>  <br/><!-- 작성자 -->
+<span th:text="${post.message}"></span>			<br/><!-- 메시지 -->
+<img th:src="${post.picture }" /> <!-- 이미지 -->
+<br/>
+<span th:text="${post.created_time}"></span>
+<hr/>
+
+
+</div>
+
+
+	
+</body>
+</html>

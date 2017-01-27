@@ -18,7 +18,7 @@ public class FacebookFeedServiceImpl implements FacebookFeedService {
 	private FacebookFeedDAO facebookFeedDAO;
 	
 	@Override
-	public void insert(PagedList<Post> feed) {
+	public void insert(PagedList<Post> feed, String id) {
 
 		try{
 		
@@ -33,7 +33,7 @@ public class FacebookFeedServiceImpl implements FacebookFeedService {
 					FacebookFeedVO vo =new FacebookFeedVO();
 					
 					
-					vo.setId(post.getId());
+					vo.setId(id);
 					vo.setCreated_time(post.getCreatedTime());
 					vo.setMessage(post.getMessage());
 					
@@ -60,9 +60,10 @@ public class FacebookFeedServiceImpl implements FacebookFeedService {
 	}
 
 	@Override
-	public List<FacebookFeedVO> list() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<FacebookFeedVO> list(String id) {
+		
+		
+		return facebookFeedDAO.list(id);
 	}
 
 	@Override

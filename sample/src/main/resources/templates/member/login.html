@@ -1,12 +1,13 @@
 
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org/">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Insert title here</title>
-
+<meta th:include="/include/header::header" th:remove="tag"></meta>
 </head>
 <body>
+<div th:include="include/menu::menu" th:remove="tag"></div>
 
 <h2>페이브북 접속</h2>
 <!--  스프링 부트에 내장되어 있는 /connect/facebook 액션으로 이동 -->

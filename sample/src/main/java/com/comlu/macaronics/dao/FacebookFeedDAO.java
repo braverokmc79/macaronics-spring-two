@@ -18,7 +18,7 @@ public interface FacebookFeedDAO {
 
 
 	
-	String list=" select * from TBL_FACEBOOK_FEED  where id=#{id} ";
+	String list=" select * from TBL_FACEBOOK_FEED  where id=#{id}  order by idx desc";
 	
 	String get="select * from TBL_FACEBOOK_FEED  where idx=#{idx}";
 	
@@ -31,7 +31,7 @@ public interface FacebookFeedDAO {
 	public void insert(FacebookFeedVO vo);
 	
 	@Select(list)
-	public List<FacebookFeedVO> list();
+	public List<FacebookFeedVO> list(String id);
 	
 	
 	@Select(get)

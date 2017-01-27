@@ -1,6 +1,7 @@
 package com.comlu.macaronics.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -15,7 +16,9 @@ import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.comlu.macaronics.dto.FacebookFeedVO;
 import com.comlu.macaronics.dto.MacaronicUser;
 import com.comlu.macaronics.service.FacebookFeedService;
 
@@ -64,7 +67,7 @@ public class FacebookController {
 	
 	@RequestMapping("/")
 	public String home(HttpSession session, Model model  ){
-		if( session.getAttribute("macaronicUser") !=null  &&cr.findPrimaryConnection(Facebook.class) ==null){
+		if( session.getAttribute("macaronicUser") !=null  && cr.findPrimaryConnection(Facebook.class) ==null){
 			//페이스북에 로그인되어 있지 않을 때
 			return "redirect:/member/login";//로그인으로 이동
 		}else{
@@ -86,6 +89,8 @@ public class FacebookController {
 			
 			//feed 정보 저장
 			PagedList<Post> feed =facebook.feedOperations().getFeed();
+			
+			//로그인 정보 아이디와 피드목록의 글 적은 아이디가 다르다. 따라서 로그인 정보 아이디 저장
 			model.addAttribute("feed", feed);
 			
 			
@@ -93,6 +98,7 @@ public class FacebookController {
 			Date createTime=feed.get(0).getCreatedTime();
 			String feed_message=feed.get(0).getMessage();
 			String feed_picture=feed.get(0).getPicture();
+			
 			String feed_id=feed.get(0).getId();
 			
 			
@@ -101,12 +107,12 @@ public class FacebookController {
 			logger.info("메시지 : " + feed_message);
 			logger.info("이미지 : " + feed_picture);
 			logger.info("아이디 : " + feed_id + " :  feed.get(0).getFrom().getId()  :" +feed.get(0).getFrom().getId());
+		
 			
 			
 			
-			
-			
-			facebookFeedService.insert( feed);
+			///// 로그인 정보 아이디 저장
+			facebookFeedService.insert( feed, id);
 			
 			model.addAttribute("name", name);
 			//세션에 저장
@@ -124,6 +130,32 @@ public class FacebookController {
 	}
 	
 
+	//피드 목록 출력
+	@RequestMapping("/member/feed")
+	public ModelAndView feed(HttpSession session, ModelAndView mav){
+		
+		
+	
+		MacaronicUser user =(MacaronicUser)session.getAttribute("macaronicUser");
+		if(user!=null){
+			
+			logger.info(" /member/feed 로그인 정보 : " +user.toString());
+		
+			List<FacebookFeedVO> list=  facebookFeedService.list(user.getId());
+			
+			for(FacebookFeedVO vo : list){
+				logger.info(" FacebookFeedVO 정보 : " +vo.toString());
+			}
+			
+			mav.addObject("feed", list);
+		
+		}
+		
+		
+		
+		mav.setViewName("/member/feed");
+		return mav;
+	}
 	
 	
 	
