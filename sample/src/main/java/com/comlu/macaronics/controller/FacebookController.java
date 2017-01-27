@@ -33,8 +33,7 @@ public class FacebookController {
 	
 	@Inject
 	private FacebookFeedService facebookFeedService;
-	
-	
+
 	private static final Logger logger=LoggerFactory.getLogger(FacebookController.class);
 	
 	

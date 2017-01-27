@@ -21,7 +21,10 @@
 <span th:text="${post.message}"></span>			<br/><!-- 메시지 -->
 <img th:src="${post.picture }" /> <!-- 이미지 -->
 <br/>
-<span th:text="${post.created_time}"></span>
+
+
+<!-- #date.format(날짜, '형식') :타임리프의 내장함수 -->
+<span th:text="${#dates.format(post.created_time, 'yyyy-MM-dd HH:mm:ss')}"></span>
 <hr/>
 
 

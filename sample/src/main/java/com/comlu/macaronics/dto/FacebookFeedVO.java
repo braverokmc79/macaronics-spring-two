@@ -1,6 +1,5 @@
 package com.comlu.macaronics.dto;
 
-import java.io.Reader;
 import java.util.Date;
 
 public class FacebookFeedVO {

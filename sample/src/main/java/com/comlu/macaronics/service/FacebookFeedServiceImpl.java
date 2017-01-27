@@ -21,18 +21,16 @@ public class FacebookFeedServiceImpl implements FacebookFeedService {
 	public void insert(PagedList<Post> feed, String id) {
 
 		try{
-		
-			
+	
 			if(feed.get(0).getId()!=null){
 				
 				//기존 데이터 삭제
-				facebookFeedDAO.delete(feed.get(0).getId());
+				facebookFeedDAO.delete(id);
 				
 				for(Post post : feed){
 					
 					FacebookFeedVO vo =new FacebookFeedVO();
-					
-					
+								
 					vo.setId(id);
 					vo.setCreated_time(post.getCreatedTime());
 					vo.setMessage(post.getMessage());
@@ -50,8 +48,7 @@ public class FacebookFeedServiceImpl implements FacebookFeedService {
 					}
 					
 					facebookFeedDAO.insert(vo);
-				}
-				
+				}			
 			}
 				
 		}catch(Exception e){
