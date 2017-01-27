@@ -42,9 +42,29 @@ public class FacebookController {
 		
 	}
 	
+	
+	
+	@RequestMapping("/member/login")
+	public String login(){
+		
+		return  "/member/login";
+	}
+	
+	
+	@RequestMapping("/member/logout")
+	public String logout(HttpSession session){
+		
+		session.invalidate();
+		
+		return  "redirect:/";
+	}
+	
+	
+	
+	
 	@RequestMapping("/")
 	public String home(HttpSession session, Model model  ){
-		if(cr.findPrimaryConnection(Facebook.class) ==null){
+		if( session.getAttribute("macaronicUser") !=null  &&cr.findPrimaryConnection(Facebook.class) ==null){
 			//페이스북에 로그인되어 있지 않을 때
 			return "redirect:/member/login";//로그인으로 이동
 		}else{
@@ -84,11 +104,21 @@ public class FacebookController {
 			
 			
 			
+			
+			
 			facebookFeedService.insert( feed);
 			
 			model.addAttribute("name", name);
 			//세션에 저장
 			session.setAttribute("macaronicUser", macaronicUser);
+			
+			//thymeleaf
+			
+			model.addAttribute("id", id);
+			model.addAttribute("birthday", birthday);
+			model.addAttribute("email", email);
+			model.addAttribute("gender", gender);
+			
 		}
 		return "main"; 
 	}

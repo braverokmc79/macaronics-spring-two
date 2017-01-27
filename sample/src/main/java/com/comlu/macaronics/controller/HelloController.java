@@ -15,20 +15,7 @@ public class HelloController {
 		return "hello";
 	}
 	
-	
-	@RequestMapping("/member/login")
-	public String login(){
-		
-		return  "/member/login";
-	}
-	
-	
-	@RequestMapping("/member/logout")
-	public String logout(){
-		
-		return  "/member/logout";
-	}
-	
+
 	
 	
 	

@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Hello</title>
+<!-- 
+th:include="디렉토리/페이지:: 프래그먼트 이름"
+th:remove="tag" 프래그먼트의 태그 제거 
+-->
+<meta th:include="/include/header::header" th:remove="tag"></meta>
+
+
+<script th:src="@{/js/test.js}" ></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	//test();
+	
+	//주소에 #_=_ 가 포함되어 있으면
+	if(window.location.href.indexOf("#_=_") > 0){
+		//alert(window.location.href.indexOf("#_=_"));  22 출력
+		//주소에서 #_=_를 제거함
+		window.location=window.location.href.replace("#_=_","");	
+	}
+	
+});
+
+</script>
+
+
+</head>
+<body>
+
+<!-- 
+templates/include/menu.html 의 fragment name이 menu 인 코드조각을
+include 
+-->
+<div th:include="/include/menu::menu" th:remove="tag"></div>
+
+<h2>spring boot application</h2>
+
+<span th:text="${name }">님 환영합니다.</span><br/>
+
+
+
+<img th:src="@{https://graph.facebook.com/}+${id }+@{/picture}" />
+
+생년월일 : <span th:text="${birthday}"></span> <br/>
+
+이메일 : <span th:text="${email}" ></span> <br/>
+성별 : <span th:text="${gender}"></span> <br/>
+<br/>
+
+
+
+
+<br/><br/>
+
+<h2>타임라인</h2>
+ <!-- each="개별값:집합데이터" -->
+<div th:each="post:${feed}">
+<b> <span th:text="${post.from.name}"></span></b> <!-- 작성자 -->
+<span th:text="${post.message}"></span>			<!-- 메시지 -->
+<img th:src="${post.picture }" /> <!-- 이미지 -->
+<hr/>
+</div>
+
+
+
+
+
+
+</body>
+</html>

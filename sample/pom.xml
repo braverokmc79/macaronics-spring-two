@@ -37,11 +37,15 @@
 
 	</repositories>
 
-
-
-
 	<dependencies>
-	
+
+
+        <!-- 스프링 thymeleaf   라이브러리  템플릿 사용 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+			
 	<!-- 스프링 부트용 jdbc 라이브러리 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
