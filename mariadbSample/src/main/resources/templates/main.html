@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+
+<span th:text="${message}" ></span>
+
+<h2>방명록</h2>
+<table border="1">
+	<tr>
+		<th>번호</th>
+		<th>이름</th>
+		<th>내용</th>
+		<th>날짜</th>
+	</tr>
+	<tr th:each="row:${list}">
+		<td><span th:text="${row.bno}"></span></td>
+		<td><span th:text="${row.title}"></span></td>
+		<td><span th:text="${row.content}"></span></td>
+		<td><span th:text="${row.regdate}"></span></td>
+	</tr>
+</table>
+
+
+</body>
+</html>

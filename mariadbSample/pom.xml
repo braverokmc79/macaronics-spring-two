@@ -4,13 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.comlu.macaronics</groupId>
-	<artifactId>sample</artifactId>
+	<artifactId>mariadbSample</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
-	<name>sample</name>
+	<name>mariadbSample</name>
 	<description>Demo project for Spring Boot</description>
-
 
 
 	<parent>
@@ -138,13 +137,23 @@
 	</dependency>
 			
 		
-			
-	<!--mysql -->
+<!-- 	mysql
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
-		</dependency>	
+		</dependency>
+ -->
+
+<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>5.0.8</version><!--$NO-MVN-MAN-VER$-->
+</dependency>
+
+
+		
 		
 	</dependencies>
 

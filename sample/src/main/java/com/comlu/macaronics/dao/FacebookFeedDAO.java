@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.type.JdbcType;
 
 import com.comlu.macaronics.dto.FacebookFeedVO;
+import com.comlu.macaronics.dto.TblUser;
 import com.comlu.macaronics.utility.CLOBHandler;
 
 public interface FacebookFeedDAO {
@@ -27,10 +28,13 @@ public interface FacebookFeedDAO {
 	
 	String count="";
 	
+	String list2 =" select * from TBL_USER ";
 	
 	@Insert(insert)
 	public void insert(FacebookFeedVO vo);
 	
+	@Select(list2)
+	public List<TblUser> list2();
 	
 	
 // preperty="vo 의 변숩명", column="테이블의 컬럼"

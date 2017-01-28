@@ -3,12 +3,15 @@ package com.comlu.macaronics;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -16,6 +19,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.comlu.macaronics.dao.FacebookFeedDAO;
 import com.comlu.macaronics.dto.FacebookFeedVO;
+import com.comlu.macaronics.dto.TblUser;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -31,6 +35,11 @@ public class SampleApplicationTests {
 	@Autowired
 	private FacebookFeedDAO dao;
 	
+	
+	
+	private static final Logger log = LoggerFactory.getLogger(SampleApplicationTests.class);
+
+	
 	//@Test
 	public void contextLoads() throws SQLException {
 	
@@ -45,7 +54,7 @@ public class SampleApplicationTests {
 		
 	}
 	
-	
+/*	
 	@Test
 	public void test() {
 		
@@ -68,7 +77,34 @@ public class SampleApplicationTests {
 		}
 	
 	}
+	*/
 	
+	
+	@Test
+	public void contextLoads3()  {
+	
+	
+		
+		List<TblUser> list =dao.list2();
+		try{
+		/*	 Connection conn =ds.getConnection();
+			log.info("출력  :" + template);
+			log.info(" ds  출력  :" + conn);
+			*/
+			for(TblUser dto : list){
+				
+				
+				
+				log.info(dto.toString());
+			}
+			
+			log.info("출력 끝");	
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
 	
 	
 
