@@ -24,7 +24,7 @@
                 <div class="aa-header-left">
                   <div class="aa-telephone-no">
                     <span class="fa fa-bars"></span>
-                   <a href="http://macaronics.comlu.com/" target="_blank">서버 환경  :  <span style="color: red;">${ServerEnvironment }</span></a>	
+                   <a href="http://macaronics.comlu.com/" target="_blank">DB 환경  :  <span style="color: red;">${ServerEnvironment }</span></a>	
                   
                   </div>
                   <div class="aa-email hidden-xs">
@@ -133,13 +133,12 @@
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="/coupon/couponList.do">이벤트<span class="caret"></span></a>
            	  <ul class="dropdown-menu" role="menu">                
-                <li><a href="/coupon/couponList.do">이벤트</a></li> 
+                <li><a href="/promotions/promotionList.do">기획전</a></li> 
                 <li><a href="/coupon/couponList.do">쿠폰</a></li>                                            
               </ul>
            
             </li>
-            
-           
+     
            <li><a href="404.html">Q&A</a></li>
          
          
@@ -169,8 +168,6 @@ $(document).ready(function(){
 		});
 	});
 		
-		
-	
 	
 });
 

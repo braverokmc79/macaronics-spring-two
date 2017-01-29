@@ -126,14 +126,14 @@
         
         <li>
           <a href="/admin/recommended/registerForm">
-            <img src="/resources/admin/img/event.jpg"  style="max-height: 18px; max-width: 18px;"><span> 이벤트 관리</span>
+            <img src="/resources/admin/img/event.jpg"  style="max-height: 18px; max-width: 18px;"><span> 기획전 관리</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
             <ul class="treeview-menu">
-            <li class="active"><a href="/admin/memberList.do"><i class="fa fa-circle-o text-red"></i> 이벤트등록</a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o text-yellow"></i> 이벤트목록</a></li>
+            <li class="active"><a href="/admin/promotions/registerForm.do"><i class="fa fa-circle-o text-red"></i> 기획전등록</a></li>
+            <li><a href="/admin/promotions/promotionsList"><i class="fa fa-circle-o text-yellow"></i> 기획전목록</a></li>
           </ul>
         </li>
         

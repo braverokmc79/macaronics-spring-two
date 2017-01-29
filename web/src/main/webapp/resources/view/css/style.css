@@ -1127,7 +1127,8 @@ img {
   position: absolute;
   width: 40%;
 }
-#aa-client-testimonial .aa-client-testimonial-area .aa-testimonial-content .aa-testimonial-slider li .aa-testimonial-single .aa-testimonial-img {
+#aa-client-testimonial .aa-client-testimonial-area .aa-testimonial-content .aa-testimonial-slider li .aa-testimonial-single 
+.aa-testimonial-img {
   display: inline;
   float: left;
   width: 100%;
@@ -1135,11 +1136,12 @@ img {
   position: relative;
   z-index: 10;
 }
-#aa-client-testimonial .aa-client-testimonial-area .aa-testimonial-content .aa-testimonial-slider li .aa-testimonial-single .aa-testimonial-img img {
+#aa-client-testimonial .aa-client-testimonial-area .aa-testimonial-content .aa-testimonial-slider li .aa-testimonial-single
+ .aa-testimonial-img img {
   background-color: #FFF;
   display: inline-block;
-  width: 100px;
-  height: 100px;
+  width: 250px;
+  height: 250px;
   margin-top: 24px;
   border-radius: 50%;
 }

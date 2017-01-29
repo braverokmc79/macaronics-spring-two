@@ -100,7 +100,7 @@
                     <td class="mailbox-subject"><b>${row.senderName }</b> ${row.subject }
                     </td>
                     <td class="mailbox-attachment"></td>
-                    <td class="mailbox-date">${row.regdate }/td>
+                    <td class="mailbox-date"><fmt:formatDate value="${row.regdate }" pattern="yyyy-MM-dd HH:ss"/>  </td>
                   </tr>
    
                  </c:forEach>

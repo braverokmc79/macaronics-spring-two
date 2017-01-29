@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.macaronics.www.user.model.dao.HomeDAO;
 import com.macaronics.www.user.model.dto.CouponVO;
 import com.macaronics.www.user.model.dto.ProductShopVO;
+import com.macaronics.www.user.model.dto.PromotionVO;
 
 
 @Service
@@ -76,6 +77,13 @@ public class HomeServiceImpl implements HomeService {
 			// TODO: handle exception
 		}
 		return vo;
+	}
+
+	
+	@Override
+	public List<PromotionVO> promotionList() {
+		// TODO Auto-generated method stub
+		return homedao.promotionList();
 	}
 
 	

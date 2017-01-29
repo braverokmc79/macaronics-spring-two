@@ -1,5 +1,6 @@
 package com.macaronics.www.admin.controller;
 
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
@@ -18,45 +19,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.macaronics.www.admin.service.AdminCouponService;
-import com.macaronics.www.member.model.dto.board.BoardVO;
-import com.macaronics.www.user.model.dto.CouponVO;
-import com.macaronics.www.user.service.CouponService;
+import com.macaronics.www.admin.model.dto.AdminPromotionsVO;
+import com.macaronics.www.admin.service.AdminPromotionsService;
+import com.macaronics.www.user.model.dto.PromotionVO;
+import com.macaronics.www.user.service.PromotionsService;
 import com.macaronics.www.util.fileupload.UploadPath;
 import com.macaronics.www.util.oralce.PageAndSearch;
 import com.macaronics.www.util.oralce.Pager;
 import com.macaronics.www.util.upload.UploadFileUtils;
 
 @Controller
-@RequestMapping(value="/admin/coupon")
-public class AdminCouponController {
+@RequestMapping("/admin/promotions")
+public class AdminPromotionsController {
 
 	
-	private static final Logger logger =LoggerFactory.getLogger(AdminCouponController.class);
-	
-	@Inject
-	private AdminCouponService adminCouponService;
+	private static final Logger logger =LoggerFactory.getLogger(AdminPromotionsController.class);
 	
 	
-	@Inject
-	private CouponService couponService;
+	private final String JSP_PAGE ="/admin/promotions/" ;
 	
 	
-	private final String JSP_PAGE ="/admin/coupon/";
 	
-	private final String PATH ="WEB-INF/uploads/coupon";
+	private final String PATH ="WEB-INF/uploads/promotions";
 
+	@Inject
+	private AdminPromotionsService adminPromotionsService;
 	
-	@RequestMapping(value="/registerForm", method=RequestMethod.GET)
-	public String coponRegisterForm(){
+	
+	@Inject
+	private PromotionsService promotionsService;
+	
+	
+	@RequestMapping(value="/registerForm.do", method=RequestMethod.GET)
+	public String promotionCreateForm(){
 		
-		return JSP_PAGE+"couponregister";
+		return JSP_PAGE +"promotionsRegister";
 	}
 	
 	
-	@RequestMapping(value="/insertcoupon", method=RequestMethod.POST
+	@RequestMapping(value="/insertPromotions", method=RequestMethod.POST
 			, produces="text/plain; charset=UTF-8")
-	public String couponRegister(@ModelAttribute CouponVO vo, HttpServletRequest request)
+	public String couponRegister(@ModelAttribute AdminPromotionsVO vo, HttpServletRequest request)
 		throws Exception{
 		
 		UploadPath.attach_path=PATH;
@@ -69,17 +72,17 @@ public class AdminCouponController {
 		
 		//DB데이터 저장
 		vo.setImg_url(savedName);
-		adminCouponService.couponInsert(vo);
+		adminPromotionsService.promotionsInsert(vo);
 		
-		return "redirect:couponList";
+		return "redirect:promotionsList";
 	}
 	
 	
-	@RequestMapping(value="/couponList", method=RequestMethod.GET)
-	public String couponList(Model model, PageAndSearch pas){
+	@RequestMapping(value="/promotionsList", method=RequestMethod.GET)
+	public String couponList(Model model, PageAndSearch pas) throws Exception{
 		
 		
-		int count =adminCouponService.countArticle(pas.getSearch_option(), pas.getKeyword());
+		int count =adminPromotionsService.countArticle(pas.getSearch_option(), pas.getKeyword());
 		
 		//페이지 나누기 관련 처리
 		if(pas.getCurPage()==null){pas.setCurPage(1);}
@@ -93,7 +96,7 @@ public class AdminCouponController {
 		logger.info(" ****************   " + pas.toString() + "    메서드  : " + pas.searchQuery(1) +
 				"  count : " + count + " start : " + start + "  end  : " + end);
 		
-		List<CouponVO> list=adminCouponService.getCouponList(start, end, pas);
+		List<AdminPromotionsVO> list=adminPromotionsService.getPromotionsList(start, end, pas);
 		
 		Map<String, Object> map =new HashMap<>();
 		map.put("countList", count);
@@ -103,28 +106,27 @@ public class AdminCouponController {
 		model.addAttribute("map", map);
 		model.addAttribute("pageAndSearch", pas);
 		
-		
-		
 		model.addAttribute("list", list);
-		return JSP_PAGE+"coponList";
+		return JSP_PAGE+"promotionsList";
 	}
 	
 	
 	
 	
 	//쿠폰 업데이트 폼
-	@RequestMapping(value="/couponUpdateForm/{idx}", method=RequestMethod.GET)
-	public String updateCouponform(@PathVariable("idx") Integer idx, Model model){
+	@RequestMapping(value="/promotionsUpdateForm/{idx}", method=RequestMethod.GET)
+	public String updateCouponform(@PathVariable("idx") Integer idx, Model model)
+		throws Exception{
 		
-		CouponVO vo=adminCouponService.couponUpdateForm(idx);
-		model.addAttribute("CouponVO", vo);
-		return JSP_PAGE+"couponAlter";
+		AdminPromotionsVO vo=adminPromotionsService.promotionsUpdateForm(idx);
+		model.addAttribute("promotions", vo);
+		return JSP_PAGE+"promotionsAlter";
 	}
 	
 	
 	//쿠폰 업데이트
-	@RequestMapping(value="/couponUpdate", method=RequestMethod.POST)
-	public String updateCoupon(@ModelAttribute CouponVO vo, HttpServletRequest request){	
+	@RequestMapping(value="/promotionsUpdate", method=RequestMethod.POST)
+	public String updateCoupon(@ModelAttribute AdminPromotionsVO vo, HttpServletRequest request){	
 		try{	
 			if(vo.getFiles().isEmpty()){
 				//기존 이미지 oldImg 저장 처리
@@ -132,7 +134,8 @@ public class AdminCouponController {
 				vo.setImg_url(vo.getOldImg());
 				
 				
-				adminCouponService.couponUpdate(vo);
+				adminPromotionsService.promotionsUpdate(vo);
+
 				
 			}else{
 				    logger.info("새로운 이미지를 사용하는 경우");
@@ -164,7 +167,8 @@ public class AdminCouponController {
 					
 					//DB데이터 저장
 					vo.setImg_url(savedName);
-					adminCouponService.couponUpdate(vo);
+
+					adminPromotionsService.promotionsUpdate(vo);
 					
 				}
 				//adminCouponService.couponUpdate(vo);
@@ -172,14 +176,15 @@ public class AdminCouponController {
 		  }catch(Exception e){
 					e.printStackTrace();
 		  }
-		  return "redirect:/coupon/read.do/"+vo.getIdx();
+		  return "redirect:/promotions/read.do/"+vo.getIdx();
 	}
 	
 	
-	@RequestMapping(value="/coupondelete", method=RequestMethod.POST)
+	
+	@RequestMapping(value="/promotionsdelete", method=RequestMethod.POST)
 	public String couponDelete(@RequestParam Integer idx, HttpServletRequest request) throws Exception{
 		
-		CouponVO vo =couponService.getRead(idx);
+		PromotionVO vo =promotionsService.getRead(idx);
 		//기존 이미지 삭제 처리
 		UploadPath.attach_path=PATH;
 		String imagePath =UploadPath.path(request);
@@ -201,23 +206,14 @@ public class AdminCouponController {
 		
 		
 		//DB 삭제
-		adminCouponService.couponDelete(idx);
+		adminPromotionsService.promotionsDelete(idx);
 		
-		return "redirect:couponList";
+		return "redirect:promotionsList";
 	}
 	
 	
 	
 }
-
-
-
-
-
-
-
-
-
 
 
 

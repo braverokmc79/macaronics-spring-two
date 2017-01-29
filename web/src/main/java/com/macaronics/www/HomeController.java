@@ -25,6 +25,7 @@ import com.macaronics.www.admin.model.dto.AdminRecommendedVO;
 import com.macaronics.www.admin.service.AdminCategoryService;
 import com.macaronics.www.admin.service.AdminRecommendedService;
 import com.macaronics.www.user.model.dto.CouponVO;
+import com.macaronics.www.user.model.dto.PromotionVO;
 import com.macaronics.www.user.service.HomeService;
 
 /**
@@ -46,6 +47,7 @@ public class HomeController {
 
 	@Inject
 	private AdminRecommendedService adminRecommendedService;
+	
 	
 	
 	
@@ -76,6 +78,11 @@ public class HomeController {
 		//쿠폰
 		CouponVO  couponVO=homeService.lastCouponProduct();
 		model.addAttribute("couponVO", couponVO);
+		
+		
+		//기획전 
+		List<PromotionVO> promotionList=homeService.promotionList();
+		model.addAttribute("promotionsList", promotionList);
 		
 		return "home";
 	}

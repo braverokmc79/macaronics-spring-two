@@ -38,6 +38,8 @@
 	
 	
 	<resources mapping="/coupon/**" location="/WEB-INF/uploads/coupon/" />
+	<resources mapping="/promotions/**" location="/WEB-INF/uploads/promotions/" />
+	
 	<resources mapping="/mailbox/**" location="/WEB-INF/uploads/mailbox/" />
 	<resources mapping="/products/img/**" location="/WEB-INF/uploads/productsImg/" />
 	

@@ -16,9 +16,8 @@
 
 #aa-property-header {
 
-  background-image: url("/coupon/${coupon.img_url.substring(0, 12)}${coupon.img_url.substring(14)}");
+  background-image: url("/promotions/${promotion.img_url.substring(0, 12)}${promotion.img_url.substring(14)}");
 
-  
 }
 .rowTitle a:hover{
 
@@ -38,10 +37,10 @@
       <div class="row">
         <div class="col-md-12">
           <div class="aa-property-header-inner">
-            <h2>${coupon.title }</h2>
+            <h2>${promotion.title }</h2>
             <ol class="breadcrumb">
             <li><a href="/">HOME</a></li>            
-            <li class="active">COUPON</li>
+            <li class="active">기획전</li>
           </ol>
           </div>
         </div>
@@ -65,7 +64,7 @@
         <div class="col-md-12">
           <div class="aa-gallery-area">
             <div class="aa-title">
-              <h2>Coupon  ${coupon.title }</h2>
+              <h2>기획전  ${promotion.title }</h2>
               
 
               
@@ -76,7 +75,7 @@
             <div class="aa-gallery-content" style="text-align: center;">
               
               
-              ${coupon.content }
+              ${promotion.content }
             </div>
           
           
@@ -88,10 +87,11 @@
           <c:if test="${not empty loginUser || not empty loginAdmin }">
            <c:if test="${sessionScope.loginUser.userid ==vo.writer   || sessionScope.loginUser.member_level >=15}"> 	
            			<input type="hidden"  name="bno" value="${vo.bno }">
-              			<a type="button" class="btn btn-warning" href="/admin/coupon/couponUpdateForm/${coupon.idx}">수정하기</a>
-            <form action="/admin/coupon/coupondelete" method="post" class="form">
-		 	<input type="hidden" value="${coupon.idx }"  name="idx">
-		 	 <button class="label label-danger"  type="button" id="couponDelete">삭제하기</button>
+              			<a type="button" class="btn btn-warning" href="/admin/promotions/promotionsUpdateForm/${promotion.idx}">수정하기</a>
+           
+            <form action="/admin/promotions/promotionsdelete" method="post" class="form">
+		 	<input type="hidden" value="${promotion.idx }"  name="idx">
+		 	 <button class="label label-danger"  type="button" id="promotionsDelete">삭제하기</button>
 		 	</form>
 		
           	</c:if>
@@ -108,7 +108,7 @@
 <script>
 $(document).ready(function(){
 	
-	$("#couponDelete").click(function(event){
+	$("#promotionsDelete").click(function(event){
 		event.preventDefault();
 		if(confirm("정말 삭제 하시겠습니까?")){
 			

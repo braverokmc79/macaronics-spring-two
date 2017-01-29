@@ -961,4 +961,25 @@ create table tbl_facebook_feed(
 create SEQUENCE seq_facebook_feed 
 
  start WITH 1 increment by 1;
+ 
+ 
+ 
+ 
+ -- 기획전 테이블 생성
+
+create table tbl_promotions (
+	
+	idx NUMBER PRIMARY KEY ,
+	title varchar2(200),
+	content long,
+	view_count number default 0,
+	img_url varchar2(200),
+	regdate date default sysdate
+	
+);
+create sequence seq_promotions
+
+start with 1 increment by 1;
+ 
+ 
 

@@ -27,13 +27,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        쿠폰 등록 목록  
+        기획전 등록 목록  
       </h1>
 
       
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Coupon</li>
+        <li class="active">Promotions</li>
       </ol>
     </section>
 
@@ -48,7 +48,7 @@
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Coupon 등록수 <span class="badge bg-green">${map.countList }</span> </h3>
+              <h3 class="box-title">기획전 등록수 <span class="badge bg-green">${map.countList }</span> </h3>
       <p style="margin-bottom: 50px;"></p>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
@@ -76,12 +76,10 @@
                 </tr>
  		
  		
- 			 		
- 		
  			<c:if test="${map.countList  ==0}">
  				<tr>
  					<td colspan="5" style="text-align: center;">
- 						등록된 쿠폰이 없습니다.
+ 						등록된 기획전이 없습니다.
  					</td>
  				</tr>
  			</c:if>
@@ -93,18 +91,18 @@
 		<td><span class="badge bg-purple">${row.idx }</span>
 		
 		
-		 <a href="/admin/coupon/couponUpdateForm/${row.idx}"><span class="label label-warning">수정하기</span></a>
+		 <a href="/admin/promotions/promotionsUpdateForm/${row.idx}"><span class="label label-warning">수정하기</span></a>
 		 
-		 <form action="/admin/coupon/coupondelete" method="post" class="form">
+		 <form action="/admin/promotions/promotionsdelete" method="post" class="form">
 		 	<input type="hidden" value="${row.idx }"  name="idx">
-		  <button class="label label-danger"  type="button" id="couponDelete">삭제하기</button>
+		  <button class="label label-danger"  type="button" id="promotionsDelete">삭제하기</button>
 		 </form>
 		
 		</td>
 		
-		<td><a href="/coupon/read.do/${row.idx }"><img src="/coupon/${row.img_url }"  style="max-height: 100px; max-width: 100px;"></a></td>
+		<td><a href="/promotions/read.do/${row.idx }"><img src="/promotions/${row.img_url }"  style="max-height: 100px; max-width: 100px;"></a></td>
 		
-		<td><a href="/coupon/read.do/${row.idx }" >${row.title }</a></td>
+		<td><a href="/promotions/read.do/${row.idx }" >${row.title }</a></td>
 			
 		
 		
@@ -201,37 +199,6 @@
 
 
 
-<form action="/admin/shop/products/prodductDelete" method="post" name="deleteForm">
-
- <input type="hidden" name="product_id" id="hidden_product_id" >
-</form>
-
-
-  <div class="modal modal-danger" id="checkPw">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span></button>
-          <h4 class="modal-title">패스워드 입력</h4>
-        </div>
-        <div class="modal-body">
-          <input type="hidden" name="userid" id="modal_Id"  class="form-control" >
-          <input type="text" name="confirmPassword" class="form-control" id="confirmPassword">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-outline" id="confirmPwd">패스워드 확인</button>
-        </div>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
-   <!-- /.modal -->
-
-
-
 
 
 
@@ -240,7 +207,7 @@
 $(document).ready(function(){
 
 	
-	$("#couponDelete").click(function(event){
+	$("#promotionsDelete").click(function(event){
 		event.preventDefault();
 		if(confirm("정말 삭제 하시겠습니까?")){
 			
@@ -256,7 +223,7 @@ $(document).ready(function(){
 
 function list(page){
 
-	location.href='/admin/coupon/couponList'+page;
+	location.href='/admin/promotions/promotionsList'+page;
 
 }
 

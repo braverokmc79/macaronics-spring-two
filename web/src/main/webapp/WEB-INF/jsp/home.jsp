@@ -459,61 +459,42 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
+        
           <div class="aa-client-testimonial-area">
             <div class="aa-title">
-              <h2>What Client Say</h2>
+              <h2>기획전 상품</h2>
               <span></span>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus eaque quas debitis animi ipsum, veritatis!</p>
+             
             </div>
             <!-- testimonial content -->
             <div class="aa-testimonial-content">
               <!-- testimonial slider -->
               <ul class="aa-testimonial-slider">
-                <li>
-                  <div class="aa-testimonial-single">
-                    <div class="aa-testimonial-img">
-                      <img src="/resources/view/img/testimonial-1.png" alt="testimonial img">
-                    </div>
-                    <div class="aa-testimonial-info">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate consequuntur ducimus cumque iure modi nesciunt recusandae eligendi vitae voluptatibus, voluptatum tempore, ipsum nisi perspiciatis. Rerum nesciunt fuga ab natus, dolorem?</p>
-                    </div>
-                    <div class="aa-testimonial-bio">
-                      <p>David Muller</p>
-                      <span>Web Designer</span>
-                    </div>
-                  </div>
-                </li>
-                 <li>
-                  <div class="aa-testimonial-single">
-                    <div class="aa-testimonial-img">
-                      <img src="/resources/view/img/testimonial-3.png" alt="testimonial img">
-                    </div>
-                    <div class="aa-testimonial-info">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate consequuntur ducimus cumque iure modi nesciunt recusandae eligendi vitae voluptatibus, voluptatum tempore, ipsum nisi perspiciatis. Rerum nesciunt fuga ab natus, dolorem?</p>
-                    </div>
-                    <div class="aa-testimonial-bio">
-                      <p>David Muller</p>
-                      <span>Web Designer</span>
-                    </div>
-                  </div>
-                </li>
-                 <li>
-                  <div class="aa-testimonial-single">
-                    <div class="aa-testimonial-img">
-                      <img src="/resources/view/img/testimonial-2.png" alt="testimonial img">
-                    </div>
-                    <div class="aa-testimonial-info">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate consequuntur ducimus cumque iure modi nesciunt recusandae eligendi vitae voluptatibus, voluptatum tempore, ipsum nisi perspiciatis. Rerum nesciunt fuga ab natus, dolorem?</p>
-                    </div>
-                    <div class="aa-testimonial-bio">
-                      <p>David Muller</p>
-                      <span>Web Designer</span>
-                    </div>
-                  </div>
-                </li>
+                
+               <c:forEach items="${promotionsList }" var="row">
+		               	<li>
+		                  <div class="aa-testimonial-single" >
+		                    <div class="aa-testimonial-img">
+		                    <a href="/promotions/read.do/${row.idx }"><img src="/promotions${row.img_url.substring(0,12) }${row.img_url.substring(14)}" alt="${row.title }img"></a>             
+		                    </div>
+		                    <div >
+		                      <p></p>
+		                    </div>
+		                    <div class="aa-testimonial-bio">
+		                     <p>${row.title }</p>
+		                     
+		                    </div>
+		                  </div>
+		                </li>   
+               </c:forEach> 
+
+             
+             
               </ul>
             </div>
           </div>
+       
+       
         </div>
       </div>
     </div>

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.macaronics.www.SqlServerEnvironment;
 import com.macaronics.www.user.model.dto.CouponVO;
 import com.macaronics.www.user.model.dto.ProductShopVO;
+import com.macaronics.www.user.model.dto.PromotionVO;
 
 
 @Repository
@@ -53,6 +54,12 @@ public class HomeDAOImpl implements HomeDAO {
 	public CouponVO lastCouponProduct(Integer idx) {
 	
 		return sqlSession.selectOne(namespace+".lastCouponProduct", idx);
+	}
+
+	@Override
+	public List<PromotionVO> promotionList() {
+		// TODO Auto-generated method stub
+		return  sqlSession.selectList(namespace+".promotionList");
 	}
 
 	

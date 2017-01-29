@@ -8,15 +8,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.macaronics.www.SqlServerEnvironment;
-import com.macaronics.www.user.model.dto.CouponVO;
+import com.macaronics.www.user.model.dto.PromotionVO;
 
 
 @Repository
-public class CouponDAOImpl implements CouponDAO {
+public class PromotionDAOImpl implements PromotionDAO{
 
-	private final String namespace=SqlServerEnvironment.SQL+".CouponMapper";
 	
-	private final static Logger logger  =LoggerFactory.getLogger(CouponDAOImpl.class);
+	private final String namespace=SqlServerEnvironment.SQL+".PromotionMapper";
+	
+	private final static Logger logger  =LoggerFactory.getLogger(PromotionDAOImpl.class);
 
 	
 	@Inject
@@ -25,20 +26,22 @@ public class CouponDAOImpl implements CouponDAO {
 	
 	
 	@Override
-	public CouponVO getRead(Integer idx) {
-	
+	public PromotionVO getRead(Integer idx) {
+		
 		return sqlSession.selectOne(namespace+".getRead", idx);
 	}
 
-
 	@Override
 	public void viewCoutUpdate(Integer idx) {
-		
 		sqlSession.update(namespace+".viewCoutUpdate", idx);
-	}
+	} 
 
-	
 	
 	
 	
 }
+
+
+
+
+

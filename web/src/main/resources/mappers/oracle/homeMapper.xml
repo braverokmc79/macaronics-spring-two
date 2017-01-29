@@ -119,6 +119,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
+	<select id="promotionList" resultType="com.macaronics.www.user.model.dto.PromotionVO">
+	
+	 select * from TBL_PROMOTIONS ORDER BY idx desc
+	
+	</select>
+	
+	
 </mapper>
 
 

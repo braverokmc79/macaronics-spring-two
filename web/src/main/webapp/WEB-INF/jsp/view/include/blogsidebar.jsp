@@ -20,16 +20,13 @@
                         </button>
                       </div>
                     </form>
-                  
-                  
+             
                   
                   </div>
                   <!-- Start single sidebar -->
                   <div class="aa-blog-sidebar-single">
                     <h3>카테고리</h3>
-                    
-                    
-                
+            
                    <select class="form-control" id="categoryOne" onchange="CategoryOneChange()" style="margin-bottom: 5px;">
                     <c:forEach items="${ categoryOne}" var="row">
                     	<option value="${row.idx }" >${row.title }</option>
@@ -86,9 +83,7 @@
      
      
 		     </c:forEach>
-                   
-                   
-                   
+                  
                     </div>                    
                   </div>
                   <!-- Start single sidebar -->

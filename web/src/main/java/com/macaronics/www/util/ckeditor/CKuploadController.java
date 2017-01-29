@@ -92,6 +92,67 @@ public class CKuploadController {
 	
 	
 	
+	@RequestMapping(value="/promotionsUpload")
+	public void promotionImageUpload(HttpServletRequest request,
+			HttpServletResponse response,
+			@RequestParam String path,
+			@RequestParam MultipartFile upload) throws Exception{
+		
+		//헤더 설정
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=utf-8");
+		
+		OutputStream out=null;
+		PrintWriter printWriter=null;
+		
+		try{
+			
+			//첨부파일 이름
+			String fileName =upload.getOriginalFilename();
+			//첨부파일을 바이트 배열로 저장
+			byte[] bytes =upload.getBytes();
+			
+			
+			UploadPath.attach_path =PATH +path+File.separatorChar;
+			String uploadPath =UploadPath.path(request)+fileName;
+			
+			
+			logger.info("Ckeditor 업로드 경로 : " + uploadPath);
+			
+			out=new FileOutputStream(new File(uploadPath));
+			out.write(bytes); //서버에 파일 업로드
+			
+			String callback =request.getParameter("CKEditorFuncNum");
+			
+			printWriter=response.getWriter();
+		
+			String fileUrl ="/promotions/"+fileName;
+			
+			String script="<script>window.parent.CKEDITOR.tools.callFunction(";
+			script +=callback;
+			script +=", '";
+			script +=fileUrl;
+			script +=" ' , '이미지를 업로드 했습니다.'";
+			script +=") </script>";
+			    
+			printWriter.println(script);
+			printWriter.flush();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			if(out!=null){
+				out.close();
+			}
+			if(printWriter!=null){
+				printWriter.close();
+			}
+			
+		}
+	}
+	
+	
+	
 	
 }
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.macaronics.www.user.model.dto.CouponVO;
 import com.macaronics.www.user.model.dto.ProductShopVO;
+import com.macaronics.www.user.model.dto.PromotionVO;
 
 public interface HomeService {
 
@@ -26,6 +27,9 @@ public interface HomeService {
 	//쿠폰 마지막 상품
 	public CouponVO lastCouponProduct();
 	
+	
+	//기획전 상품
+	public List<PromotionVO> promotionList();
 	
 	
 }
