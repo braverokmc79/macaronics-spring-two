@@ -1000,3 +1000,24 @@ create SEQUENCE sq_tbl_banner
 START WITH 1 INCREMENT BY 1;
 
 
+
+
+-- Q & A 
+create table tbl_qna(
+
+	idx number not null primary key ,
+	userid VARCHAR(50) not null,
+	subject VARCHAR(100) not null,
+	content VARCHAR2(4000) not null,
+	secret VARCHAR2(10) default 'show',
+	answer varchar2(10) default 'uncheck',
+	ref number default 0  ,
+	depth number default 0 ,
+	reorder number default 0,
+	regdate date DEFAULT sysdate 
+);
+
+
+
+
+

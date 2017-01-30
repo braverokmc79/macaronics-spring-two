@@ -1,4 +1,4 @@
-package com.macaronics.www.user.controller;
+package com.macaronics.www.member.controller.board;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,15 +22,13 @@ import com.macaronics.www.user.service.CartService;
 import com.macaronics.www.user.service.ProductOrderService;
 
 @Controller
-@RequestMapping("/user/myproduct")
+@RequestMapping("/users/myproduct")
 public class UserMyProductController {
 
 	
 	private static final Logger logger =LoggerFactory.getLogger(UserMyProductController.class);
 	
-	
 	private static String JSP_PAGE ="/users/myproduct/";
-	
 	
 	@Inject
 	private CartService cartService;
@@ -82,9 +80,7 @@ public class UserMyProductController {
 		List<ProductOrderVO> orderList= productOrderService.productOrder(member.getUserid());
 		map.put("orderList", orderList);
 		map.put("orderSize", orderList.size());
-	
 
-	
 		model.addAttribute("map", map);
 		
 		return JSP_PAGE+"payment";		

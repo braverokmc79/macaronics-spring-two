@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="ORACLE.QnaMapper">
+	
+
+	
+	<select id="qnaList"  resultType="com.macaronics.www.member.model.dto.board.UsersQandAVO">
+	 select * from tbl_qna  WHERE  userid=#{userid}  order by  ref desc, reorder asc
+	</select>
+	
+	
+	<select id="getQnA" resultType="com.macaronics.www.member.model.dto.board.UsersQandAVO">
+		select * from tbl_qna  WHERE  idx=#{idx}  order by  ref desc, reorder asc
+	</select>
+	
+	
+	
+	<insert id="qnaInsert">
+	insert into tbl_qna (idx, userid, subject, content, ref)
+
+	values ((select nvl(max(idx)+1, 1) from tbl_qna), #{userid}, #{subject}, #{content}, (select nvl(max(idx)+1, 1) from tbl_qna))
+	</insert>
+	
+	
+	<update id="qnaUpdate">
+		
+	</update>
+	
+	
+	<delete id="qnaDelete">
+	delete  from tbl_qna where idx=#{idx}
+	</delete>
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

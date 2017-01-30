@@ -1,4 +1,4 @@
-package com.macaronics.www.user.controller;
+package com.macaronics.www.member.controller.board;
 
 import javax.inject.Inject;
 

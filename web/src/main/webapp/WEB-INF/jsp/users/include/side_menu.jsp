@@ -36,8 +36,8 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="/user/myproduct/cart.do">장바구니</a></li>                          
-                          <li><a class="" href="/user/myproduct/paymentList.do">결제대기</a></li>
+                          <li><a class="" href="/users/myproduct/cart.do">장바구니</a></li>                          
+                          <li><a class="" href="/users/myproduct/paymentList.do">결제대기</a></li>
                           <li><a class="" href="form_validation.html">배송대기</a></li>
                       </ul>
                   </li>  
@@ -54,45 +54,20 @@
                       </ul>
                   </li>
                   
-                  
-                  
-                  <li>
-                      <a class="" href="widgets.html">
-                          <i class="icon_genius"></i>
-                          <span>Widgets</span>
-                      </a>
-                  </li>
-                  <li>                     
-                      <a class="" href="chart-chartjs.html">
-                          <i class="icon_piechart"></i>
-                          <span>Charts</span>
-                          
-                      </a>
-                                         
-                  </li>
+  
                              
-                  <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon_table"></i>
-                          <span>Tables</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="basic_table.html">Basic Table</a></li>
-                      </ul>
-                  </li>
+  
                   
                   <li class="sub-menu">
                       <a href="javascript:;" class="">
                           <i class="icon_documents_alt"></i>
-                          <span>Pages</span>
+                          <span>Q & A</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">                          
-                          <li><a class="" href="profile.html">Profile</a></li>
-                          <li><a class="" href="login.html"><span>Login Page</span></a></li>
-                          <li><a class="" href="blank.html">Blank Page</a></li>
-                          <li><a class="" href="404.html">404 Error</a></li>
+                          <li><a class="" href="/users/qna/registerform.do">문의 등록</a></li>
+                          <li><a class="" href="/users/qna/qnaList"><span>나의 문의 내용</span></a></li>
+                         
                       </ul>
                   </li>
                   
