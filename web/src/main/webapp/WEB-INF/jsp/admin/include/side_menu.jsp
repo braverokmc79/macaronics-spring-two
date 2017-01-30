@@ -119,11 +119,11 @@
           </a>
           <ul class="treeview-menu">
             <li class="active"><a href="/admin/coupon/registerForm"><i class="fa fa-circle-o text-red"></i> 쿠폰등록</a></li>
-            <li><a href="/admin/coupon/couponList"><i class="fa fa-circle-o text-yellow"></i> 쿠폰목록</a></li>
+            <li><a href="/admin/coupon/couponList"><i class="fa fa-circle-o text-aqua"></i> 쿠폰목록</a></li>
           </ul>
         </li>
         
-        
+       
         <li>
           <a href="/admin/recommended/registerForm">
             <img src="/resources/admin/img/event.jpg"  style="max-height: 18px; max-width: 18px;"><span> 기획전 관리</span>
@@ -133,24 +133,27 @@
           </a>
             <ul class="treeview-menu">
             <li class="active"><a href="/admin/promotions/registerForm.do"><i class="fa fa-circle-o text-red"></i> 기획전등록</a></li>
-            <li><a href="/admin/promotions/promotionsList"><i class="fa fa-circle-o text-yellow"></i> 기획전목록</a></li>
+            <li><a href="/admin/promotions/promotionsList"><i class="fa fa-circle-o text-aqua"></i> 기획전목록</a></li>
           </ul>
         </li>
-        
-        
-        
-         <li>
-          <a href="/admin/recommended/registerForm">
-            <i class="glyphicon glyphicon-picture"></i> <span>메인상품 관리</span>
-            <span class="pull-right-container">   
+      
+        <li>
+          <a href="/admin/mainBanner/registerForm">
+            <i class="glyphicon glyphicon-picture"></i> <span>메인배너 관리</span>
+            <span class="pull-right-container"> 
+             <i class="fa fa-angle-left pull-right"></i>  
             </span>
           </a>
-        </li>
+        <ul class="treeview-menu">
+            <li class="active"><a href="/admin/mainBanner/registerForm"><i class="fa fa-circle-o text-red"></i> 메인배너 등록</a></li>
+            <li><a href="/admin/mainBanner/bannerlist"><i class="fa fa-circle-o text-aqua"></i> 메인배너 목록</a></li>
+          </ul>
+       </li>
         
         
     	<li>
           <a href="/admin/recommended/registerForm">
-            <i class="glyphicon glyphicon-question-sign"></i> <span>Q&A 관리</span>
+            <i class="glyphicon glyphicon-question-sign"></i> <span>Q & A 관리</span>
             <span class="pull-right-container">   
             </span>
           </a>
@@ -225,8 +228,6 @@
             <li><a href="/admin/mail/senderEmailList"><i class="fa fa-circle-o text-yellow"></i>보낸 메일 리스트</a></li>
           </ul>
         </li>
-
-
 
         <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
 

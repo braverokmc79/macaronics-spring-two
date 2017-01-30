@@ -42,6 +42,7 @@
 	
 	<resources mapping="/mailbox/**" location="/WEB-INF/uploads/mailbox/" />
 	<resources mapping="/products/img/**" location="/WEB-INF/uploads/productsImg/" />
+	<resources mapping="/mainbanner/**" location="/WEB-INF/uploads/mainbanner/" />
 	
 	
 	

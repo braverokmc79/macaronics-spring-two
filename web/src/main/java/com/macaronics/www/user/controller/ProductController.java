@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.macaronics.www.admin.model.dto.AdminCategoryVO;
 import com.macaronics.www.admin.service.AdminCategoryService;
@@ -109,9 +110,15 @@ public class ProductController {
 	@RequestMapping(value="/detail.do/{product_id}")
 	public ModelAndView productDetail(@PathVariable("product_id") Integer product_id
 			, ModelAndView mav
-			) throws Exception {
+			, RedirectAttributes rttr) throws Exception {
 		
 		ProductShopVO vo =service.detailProduct(product_id);
+		
+		if(vo ==null){	
+			mav.addObject("productCodeErroMessage" , "등록된 상품이 없습니다.");
+			mav.setViewName(JSP_PAGE+"/productDetail");
+			return mav;
+		}
 		
 		List<String>  attach=service.getAttach(product_id);
 		List<String>  fullName=new ArrayList<>(); 

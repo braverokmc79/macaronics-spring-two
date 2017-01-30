@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.macaronics.www.SqlServerEnvironment;
+import com.macaronics.www.admin.model.dto.AdminMainBannerVO;
 import com.macaronics.www.user.model.dto.CouponVO;
 import com.macaronics.www.user.model.dto.ProductShopVO;
 import com.macaronics.www.user.model.dto.PromotionVO;
@@ -60,6 +61,12 @@ public class HomeDAOImpl implements HomeDAO {
 	public List<PromotionVO> promotionList() {
 		// TODO Auto-generated method stub
 		return  sqlSession.selectList(namespace+".promotionList");
+	}
+
+	@Override
+	public List<AdminMainBannerVO> mainBannerList() {
+		
+		return sqlSession.selectList(namespace+".mainBannerList");
 	}
 
 	

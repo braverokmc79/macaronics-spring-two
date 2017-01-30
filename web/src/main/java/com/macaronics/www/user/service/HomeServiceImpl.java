@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.macaronics.www.admin.model.dto.AdminMainBannerVO;
 import com.macaronics.www.user.model.dao.HomeDAO;
 import com.macaronics.www.user.model.dto.CouponVO;
 import com.macaronics.www.user.model.dto.ProductShopVO;
@@ -79,11 +80,16 @@ public class HomeServiceImpl implements HomeService {
 		return vo;
 	}
 
-	
 	@Override
 	public List<PromotionVO> promotionList() {
 		// TODO Auto-generated method stub
 		return homedao.promotionList();
+	}
+
+	@Override
+	public List<AdminMainBannerVO> mainBannerList() {
+		// TODO Auto-generated method stub
+		return homedao.mainBannerList();
 	}
 
 	

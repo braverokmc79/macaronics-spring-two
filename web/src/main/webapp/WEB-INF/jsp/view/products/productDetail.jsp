@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jstl/core_rt" %>        
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %>
 <%@ include file="../include/header.jsp" %>
@@ -49,12 +50,41 @@
 
 
 
+
+
+  <c:choose>
+  	<c:when test="${not empty productCodeErroMessage }">
+  	
+  	
+  	<div class="alert alert-danger alert-dismissible fade in" role="alert"   >
+  
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+      <h4  style="text-align: center; " id="oh-snap!-you-got-an-error!">Error!<a class="anchorjs-link" href="#oh-snap!-you-got-an-error!">
+      <span class="anchorjs-icon"></span></a>
+      </h4>
+      <div style="text-align: center; height: 200px;"><h3>${productCodeErroMessage }</h3></div>
+      <p style="text-align: center">
+        <a  href="/shop/products/list.do" type="button" class="btn btn-danger">상품목록가기</a>
+        <a  href="/" type="button" class="btn btn-default">메인</a>
+      </p>
+    </div>
+  	
+  	
+  	
+  	
+  	</c:when>
+  	<c:otherwise>
+  	
+  	
   <!-- Start Properties  -->
   <section id="aa-properties">
     <div class="container">
       <div class="row">
         <div class="col-md-8">
           <div class="aa-properties-content">            
+       
+ 
+       
             <!-- Start properties content body -->
             <div class="aa-properties-details">
              <div class="aa-properties-details-img">
@@ -142,6 +172,8 @@
              <div class="aa-nearby-properties">
                <div class="aa-title">
                  <h2>다른 고객님들이 이 상품과 함께 구매하신 상품</h2>
+                
+                
                  <span></span>
                </div>
                <div class="aa-nearby-properties-area">
@@ -211,7 +243,13 @@
              </div>
 
             </div>           
+       
+       
+       
           </div>
+       
+       
+       
         </div>
         <!-- Start properties sidebar -->
         <div class="col-md-4">
@@ -311,6 +349,12 @@
     </div>
   </section>
   <!-- / Properties  -->
+
+
+
+  	
+  	</c:otherwise>
+  </c:choose>
 
 
 

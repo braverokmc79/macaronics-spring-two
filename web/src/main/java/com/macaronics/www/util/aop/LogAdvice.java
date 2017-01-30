@@ -28,12 +28,7 @@ public class LogAdvice {
     	
     	
     }
-     
-
-
-
-	
-	
+ 
 //ProceedingJoinPoint 클래스는 around 에서 만 가능 
 	//@Around("logging()")
 	public Object logPrint(ProceedingJoinPoint joinPoint) throws Throwable{
@@ -90,8 +85,6 @@ public class LogAdvice {
 	
 
 	 }
-	
-	 
-	 
+ 
 	
 }

@@ -983,3 +983,20 @@ start with 1 increment by 1;
  
  
 
+
+ -- 메인 배너 테이블  생성
+
+
+create table tbl_main_banner (	
+	idx number ,
+	img_url VARCHAR2(100),
+	proudct_id number,
+	display varchar(10) default 'show', 
+	Primary key(idx)
+);
+
+
+create SEQUENCE sq_tbl_banner 
+START WITH 1 INCREMENT BY 1;
+
+

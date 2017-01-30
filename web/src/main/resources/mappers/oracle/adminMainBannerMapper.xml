@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="ORACLE.adminMainBannerMapper">
+	
+	
+	<select id="mainBannerList" resultType="com.macaronics.www.admin.model.dto.AdminMainBannerVO">
+		  select b.idx, b.display, b.img_url, b.proudct_Id, p.product_name
+		 , p.price, p.product_state, p.picture_url, p.regdate  
+		from 	PRODUCT p , TBL_MAIN_BANNER b
+	
+		where p.PRODUCT_ID =b.PROUDCT_ID order by idx desc
+	</select>
+	
+	<select id="getMainBanner" resultType="com.macaronics.www.admin.model.dto.AdminMainBannerVO">
+	select * from TBL_MAIN_BANNER  where idx =#{idx}
+	</select>
+	
+	
+	<insert id="mainBannerInsert">
+	insert INTO TBL_MAIN_BANNER (IDX, IMG_URL, PROUDCT_ID, DISPLAY) 
+
+	VALUES(SQ_TBL_BANNER.nextval, #{img_url}, #{proudct_Id}, #{display})
+	</insert>
+	
+	
+	<update id="mainBannerUpdate">
+	update TBL_MAIN_BANNER SET DISPLAY =#{display},  IMG_URL=#{img_url}, PROUDCT_ID=#{proudct_Id}
+		where idx=#{idx}
+	</update>
+	
+	
+	<delete id="mainBannerDelete">
+	delete from tbl_main_Banner where idx=#{idx} 
+	</delete>
+	
+	
+	<select id="mainBannerCount" resultType="int">
+	
+		select count(*) from TBL_MAIN_BANNER
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

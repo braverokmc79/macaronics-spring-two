@@ -126,6 +126,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
+	<select id="mainBannerList" resultType="com.macaronics.www.admin.model.dto.AdminMainBannerVO">
+	 	  select b.idx, b.display, b.img_url, b.proudct_Id, p.product_name
+		 , p.price, p.product_state, p.picture_url, p.regdate  
+		from 	PRODUCT p , TBL_MAIN_BANNER b
+	
+		where p.PRODUCT_ID =b.PROUDCT_ID order by idx asc
+	
+	</select>
+	
+	
+	
+	
 </mapper>
 
 

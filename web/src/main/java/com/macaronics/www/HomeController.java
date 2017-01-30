@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.macaronics.www.admin.model.dto.AdminCategoryVO;
+import com.macaronics.www.admin.model.dto.AdminMainBannerVO;
 import com.macaronics.www.admin.model.dto.AdminRecommendedVO;
 import com.macaronics.www.admin.service.AdminCategoryService;
 import com.macaronics.www.admin.service.AdminRecommendedService;
@@ -36,21 +37,14 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-
 	@Inject
 	private HomeService homeService;
-	
-	
-	
+
 	@Inject
 	private AdminCategoryService adminCategoryService;
 
 	@Inject
 	private AdminRecommendedService adminRecommendedService;
-	
-	
-	
-	
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, AdminRecommendedVO vo) {
@@ -76,23 +70,27 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		//쿠폰
-		CouponVO  couponVO=homeService.lastCouponProduct();
-		model.addAttribute("couponVO", couponVO);
-		
+		model.addAttribute("couponVO", homeService.lastCouponProduct());
 		
 		//기획전 
-		List<PromotionVO> promotionList=homeService.promotionList();
-		model.addAttribute("promotionsList", promotionList);
+		model.addAttribute("promotionsList", homeService.promotionList());
 		
+		
+		//메인배너
+		List<AdminMainBannerVO> mainBannerList =homeService.mainBannerList();
+		for(AdminMainBannerVO BannerVO : mainBannerList){
+		   logger.info(" 배너 : " + BannerVO.toString());
+		}
+		model.addAttribute("mainBannerList", mainBannerList);
 		return "home";
 	}
 	
-	
-	
+
 	//2차 카테고리 불러오기
 	@ResponseBody
 	@RequestMapping(value="/categoryTwoList/{idx}", method=RequestMethod.GET)
 	public ResponseEntity<List<AdminCategoryVO>> categoryTwoList(@PathVariable("idx") Integer idx){
+		
 		ResponseEntity<List<AdminCategoryVO>> entity=null;
 		List<AdminCategoryVO> list=null;
 		try{
@@ -114,6 +112,7 @@ public class HomeController {
 	@ResponseBody
 	@RequestMapping(value="/categoryThreeList/{bno}", method=RequestMethod.GET)
 	public ResponseEntity<List<AdminCategoryVO>> categoryThreeList(@PathVariable("bno") Integer bno){
+		
 		ResponseEntity<List<AdminCategoryVO>> entity=null;
 		List<AdminCategoryVO> list=null;
 		try{
@@ -128,9 +127,6 @@ public class HomeController {
 
 		return entity;
 	}
-	
-	
-	
 	
 }
 
