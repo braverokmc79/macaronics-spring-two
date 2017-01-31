@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="ORACLE.UserQnaMapper">
+	
+
+	
+	<select id="qnaList"  resultType="com.macaronics.www.member.model.dto.board.UsersQandAVO">
+			 select * from
+		 (
+		 select rownum as rn, A.* from
+		 
+		 (select rownum , ANSWER,  CONTENT , DEPTH, IDX, REF, REGDATE, REORDER, SECRET, SUBJECT, USERID
+		 
+		  from tbl_qna  WHERE  userid=#{userid}  order by  ref desc, reorder asc
+		  
+		  )  A 
+		  
+		  )
+		  where  rn BETWEEN  #{start} and #{end}
+	</select>
+	
+	
+	<select id="getQnA" resultType="com.macaronics.www.member.model.dto.board.UsersQandAVO">
+		select * from tbl_qna  WHERE  idx=#{idx}  and userid=#{userid}
+	</select>
+	
+	
+	
+	<insert id="qnaInsert">
+	insert into tbl_qna (idx, userid, subject, content, secret  , ref)
+
+	values ((select nvl(max(idx)+1, 1) from tbl_qna), #{userid}, #{subject}, #{content},  #{secret}, (select nvl(max(idx)+1, 1) from tbl_qna))
+	</insert>
+	
+	
+	<update id="qnaUpdate">
+		
+	</update>
+	
+	
+	<delete id="qnaDelete">
+	delete  from tbl_qna where idx=#{idx}
+	</delete>
+	
+	
+	<select id="listCount" resultType="int">
+		select count(*) from tbl_qna where  userid= #{userid}
+	</select>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

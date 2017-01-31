@@ -7,34 +7,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="ORACLE.QnaMapper">
 	
 
-	
-	<select id="qnaList"  resultType="com.macaronics.www.member.model.dto.board.UsersQandAVO">
-	 select * from tbl_qna  WHERE  userid=#{userid}  order by  ref desc, reorder asc
-	</select>
-	
-	
-	<select id="getQnA" resultType="com.macaronics.www.member.model.dto.board.UsersQandAVO">
-		select * from tbl_qna  WHERE  idx=#{idx}  order by  ref desc, reorder asc
-	</select>
-	
-	
-	
-	<insert id="qnaInsert">
-	insert into tbl_qna (idx, userid, subject, content, ref)
+	<select id="list" resultType="com.macaronics.www.member.model.dto.board.UsersQandAVO">
 
-	values ((select nvl(max(idx)+1, 1) from tbl_qna), #{userid}, #{subject}, #{content}, (select nvl(max(idx)+1, 1) from tbl_qna))
-	</insert>
+				select * from
+		 (
+		 select rownum as rn , A.* from
+		 
+		 (select rownum, answer, content, depth, idx,ref, regdate, reorder,secret,subject,userid
+		 	from tbl_qna where  
+			idx >0 order by  ref desc, reorder asc
+			
+			) A 
+			
+		 ) where rn BETWEEN #{start} AND #{end}
+	</select>
 	
 	
-	<update id="qnaUpdate">
-		
-	</update>
+	<select id="getRead" resultType="com.macaronics.www.member.model.dto.board.UsersQandAVO">
+		 select * from tbl_qna where idx =#{idx}	
+	
+	</select>
 	
 	
-	<delete id="qnaDelete">
-	delete  from tbl_qna where idx=#{idx}
-	</delete>
-	
+	<select id="count" resultType="int">
+			select count(*) from tbl_qna 
+	</select>
 	
 	
 </mapper>

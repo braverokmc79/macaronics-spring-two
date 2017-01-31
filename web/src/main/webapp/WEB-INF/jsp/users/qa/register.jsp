@@ -149,6 +149,12 @@ $(document).ready(function(){
 			$("#secret").val("hide");
 		}
 		
+		if(!$("#checkbox").is(":checked")){
+			//alert("체크 되었습니다.");
+			$("#secret").val("show");
+		}
+		
+		
 		document.form1.submit();
 	});
 	

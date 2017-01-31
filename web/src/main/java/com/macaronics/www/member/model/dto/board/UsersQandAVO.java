@@ -12,6 +12,8 @@ public class UsersQandAVO {
 	private String subject;
 	private String content;
 
+	private String qcontent;
+	private String qsubject;
 	
 	private Integer ref; //"게시물 그룹 ID",
 	private Integer depth; //"답변 단계",

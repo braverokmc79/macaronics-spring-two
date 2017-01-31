@@ -155,8 +155,13 @@
           <a href="/admin/recommended/registerForm">
             <i class="glyphicon glyphicon-question-sign"></i> <span>Q & A 관리</span>
             <span class="pull-right-container">   
+              <i class="fa fa-angle-left pull-right"></i>  
             </span>
           </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="/admin/qna/questionList"><i class="fa fa-circle-o text-red"></i> Question 목록</a></li>
+            <li><a href="/admin/qna/answerList"><i class="fa fa-circle-o text-aqua"></i> Answer 목록</a></li>
+          </ul>
         </li>
         
         

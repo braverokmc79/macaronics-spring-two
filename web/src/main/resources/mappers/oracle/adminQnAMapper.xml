@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="ORACLE.adminQnAMapper">
+	
+	
+	
+	<select id="questionList" resultType="com.macaronics.www.member.model.dto.board.UsersQandAVO">
+			select * from
+		 (
+		 select rownum as rn , A.* from
+		 
+		 (select rownum, answer, content, depth, idx,ref, regdate, reorder,secret,subject,userid
+		 	from tbl_qna where  
+			ANSWER ='uncheck' order BY idx asc , regdate asc
+			
+			) A
+			
+		 ) where rn between #{start} and #{end}
+	</select>
+	
+
+	
+	<select id="answerList" resultType="com.macaronics.www.member.model.dto.board.UsersQandAVO">
+	
+	
+				select * from
+		 (
+		 select rownum as rn , A.* from
+		 
+		 (select rownum, answer, content, depth, idx,ref, regdate, reorder,secret,subject,userid
+		 	from tbl_qna where  
+			ANSWER ='check' order by  ref desc, reorder asc
+			
+			) A
+			
+		 ) where rn between #{start} and #{end}	
+	</select>
+	
+	
+	<!-- select * from board_v  order by  ref desc, reorder asc  limit #{pageStart} , #{perPageNum} -->
+	
+	<update id="reorderUpdate">
+		update tbl_qna set reorder =reorder +1
+		where ref =#{ref} and reorder > #{reorder}
+	</update>
+	
+	<update id="answerUpdate">
+		update tbl_qna set answer ='check'
+		where ref =#{ref} 
+	</update>
+	
+	
+	
+	<insert id="replyInsert">
+		insert into tbl_qna (idx, userid, subject, content, answer ,secret  , ref, depth, reorder)
+
+	values ((select nvl(max(idx)+1, 1) from tbl_qna), #{userid}, #{subject}, #{content}, #{answer} , #{secret}, #{ref}, #{depth}, #{reorder} )
+	</insert>
+	
+	
+	<select id="getQnA"  resultType="com.macaronics.www.member.model.dto.board.UsersQandAVO">
+	 select * from tbl_qna where idx =#{idx}	
+	</select>
+	
+	
+	
+	<select id="listCount" resultType="int">
+		select count(*) from tbl_qna where  ANSWER =#{answer}
+	
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

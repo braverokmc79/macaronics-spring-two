@@ -77,11 +77,7 @@ public class HomeController {
 		
 		
 		//메인배너
-		List<AdminMainBannerVO> mainBannerList =homeService.mainBannerList();
-		for(AdminMainBannerVO BannerVO : mainBannerList){
-		   logger.info(" 배너 : " + BannerVO.toString());
-		}
-		model.addAttribute("mainBannerList", mainBannerList);
+		model.addAttribute("mainBannerList", homeService.mainBannerList());
 		return "home";
 	}
 	

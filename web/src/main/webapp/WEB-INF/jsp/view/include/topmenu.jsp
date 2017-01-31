@@ -139,7 +139,7 @@
            
             </li>
      
-           <li><a href="404.html">Q&A</a></li>
+           <li><a href="/qna/list">Q&A</a></li>
          
          
           </ul>                            
