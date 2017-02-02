@@ -21,11 +21,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.macaronics.www.admin.model.dto.AdminCategoryVO;
-import com.macaronics.www.admin.model.dto.AdminMainBannerVO;
 import com.macaronics.www.admin.model.dto.AdminRecommendedVO;
 import com.macaronics.www.admin.service.AdminCategoryService;
 import com.macaronics.www.admin.service.AdminRecommendedService;
-import com.macaronics.www.user.model.dto.CouponVO;
+import com.macaronics.www.user.model.dto.ProductShopVO;
 import com.macaronics.www.user.model.dto.PromotionVO;
 import com.macaronics.www.user.service.HomeService;
 
@@ -61,7 +60,12 @@ public class HomeController {
 		map.put("newProductList", homeService.newProudctList());
 		map.put("bestProductList", homeService.bestProductList());
 		map.put("eventProductList", homeService.eventProductList());
-		map.put("recommendProduct", adminRecommendedService.detailProduct(currProductId));
+		
+		
+		ProductShopVO recommendProduct =adminRecommendedService.detailProduct(currProductId);
+		if(recommendProduct!=null){
+			map.put("recommendProduct", recommendProduct);
+		}
 		
 		model.addAttribute("map", map);
 		
@@ -73,8 +77,11 @@ public class HomeController {
 		model.addAttribute("couponVO", homeService.lastCouponProduct());
 		
 		//기획전 
-		model.addAttribute("promotionsList", homeService.promotionList());
 		
+		List<PromotionVO> promotionsList =homeService.promotionList();
+		if(promotionsList !=null){
+			model.addAttribute("promotionsList", homeService.promotionList());
+		}
 		
 		//메인배너
 		model.addAttribute("mainBannerList", homeService.mainBannerList());

@@ -161,11 +161,15 @@
                 </div>
               </div>
               <div class="col-md-7">
+              
+           
+                
                 <div class="aa-about-us-right">
                   <div class="aa-title">
                     <h2>오늘의 추천 상품</h2>
                     <span></span>
                   </div>
+                <c:if test="${ not map.recommendProduct }">
                   <p>                  
                  ${map.recommendProduct.description}
                    </p>
@@ -175,8 +179,11 @@
                   	<li>￦ <fmt:formatNumber value="${map.recommendProduct.price }" pattern="###,###"/></li>
                   	<li><i class="glyphicon glyphicon-eye-open"></i> ${map.recommendProduct.view_count }</li>
                   	<li> <a href="/shop/products/detail.do/${map.recommendProduct.product_id }" class="aa-secondary-btn">상세보기</a></li>
-                  </ul> 
+                  </ul>
+                     </c:if>  
                 </div>
+            
+              
               </div>
             </div>
           </div>

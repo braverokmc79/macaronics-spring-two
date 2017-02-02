@@ -41,7 +41,7 @@ public class AdminRecommendedDAOImpl implements AdminRecommendedDAO {
 
 
 	@Override
-	public int getProductId(AdminRecommendedVO vo) {
+	public Integer getProductId(AdminRecommendedVO vo) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".getProductId", vo);
 	}

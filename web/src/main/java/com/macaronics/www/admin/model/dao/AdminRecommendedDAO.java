@@ -10,7 +10,7 @@ public interface AdminRecommendedDAO {
 
 	void registerProduct(AdminRecommendedVO vo);
 
-	int getProductId(AdminRecommendedVO vo);
+	Integer getProductId(AdminRecommendedVO vo);
 
 	ProductShopVO detailProduct(Integer product_id);
 

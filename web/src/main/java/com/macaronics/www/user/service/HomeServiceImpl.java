@@ -64,9 +64,17 @@ public class HomeServiceImpl implements HomeService {
 
 	@Override
 	public int couponLastProudctIdx() {
-		// TODO Auto-generated method stub
-		return homedao.couponLastProudctIdx();
+		
+		int couponId=0;
+		try{
+			couponId=homedao.couponLastProudctIdx();
+		}catch(Exception e){
+			e.printStackTrace();
+		}	
+		return couponId;
 	}
+	
+	
 
 	@Override
 	public CouponVO lastCouponProduct() {
@@ -82,14 +90,26 @@ public class HomeServiceImpl implements HomeService {
 
 	@Override
 	public List<PromotionVO> promotionList() {
-		// TODO Auto-generated method stub
-		return homedao.promotionList();
+		List<PromotionVO> list=null;
+		try{
+			list=homedao.promotionList();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 
 	@Override
 	public List<AdminMainBannerVO> mainBannerList() {
-		// TODO Auto-generated method stub
-		return homedao.mainBannerList();
+		List<AdminMainBannerVO> list=null;
+		try{
+			list=homedao.mainBannerList();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 
 	

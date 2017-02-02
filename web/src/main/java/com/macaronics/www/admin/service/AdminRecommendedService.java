@@ -9,7 +9,7 @@ public interface AdminRecommendedService {
 
 	void registerProduct(AdminRecommendedVO vo);
 
-	int getProductId(AdminRecommendedVO vo);
+	Integer getProductId(AdminRecommendedVO vo);
 
 	public ProductShopVO detailProduct(Integer product_id);
 	

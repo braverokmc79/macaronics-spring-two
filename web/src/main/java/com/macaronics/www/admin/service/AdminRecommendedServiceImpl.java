@@ -37,16 +37,30 @@ public class AdminRecommendedServiceImpl implements AdminRecommendedService {
 	}
 
 	@Override
-	public int getProductId(AdminRecommendedVO vo) {
-		// TODO Auto-generated method stub
-		return adminRecommendedDAO.getProductId(vo);
+	public Integer getProductId(AdminRecommendedVO vo) {
+		Integer id=null;
+		try {
+			id=adminRecommendedDAO.getProductId(vo);
+		} catch (Exception e) {
+			
+		}
+			
+		return id;
 	}
 	
 	
 	
 	public ProductShopVO detailProduct(Integer product_id){
-		
-		return adminRecommendedDAO.detailProduct(product_id);
+		ProductShopVO vo =null;
+		try{
+			if(product_id!=null){	
+				vo =adminRecommendedDAO.detailProduct(product_id);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
+		return vo;
 	}
 	
 	
